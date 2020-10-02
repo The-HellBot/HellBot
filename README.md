@@ -16,8 +16,15 @@ For any query
 
 [![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+### Get String Session From Here:-
 
+[Click Here To get String Session](https://hellbot.hellboyop.repl.run)
 
+• Enter Your Phone Number with your Country Code (E.X. For India It's +91)
+
+• Paste the OTP you received on Telegram.
+
+• Your String Session is stored in Saved Message of your Telegram Account.
 
 
 ### The Normal Way
