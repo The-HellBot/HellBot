@@ -16,6 +16,10 @@ For any query
 
 [![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+### String Session
+
+[![Run on Repl.it](https://repl.it/badge/github/hellboy-op/hellbot)](https://repl.it/github/hellboy-op/hellbot)
+
 ### The Normal Way
 
 Simply clone the repository and run the main file:
