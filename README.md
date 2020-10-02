@@ -20,8 +20,8 @@ For any query
 
 Simply clone the repository and run the main file:
 ```sh
-git clone https://github.com/Amberyt/JaaduBot
-cd JaaduBot
+git clone https://github.com/HellBoy-OP/HellBot
+cd HellBot
 virtualenv -p /usr/bin/python3 venv
 . ./venv/bin/activate
 pip install -r requirements.txt
