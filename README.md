@@ -1,7 +1,7 @@
 # HellBot
 This is the one and only official HellBot Userbot made by @Kraken_The_BadASS Also join support channel and group :- https://t.me/HellBot_Official Enjoy Your Bot!!💝
 # Hêllẞø†
-This is a userbot made for telegram. I made this userbot with help of all other userbots available in telegram.
+This is a userbot made for telegram. I made this userbot with help of all other userbots available in telegram. Credits To It's Respective Owners.
  
 # The owner would not be responsible for any kind of bans due to the bot.
 
