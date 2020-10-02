@@ -18,7 +18,7 @@ For any query
 
 ### String Session
 
-[![Run on Repl.it](https://repl.it/badge/github/hellboy-op/hellbot)](https://repl.it/github/hellboy-op/hellbot)
+
 
 ### The Normal Way
 
