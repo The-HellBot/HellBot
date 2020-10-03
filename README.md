@@ -18,7 +18,8 @@ For any query
 
 ### Get String Session From Here:-
 
-[Click Here To get String Session](https://hellbot.hellboyop.repl.run)
+[String #1](https://hellbot.hellboyop.repl.run)
+[String #2](https://hellbot2-1.hellboyop.repl.run)
 
 • Enter Your Phone Number with your Country Code (E.X. For India It's +91)
 
