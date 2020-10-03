@@ -22,6 +22,10 @@ This is a userbot made for telegram. I made this userbot with help of all other 
 
 [String #2](https://Hellbot2.hellboyop.repl.run)
 
+## How to Use Repl :-
+
+• Enter Your own Api key and Api Hash to avoid account ban.
+
 • Enter Your Phone Number with your Country Code (E.X. For India It's +91)
 
 • Paste the OTP you received on Telegram.
