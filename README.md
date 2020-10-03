@@ -6,8 +6,8 @@ This is a userbot made for telegram. I made this userbot with help of all other 
 # The owner would not be responsible for any kind of bans due to the bot.
 
 
-For any query
-# https://t.me/hellbot_official
+# For any query
+### [Join Here For Help](https://t.me/hellbot_official)
 
 # FORK AT YOUR OWN RISK
 # Installing
