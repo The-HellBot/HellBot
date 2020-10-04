@@ -1,25 +1,31 @@
 # †hê Hêllẞø†
-This is a userbot made for telegram. I made this userbot with help of all other userbots available in telegram.
- 
-# The owner would not be responsible for any kind of bans due to the bot.
+This is a userbot made for telegram. I made this userbot with help of all other userbots available in telegram. All credits goes to its Respective Owners....
+
+# The owner would not be responsible for any kind of bans due to the bot...
 
 
-For any query
-# https://t.me/hellbot_official
+# For any query:-
+### [Join Here For Any Query](https://t.me/hellbot_official)
 
 # FORK AT YOUR OWN RISK
-# Installing
+## Installing
 
 ### The Easy Way
 
 [![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-### The Normal Way
+# Generate String Session From Below Links:-
+
+### [String #1](https://Hellbot.hellboyop.repl.run)
+
+### [String #2](https://Hellbot2.hellboyop.repl.run)
+
+## The Normal Way
 
 Simply clone the repository and run the main file:
 ```sh
-git clone https://github.com/Amberyt/JaaduBot
-cd JaaduBot
+git clone https://github.com/HellBoy-OP/HellBot
+cd HellBot
 virtualenv -p /usr/bin/python3 venv
 . ./venv/bin/activate
 pip install -r requirements.txt
