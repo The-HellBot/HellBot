@@ -1,0 +1,193 @@
+{
+  "name": "Hêllẞø†",
+  "description": "The best userbot made by @Kraken_The_BadASS. Made with Love And Phone And Hardwork and... Nhi aur kahi se to nhi bana....For Support Join @HellBot_Official ",
+  "logo": "https://telegra.ph/file/7decf235312af8536e9aa.jpg ",
+    "keywords": [
+    "telegram",
+    "userbot",
+    "plugin",
+    "modular",
+    "productivity"
+  ],
+  "repository": "https://github.com/HellBoy-OP/HellBot/",
+  "website": "https://github.com/HellBoy-OP/HellBot/",
+  "success_url": "https://t.me/HellBot_Official",
+  "env": {
+    "ENV": {
+      "description": "Setting this to ANYTHING will enable heroku.",
+      "value": "ANYTHING"
+    },
+    "TEMP_DOWNLOAD_DIRECTORY": {
+      "description": "Where downloaded files will go.",
+      "value": "./userbot/DOWNLOADS/",
+      "required": false
+    },
+    "F_BAN_LOGGER_GROUP": {
+      "description": "Put Group id Same As PRIVATE_GROUP_ID.",
+      "value": "",
+      "required": false
+    },
+    "ALIVE_NAME": {
+      "description": "Fill your Full name or Username like @Kraken_The_BadASS.",
+      "value": "",
+      "required": false
+    },
+    "ALIVE_MSG": {
+      "description": "Set Custom awake Message When entering .awake command.",
+      "value": "",
+      "required": true
+    },
+    "ALIVE_PHOTTO": {
+      "description": "put here any telegraph media link for alive pic.",
+      "value": "",
+      "required": true
+    },
+    "BIO_MSG": {
+      "description": "Put Your Telegram Bio Here Required For Auto Bio.",
+      "value": "",
+      "required": false
+    },
+    "PMPERMIT_PIC": {
+      "description": "put here any telegraph media link for pmpermit custom pic.",
+      "value": "",
+      "required": true
+    },
+    "PM_PERMIT_GROUP_ID": {
+      "description": "Put an Group Id Same As PRIVATE_GROUP_ID Required For Pmpermit plugin.",
+      "value": "",
+      "required": false
+    },
+    "APP_ID": {
+      "description": "Get this value from my.telegram.org! Putting Others Value may result In Account Ban.",
+      "value": ""
+    },
+    "REM_BG_API_KEY": {
+      "description": "Required for Removing image background functionality. Get from https://www.remove.bg/",
+      "value": "",
+      "required": false
+    },
+    "LYDIA_API_KEY": {
+      "description": "Needed for Lydia AI. Follow https://telegra.ph/Lydia-09-05 to get your API.",
+      "value": "",
+      "required": false
+    },
+    "API_HASH": {
+      "description": "Get this value from my.telegram.org! Putting Others Value May result In Account Ban.",
+      "value": ""
+    },
+    "PLUGIN_CHANNEL": {
+      "description": "Create a private group add rose  then type /id. PLUGIN_CHANNEL and PRIVATE_GROUP_ID both values should be same",
+      "value": ""
+    },
+    "PRIVATE_GROUP_BOT_API_ID": {
+      "description": "create a private channel and then type .get_id add that value here for save messages",
+      "value": ""
+    },
+    "PRIVATE_GROUP_ID": {
+      "description": "Create a private group add rose bot then type /id. PLUGIN_CHANNEL and PRIVATE_GROUP_ID both values should be same",
+      "value": ""
+    },
+    "PM_LOGGR_BOT_API_ID": {
+       "description": "for login private messages create a private channel and do .get_id and add that id", 
+       "value": ""
+    }, 
+    "STRING_SESSION": {
+      "description": "Get this value by running https://Hellbot.hellboyop.repl.run/ ",
+      "value": ""
+    },
+    "GITHUB_ACCESS_TOKEN": {
+      "description": "Your Github Access Token for gitcommit plugin.Google 'Github access token' to find.",
+      "value": "",
+      "required": false
+    },
+    "GIT_REPO_NAME": {
+      "description": "Your repo name Example: HellBoy-OP/HellBot , but GITHUB_ACCESS_TOKEN must be setup first.",
+      "value": "",
+      "required": false
+    },
+    "HEROKU_API_KEY": {
+      "description": "Go to https://dashboard.heroku.com/account, scroll down and press Reveal API.Required for updater to work.",
+      "value": "",
+      "required": true
+    },
+    "HEROKU_APP_NAME": {
+      "description": "The Value of App Name you filled in right on top.Required for updater to work.",
+      "value": "",
+      "required": false
+    },
+    "TG_BOT_TOKEN_BF_HER": {
+      "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the token of your bot. And Don't Forget To Turn on inline Mode on bot settings. Get it.",
+      "value": ""
+    },
+    "CHROME_BIN": {
+      "description": "For Carbon.py. Leave as it is. ",
+      "value": "/app/.apt/usr/bin/google-chrome",
+      "required": false
+    },
+    "CHROME_DRIVER": {
+      "description": "For Carbon.py. Leave as it is. ",
+      "value": "/app/.chromedriver/bin/chromedriver",
+      "required": false
+    },
+    "TG_BOT_USER_NAME_BF_HER": {
+      "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the username of your bot",
+      "value": ""
+    },
+    "DOWNLOAD_PFP_URL_CLOCK": {
+      "description": "Needed for autopic module. A url that is a preview link of your Profile Pic",
+      "value": "",
+      "required": false
+    },
+    "OPEN_WEATHER_MAP_APPID": {
+      "description": "Get your own APPID from https://api.openweathermap.org/data/2.5/weather",
+      "required": false
+    },
+    "NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD": {
+      "description": " Set The Amount Of Buttons Displayed In Help Command",
+      "required": true
+    },
+    "NO_OF_COLUMS_DISPLAYED_IN_H_ME_CMD": {
+      "description": "Set The Amount Of Rows You Want To Displayed In Help Command default 2",
+      "required": true
+    },
+    "EMOJI_TO_DISPLAY_IN_HELP": {
+      "description": "Set The emojies You Want to Add In Help Command!!",
+      "value": "",
+      "required": true
+    }, 
+    "TZ": {
+      "description": "Required for Correct Time for autopic get from http://www.timezoneconverter.com/cgi-bin/findzone.tzc",
+      "value": "Asia/Kolkata",
+      "required": false
+    },
+    "REDIRECTCHANNEL": {
+      "description": "Put You Channel Username Reflecting Your Info or Your Tags Etc",
+      "value": "",
+      "required": false 
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql",
+      "options": {
+        "version": "12"
+      }
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+  },{
+    "url":"https://github.com/amivin/aria2-heroku.git"
+  },{
+    "url":"https://github.com/heroku/heroku-buildpack-google-chrome"
+  },{
+     "url": "https://github.com/heroku/heroku-buildpack-apt.git"
+  },{
+    "url":"https://github.com/heroku/heroku-buildpack-chromedriver"
+  },{
+    "url": "https://github.com/opendoor-labs/heroku-buildpack-p7zip"
+  },{
+    "url": "heroku/python"
+  }]
+}
