@@ -10,7 +10,7 @@ import asyncio
 async def _(event):
     if event.fwd_from:
         return
-    animation_interval = 0.5
+    animation_interval = 1.5
     animation_ttl = range(0, 14)
     input_str = event.pattern_match.group(1)
     if input_str == "game":
@@ -30,7 +30,7 @@ async def _(event):
             "🎇🎆🎇🎆🎇🎆🎇\n🎆🎇🎆🎇🎆🎇🎆\n🎇🎆🎇🎆🎇🎆🎇\n🎆🎇🎆🎇🎆🎇🎆\n🎇🎆🎇🎆🎇🎆🎇\n🎆🎇🎆🎇🎆🎇🎆\n[🎁](https://github.com/HellBoy-OP/HellBot)🎆🎇🎆🎇🎆🎇",
             "🎇🎆🎇🎆🎇🎆🎇\n🎆🎇🎆🎇🎆🎇[🎁](https://HellBoy-OP/HellBot)\n🎇🎆🎇🎆🎇🎆🎇\n🎆🎇🎆🎇🎆🎇🎆\n🎇🎆🎇🎆🎇🎆🎇\n🎆🎇🎆🎇🎆🎇🎆\n🎇🎆🎇🎆🎇🎆",
             "🎇🎆🎇🎆🎇🎆🎇\n🎆🎇🎆🎇🎆🎇🎆\n🎇🎆🎇🎆🎇🎆🎇\n🎆🎇🎆🎇🎆🎇🎆\n🎇🎆🎇🎆🎇🎆🎇\n🎆🎇🎆🎇🎆🎇\n🎇🎆🎇🎆🎇🎆🎇",
-            "**Game Over**"
+            "**Game Over\n   Join @HellBot_Official For more games😁**"
  ]
         for i in animation_ttl:
             await asyncio.sleep(animation_interval)
