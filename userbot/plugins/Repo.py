@@ -10,3 +10,18 @@ from telethon import events
 async def _(event):
      if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
        await event.edit(" Click [here](https://github.com/hellboy-op/hellbot) to open this Lit AF🔥 Hêllẞø† Repo...🔥")
+     
+@borg.on(admin_cmd(pattern="rep ?(.*)"))
+async def _(event):
+     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
+       await event.edit(" Click [here](https://github.com/hellboy-op/hellbot) to open this Lit AF🔥 Hêllẞø† Repo...🔥")
+     
+@borg.on(admin_cmd(pattern="re ?(.*)"))
+async def _(event):
+     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
+       await event.edit(" Click [here](https://github.com/hellboy-op/hellbot) to open this Lit AF🔥 Hêllẞø† Repo...🔥")
+     
+@borg.on(admin_cmd(pattern="repo ?(.*)"))
+async def _(event):
+     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
+       await event.edit(" Click [here](https://github.com/hellboy-op/hellbot) to open this Lit AF🔥 Hêllẞø† Repo...🔥")
