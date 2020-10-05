@@ -60,8 +60,8 @@ async def amireallyalive(alive):
         tele += "` 🔸 Database Status:` **All OK 👌!**\n"
         tele += f"` 🔹 My pro owner`: {DEFAULTUSER}\n\n"
         tele += "    [✨ GitHub Repository ✨](https://github.com/HellBoy-OP/HellBot)"
-HellBot
-        chat = await alive.get_chat()
+
+
         await alive.delete()
         """ For .alive command, check if the bot is running.  """
         await borg.send_file(alive.chat_id, ALV_PIC,caption=tele, link_preview = False)
