@@ -67,7 +67,7 @@ def register(**args):
             try:
                 await func(check)
 
-            # Thanks to @hellboi_atul for this HACK.
+            # Thanks to @Kraken_The_BadASS for this HACK.
             # Raise StopPropagation to Raise StopPropagation
             # This needed for AFK to working properly
 
@@ -86,7 +86,7 @@ def register(**args):
                     date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
                     text = "**USERBOT ERROR REPORT**\n"
-                    link = "[DARK COBRA Support Chat](https://t.me/Dark_cobra_support)"
+                    link = "[HellBot Official Chat](https://t.me/HellBot_Official)"
                     text += "If you want to, you can report it"
                     text += f"- just forward this message to {link}.\n"
                     text += "Nothing is logged except the fact of error and date\n"
