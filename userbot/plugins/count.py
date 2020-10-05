@@ -1,4 +1,4 @@
-# Thanks to @hellboi_atul
+# Thanks to @Kraken_The_BadASS
 
 """Count the Number of Dialogs you have in your Telegram Account
 Syntax: .status"""
