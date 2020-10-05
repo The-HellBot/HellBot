@@ -88,7 +88,7 @@ async def stats(event: NewMessage.Event) -> None:  # pylint: disable = R0912, R0
     response += f'**Unread:** {unread} \n'
     response += f'**Unread Mentions:** {unread_mentions} \n\n'
     response += f'__It Took:__ {stop_time:.02f}s \n'
-    response += f'**From The DataBase Of** :- [HellBot](https://t.me/hellbot_official)
+    response += f'**From The DataBase Of** :- [Hêllẞø†](https://t.me/hellbot_official)'
 
     await event.edit(response)
 
