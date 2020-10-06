@@ -1,4 +1,4 @@
-#Made By  Keep Credits If You Are Goanna Kang This Lol
+#Made By @Kraken_The_BadASS Keep Credits If You Are Goanna Kang This Lol
 
 #And Thanks To The Creator Of Autopic This Script Was Made from Snippets From That Script
 
@@ -24,13 +24,13 @@ COLLECTION_STRING = [
 
   "pokemon-serena-wallpaper",
 
-  "hd-pokemon-iphone-wallpapers",
+  "hd-anime-girls-wallpapers",
 
-  "pokemon-wallpaper-pikachu",
+  "sexy-anime-gilr-wallpaper",
 
-  "doraemon-3d-wallpaper-2018",
+  "cute-anime-girl-3d-wallpaper-2018",
   
-  "pokemon-serena-wallpaper",
+  "ash-serena-love-wallpaper",
 
   "anime-girls-wallpapers"
 
@@ -64,7 +64,7 @@ async def animepp():
 
 async def main(event):
 
-    await event.edit("**Starting Anime Profile Pic...\n\nDone !!! Check Your DP..by DARK COBRA😎🤟🏻**")
+    await event.edit("**Starting Anime Profile Pic...\n\nDone !!! Check Your DP..\n\n\n           @HellBot_Official**")
 
     while True:
 
