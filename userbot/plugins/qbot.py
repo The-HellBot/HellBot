@@ -1,4 +1,4 @@
-#port to DARK COBRA by @hellboi-atul
+#port to Hêllẞø† by @Kraken_The_BadASS
 
 import datetime
 from telethon import events
