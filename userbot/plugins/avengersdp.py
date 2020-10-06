@@ -60,7 +60,7 @@ async def animepp():
 
 async def main(event):
 
-    await event.edit("**Starting Avengers Profile Pic...\n\nDone !!! Check Your DP By @Dark_cobra_support**")
+    await event.edit("**Starting Avengers Profile Pic...\n\nDone !!! Check Your DP\n\n\n         @HellBot_Official**")
 
     while True:
 
