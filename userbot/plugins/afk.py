@@ -118,7 +118,7 @@ async def on_afk(event):
         msg = None
         message_to_reply = (
             f"__My Master Has Been In afk since__ `{total_afk_time}`\nWhere He Is: I don't know buddy..he is a busy person "
-            + f"\n\n__I can't guarantee you that when he will come..__\n**REASON**: {reason}"
+            + f"\n\n__I can't guarantee you that when he will come..__\n**Ohh!!He left a REASON** __BTW__🧐: {reason}"
             if reason
             else f"**Heyy!**\n__I am currently unavailable. Since when, you ask? For {total_afk_time} I guess.__\n\nWhen will I be back? Soon __Whenever I feel like coming back__**(o(^â–½^)o)**  "
         )
