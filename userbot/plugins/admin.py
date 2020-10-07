@@ -133,7 +133,7 @@ async def promote(promt):
     await promt.edit("`Promoting...`")
     user, rank = await get_user_from_event(promt)
     if not rank:
-        rank = "Sarkar Jii"  # Just in case.
+        rank = "Hell-mine"  # Just in case.
     if user:
         pass
     else:
@@ -448,95 +448,8 @@ async def muter(moot):
             await moot.delete()
 
 
-#@register(outgoing=True, pattern="^.ungmute(?: |$)(.*)")
-@borg.on(admin_cmd(pattern=r"ungmute(?: |$)(.*)"))
-@errors_handler
-async def ungmoot(un_gmute):
-    """ For .ungmute command, ungmutes the target in the userbot """
-    # Admin or creator check
-    chat = await un_gmute.get_chat()
-    admin = chat.admin_rights
-    creator = chat.creator
 
-    # If not admin and not creator, return
-    if not admin and not creator:
-        await un_gmute.edit(NO_ADMIN)
-        return
-
-    # Check if the function running under SQL mode
-    try:
-        from userbot.modules.sql_helper.gmute_sql import ungmute
-    except AttributeError:
-        await un_gmute.edit(NO_SQL)
-        return
-
-    user = await get_user_from_event(un_gmute)
-    user = user[0]
-    if user:
-        pass
-    else:
-        return
-
-    # If pass, inform and start ungmuting
-    await un_gmute.edit('```Ungmuting...```')
-
-    if ungmute(user.id) is False:
-        await un_gmute.edit("`Error! User probably not gmuted.`")
-    else:
-        # Inform about success
-        await un_gmute.edit("```Ungmuted Successfully```")
-
-        if BOTLOG:
-            await un_gmute.client.send_message(
-                BOTLOG_CHATID, "#UNGMUTE\n"
-                f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-                f"CHAT: {un_gmute.chat.title}(`{un_gmute.chat_id}`)")
-
-
-#@register(outgoing=True, pattern="^.gmute(?: |$)(.*)")
-@borg.on(admin_cmd(pattern=r"gmute(?: |$)(.*)"))
-@errors_handler
-async def gspider(gspdr):
-    """ For .gmute command, globally mutes the replied/tagged person """
-    # Admin or creator check
-    chat = await gspdr.get_chat()
-    admin = chat.admin_rights
-    creator = chat.creator
-
-    # If not admin and not creator, return
-    if not admin and not creator:
-        await gspdr.edit(NO_ADMIN)
-        return
-
-    # Check if the function running under SQL mode
-    try:
-        from userbot.modules.sql_helper.gmute_sql import gmute
-    except AttributeError:
-        await gspdr.edit(NO_SQL)
-        return
-
-    user, reason = await get_user_from_event(gspdr)
-    if user:
-        pass
-    else:
-        return
-
-    # If pass, inform and start gmuting
-    await gspdr.edit("`Grabs a huge, sticky duct tape!`")
-    if gmute(user.id) is False:
-        await gspdr.edit(
-            '`Error! User probably already gmuted.\nRe-rolls the tape.`')
-    else:
-        if reason:
-            await gspdr.edit(f"`Globally taped!`Reason: {reason}")
-        else:
-            await gspdr.edit("`Globally taped!`")
-
-        if BOTLOG:
-            await gspdr.client.send_message(
-                BOTLOG_CHATID, "#GMUTE\n"
-                f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-                f"CHAT: {gspdr.chat.title}(`{gspdr.chat_id}`)")
+    
 
 
 #@register(outgoing=True, pattern="^.delusers(?: |$)(.*)")
@@ -831,10 +744,10 @@ CMD_HELP.update({
 \nUsage: Mutes the person in the chat, works on admins too.\
 \n\n.unmute <username/reply>\
 \nUsage: Removes the person from the muted list.\
-\n\n.gmute <username/reply> <reason (optional)>\
-\nUsage: Mutes the person in all groups you have in common with them.\
-\n\n.ungmute <username/reply>\
-\nUsage: Reply someone's message with .ungmute to remove them from the gmuted list.\
+
+
+
+
 \n\n.delusers\
 \nUsage: Searches for deleted accounts in a group. Use .delusers clean to remove deleted accounts from the group.\
 \n\n.admins\
