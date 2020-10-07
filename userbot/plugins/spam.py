@@ -97,7 +97,9 @@ async def tiny_pic_spam(e):
 
   except:
 
-    	pass  try:
+    	pass
+    
+  try:
 
     counter = int(e.pattern_match.group(1).split(' ', 1)[0])
 
