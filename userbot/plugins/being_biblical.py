@@ -1,6 +1,6 @@
-"""Say something from the Holy Bible... Syntax: .BBL by @Mayur_Karaniya
+"""Say something from the Holy Bible... Syntax: .BBL by @Mayur_Karaniya Modified By @Kraken_The_Badass
 |
-Quotes credits: Being Biblical Channel : @BeingBiblical"""
+Join official Channel : @HellBot_Official"""
 
 from telethon import events
 
@@ -21,7 +21,7 @@ async def _(event):
 
         return
 
-    await event.edit("LAKHU CHU 1 MINUTE !...")
+    await event.edit("Making A Bible Quote... Wait")
 
     await asyncio.sleep(2)
 
