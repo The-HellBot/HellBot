@@ -10,10 +10,10 @@ import asyncio
 
 from uniborg.util import admin_cmd
 
-from userbot import AUTONAME
+from userbot import ALIVE_NAME
 
 
-DEFAULTUSER = str(AUTONAME) if AUTONAME else "Hell-User"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell-User"
 
 @borg.on(admin_cmd(pattern=r"deploy"))
 
