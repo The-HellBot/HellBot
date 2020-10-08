@@ -1,4 +1,4 @@
-"""Malayalam Calendar plugin for Indian Bot 
+"""Calendar plugin for Hêllẞø†
 SYNTAX: .calendar YYYY-MM-DD"""
 from telethon import events
 import asyncio
