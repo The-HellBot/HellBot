@@ -1,5 +1,5 @@
 """Fun pligon...for DC
-\nCode by DC , ©[Hellboi_atul](https://t.me/hellboi_atul)
+\nCode by DC , ©[Kraken_The_Badass](https://t.me/kraken_the_badass)
 type `.degi` and `.nehi` to see the fun.
 """
 import random, re
