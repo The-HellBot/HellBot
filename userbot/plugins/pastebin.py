@@ -1,3 +1,10 @@
+"""IX.IO pastebin like site
+Syntax: .paste
+Syntax: .neko
+Syntax: .paster
+Syntax: .iffuci
+"""
+
 import logging
 import os
 from datetime import datetime
@@ -8,8 +15,7 @@ from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from userbot import CMD_HELP
-from userbot.uniborgConfig import Config
-from userbot.utils import admin_cmd, sudo_cmd
+from userbot.utils import admin_cmd
 
 logging.basicConfig(
     format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=logging.WARNING
@@ -159,8 +165,8 @@ async def _(event):
             message = previous_message.message
     else:
         message = "SYNTAX: `.neko <long text to include>`"
-    py_file = ""
     if downloaded_file_name.endswith(".py"):
+        py_file = ""
         py_file += ".py"
         data = message
         key = (
@@ -170,8 +176,6 @@ async def _(event):
             .get("key")
         )
         url = f"https://nekobin.com/{key}{py_file}"
-        reply_text = f"Pasted to Nekobin : [neko]({url})"
-        await event.edit(reply_text)
     else:
         data = message
         key = (
@@ -181,8 +185,9 @@ async def _(event):
             .get("key")
         )
         url = f"https://nekobin.com/{key}"
-        reply_text = f"Pasted to Nekobin : [neko]({url})"
-        await event.edit(reply_text)
+
+    reply_text = f"Pasted to Nekobin : [neko]({url})"
+    await event.edit(reply_text)
 
 
 @borg.on(admin_cmd(pattern="iffuci ?(.*)"))
@@ -271,7 +276,7 @@ async def _(event):
         await event.edit(
             "Dogged to {} in {} seconds. GoTo Original URL: {}".format(url, ms, nurl)
         )
-    # This module is modded by @ViperAdnan #KeepCredit
+    # This module is modded by @Kraken_The_Badass #KeepCredit
     else:
         await event.edit("**Making instant view...**")
         async with event.client.conversation(chat) as conv:
@@ -288,3 +293,20 @@ async def _(event):
             await event.client.send_message(
                 event.chat_id, response.message, reply_to=reply_message
             )
+
+
+CMD_HELP.update(
+    {
+        "pastebin": ".paste <text/reply>\
+\nUsage: Create a paste or a shortened url using dogbin (https://del.dog/)\
+\n\n.getpaste\
+\nUsage: Gets the content of a paste or shortened url from dogbin (https://del.dog/)\
+\n\n.neko <reply>\
+\nUsage: Create a paste or a shortened url using nekobin (https://nekobin.com)\
+\n\n.iffuci <text/reply>\
+\nUsage: Create a paste or a shortened url using iffuci (https://www.iffuci.tk)\
+\n\n.paster <text/reply>\
+\nUsage: Create a instant view or a paste it in telegraph file\
+  "
+    }
+)
