@@ -23,18 +23,21 @@ PREV_REPLY_MESSAGE = {}
 PM_ON_OFF = Config.PM_DATA
 
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"
-CUSTOM_MIDDLE_PMP = str(CUSTOM_PMPERMIT) if CUSTOM_PMPERMIT else "**YOU HAVE TRESPASSED TO MY MASTERS INBOX** \n`THIS IS ILLEGAL AND REGARDED AS A CRIME`"
-USER_BOT_WARN_ZERO = "`You were spamming my sweet master's inbox, henceforth your retarded lame ass has been blocked by my master's userbot⭕️.`\n**Now GTFO, i'm busy**"
-USER_BOT_NO_WARN = ("`Hello, This is HellBot⚠️.You have found your way here to my master,`"
-                   f"{DEFAULTUSER}'s `inbox. Koi fayda nhi h re dekh... Accha khasa ghar me jake Roti,Bhaji bana yeh sab chale naa kar...\n"
-                    "Leave your Name,Reason and 100 Million $ and hopefully you'll get a reply within 100 light years.`⭕️\n\n"
-                    "❤️ Register Your Request! ❤️\nSend /start To Register Your Request!! 🔥\n"
-                    "⭕️**Now You Are In Trouble So Send** 🔥 `/start` 🔥 **To Start A Valid Conversation!!**⭕️")
+DEFAULTUSER = (
+               str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"
+)
+CUSTOM_MIDDLE_PMP = str(CUSTOM_PMPERMIT) if CUSTOM_PMPERMIT else "**YOU HAVE TRESPASSED TO MY MASTERS INBOX** \n THIS IS ILLEGAL AND REGARDED AS A CRIME" 
+
+USER_BOT_WARN_ZERO = "**You were spamming my sweet master's inbox, henceforth you have been blocked by my master's Hêllẞø†.**\n__Now GTFO, i'm busy__"
+USER_BOT_NO_WARN = ("Hello, This is **Hêllẞø† Úl†rã Pr¡va†e Security Protocol⚠️**.You have found your way here to my master,"
+                   f"{DEFAULTUSER}'s Inbox\n"
+                   f"\n**{CUSTOM_MIDDLE_PMP}**\n\n"
+                    "__Leave your Name,Reason and 100 million $ and hopefully you'll get a reply within 100 light years.__⭕️\n\n"
+                    "❤️Register Your Request! ❤️\nSend `/start` To Register Your Request and start a valid conversation 🔥")
 
 
 if Var.PRIVATE_GROUP_ID is not None:
-    @borg.on(admin_cmd(pattern="approve ?(.*)"))
+    @borg.on(admin_cmd(pattern="allow ?(.*)"))
     async def approve_p_m(event):
         if event.fwd_from:
            return
@@ -88,7 +91,7 @@ if Var.PRIVATE_GROUP_ID is not None:
                 await asyncio.sleep(3)
                 await event.client(functions.contacts.BlockRequest(chat.id))
 
-    @command(pattern="^.disapprove ?(.*)")
+    @command(pattern="^.disallow ?(.*)")
     async def approve_p_m(event):
         if event.fwd_from:
             return
@@ -115,9 +118,9 @@ if Var.PRIVATE_GROUP_ID is not None:
         if len(approved_users) > 0:
             for a_user in approved_users:
                 if a_user.reason:
-                    APPROVED_PMs += f"👉 [{a_user.chat_id}](tg://user?id={a_user.chat_id}) for {a_user.reason}\n"
+                    APPROVED_PMs += f"🔹🔸 [{a_user.chat_id}](tg://user?id={a_user.chat_id}) for {a_user.reason}\n"
                 else:
-                    APPROVED_PMs += f"👉 [{a_user.chat_id}](tg://user?id={a_user.chat_id})\n"
+                    APPROVED_PMs += f"🔹🔸 [{a_user.chat_id}](tg://user?id={a_user.chat_id})\n"
         else:
             APPROVED_PMs = "no Approved PMs (yet)"
         if len(APPROVED_PMs) > 4095:
@@ -230,7 +233,7 @@ async def hehehe(event):
     if event.is_private:
         if not pmpermit_sql.is_approved(chat.id):
             pmpermit_sql.approve(chat.id, "**My Boss Is Best🔥**")
-            await borg.send_message(chat, "**Boss Meet My Creator he made me..he is the best you know.. @Kraken_The_BadASS **")
+            await borg.send_message(chat, "**Boss Meet My Creator he made me..he is the best you know🔥** @Kraken_The_BadASS")
             
             
             
@@ -246,4 +249,3 @@ CMD_HELP.update({
 \n\n.listapproved\
 \nUsage: To list the all approved users.\
 "
-})
