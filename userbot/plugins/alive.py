@@ -17,7 +17,7 @@ pm_caption += "🔱🔱**GROUP**🔱🔱.         : [ᴊᴏɪɴ](https://t.me/He
 
 pm_caption += "😎😎**LICENSE**😎😎       : [ӀíϲҽղՏҽ](https://github.com/HellBoy-OP/HellBot/blob/master/LICENSE)\n"
 
-pm_caption += "🔥🔥**CREATOR**🔥🔥      : [HellBot-Owner](https://github.com/HellBoy-OP)\n"
+pm_caption += "🔥🔥**CREATOR🔥🔥      : [HellBot-Owner](https://github.com/HellBoy-OP)\n"
 
 pm_caption += " [...▄███▄███▄\n....█████████\n.......▀█████▀\n............▀█▀\n](https://t.me/hellbot_official)\n"
 #@command(outgoing=True, pattern="^.alive$")
