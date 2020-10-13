@@ -13,11 +13,11 @@ pm_caption += "🛡️🛡️**TELETHON**🛡️🛡️   : 1.15.0 \n"
 
 pm_caption += "⚠️⚠️**CHANNEL**⚠️⚠️     : [ᴊᴏɪɴ](https://t.me/HellBot_Official)\n"
 
-pm_caption += "🔱🔱**GROUP**🔱🔱.       : [ᴊᴏɪɴ](https://t.me/HellBot_Official_Chat)\n"
+pm_caption += "🔱🔱**GROUP**🔱🔱.         : [ᴊᴏɪɴ](https://t.me/HellBot_Official_Chat)\n"
 
-pm_caption += "😎😎**LICENSE**😎😎.       : [ӀíϲҽղՏҽ](https://github.com/HellBoy-OP/HellBot/blob/master/LICENSE)\n"
+pm_caption += "😎😎**LICENSE**😎😎       : [ӀíϲҽղՏҽ](https://github.com/HellBoy-OP/HellBot/blob/master/LICENSE)\n"
 
-pm_caption += "🔥🔥**CREATOR**🔥🔥       : [HellBot-Owner](https://github.com/HellBoy-OP)\n"
+pm_caption += "🔥🔥**CREATOR**🔥🔥      : [HellBot-Owner](https://github.com/HellBoy-OP)\n"
 
 pm_caption += " [...▄███▄███▄\n....█████████\n.......▀█████▀\n............▀█▀\n](https://t.me/hellbot_official)\n"
 #@command(outgoing=True, pattern="^.alive$")
