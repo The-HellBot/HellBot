@@ -1,21 +1,15 @@
 # For The-TG-Bot-3.0
 # By Priyam Kalra
-# Parts of the code below is taken from other sources, the links to the
-# sources is commented above the taken code
+# Parts of the code below is taken from other sources, the links to the sources is commented above the taken code
 
 from PIL import Image, ImageFont, ImageDraw
 import textwrap
 import os
-from userbot.events import register
-from userbot import (
-    CMD_HELP,
-    LOGS,
-    TEMP_DOWNLOAD_DIRECTORY,
-    bot,
-    BOTLOG_CHATID)
-
-
-@register(outgoing=True, pattern=r"\.memify ?(.*)")
+from userbot.utils import admin_cmd, sudo_cmd
+from var import Var
+# how a lazy guy ports.
+client = borg
+@borg.on(admin_cmd("memify ?(.*)"))
 async def handler(event):
     if event.fwd_from:
         return
@@ -26,13 +20,13 @@ async def handler(event):
     if not reply_message.media:
         await event.edit("```Reply to a image/sticker.```")
         return
-    file = await bot.download_media(reply_message)
+    file = await client.download_media(reply_message, Var.TEMP_DOWNLOAD_DIRECTORY)
     await event.edit("```Memifying this image! (」ﾟﾛﾟ)｣ ```")
     text = str(event.pattern_match.group(1)).strip()
     if len(text) < 1:
         return await event.edit("You might want to try `.help memify`")
     meme = await drawText(file, text)
-    await bot.send_file(event.chat_id, file=meme, force_document=False)
+    await client.send_file(event.chat_id, file=meme, force_document=False)
     os.remove(meme)
 
 # Taken from https://github.com/UsergeTeam/Userge-Plugins/blob/master/plugins/memify.py#L64
@@ -47,10 +41,10 @@ async def drawText(image_path, text):
     if os.name == "nt":
         fnt = "arial.ttf"
     else:
-        fnt = "/usr/share/fonts/TTF/dejavu/OpenSans-Regular.ttf"
+        fnt = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
     m_font = ImageFont.truetype(fnt, int((70 / 640) * i_width))
-    if ";" in text:
-        upper_text, lower_text = text.split(";")
+    if "," in text:
+        upper_text, lower_text = text.split(",")
     else:
         upper_text = text
         lower_text = ''
@@ -59,62 +53,45 @@ async def drawText(image_path, text):
     if upper_text:
         for u_text in textwrap.wrap(upper_text, width=15):
             u_width, u_height = draw.textsize(u_text, font=m_font)
-            draw.text(xy=(((i_width - u_width) / 2) - 2, int((current_h / 640)
-                                                             * i_width)), text=u_text, font=m_font, fill=(0, 0, 0))
-            draw.text(xy=(((i_width - u_width) / 2) + 2, int((current_h / 640)
-                                                             * i_width)), text=u_text, font=m_font, fill=(0, 0, 0))
-            draw.text(xy=((i_width - u_width) / 2,
-                          int(((current_h / 640) * i_width)) - 2),
-                      text=u_text,
-                      font=m_font,
-                      fill=(0,
-                            0,
-                            0))
-            draw.text(xy=(((i_width - u_width) / 2),
-                          int(((current_h / 640) * i_width)) + 2),
-                      text=u_text,
-                      font=m_font,
-                      fill=(0,
-                            0,
-                            0))
+            draw.text(xy=(((i_width - u_width) / 2) - 2, int((current_h / 640)*i_width)),
+                      text=u_text, font=m_font, fill=(0, 0, 0))
+            draw.text(xy=(((i_width - u_width) / 2) + 2, int((current_h / 640)*i_width)),
+                      text=u_text, font=m_font, fill=(0, 0, 0))
+            draw.text(xy=((i_width - u_width) / 2, int(((current_h / 640)*i_width)) - 2),
+                      text=u_text, font=m_font, fill=(0, 0, 0))
+            draw.text(xy=(((i_width - u_width) / 2), int(((current_h / 640)*i_width)) + 2),
+                      text=u_text, font=m_font, fill=(0, 0, 0))
 
-            draw.text(xy=((i_width - u_width) / 2, int((current_h / 640)
-                                                       * i_width)), text=u_text, font=m_font, fill=(255, 255, 255))
+            draw.text(xy=((i_width - u_width) / 2, int((current_h / 640)*i_width)),
+                      text=u_text, font=m_font, fill=(255, 255, 255))
             current_h += u_height + pad
     if lower_text:
         for l_text in textwrap.wrap(lower_text, width=15):
             u_width, u_height = draw.textsize(l_text, font=m_font)
             draw.text(
                 xy=(((i_width - u_width) / 2) - 2, i_height -
-                    u_height - int((20 / 640) * i_width)),
+                    u_height - int((20 / 640)*i_width)),
                 text=l_text, font=m_font, fill=(0, 0, 0))
             draw.text(
                 xy=(((i_width - u_width) / 2) + 2, i_height -
-                    u_height - int((20 / 640) * i_width)),
+                    u_height - int((20 / 640)*i_width)),
                 text=l_text, font=m_font, fill=(0, 0, 0))
             draw.text(
                 xy=((i_width - u_width) / 2, (i_height -
-                                              u_height - int((20 / 640) * i_width)) - 2),
+                                              u_height - int((20 / 640)*i_width)) - 2),
                 text=l_text, font=m_font, fill=(0, 0, 0))
             draw.text(
                 xy=((i_width - u_width) / 2, (i_height -
-                                              u_height - int((20 / 640) * i_width)) + 2),
+                                              u_height - int((20 / 640)*i_width)) + 2),
                 text=l_text, font=m_font, fill=(0, 0, 0))
 
             draw.text(
                 xy=((i_width - u_width) / 2, i_height -
-                    u_height - int((20 / 640) * i_width)),
+                    u_height - int((20 / 640)*i_width)),
                 text=l_text, font=m_font, fill=(255, 255, 255))
             current_h += u_height + pad
     image_name = "memify.webp"
-    webp_file = os.path.join(image_name)
+    webp_file = os.path.join(Var.TEMP_DOWNLOAD_DIRECTORY, image_name)
     img.save(webp_file, "webp")
     return webp_file
 
-
-CMD_HELP.update({
-    "memify": "\
-```.memify <text_to_be_pasted_on_top> ; <text_to_be_pasted_on_bottom>```\
-\nUsage: Memifies the image/sticker/gif.\
-"
-})
