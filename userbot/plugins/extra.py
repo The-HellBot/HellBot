@@ -11,15 +11,6 @@ from telethon.tl.functions.users import GetFullUserRequest
 from userbot.events import register
 from userbot.utils import admin_cmd
 
-@borg.on(admin_cmd("leave$"))
-async def leave(e):
-    if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
-        await e.edit("`I iz Leaving dis Lol Group kek!`")
-        time.sleep(3)
-        if '-' in str(e.chat_id):
-            await bot(LeaveChannelRequest(e.chat_id))
-        else:
-            await e.edit('`But Boss! This is Not A Chat`')
 
 @borg.on(admin_cmd(";__;$"))
 #@register(outgoing=True, pattern="^;__;$")
@@ -123,9 +114,7 @@ async def _(event):
 
 
 
-CMD_HELP.update({
-    "leave": "Leave a Chat"
-})
+
 CMD_HELP.update({
     ";__;": "You try it!"
 })
