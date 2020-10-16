@@ -20,7 +20,7 @@ requirements_path = path.join(
 HEROKU_API_KEY = Var.HEROKU_API_KEY
 HEROKU_APP_NAME = Var.HEROKU_APP_NAME
 GIT_REPO_NAME = "HellBot"
-UPSTREAM_REPO_URL = "https://github.com/HellBoy-OP/HellBot"
+UPSTREAM_REPO_URL = "https://github.com/HellBoy-OP/HellBot.git"
 
 async def gen_chlog(repo, diff):
     ch_log = ''
@@ -46,7 +46,7 @@ async def updateme_requirements():
 @borg.on(admin_cmd(pattern="update ?(.*)"))
 async def upstream(ups):
     "For .update command, check if the bot is up to date, update if specified"
-    await ups.edit("`Wanna check New update!! Wait A second.... I'll do that for you😉`")
+    await ups.edit("**Wait A Sec.... Checking for new update😋**")
     conf = ups.pattern_match.group(1)
     off_repo = UPSTREAM_REPO_URL
     force_updateme = False
