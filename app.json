@@ -35,12 +35,12 @@
     "ALIVE_MSG": {
       "description": "Set Custom awake Message When entering .awake command.",
       "value": "",
-      "required": true
+      "required": false
     },
     "ALIVE_PHOTTO": {
       "description": "put here any telegraph media link for alive pic.",
       "value": "",
-      "required": true
+      "required": false
     },
     "BIO_MSG": {
       "description": "Put Your Telegram Bio Here Required For Auto Bio.",
@@ -63,6 +63,11 @@
     },
     "REM_BG_API_KEY": {
       "description": "Required for Removing image background functionality. Get from https://www.remove.bg/",
+      "value": "",
+      "required": false
+    },
+    "OCR_SPACE_API_KEY": {
+      "description": "Register an account on ocr.space to get this value(API key)....",
       "value": "",
       "required": false
     },
