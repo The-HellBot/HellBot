@@ -406,8 +406,9 @@ def sudo_cmd(pattern=None, **args):
             args["pattern"] = re.compile(pattern)
         else:
             
-            args["pattern"] = re.compile(cmdhandler + pattern)
-            cmd = cmdhandler + pattern
+            args["pattern"] = re.compile(Config.SUDO_COMMAND_HAND_LER + pattern)
+            reg =Config.SUDO_COMMAND_HAND_LER[1]
+            cmd = (reg +pattern).replace("$", "").replace("\\", "").replace("^", "")
             try:
                 SUDO_LIST[file_test].append(cmd)
             except:
