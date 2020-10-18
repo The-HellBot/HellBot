@@ -205,12 +205,12 @@ async def _(event):
             "😧",
             "😡",
             "😢",
-            "‎**HellBoy Bolte Public**",
+            "‎**HellBot Bolte Public**",
             "😁",
             "😧",
             "😡",
             "😢",
-            "[PAPA HERE](https://t.me/Kraken_The_BadASS)",
+            "[PAPA HERE](https://t.me/hellbot_official)",
             "__**Good to See you Guys....**__"
         ]
     for i in animation_ttl:
