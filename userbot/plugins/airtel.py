@@ -24,9 +24,9 @@ async def _(event):
 
    # input_str = event.pattern_match.group(1)
 
-   # if input_str == "mtn":
+   # if input_str == "airtel":
 
-    await event.edit("mtn")
+    await event.edit("airtel")
 
     animation_chars = [
         
