@@ -1,5 +1,8 @@
+#Hello Nub here @Kraken_The_BadASS. Only pro is @Hellboi_atul. He iz ultra pro max.......
+
 """Auto Profile Updation Commands
 .autoname"""
+
 from telethon import events
 import asyncio
 import time
@@ -37,4 +40,4 @@ async def _(event):
             #     "Successfully Changed Profile Name"
             # )
         await asyncio.sleep(DEL_TIME_OUT)
-    await event.edit(f"Auto Name has been started Master") 
+    await event.edit(f"Okay So... Autoname has been started... ") 
