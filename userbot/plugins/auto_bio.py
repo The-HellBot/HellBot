@@ -1,6 +1,10 @@
 
 """
-.autobio"""
+Cmd : .autobio
+
+@HellBot_Official
+
+"""
 
 
 
