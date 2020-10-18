@@ -65,7 +65,7 @@ async def device_info(request):
                 f'**Codename**: `{codename}`\n' \
                 f'**Model**: {model}\n\n'
     else:
-        reply = f"`Couldn't find info about {device}!`\n"
+        reply = f"Couldn't find info about {device}!\n"
     await request.edit(reply)
 
 
