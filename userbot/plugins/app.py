@@ -1,4 +1,4 @@
-"""Fetch App Details from Playstore.
+"""Fetch App Details from Playstore. @HellBot_Official 🚶
 .app <app_name> to fetch app details.
 .appr <app_name>  to fetch app details with Xpl0iter request link."""
 
