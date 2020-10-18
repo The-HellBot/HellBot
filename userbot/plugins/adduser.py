@@ -1,5 +1,5 @@
 """Add the user(s) to the current chat
-Syntax: .edd <User(s)>"""
+Syntax: .add <User(s)>"""
 
 from telethon import functions
 from userbot.utils import admin_cmd
