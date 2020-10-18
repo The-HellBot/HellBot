@@ -1,5 +1,6 @@
-
-"""Check if userbot awake or not . 
+#Hello guys... Nub here @Kraken_the_badass
+#Pro is @Hellboi_atul. Who never kanged a single plugin...
+"""Check if userbot working or not . 
 
 """
 import os
@@ -27,17 +28,17 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars 
 ALIVE_MESSAGE = Config.ALIVE_MSG
 if ALIVE_MESSAGE is None:
    ALIVE_MESSAGE = "**🔱HellBot Zinda Tha....Zinda Hai....Aur Zinda Rahega🔱 \n\n\n**"
-   ALIVE_MESSAGE += "`My Bot Status \n\n\n`"
-   ALIVE_MESSAGE += f"`Telethon: TELETHON-15.0.0 \n\n`"
-   ALIVE_MESSAGE += f"`Python: PYTHON-3.8.5 \n\n`"
-   ALIVE_MESSAGE += "`I'll Be With You Master Till My Dyno Ends!!☠ \n\n`"
-   ALIVE_MESSAGE += f"`Support Channel` : @HellBot_Official \n\n"
-   ALIVE_MESSAGE += f"`MY BOSS`: {DEFAULTUSER} \n\n "
+   ALIVE_MESSAGE += "🤙__My Bot Status__🤙 \n\n\n"
+   ALIVE_MESSAGE += f"Telethon: TELETHON-1.15.0 \n\n"
+   ALIVE_MESSAGE += f"Python: PYTHON-3.8.5 \n\n"
+   ALIVE_MESSAGE += "**I'll Be With You Master Till My Dyno Ends!!**☠ \n\n"
+   ALIVE_MESSAGE += f"Support Channel : @HellBot_Official \n\n"
+   ALIVE_MESSAGE += f"MY BOSS : {DEFAULTUSER} \n\n "
                 
             
-#@command(outgoing=True, pattern="^.awake$")
-@borg.on(admin_cmd(pattern=r"awake"))
-async def amireallyalive(awake):
-    """ For .awake command, check if the bot is running.  """
-    await awake.delete() 
+#@command(outgoing=True, pattern="^.hell$")
+@borg.on(admin_cmd(pattern=r"hell"))
+async def amireallyalive(hell):
+    """ For .hell command, check if the bot is running.  """
+    await hell.delete() 
     await borg.send_file(awake.chat_id, ALIVE_PIC,caption=ALIVE_MESSAGE)
