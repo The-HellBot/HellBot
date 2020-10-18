@@ -1,6 +1,8 @@
 #Made By @Nihinivi Keep Credits If You Are Goanna Kang This Lol
+#Porting to @HellBot_Official by a nub @Kraken_The_BadASS. Who pro then? @Hellboi_atul <- this man...
 #And Thanks To The Creator Of Autopic This Script Was Made from Snippets From That Script
-#Usage .gamerpfp  Im Not Responsible For Any Ban caused By This
+#Usage .batmandp  Im Not Responsible For Any Ban caused By This
+
 import requests , re , random 
 import urllib , os 
 from telethon.tl import functions
@@ -30,13 +32,13 @@ async def animepp():
     if not os.path.exists("f.ttf"):
         urllib.request.urlretrieve("https://github.com/rebel6969/mym/raw/master/Rebel-robot-Regular.ttf","f.ttf")
     urllib.request.urlretrieve(fy,"donottouch.jpg")
-@borg.on(admin_cmd(pattern="batmanpfp ?(.*)"))
+@borg.on(admin_cmd(pattern="batmandp ?(.*)"))
 async def main(event):
-    await event.edit("**Starting batman Profile Pic.**") #Owner @NihiNivi
+    await event.edit("**Starting batman Profile Pic.**\n Done done done🤙") #Owner @NihiNivi
     while True:
         await animepp()
         file = await event.client.upload_file("donottouch.jpg")
         await event.client(functions.photos.DeletePhotosRequest(await event.client.get_profile_photos("me", limit=1)))
         await event.client(functions.photos.UploadProfilePhotoRequest( file))
         os.system("rm -rf donottouch.jpg")
-        await asyncio.sleep(120) #Edit this to your required needs
+        await asyncio.sleep(600) #Edit this to your required needs
