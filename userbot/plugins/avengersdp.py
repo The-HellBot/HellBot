@@ -1,3 +1,6 @@
+#Ported to @Hellbot_official by a nub @Kraken_the_badass
+#only pro in this madafaking planet is @hellboi_atul
+#who never kanged a single plugin...
 #And Thanks To The Creator Of Autopic This Script Was Made from Snippets From That Script
 
 #Usage .avengersdp Im Not Responsible For Any Ban caused By This
@@ -72,5 +75,5 @@ async def main(event):
 
         os.system("rm -rf donottouch.jpg")
 
-        await asyncio.sleep(1000) #Edit this to your required needs
+        await asyncio.sleep(600) #Edit this to your required needs
 
