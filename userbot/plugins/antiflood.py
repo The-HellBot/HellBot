@@ -1,3 +1,5 @@
+# Idhar kya dekhne aaya be bsdk. Credit to @Kraken_The_BadASS for @HellBot_official
+
 import asyncio
 from telethon import events
 from telethon.tl.functions.channels import EditBannedRequest
@@ -45,7 +47,7 @@ async def _(event):
         )
         await asyncio.sleep(10)
         await no_admin_privilege_message.edit(
-            "This is useless SPAM dude . stop this enjoy chat man ",
+            "**Bruh, This is useless spam... Stop it njoy tha chat🚶** ",
             link_preview=False
         )
     else:
