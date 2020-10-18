@@ -1,3 +1,7 @@
+#ported to @Hellbot_Official by a nub @Kraken_The_BadASS
+#only pro in this fuking world is @hellboi_atul......
+
+
 import os
 from datetime import datetime
 from PIL import Image, ImageDraw, ImageFont
