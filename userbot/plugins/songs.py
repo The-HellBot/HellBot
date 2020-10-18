@@ -47,25 +47,32 @@ async def _(event):
           await event.delete()
           await bot.forward_messages(event.chat_id, respond.message)
 
-@register(outgoing=True, pattern="^.getsong(?: |$)(.*)")
-async def _(event):
-    if event.fwd_from:
+@register(outgoing=True, pattern="^.gsong(?: |$)(.*)")
+async def getmusic(so):
+    if so.fwd_from:
         return
-    link = event.pattern_match.group(1)
+    song = so.pattern_match.group(1)
     chat = "@MissAlexaRobot"
-    await event.edit("```🎶Getting Your Music🎶```")
+    link = f"/song {song}"
+    await so.edit("```🎶Getting Your Song🎶```")
     async with bot.conversation(chat) as conv:
           await asyncio.sleep(2)
-          await event.edit("`🎵Downloading music taking some times,  Stay Tuned.....🔥😉`")
+          await so.edit("🎶Downloading Your Song🎶..... Wait sur🥰")
           try:
-              response = conv.wait_event(events.NewMessage(incoming=True,from_users=1361631434))
-              await bot.send_message(chat, link)
-              respond = await response
+              msg = await conv.send_message(link)
+              response = await conv.get_response()
+              respond = await conv.get_response()
+              """ - don't spam notif - """
+              await bot.send_read_acknowledge(conv.chat_id)
           except YouBlockedUserError:
-              await event.reply("```😐Please unblock @MissAlexaRobot and try again```")
+              await so.edit("```Please unblock @MissAlexaRobot and try again```")
               return
-          await event.delete()
-          await bot.forward_messages(event.chat_id, respond.message)
+          await so.edit("Ok!! I found something... Wait sending😉")
+          await asyncio.sleep(3)
+          await bot.send_file(so.chat_id, respond)
+    await so.client.delete_messages(conv.chat_id,
+                                       [msg.id, response.id, respond.id])
+    await so.delete()
 
 
 
@@ -101,7 +108,7 @@ CMD_HELP.update({
         "music":
         ".song`<Artist - Song Title>\
             \nUsage:For searching songs from Spotify.\
-            \n\n`.getsong` <Artist - Song Title>\
+            \n\n`.gsong` <Artist - Song Title>\
             \nUsage:Download music with @MissAlexaRobot\
             \n\n`.dwlsong` <Spotify/Deezer Link>\
             \nUsage:Download music from Spotify or Deezer.\
