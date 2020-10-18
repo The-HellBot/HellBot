@@ -5,13 +5,13 @@ from telethon import functions
 from userbot.utils import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="edd ?(.*)"))
+@borg.on(admin_cmd(pattern="add ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
     to_add_users = event.pattern_match.group(1)
     if event.is_private:
-        await event.edit("`.add` users to a chat, don't use this in PM")
+        await event.edit("Umm.. Add user to a group..\nAnd I don't think this is group👀")
     else:
         logger.info(to_add_users)
         if not event.is_channel and event.is_group:
@@ -24,7 +24,7 @@ async def _(event):
                     ))
                 except Exception as e:
                     await event.reply(str(e))
-            await event.edit("Added Successfully")
+            await event.edit("**Added User Successfully**")
         else:
             for user_id in to_add_users.split(" "):
                 try:
@@ -34,4 +34,4 @@ async def _(event):
                     ))
                 except Exception as e:
                     await event.reply(str(e))
-            await event.edit("ADDED the user to the chat successfully.")
+            await event.edit("**ADDED the user to the chat successfully.**😙")
