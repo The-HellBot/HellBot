@@ -37,7 +37,7 @@ async def set_not_afk(event):
     if ".afk" not in current_message and "yes" in USER_AFK:  # pylint:disable=E0602
         shite = await borg.send_message(
             event.chat_id,
-            "__Back alive!__\n**No Longer afk.**\n `Was afk for:``"
+            "😶__Back alive!__\n**No Longer afk.**\n `Was afk for:``"
             + total_afk_time
             + "`",
         )
@@ -45,7 +45,7 @@ async def set_not_afk(event):
             await borg.send_message(  # pylint:disable=E0602
                 Config.PRIVATE_GROUP_BOT_API_ID,  # pylint:disable=E0602
                 "#AFKFALSE \nSet AFK mode to False\n"
-                + "__Back alive!__\n**No Longer afk.**\n `Was afk for:``"
+                + "😶__Back alive!__\n**No Longer afk.**\n `Was afk for:``"
                 + total_afk_time
                 + "`",
             )
@@ -117,10 +117,10 @@ async def on_afk(event):
         #           afk_since = f"`{int(seconds)}s` **ago**"
         msg = None
         message_to_reply = (
-            f"__My Master Has Been In afk since__ `{total_afk_time}`\nWhere He Is: I don't know buddy..he is a busy person "
+            f"😐__My Master Has Been AFK since__ `{total_afk_time}`\n😐😐😶😶"
             + f"\n\n__I can't guarantee you that when he will come..__\n**Ohh!!He left a REASON** __BTW__🧐: {reason}"
             if reason
-            else f"**Heyy!**\n__I am currently unavailable. Since when, you ask? For {total_afk_time} I guess.__\n\nWhen will I be back? Soon __Whenever I feel like coming back__**(o(^â–½^)o)**  "
+            else f"**Heyy!**\n__I am currently unavailable. Since when, you ask? For {total_afk_time} .__\n\nWhen will I be back? Soon __Whenever I feel like coming back__🤧🤧🚶🚶  "
         )
         msg = await event.reply(message_to_reply)
         await asyncio.sleep(5)
@@ -173,8 +173,8 @@ async def _(event):
 CMD_HELP.update(
     {
         "afk": "__**PLUGIN NAME :** Afk__\
-\n\nðŸ“Œ** CMD âž¥** `.afk` [Optional Reason]\
-\n**USAGE   âž¥  **Sets you as afk.\nReplies to anyone who tags/PM's \
+\n\n ** CMD ** `.afk` [Optional Reason]\
+\n**USAGE  :  **Sets you as afk.\nReplies to anyone who tags/PM's \
 you telling them that you are AFK(reason)\n\n__Switches off AFK when you type back anything, anywhere.__\
 "
     }
