@@ -1,7 +1,8 @@
 """	
 	Anilist Search Plugin for Userbot	
 	Usage : .anilist animeName	
-	By :- @Zero_cool7870	
+	By :- @Zero_cool7870
+        Using in :- HellBot	
 """
 
 import requests 
