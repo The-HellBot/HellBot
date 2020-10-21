@@ -22,6 +22,10 @@ This is the one and only official HellBot Userbot made by [@Kraken_The_BadASS](h
 
 ### [String #2](https://Hellbot2.hellboyop.repl.run)
 
+# Credits👀
+### • [JaaduBot](https://github.com/Amberyt/JaaduBot)
+## One and only. Others with some misfuntioning brain stay out from this SUPER POWERFULL BOT😏
+
 ## The Normal Way
 
 Simply clone the repository and run the main file:
