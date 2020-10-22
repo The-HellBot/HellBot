@@ -27,7 +27,7 @@ def bruh(name):
     
 
 
-@register(outgoing=True, pattern="^.song(?: |$)(.*)")
+@register(outgoing=True, pattern="^.spotify(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
