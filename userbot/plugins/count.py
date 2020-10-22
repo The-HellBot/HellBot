@@ -1,7 +1,7 @@
-# Thanks to @Kraken_The_BadASS
+#Thanks to @Kraken_The_BadASS
 
 """Count the Number of Dialogs you have in your Telegram Account
-Syntax: .status"""
+Syntax: .stats"""
 import logging
 import time
 
@@ -15,7 +15,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-@borg.on(admin_cmd(pattern='status'))  
+@borg.on(admin_cmd(pattern='stats'))  
 async def stats(event: NewMessage.Event) -> None:  # pylint: disable = R0912, R0914, R0915
     """Command to get stats about the account"""
     waiting_message = await event.edit('`Collecting stats, Wait Master`')
@@ -73,22 +73,22 @@ async def stats(event: NewMessage.Event) -> None:  # pylint: disable = R0912, R0
     stop_time = time.time() - start_time
 
     full_name = inline_mention(await event.client.get_me())
-    response = f'ðŸ”¸ **Stats for {full_name}** \n\n'
-    response += f'**Private Chats:** {private_chats} \n'
-    response += f'   â€¢ `Users: {private_chats - bots}` \n'
-    response += f'   â€¢ `Bots: {bots}` \n'
-    response += f'**Groups:** {groups} \n'
-    response += f'**Channels:** {broadcast_channels} \n'
-    response += f'**Admin in Groups:** {admin_in_groups} \n'
-    response += f'   â€¢ `Creator: {creator_in_groups}` \n'
-    response += f'   â€¢ `Admin Rights: {admin_in_groups - creator_in_groups}` \n'
-    response += f'**Admin in Channels:** {admin_in_broadcast_channels} \n'
-    response += f'   â€¢ `Creator: {creator_in_channels}` \n'
-    response += f'   â€¢ `Admin Rights: {admin_in_broadcast_channels - creator_in_channels}` \n'
-    response += f'**Unread:** {unread} \n'
-    response += f'**Unread Mentions:** {unread_mentions} \n\n'
-    response += f'__It Took:__ {stop_time:.02f}s \n'
-    response += f'**From The DataBase Of** :- [Hêllẞø†](https://t.me/hellbot_official)'
+    response = f'🔰**Stats for {full_name}**🔰\n\n'
+    response += f'🔱 **Private Chats:** {private_chats} \n'
+    response += f'🔸   `Users: {private_chats - bots}` \n'
+    response += f'🔹   `Bots: {bots}` \n'
+    response += f'🔱 **Groups:** {groups} \n'
+    response += f'🔱 **Channels:** {broadcast_channels} \n'
+    response += f'☣️  **Admin in Groups:** {admin_in_groups} \n'
+    response += f'🔹   `Creator: {creator_in_groups}` \n'
+    response += f'🔸   `Admin Rights: {admin_in_groups - creator_in_groups}` \n'
+    response += f'☣️  **Admin in Channels:** {admin_in_broadcast_channels} \n'
+    response += f'🔸   `Creator: {creator_in_channels}` \n'
+    response += f'🔹   `Admin Rights: {admin_in_broadcast_channels - creator_in_channels}` \n'
+    response += f'🔱 **Unread:** {unread} \n'
+    response += f'🔱 **Unread Mentions:** {unread_mentions} \n\n'
+    response += f'☣️   __It Took:__ {stop_time:.02f}s \n'
+    response += f'📌 **From The DataBase Of** :- [Hêllẞø†](https://t.me/hellbot_official)'
 
     await event.edit(response)
 
