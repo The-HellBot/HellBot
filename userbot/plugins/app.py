@@ -1,6 +1,7 @@
 """Fetch App Details from Playstore. @HellBot_Official 🚶
 .app <app_name> to fetch app details.
-.appr <app_name>  to fetch app details with Xpl0iter request link."""
+.appr <app_name>  to fetch app details with Xpl0iter request link.
+.mod <app_name> to get the premier app from telegram if available.."""
 
 import requests
 
@@ -13,7 +14,8 @@ import re
 from telethon import *
 
 from userbot import CMD_HELP
-
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from var import Var
 from userbot.events import register
 
 
@@ -79,3 +81,16 @@ async def apkr(e):
         await e.edit("No result found in search. Please enter **Valid app name**")
     except Exception as err:
         await e.edit("Exception Occured:- "+str(err))
+
+
+@borg.on(admin_cmd(pattern="mod ?(.*)"))
+async def mod(event):
+    if event.fwd_from:
+        return
+    modr = event.pattern_match.group(1)
+    botusername = "@PremiumAppBot"
+    if event.reply_to_msg_id:
+        reply_to_id = await event.get_reply_message()
+    tap = await bot.inline_query(botusername, modr) 
+    await tap[0].click(event.chat_id)
+    await event.delete()
