@@ -3,6 +3,7 @@
 #credits to catuserbot
 """
 designed By @Krishna_Singhal in userge
+Ported to telethon by catuserbot
 ported to hellbot by @kraken_the_badass
 """
 
