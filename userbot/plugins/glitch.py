@@ -1,5 +1,6 @@
 #Challenge Accepted @Hellboi_Atul now STFO!!!
 #Hellbot ported glitch from userge.. le* dc :- mai chadarmod hu jo isko challenge dia
+#credits to catuserbot
 """
 designed By @Krishna_Singhal in userge
 ported to hellbot by @kraken_the_badass
