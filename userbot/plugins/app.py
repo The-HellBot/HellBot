@@ -1,7 +1,7 @@
 """Fetch App Details from Playstore. @HellBot_Official 🚶
 .app <app_name> to fetch app details.
 .appr <app_name>  to fetch app details with Xpl0iter request link.
-.mod <app_name> to get the premier app from telegram if available.."""
+.mods <app_name> to get the premier app from telegram if available.."""
 
 import requests
 
@@ -83,7 +83,7 @@ async def apkr(e):
         await e.edit("Exception Occured:- "+str(err))
 
 
-@borg.on(admin_cmd(pattern="mod ?(.*)"))
+@borg.on(admin_cmd(pattern="mods ?(.*)"))
 async def mod(event):
     if event.fwd_from:
         return
