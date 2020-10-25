@@ -33,7 +33,7 @@
       "required": false
     },
     "ALIVE_MSG": {
-      "description": "Set Custom awake Message When entering .awake command.",
+      "description": "Set Custom awake Message When entering .hell command.",
       "value": "",
       "required": false
     },
@@ -123,7 +123,7 @@
     "HEROKU_APP_NAME": {
       "description": "The Value of App Name you filled in right on top.Required for updater to work.",
       "value": "",
-      "required": false
+      "required": true
     },
     "TG_BOT_TOKEN_BF_HER": {
       "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the token of your bot. And Don't Forget To Turn on inline Mode on bot settings. Get it.",
