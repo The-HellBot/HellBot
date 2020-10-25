@@ -52,6 +52,11 @@
       "value": "",
       "required": true
     },
+    "CUSTOM_PMPERMIT": {
+      "description": "Your custom pm permit msg.",
+      "value": "",
+      "required": false
+    },
     "PM_PERMIT_GROUP_ID": {
       "description": "Put an Group Id Same As PRIVATE_GROUP_ID Required For Pmpermit plugin.",
       "value": "",
