@@ -53,6 +53,7 @@ speedtest-cli>=2.0.2
 spotify_token
 sqlalchemy>=1.2
 telegraph
+twitter_scraper
 urbandict>=0.5
 validators
 wikipedia>=1.4.0
