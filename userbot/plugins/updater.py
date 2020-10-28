@@ -148,7 +148,7 @@ async def upstream(ups):
             )
             repo.__del__()
             return
-        await ups.edit('`Updating your Hêllẞø†.... .`'
+        await ups.edit('`Updated Hêllẞø† Successfully Sur🔥🔥\nRestarting, please wait...5 mins...then type .ping to check if I am On!!!😐`'
                        )
         ups_rem.fetch(ac_br)
         repo.git.reset("--hard", "FETCH_HEAD")
@@ -165,8 +165,8 @@ async def upstream(ups):
             await ups.edit(f'{txt}\n`Here is the error log:\n{error}`')
             repo.__del__()
             return
-        await ups.edit('`Updated Hêllẞø† Successfully Sur🔥🔥\n'
-                       'Restarting, please wait...5 mins...then type .ping to check if I am On!!!😐`')
+        await ups.edit('`Sync Verified Hêllẞø† Successfully Sur🔥🔥\n'
+                       'Restarting, please wait...1 mins...then type .ping to check if I am On!!!😐`')
     else:
         # Classic Updater, pretty straightforward.
         try:
