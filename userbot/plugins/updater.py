@@ -66,9 +66,7 @@ async def upstream(ups):
     except InvalidGitRepositoryError as error:
         if conf != "now":
             await ups.edit(
-                f"**Unfortunately, the directory {error} does not seem to be a git repository.\
-                \nOr Maybe it just needs a sync verification with {GIT_REPO_NAME}\
-            \nBut we can fix that by force updating the userbot using** `.update now`."
+                f'**New UPDATE available for [[{ac_br}]]({UPSTREAM_REPO_URL}/tree/{ac_br}):**\n\n' + '**CHANGELOG**\n\n' + f'{changelog}'
             )
             return
         repo = Repo.init()
