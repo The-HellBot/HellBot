@@ -5,7 +5,7 @@ from telethon.tl.functions.account import UpdateNotifySettingsRequest
 from userbot.utils import admin_cmd
 from userbot import bot 
 
-@borg.on(admin_cmd(pattern="itos ?(.*)"))
+@borg.on(admin_cmd(pattern="ss2 ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return 
