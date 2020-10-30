@@ -170,9 +170,9 @@
       "value": "Asia/Kolkata",
       "required": false
     },
-    "REDIRECTCHANNEL": {
-      "description": "Put You Channel Username Reflecting Your Info or Your Tags Etc",
-      "value": "",
+    "PM_DATA": {
+      "description": "Type DISABLE if you want to disable pm protection... ",
+      "value": "ENABLE",
       "required": false 
     }
   },
