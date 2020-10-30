@@ -1,11 +1,15 @@
 
 import os
 import sys
+import time
 from telethon.sessions import StringSession
 from telethon import TelegramClient
 from userbot.helpers import functions as darkdef
 
 from var import Var
+
+StartTime = time.time()
+hellversion = "1.4" 
 
 os.system("pip install --upgrade pip")
 if Var.STRING_SESSION:
