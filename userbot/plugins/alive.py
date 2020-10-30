@@ -11,7 +11,7 @@ pm_caption += f"⚔️⚔️**MASTER**⚔️⚔️       : {DEFAULTUSER}\n\n"
 
 pm_caption += "🛡️🛡️**TELETHON**🛡️🛡️   : 1.15.0 \n\n"
 
-pm_caption += "😈😈**Hêllẞø†**😈😈         : `{hellversion}`\n\n"
+pm_caption += f"😈😈**Hêllẞø†**😈😈         : `{hellversion}`\n\n"
 
 pm_caption += "⚠️⚠️**CHANNEL**⚠️⚠️     : [ᴊᴏɪɴ](https://t.me/HellBot_Official)\n\n"
 
