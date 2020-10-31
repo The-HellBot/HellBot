@@ -29,11 +29,10 @@ DEFAULTUSER = (
 CUSTOM_MIDDLE_PMP = str(CUSTOM_PMPERMIT) if CUSTOM_PMPERMIT else "**YOU HAVE TRESPASSED TO MY MASTERS INBOX** \n THIS IS ILLEGAL AND REGARDED AS CRIME"
 
 USER_BOT_WARN_ZERO = "**You were spamming my sweet master's inbox, henceforth you have been blocked by my master's Hêllẞø†.**\n__Now GTFO, i'm busy__"
-USER_BOT_NO_WARN = ("Hello, This is **Hêllẞø† Úl†rã Pr¡va†e Security Protocol⚠️**.You have found your way here to my master,"
-                   f"{DEFAULTUSER}'s Inbox\n"
+USER_BOT_NO_WARN = ("Hello, This is **Hêllẞø† Úl†rã Pr¡va†e Security Protocol⚠️**.\n"
+                   f"This is my master {DEFAULTUSER}'s Inbox\n"
                    f"\n**{CUSTOM_MIDDLE_PMP}**\n\n"
-                    "__Leave your Name,Reason and 100 million $ and hopefully you'll get a reply within 100 light years.__⭕️\n\n"
-                    "🔱Register Your Request!🔱\nSend `/start` To Register Your Request and start a valid conversation 🔥")
+                    "To start a valid conversation\n🔱Register Your Request!🔱\nSend `/start` To Register Your Request\nHopefully u will get a reply🔥")
 
 
 if Var.PRIVATE_GROUP_ID is not None:
