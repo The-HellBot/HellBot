@@ -130,7 +130,8 @@ if bool(ENV):
     
     # Custom Module
     CUSTOM_PMPERMIT = os.environ.get("CUSTOM_PMPERMIT", None)
-    
+    CUSTOM_AFK = os.environ.get("CUSTOM_AFK", None)
+
     # Upstream Repo
     UPSTREAM_REPO_URL = os.environ.get(
     "UPSTREAM_REPO_URL",
