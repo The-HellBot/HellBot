@@ -3,8 +3,9 @@
 
 from telethon import events
 import asyncio
-from userbot import bot, CMD_HELP
+#from userbot.utils import admin_cmd
 from userbot.events import register 
+from userbot import bot, CMD_HELP
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 import os
 try:
@@ -27,10 +28,10 @@ async def getmusic(so):
         return
     song = so.pattern_match.group(1)
     chat = "@SongsForYouBot"
-    link = f"{song}"
+    link = f"/song {song}"
     await so.edit("🔹Ok wait... 📡Searching your song🔸")
     async with bot.conversation(chat) as conv:
-          await asyncio.sleep(1.5)
+          await asyncio.sleep(2)
           await so.edit("📥Downloading...Please wait🤙")
           try:
               msg = await conv.send_message(link)
@@ -42,7 +43,7 @@ async def getmusic(so):
               await so.edit("Please unblock @SongsForYouBot and try searching again🤐")
               return
           await so.edit("Ohh.. I got something!! Wait sending😋🤙")
-          await asyncio.sleep(1)
+          await asyncio.sleep(3)
           await bot.send_file(so.chat_id, respond)
     await so.client.delete_messages(conv.chat_id,
                                        [msg.id, response.id, respond.id])
