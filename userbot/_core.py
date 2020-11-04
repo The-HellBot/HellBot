@@ -38,7 +38,6 @@ async def send(event):
     else:
         await edit_or_reply(event, "File not found..... Kek")
 
-
 @bot.on(admin_cmd(pattern="install"))
 async def install(event):
     if event.fwd_from:
@@ -55,7 +54,8 @@ async def install(event):
                 path1 = Path(downloaded_file_name)
                 shortname = path1.stem
                 load_module(shortname.replace(".py", ""))
-                await event.edit(f"Plugin successfully installed\n [{DEFAULTUSER}](tg://user?id={kraken})\n `{}`".format(
+                await event.edit(
+                    "Plugin successfully installed\n @HellBot_Official `{}`".format(
                         os.path.basename(downloaded_file_name)
                     )
                 )
