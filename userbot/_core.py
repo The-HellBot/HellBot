@@ -56,7 +56,7 @@ async def install(event):
                 shortname = path1.stem
                 load_module(shortname.replace(".py", ""))
                 await event.edit(
-                    "Plugin successfully installed\n `{}`".format(
+                    f"Plugin successfully installed\n [{DEFAULTUSER}](tg://user?id={kraken})\n `{}`".format(
                         os.path.basename(downloaded_file_name)
                     )
                 )
