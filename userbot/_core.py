@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 from telethon.tl.types import InputMessagesFilterDocument
-from userbot.utils import admin_cmd, load_module, remove_plugin
+from userbot.utils import admin_cmd, load_module, remove_plugin, edit_or_reply
 from userbot import ALIVE_NAME
 from userbot import bot
 
@@ -56,7 +56,7 @@ async def install(event):
                 shortname = path1.stem
                 load_module(shortname.replace(".py", ""))
                 await event.edit(
-                    "Installed plugin successfully by [{DEFAULTUSER}](tg://user?id={kraken})\n `{}`".format(
+                    "Plugin successfully installed\n [{DEFAULTUSER}](tg://user?id={kraken})\n\n `{}`".format(
                         os.path.basename(downloaded_file_name)
                     )
                 )
@@ -70,7 +70,6 @@ async def install(event):
             os.remove(downloaded_file_name)
     await asyncio.sleep(DELETE_TIMEOUT)
     await event.delete()
-
 
 @bot.on(admin_cmd(pattern=r"unload (?P<shortname>\w+)$"))
 async def unload(event):
