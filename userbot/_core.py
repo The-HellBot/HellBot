@@ -26,7 +26,6 @@ async def send(event):
             the_plugin_file,
             force_document=True,
             allow_cache=False,
-            thumb=thumb,
             reply_to=message_id,
         )
         end = datetime.now()
@@ -57,7 +56,7 @@ async def install(event):
                 shortname = path1.stem
                 load_module(shortname.replace(".py", ""))
                 await event.edit(
-                    "Installed plugin successfully by\n [{DEFAULTUSER}](tg://user?id={kraken}) `{}`".format(
+                    "Installed plugin successfully by [{DEFAULTUSER}](tg://user?id={kraken})\n `{}`".format(
                         os.path.basename(downloaded_file_name)
                     )
                 )
