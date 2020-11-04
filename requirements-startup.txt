@@ -58,5 +58,6 @@ urbandict>=0.5
 validators
 wikipedia>=1.4.0
 youtube-dl
+youtube-search-python
 covid
 tswift
