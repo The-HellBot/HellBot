@@ -9,7 +9,7 @@ from userbot import functions as darkdef
 from var import Var
 
 StartTime = time.time()
-hellversion = "1.4" 
+hellversion = "1.5" 
 
 os.system("pip install --upgrade pip")
 if Var.STRING_SESSION:
