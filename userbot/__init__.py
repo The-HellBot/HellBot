@@ -4,7 +4,7 @@ import sys
 import time
 from telethon.sessions import StringSession
 from telethon import TelegramClient
-from userbot.helpers import functions as darkdef
+from userbot import functions as darkdef
 
 from var import Var
 
