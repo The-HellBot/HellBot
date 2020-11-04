@@ -543,7 +543,7 @@ async def izal(zgfy):
         await zgfy.edit("".join(reply_text))
 
 
-@borg.on(admin_cmd(pattern="hi", outgoing=True)) 
+@borg.on(admin_cmd(pattern="hey", outgoing=True)) 
 async def hoi(hello):
     """ Greet everyone! """
     if not hello.text[0].isalpha() and hello.text[0] not in ("/", "#", "@", "!"):
