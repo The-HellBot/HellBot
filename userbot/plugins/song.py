@@ -3,7 +3,6 @@
 
 from telethon import events
 import asyncio
-#from userbot.utils import admin_cmd
 from userbot.events import register 
 from userbot import bot, CMD_HELP
 from telethon.tl.functions.channels import JoinChannelRequest
@@ -28,7 +27,7 @@ def bruh(name):
 async def getmusic(so):
     if so.fwd_from:
         return
-await so.client(JoinChannelRequest("t.me/anitimeofficial"))
+    await so.client(JoinChannelRequest("t.me/anitimeofficial"))
     song = so.pattern_match.group(1)
     chat = "@SongsForYouBot"
     link = f"/song {song}"
