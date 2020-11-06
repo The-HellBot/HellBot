@@ -37,7 +37,7 @@ if ALIVE_MESSAGE is None:
                 
             
 #@command(outgoing=True, pattern="^.hell$")
-@borg.on(admin_cmd(pattern=r"hell"))
+@command(outgoing=True, pattern="^.hell$")
 async def amireallyalive(awake):
     """ For .hell command, check if the bot is running.  """
     await awake.delete() 
