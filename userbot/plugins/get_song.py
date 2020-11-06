@@ -23,7 +23,7 @@ def bruh(name):
 
     os.system("instantmusic -q -s "+name)
 
-@register(outgoing=True, pattern="^.song(?: |$)(.*)")
+@register(outgoing=True, pattern="^.getsong(?: |$)(.*)")
 async def getmusic(so):
     if so.fwd_from:
         return
