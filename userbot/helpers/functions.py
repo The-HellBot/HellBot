@@ -102,7 +102,7 @@ async def solarize(imagefile, endname):
     inverted_image.save(endname)
     
     
-#tweets....
+#pranks....
 #source - https://nekobot.xyz/api
 
     
@@ -226,3 +226,6 @@ async def phcomment(text1, text2, text3):
         img = img.convert("RGB")
     img.save("temp.jpg", "jpeg")
     return "temp.jpg"
+
+#tweets...
+#source - https://nekobot.xyz/api
