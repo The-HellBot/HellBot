@@ -1,11 +1,13 @@
+#Credits to @spechide and his team for @TROLLVOICEBOT
+#made by @kraken_the_badass from the snippets of waifu AKA stickerizerbot....
+#kang karega kya madarchod?
+#aukaat h bsdk teri...jake baap ka loda chus ke aa....
+
+
 import re
-
 import random
-
 from userbot import bot
-
 from userbot.utils import admin_cmd
-
 
 
 IF_EMOJI = re.compile(
@@ -37,7 +39,6 @@ IF_EMOJI = re.compile(
     "]+")
 
 
-
 def deEmojify(inputString: str) -> str:
 
     """Remove emojis and other non-safe characters from string"""
@@ -46,33 +47,21 @@ def deEmojify(inputString: str) -> str:
 
 
 
-
-
 @borg.on(admin_cmd(pattern="mev(?: |$)(.*)"))
-
-
-
 async def nope(kraken):
-
     hell = kraken.pattern_match.group(1)
-
     if not hell:
-
         if kraken.is_reply:
-
             what = (await kraken.get_reply_message()).message
-
         else:
-
             await kraken.edit("`Sir please give some query to search and download it for you..!`")
-
             return
 
-    sticcers = await bot.inline_query(
+    troll = await bot.inline_query(
 
         "TrollVoiceBot", f"{(deEmojify(hell))}")
 
-    await sticcers[0].click(kraken.chat_id,
+    await troll[0].click(kraken.chat_id,
 
                             reply_to=kraken.reply_to_msg_id,
 
