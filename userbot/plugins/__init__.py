@@ -1,6 +1,6 @@
-from userbot import darkdef
+from userbot import simpdef
 
 
-darkmusic = darkdef.darkmusic 
-darkmusicvideo = darkdef.darkmusicvideo
+simpmusic = simpdef.simpmusic 
+simpmusicvideo = simpdef.simpmusicvideo
 
