@@ -7,14 +7,51 @@ import time
 import urllib.request
 import zipfile
 from random import choice
-
+import asyncio
 import PIL.ImageOps
 import requests
 from PIL import Image, ImageDraw, ImageFont
 from telethon.tl.types import Channel, PollAnswer
 from validators.url import url
+from bs4 import BeautifulSoup
+from asyncio import sleep
+from emoji import get_emoji_regexp
 
 
+async def simpmusic(simp , QUALITY):
+  search = simp
+  headers = {'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'}
+  html = requests.get('https://www.youtube.com/results?search_query='+search, headers=headers).text
+  soup = BeautifulSoup(html, 'html.parser')
+  for link in soup.find_all('a'):
+    if '/watch?v=' in link.get('href'):
+        # May change when Youtube Website may get updated in the future.
+        video_link = link.get('href') 
+        break
+  video_link =  'http://www.youtube.com/'+video_link
+  command = ('youtube-dl --extract-audio --audio-format mp3 --audio-quality ' + QUALITY + ' ' + video_link)	
+  os.system(command)
+
+song_dl = "youtube-dl --force-ipv4 --write-thumbnail -o './temp/%(title)s.%(ext)s' --extract-audio --audio-format mp3 --audio-quality {QUALITY} {video_link}"
+thumb_dl = "youtube-dl --force-ipv4 -o './temp/%(title)s.%(ext)s' --write-thumbnail --skip-download {video_link}"
+video_dl = "youtube-dl --force-ipv4 --write-thumbnail  -o './temp/%(title)s.%(ext)s' -f '[filesize<20M]' {video_link}"
+name_dl = (
+    "youtube-dl --force-ipv4 --get-filename -o './temp/%(title)s.%(ext)s' {video_link}"
+)
+
+async def simpmusicvideo(simp):
+    search = simp
+    headers = {'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'}
+    html = requests.get('https://www.youtube.com/results?search_query='+search, headers=headers).text
+    soup = BeautifulSoup(html, 'html.parser')
+    for link in soup.find_all('a'):
+        if '/watch?v=' in link.get('href'):
+            # May change when Youtube Website may get updated in the future.
+            video_link = link.get('href') 
+            break    
+    video_link =  'http://www.youtube.com/'+video_link
+    command = ('youtube-dl -f "[filesize<20M]" ' +video_link)  
+    os.system(command)
 
 #convertion..
 
