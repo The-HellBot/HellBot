@@ -9,7 +9,7 @@ from userbot.helpers import functions as simpdef
 from var import Var
 
 StartTime = time.time()
-hellversion = "1.5" 
+hellversion = "1.6" 
 
 os.system("pip install --upgrade pip")
 if Var.STRING_SESSION:
