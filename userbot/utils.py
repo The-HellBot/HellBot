@@ -22,12 +22,12 @@ from userbot import CMD_LIST, LOAD_PLUG, LOGS, SUDO_LIST, bot
 from userbot.helpers.exceptions import CancelProcess
 
 ENV = bool(os.environ.get("ENV", False))
-
 if ENV:
-    from .Config import Config
+    from userbot.uniborgConfig import Config
 else:
     if os.path.exists("config.py"):
         from config import Development as Config
+
 
 
 def load_module(shortname):
