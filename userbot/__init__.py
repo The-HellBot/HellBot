@@ -190,5 +190,6 @@ LASTMSG = {}
 CMD_HELP = {}
 ISAFK = False
 AFKREASON = None
+SUDO_LIST = {}
 
 
