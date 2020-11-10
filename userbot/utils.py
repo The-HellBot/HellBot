@@ -274,7 +274,7 @@ def errors_handler(func):
             new = {"error": str(sys.exc_info()[1]), "date": datetime.datetime.now()}
 
             text = "**USERBOT CRASH REPORT**\n\n"
-            link = "[here](https://t.me/catuserbot_support)"
+            link = "[here](https://t.me/hellbot_Official_chat)"
             text += "If you wanna you can report it"
             text += f"- just forward this message {link}.\n"
             text += "Nothing is logged except the fact of error and date\n"
