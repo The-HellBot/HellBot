@@ -262,59 +262,7 @@ async def edit_delete(event, text, time=None, parse_mode=None, link_preview=None
         )
     await asyncio.sleep(time)
     return await catevent.delete()
-
-
-def errors_handler(func):
-    async def wrapper(errors):
-        try:
-            await func(errors)
-        except BaseException:
-
-            date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-            new = {"error": str(sys.exc_info()[1]), "date": datetime.datetime.now()}
-
-            text = "**USERBOT CRASH REPORT**\n\n"
-            link = "[here](https://t.me/hellbot_Official_chat)"
-            text += "If you wanna you can report it"
-            text += f"- just forward this message {link}.\n"
-            text += "Nothing is logged except the fact of error and date\n"
-            ftext = "\nDisclaimer:\nThis file uploaded ONLY here,"
-            ftext += "\nwe logged only fact of error and date,"
-            ftext += "\nwe respect your privacy,"
-            ftext += "\nyou may not report this error if you've"
-            ftext += "\nany confidential data here, no one will see your data\n\n"
-            ftext += "--------BEGIN USERBOT TRACEBACK LOG--------"
-            ftext += "\nDate: " + date
-            ftext += "\nGroup ID: " + str(errors.chat_id)
-            ftext += "\nSender ID: " + str(errors.sender_id)
-            ftext += "\n\nEvent Trigger:\n"
-            ftext += str(errors.text)
-            ftext += "\n\nTraceback info:\n"
-            ftext += str(traceback.format_exc())
-            ftext += "\n\nError text:\n"
-            ftext += str(sys.exc_info()[1])
-            ftext += "\n\n--------END USERBOT TRACEBACK LOG--------"
-
-            command = 'git log --pretty=format:"%an: %s" -5'
-
-            ftext += "\n\n\nLast 5 commits:\n"
-
-            process = await asyncio.create_subprocess_shell(
-                command, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
-            )
-            stdout, stderr = await process.communicate()
-            result = str(stdout.decode().strip()) + str(stderr.decode().strip())
-            ftext += result
-            file = open("error.log", "w+")
-            file.write(ftext)
-            file.close()
-            await errors.client.send_file(
-                Config.PRIVATE_GROUP_BOT_API_ID,
-                "error.log",
-                caption=text,
-            )
-
-    return wrapper
+ 
 
 
 async def progress(
