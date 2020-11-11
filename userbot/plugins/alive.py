@@ -23,7 +23,8 @@ pm_caption += "🔥🔥**CREATOR🔥🔥      : [HellBot-Owner](https://t.me/kra
 
 pm_caption += " [...▄███▄███▄\n....█████████\n.......▀█████▀\n............▀█▀\n](https://t.me/hellbot_official)\n\n"
 #@command(outgoing=True, pattern="^.alive$")
-@borg.on(admin_cmd(pattern=r"alive"))
+@bot.on(admin_cmd(outgoing=True, pattern="alive$"))
+@bot.on(sudo_cmd(pattern="alive$", allow_sudo=True))
 async def amireallyalive(alive):
     chat = await alive.get_chat()
     await alive.delete()
