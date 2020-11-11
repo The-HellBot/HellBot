@@ -1,6 +1,7 @@
+ -0,0 +1,97 @@
 from userbot import CMD_LIST
 from userbot import ALIVE_NAME
-from userbot.utils import admin_cmd, sudo_cmd
+from userbot.utils import admin_cmd
 from platform import uname
 import sys
 from telethon import events, functions, __version__
@@ -57,7 +58,7 @@ async def cmd_list(event):
                 hide_via=True
             )
             await event.delete()
-            
+
 @borg.on(admin_cmd(pattern="dc"))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
@@ -85,7 +86,7 @@ async def _(event):
     if plugin_name in CMD_LIST:
         help_string = CMD_LIST[plugin_name].__doc__
         unload_string = f"Use `.unload {plugin_name}` to remove this plugin.\n           @HellBot_Official"
-        
+
         if help_string:
             plugin_syntax = f"Syntax for plugin **{plugin_name}**:\n\n{help_string}\n{unload_string}"
         else:
