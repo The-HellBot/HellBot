@@ -1,4 +1,3 @@
- -0,0 +1,97 @@
 from userbot import CMD_LIST
 from userbot import ALIVE_NAME
 from userbot.utils import admin_cmd
