@@ -6,7 +6,7 @@ import sys
 
 import git
 
-from userbot.herokuConfig import Config
+from userbot.uniborgConfig import Config
 from userbot.utils import admin_cmd
 
 # -- Constants -- #
