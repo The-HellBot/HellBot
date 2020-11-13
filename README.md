@@ -1,3 +1,10 @@
+[![Python 3.6](https://img.shields.io/badge/Python-3.6%20or%20newer-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/dec3fe46191d47fc8a5155406eef49af)](https://www.codacy.com/manual/Hellboy-Op/Hellbot)
+![GitHub repo size](https://img.shields.io/github/repo-size/HellBoy-OP/Hellbot)
+[![HitCount](http://hits.dwyl.com/HellBoy-OP/Hellbot.svg)](http://hits.dwyl.com/Hellboy-OP/Hellbot)
+[![Contact Me](https://img.shields.io/badge/Telegram-Contact%20Me-informational)](https://t.me/kraken_the_badass)
+
+
 # †hê Hêllẞø†
 This is a userbot made for telegram. I made this userbot with help of all other userbots available in telegram. All credits goes to its Respective Owners....
 
