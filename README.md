@@ -1,5 +1,5 @@
 [![Python 3.6](https://img.shields.io/badge/Python-3.6%20or%20newer-blue.svg)](https://www.python.org/downloads/release/python-360/)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/dec3fe46191d47fc8a5155406eef49af)](https://www.codacy.com/manual/Hellboy-Op/Hellbot)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/cba37e8579174c8a9b4c0bf46c0106f9)](https://www.codacy.com/gh/HellBoy-OP/HellBot/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=HellBoy-OP/HellBot&amp;utm_campaign=Badge_Grade)
 ![GitHub repo size](https://img.shields.io/github/repo-size/HellBoy-OP/Hellbot)
 [![HitCount](http://hits.dwyl.com/Hellboy-OP/Hellbot.svg)](http://hits.dwyl.com/Hellboy-OP/Hellbot)
 [![Contact Me](https://img.shields.io/badge/Telegram-Contact%20Me-informational)](https://t.me/kraken_the_badass)
