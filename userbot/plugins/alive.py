@@ -8,9 +8,9 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 kraken = bot.uid
 
 PM_IMG = "https://telegra.ph/file/f34675b4e94d4290c0b6b.mp4"
-pm_caption = "🔥🔥**Hêllẞø† IS ONLINE**🔥🔥\n\n"
+pm_caption = "__**🔥🔥Hêllẞø† IS ONLINE🔥🔥**__\n\n"
 
-pm_caption += f"         ≈≈ 🄼   🄰   🅂   🅃   🄴   🅁 ≈≈      \n[{DEFAULTUSER}](tg://user?id={kraken})\n\n"
+pm_caption += f"            __↼🄼🄰🅂🅃🄴🅁⇀__\n**『[{DEFAULTUSER}](tg://user?id={kraken})』**\n\n"
 
 pm_caption += "🛡️TELETHON🛡️ : 1.15.0 \n"
 
