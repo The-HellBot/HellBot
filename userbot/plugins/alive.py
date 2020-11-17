@@ -7,7 +7,7 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 PM_IMG = "https://telegra.ph/file/f34675b4e94d4290c0b6b.mp4"
 pm_caption = "🔥🔥**Hêllẞø† IS ONLINE**🔥🔥\n\n"
 
-pm_caption += f"⚔️MASTER⚔️     : {DEFAULTUSER}\n\n"
+pm_caption += f"          **⚔️MASTER⚔️**      \n{DEFAULTUSER}\n"
 
 pm_caption += "🛡️TELETHON🛡️ : 1.15.0 \n"
 
