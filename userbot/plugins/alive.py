@@ -7,7 +7,7 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
 kraken = bot.uid
 
-PM_IMG = "https://telegra.ph/file/f34675b4e94d4290c0b6b.mp4"
+PM_IMG = "https://telegra.ph/file/80e5200c615cf0cb57aa9.mp4"
 pm_caption = "__**🔥🔥Hêllẞø† IS ONLINE🔥🔥**__\n\n"
 
 pm_caption += f"            __↼🄼🄰🅂🅃🄴🅁⇀__\n**『[{DEFAULTUSER}](tg://user?id={kraken})』**\n\n"
@@ -20,9 +20,9 @@ pm_caption += "⚠️CHANNEL⚠️   : [ᴊᴏɪɴ](https://t.me/HellBot_Officia
 
 pm_caption += "🔱GROUP🔱.       : [ᴊᴏɪɴ](https://t.me/HellBot_Official_Chat)\n"
 
-pm_caption += "😎LICENSE😎     : [ӀíϲҽղՏҽ](https://github.com/HellBoy-OP/HellBot/blob/master/LICENSE)\n"
-
 pm_caption += "🔥CREATOR🔥    : [Nub Here](https://t.me/kraken_the_badass)\n"
+
+pm_caption += "             [✨REPO✨](https://github.com/hellboy-op/hellbot) 🔹 [📜License📜](https://github.com/HellBoy-OP/HellBot/blob/master/LICENSE)"
 #@command(outgoing=True, pattern="^.alive$")
 @bot.on(admin_cmd(outgoing=True, pattern="alive$"))
 @bot.on(sudo_cmd(pattern="alive$", allow_sudo=True))
