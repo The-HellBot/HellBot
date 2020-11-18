@@ -1,6 +1,6 @@
 # Created By starkdy And Ported For Type 2 Userbot By StarkxD
 #modified and added more tweets by @kraken_the_badass for Hellbot.....
-
+# no offense pliz
 from userbot.events import register
 import requests , re
 from PIL import Image
@@ -203,7 +203,7 @@ CMD_HELP.update({
 \n\n`.mia` (text)\
      \nUsage : Tweet with mia\
 \n\n`.pappu` (text)\
-     \nUsage : Tweet with Rahul Gandhi
+     \nUsage : Tweet with Rahul Gandhi\
 \n\n`.cmm` (text)\
      \nUsage : Get a banner\
 \n\n`.kanna` (text)\
