@@ -25,7 +25,7 @@ pm_caption += f"😈Hêllẞø†😈       : `{hellversion}`\n"
 
 pm_caption += "⚠️CHANNEL⚠️   : [ᴊᴏɪɴ](https://t.me/HellBot_Official)\n"
 
-pm_caption += "✴️Sudo✴️       : `{sudou}`\n"
+pm_caption += f"⚜️Sudo⚜️            : `{sudou}`\n"
 
 pm_caption += "🔥CREATOR🔥    : [Nub Here](https://t.me/kraken_the_badass)\n\n"
 
