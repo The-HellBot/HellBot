@@ -5,6 +5,13 @@ from userbot import ALIVE_NAME, hellversion
 from telethon.tl.types import ChannelParticipantsAdmins
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
+ludosudo = Config.SUDO_USERS
+
+if ludosudo:
+    sudou = "True"
+else:
+    sudou = "False"
+
 kraken = bot.uid
 
 PM_IMG = "https://telegra.ph/file/80e5200c615cf0cb57aa9.mp4"
@@ -18,7 +25,7 @@ pm_caption += f"😈Hêllẞø†😈       : `{hellversion}`\n"
 
 pm_caption += "⚠️CHANNEL⚠️   : [ᴊᴏɪɴ](https://t.me/HellBot_Official)\n"
 
-pm_caption += "🔱GROUP🔱.       : [ᴊᴏɪɴ](https://t.me/HellBot_Official_Chat)\n"
+pm_caption += "✴️Sudo✴️       : `{sudou}`\n"
 
 pm_caption += "🔥CREATOR🔥    : [Nub Here](https://t.me/kraken_the_badass)\n\n"
 
