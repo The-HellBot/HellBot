@@ -69,7 +69,7 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 
 
 #@register(outgoing=True, pattern="^.setgpic$")
-@bot.on(admin_cmd("setgpic$"))
+@bot.on(admin_cmd(outgoing=True, pattern="setgpic$"))
 @bot.on(sudo_cmd(pattern="setgpic$", allow_sudo=True))
 @errors_handler
 async def set_group_photo(gpic):
@@ -109,7 +109,7 @@ async def set_group_photo(gpic):
 
 
 #@register(outgoing=True, pattern="^.promote(?: |$)(.*)")
-@bot.on(admin_cmd("promote(?: |$)(.*)"))
+@bot.on(admin_cmd(outgoing=True, pattern="promote(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="promote(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def promote(promt):
@@ -162,7 +162,7 @@ async def promote(promt):
 
 
 #@register(outgoing=True, pattern="^.demote(?: |$)(.*)")
-@bot.on(admin_cmd("demote(?: |$)(.*)"))
+@bot.on(admin_cmd(outgoing=True, pattern="demote(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="demote(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def demote(dmod):
@@ -214,7 +214,7 @@ async def demote(dmod):
 
 
 #@register(outgoing=True, pattern="^.ban(?: |$)(.*)")
-@bot.on(admin_cmd("ban(?: |$)(.*)"))
+@bot.on(admin_cmd(outgoing=True, pattern="ban(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="ban(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def ban(bon):
@@ -270,7 +270,7 @@ async def ban(bon):
 
 
 #@register(outgoing=True, pattern="^.unban(?: |$)(.*)")
-@bot.on(admin_cmd("unban(?: |$)(.*)"))
+@bot.on(admin_cmd(outgoing=True, pattern="unban(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="unban(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def nothanos(unbon):
@@ -310,7 +310,7 @@ async def nothanos(unbon):
 
 
 #@register(outgoing=True, pattern="^.mute(?: |$)(.*)")
-@bot.on(admin_cmd("mute(?: |$)(.*)"))
+@bot.on(admin_cmd(outgoing=True, pattern="mute(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="mute(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def spider(spdr):
@@ -373,7 +373,7 @@ async def spider(spdr):
 
 
 #@register(outgoing=True, pattern="^.unmute(?: |$)(.*)")
-@bot.on(admin_cmd("unmute(?: |$)(.*)"))
+@bot.on(admin_cmd(outgoing=True, pattern="unmute(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="unmute(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def unmoot(unmot):
@@ -454,7 +454,7 @@ async def muter(moot):
         if i.sender == str(moot.sender_id):
             await moot.delete()
 
-@bot.on(admin_cmd("pin($| (.*))"))
+@bot.on(admin_cmd(outgoing=True, pattern="pin($| (.*))"))
 @bot.on(sudo_cmd(pattern="pin($| (.*))", allow_sudo=True))
 @errors_handler
 async def pin(msg):
@@ -501,7 +501,7 @@ async def pin(msg):
             f"LOUD: {not is_silent}")
 
 
-@bot.on(admin_cmd("kick(?: |$)(.*)"))
+@bot.on(admin_cmd(outgoing=True, pattern="kick(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="kick(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def kick(usr):
