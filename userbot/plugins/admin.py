@@ -69,8 +69,8 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 
 
 #@register(outgoing=True, pattern="^.setgpic$")
-@bot.on(admin_cmd(outgoing=True, pattern="setgpic$"))
-@bot.on(sudo_cmd(pattern="setgpic$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"setgpic"))
+@bot.on(sudo_cmd(pattern=r"setgpic", allow_sudo=True))
 @errors_handler
 async def set_group_photo(gpic):
     """ For .setgpic command, changes the picture of a group """
@@ -109,8 +109,8 @@ async def set_group_photo(gpic):
 
 
 #@register(outgoing=True, pattern="^.promote(?: |$)(.*)")
-@bot.on(admin_cmd(outgoing=True, pattern="promote(?: |$)(.*)"))
-@bot.on(sudo_cmd(pattern="promote(?: |$)(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"promote(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern=r"promote(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def promote(promt):
     """ For .promote command, promotes the replied/tagged person """
