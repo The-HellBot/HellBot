@@ -31,7 +31,7 @@ from telethon.tl.types import (
 
 from userbot.utils import admin_cmd, edit_or_reply, errors_handler, sudo_cmd
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, LOGS
-from .sql_helper.mute_sql import is_muted, mute, unmute
+from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
 
 # =================== CONSTANT ===================
 
