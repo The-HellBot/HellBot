@@ -154,16 +154,18 @@
     },
     "NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD": {
       "description": " Set The Amount Of Buttons Displayed In Help Command",
-      "required": true
+      "value": "15",
+      "required": false
     },
     "NO_OF_COLUMS_DISPLAYED_IN_H_ME_CMD": {
       "description": "Set The Amount Of Rows You Want To Displayed In Help Command default 2",
-      "required": true
+      "value": "2",
+      "required": false
     },
     "EMOJI_TO_DISPLAY_IN_HELP": {
       "description": "Set The emojies You Want to Add In Help Command!!",
-      "value": "",
-      "required": true
+      "value": "🌟",
+      "required": false
     }, 
     "TZ": {
       "description": "Required for Correct Time for autopic get from http://www.timezoneconverter.com/cgi-bin/findzone.tzc",
