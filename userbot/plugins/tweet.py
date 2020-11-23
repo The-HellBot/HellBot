@@ -263,6 +263,8 @@ CMD_HELP.update({
      \nUsage : Tweet with Rahul Gandhi\
 \n\n`.sunny` (text)\
      \nUsage : Tweet with sunny leone\
+\n\n`.johhny` (text)\
+     \nUsage : Tweet with johhny sins\
 \n\n`.cmm` (text)\
      \nUsage : Get a banner\
 \n\n`.kanna` (text)\
