@@ -10,7 +10,7 @@ import asyncio, time, io, math, os, logging, asyncio, shutil, re, subprocess, js
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from base64 import b64decode
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 from telethon.events import NewMessage
 from telethon.tl.custom import Dialog
 from telethon.tl.types import Channel, Chat, User
@@ -74,7 +74,8 @@ def user_full_name(user):
     return full_name
 
 
-@borg.on(admin_cmd(pattern=r"inviteall ?(.*)"))
+@bot.on(admin_cmd(pattern="inviteall ?(.*)"))
+@bot.on(sudo_cmd(pattern="inviteall ?(.*)", allow_sudo=True))
 async def get_users(event):   
     sender = await event.get_sender() ; me = await event.client.get_me()
     if not sender.id == me.id:
