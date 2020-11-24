@@ -3,7 +3,8 @@ import datetime
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.account import UpdateNotifySettingsRequest
-from uniborg.util import admin_cmd
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+import urbandict
 
 @borg.on(admin_cmd(pattern="purl ?(.*)", allow_sudo=True))
 async def _(event):
@@ -27,7 +28,7 @@ async def _(event):
           await event.delete()
           await event.client.send_message(event.chat_id, response.message, reply_to=reply_message)
 
-@borg.on(admin_cmd(pattern="sgm ?(.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="history ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return 
@@ -89,3 +90,27 @@ async def _(event):
   await event.edit("[Connected](https://t.me/missrose_bot)")
   await asyncio.sleep(3)
   await event.delete()
+
+@borg.on(admin_cmd("ud (.*)"))
+async def _(event):
+    if event.fwd_from:
+        return
+    await event.edit("processing...")
+    str = event.pattern_match.group(1)
+    try:
+        mean = urbandict.define(str)
+        if len(mean) > 0:
+            await event.edit(
+                'Text: **' +
+                str +
+                '**\n\nMeaning: **' +
+                mean[0]['def'] +
+                '**\n\n' +
+                'Example: \n__' +
+                mean[0]['example'] +
+                '__'
+            )
+        else:
+            await event.edit("No result found for **" + str + "**")
+    except:
+        await event.edit("No result found for **" + str + "**")
