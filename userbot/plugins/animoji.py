@@ -257,6 +257,93 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 6])
 
+@bot.on(admin_cmd(pattern=f"hand$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"hand$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    animation_interval = 1
+    animation_ttl = range(13)
+    event = await edit_or_reply(event, "🖐️")
+    animation_chars = [
+        "👈",
+        "👉",
+        "☝️",
+        "👆",
+        "🖕",
+        "👇",
+        "✌️",
+        "🤞",
+        "🖖",
+        "🤘",
+        "🤙",
+        "🖐️",
+        "👌",
+    ]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 13])
+
+
+@bot.on(admin_cmd(pattern=f"gsg$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"gsg$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    animation_interval = 1
+    animation_ttl = range(12)
+    event = await edit_or_reply(event, "ContDown....")
+    animation_chars = [
+        "🔟",
+        "9️⃣",
+        "8️⃣",
+        "7️⃣",
+        "6️⃣",
+        "5️⃣",
+        "4️⃣",
+        "3️⃣",
+        "2️⃣",
+        "1️⃣",
+        "0️⃣",
+        "🆘",
+    ]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 12])
+
+
+@bot.on(admin_cmd(pattern=r"theart$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"theart$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    animation_interval = 0.3
+    animation_ttl = range(54)
+    event = await edit_or_reply(event, "🖤")
+    animation_chars = [
+        "❤️",
+        "🧡",
+        "💛",
+        "💚",
+        "💙",
+        "💜",
+        "🖤",
+        "💘",
+        "💝",
+        "❤️",
+        "🧡",
+        "💛",
+        "💚",
+        "💙",
+        "💜",
+        "🖤",
+        "💘",
+        "💝",
+    ]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 18])
+
 
 
 CMD_HELP.update(
@@ -279,6 +366,9 @@ CMD_HELP.update(
   •  `.anim`
   •  `.fnl`
   •  `.monkey`
+  •  `.hand`
+  •  `.gsg`
+  •  `.theart`
   
 **Function : **__Different kinds of emoji animation commands check yourself for their animation .__"""
     }
