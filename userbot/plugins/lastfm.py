@@ -11,7 +11,7 @@ from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import User as Userbot
 from telethon.errors.rpcerrorlist import FloodWaitError
 
-from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID, DEFAULT_BIO, BIO_PREFIX, lastfm, LASTFM_USERNAME, bot
+from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID, BIO_MSG, BIO_PREFIX, lastfm, LASTFM_USERNAME, bot
 from userbot.events import register
 
 # =================== CONSTANT ===================
