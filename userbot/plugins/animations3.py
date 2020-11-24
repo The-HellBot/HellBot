@@ -46,7 +46,7 @@ async def _(event):
         "👁👁\n  💋  =====> Teri maa nach rhi h idhar?",
         "👁👁\n  👄  =====> Bhag madarchod",
         "👁👁\n  👅  =====> Abee ja naa gandu",
-        "👁👁\n  💋  =====> Abee jaa naa suar,
+        "👁👁\n  💋  =====> Abee jaa naa suar",
         "👁👁\n  👄  =====> Abe jaa naa chakke",
         "👁👁\n  👅  =====> Aae madarchod apna kaam kar",
         "👁👁\n  💋  =====> Chal abb gand mra bsdk",
