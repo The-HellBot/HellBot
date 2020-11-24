@@ -3,84 +3,154 @@
 .appr <app_name>  to fetch app details with Xpl0iter request link.
 .mods <app_name> to get the premier app from telegram if available.."""
 
+import bs4
 import requests
 
-import bs4
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot import ALIVE_NAME, CMD_HELP
 
-import re
-
-
-
-from telethon import *
-
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
-from var import Var
-from userbot.events import register
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
 
-@borg.on(events.NewMessage(pattern='.app (.*)'))
-
-@borg.on(events.MessageEdited(pattern='.app (.*)'))
-
-async def apk(e):
+@bot.on(admin_cmd(pattern="app (.*)"))
+@bot.on(sudo_cmd(pattern="app (.*)", allow_sudo=True))
+async def apk(event):
+    app_name = event.pattern_match.group(1)
+    event = await edit_or_reply(event, "Searching!")
     try:
-        app_name = e.pattern_match.group(1)
-        remove_space = app_name.split(' ')
-        final_name = '+'.join(remove_space)
-        page = requests.get("https://play.google.com/store/search?q="+final_name+"&c=apps")
-        lnk = str(page.status_code)
-        soup = bs4.BeautifulSoup(page.content,'lxml', from_encoding='utf-8')
-        results = soup.findAll("div","ZmHEEd")
-        app_name = results[0].findNext('div', 'Vpfmgd').findNext('div', 'WsMG1c nnK0zc').text
-        app_dev = results[0].findNext('div', 'Vpfmgd').findNext('div', 'KoLSrc').text
-        app_dev_link = "https://play.google.com"+results[0].findNext('div', 'Vpfmgd').findNext('a', 'mnKHRc')['href']
-        app_rating = results[0].findNext('div', 'Vpfmgd').findNext('div', 'pf5lIe').find('div')['aria-label']
-        app_link = "https://play.google.com"+results[0].findNext('div', 'Vpfmgd').findNext('div', 'vU6FJ p63iDd').a['href']
-        app_icon = results[0].findNext('div', 'Vpfmgd').findNext('div', 'uzcko').img['data-src']
-        app_details = "<a href='"+app_icon+"'>ЁЯУ▓&#8203;</a>"
-        app_details += " <b>"+app_name+"</b>"
-        app_details += "\n\n<code>Developer :</code> <a href='"+app_dev_link+"'>"+app_dev+"</a>"
-        app_details += "\n<code>Rating :</code> "+app_rating.replace("Rated ", "тнР ").replace(" out of ", "/").replace(" stars", "", 1).replace(" stars", "тнР ").replace("five", "5")
-        app_details += "\n<code>Features :</code> <a href='"+app_link+"'>View in Play Store</a>"
-        app_details += "\n\n===> HellBot <==="
-        await e.edit(app_details, link_preview = True, parse_mode = 'HTML')
+        remove_space = app_name.split(" ")
+        final_name = "+".join(remove_space)
+        page = requests.get(
+            "https://play.google.com/store/search?q=" + final_name + "&c=apps"
+        )
+        str(page.status_code)
+        soup = bs4.BeautifulSoup(page.content, "lxml", from_encoding="utf-8")
+        results = soup.findAll("div", "ZmHEEd")
+        app_name = (
+            results[0].findNext("div", "Vpfmgd").findNext("div", "WsMG1c nnK0zc").text
+        )
+        app_dev = results[0].findNext("div", "Vpfmgd").findNext("div", "KoLSrc").text
+        app_dev_link = (
+            "https://play.google.com"
+            + results[0].findNext("div", "Vpfmgd").findNext("a", "mnKHRc")["href"]
+        )
+        app_rating = (
+            results[0]
+            .findNext("div", "Vpfmgd")
+            .findNext("div", "pf5lIe")
+            .find("div")["aria-label"]
+        )
+        app_link = (
+            "https://play.google.com"
+            + results[0]
+            .findNext("div", "Vpfmgd")
+            .findNext("div", "vU6FJ p63iDd")
+            .a["href"]
+        )
+        app_icon = (
+            results[0]
+            .findNext("div", "Vpfmgd")
+            .findNext("div", "uzcko")
+            .img["data-src"]
+        )
+        app_details = "<a href='" + app_icon + "'>📲&#8203;</a>"
+        app_details += " <b>" + app_name + "</b>"
+        app_details += (
+            "\n\n<code>Developer :</code> <a href='"
+            + app_dev_link
+            + "'>"
+            + app_dev
+            + "</a>"
+        )
+        app_details += "\n<code>Rating :</code> " + app_rating.replace(
+            "Rated ", "⭐ "
+        ).replace(" out of ", "/").replace(" stars", "", 1).replace(
+            " stars", "⭐ "
+        ).replace(
+            "five", "5"
+        )
+        app_details += (
+            "\n<code>Features :</code> <a href='"
+            + app_link
+            + "'>View in Play Store</a>"
+        )
+        app_details += f"\n\n===> {DEFAULTUSER} <==="
+        await event.edit(app_details, link_preview=True, parse_mode="HTML")
     except IndexError:
-        await e.edit("No result found in search. Please enter **Valid app name**")
+        await event.edit("No result found in search. Please enter **Valid app name**")
     except Exception as err:
-        await e.edit("Exception Occured:- "+str(err))
+        await event.edit("Exception Occured:- " + str(err))
 
-@borg.on(events.NewMessage(pattern='.appr (.*)'))
 
-@borg.on(events.MessageEdited(pattern='.appr (.*)'))
-
-async def apkr(e):
+@bot.on(admin_cmd(pattern="appr (.*)"))
+@bot.on(sudo_cmd(pattern="appr (.*)", allow_sudo=True))
+async def apkr(event):
+    app_name = event.pattern_match.group(1)
+    event = await edit_or_reply(event, "searching!")
     try:
-        app_name = e.pattern_match.group(1)
-        remove_space = app_name.split(' ')
-        final_name = '+'.join(remove_space)
-        page = requests.get("https://play.google.com/store/search?q="+final_name+"&c=apps")
-        lnk = str(page.status_code)
-        soup = bs4.BeautifulSoup(page.content,'lxml', from_encoding='utf-8')
-        results = soup.findAll("div","ZmHEEd")
-        app_name = results[0].findNext('div', 'Vpfmgd').findNext('div', 'WsMG1c nnK0zc').text
-        app_dev = results[0].findNext('div', 'Vpfmgd').findNext('div', 'KoLSrc').text
-        app_dev_link = "https://play.google.com"+results[0].findNext('div', 'Vpfmgd').findNext('a', 'mnKHRc')['href']
-        app_rating = results[0].findNext('div', 'Vpfmgd').findNext('div', 'pf5lIe').find('div')['aria-label']
-        app_link = "https://play.google.com"+results[0].findNext('div', 'Vpfmgd').findNext('div', 'vU6FJ p63iDd').a['href']
-        app_icon = results[0].findNext('div', 'Vpfmgd').findNext('div', 'uzcko').img['data-src']
-        app_details = "<a href='"+app_icon+"'>ЁЯУ▓&#8203;</a>"
-        app_details += " <b>"+app_name+"</b>"
-        app_details += "\n\n<code>Developer :</code> <a href='"+app_dev_link+"'>"+app_dev+"</a>"
-        app_details += "\n<code>Rating :</code> "+app_rating.replace("Rated ", "тнР ").replace(" out of ", "/").replace(" stars", "", 1).replace(" stars", "тнР ").replace("five", "5")
-        app_details += "\n<code>Features :</code> <a href='"+app_link+"'>View in Play Store</a>"
-        app_details += "\n\n<b>Download : </b> <a href='https://t.me/HellBot_Official'>Request_Here</a>"
-        app_details += "\n\n===> HellBot <==="
-        await e.edit(app_details, link_preview = True, parse_mode = 'HTML')
+        remove_space = app_name.split(" ")
+        final_name = "+".join(remove_space)
+        page = requests.get(
+            "https://play.google.com/store/search?q=" + final_name + "&c=apps"
+        )
+        str(page.status_code)
+        soup = bs4.BeautifulSoup(page.content, "lxml", from_encoding="utf-8")
+        results = soup.findAll("div", "ZmHEEd")
+        app_name = (
+            results[0].findNext("div", "Vpfmgd").findNext("div", "WsMG1c nnK0zc").text
+        )
+        app_dev = results[0].findNext("div", "Vpfmgd").findNext("div", "KoLSrc").text
+        app_dev_link = (
+            "https://play.google.com"
+            + results[0].findNext("div", "Vpfmgd").findNext("a", "mnKHRc")["href"]
+        )
+        app_rating = (
+            results[0]
+            .findNext("div", "Vpfmgd")
+            .findNext("div", "pf5lIe")
+            .find("div")["aria-label"]
+        )
+        app_link = (
+            "https://play.google.com"
+            + results[0]
+            .findNext("div", "Vpfmgd")
+            .findNext("div", "vU6FJ p63iDd")
+            .a["href"]
+        )
+        app_icon = (
+            results[0]
+            .findNext("div", "Vpfmgd")
+            .findNext("div", "uzcko")
+            .img["data-src"]
+        )
+        app_details = "<a href='" + app_icon + "'>📲&#8203;</a>"
+        app_details += " <b>" + app_name + "</b>"
+        app_details += (
+            "\n\n<code>Developer :</code> <a href='"
+            + app_dev_link
+            + "'>"
+            + app_dev
+            + "</a>"
+        )
+        app_details += "\n<code>Rating :</code> " + app_rating.replace(
+            "Rated ", "⭐ "
+        ).replace(" out of ", "/").replace(" stars", "", 1).replace(
+            " stars", "⭐ "
+        ).replace(
+            "five", "5"
+        )
+        app_details += (
+            "\n<code>Features :</code> <a href='"
+            + app_link
+            + "'>View in Play Store</a>"
+        )
+        app_details += "\n\n<b>Download : </b> <a href='https://t.me/joinchat/JCu-H1NikiYDgNjpjPYd4A'>Request_Here</a>"
+        app_details += "\n\n===> @Xpl0iter <==="
+        await event.edit(app_details, link_preview=True, parse_mode="HTML")
     except IndexError:
-        await e.edit("No result found in search. Please enter **Valid app name**")
+        await event.edit("No result found in search. Please enter **Valid app name**")
     except Exception as err:
-        await e.edit("Exception Occured:- "+str(err))
+        await event.edit("Exception Occured:- " + str(err))
 
 
 @borg.on(admin_cmd(pattern="mods ?(.*)"))
@@ -94,3 +164,17 @@ async def mod(event):
     tap = await bot.inline_query(botusername, modr) 
     await tap[0].click(event.chat_id)
     await event.delete()
+
+
+CMD_HELP.update(
+    {
+        "app": "**Plugin :** `app`\
+        \n**Syntax : **`.app [app name]`\
+        \n**Usage: **searches the app in the playstore and provides the link to the app in playstore and fetchs app details \
+        \n\n**Syntax : **`.mods [app name]`\
+        \n**Usage: **searches and downloads the modded app\
+        \n\n**Syntax : **`.appr [app name]`\
+        \n**Usage: **searches the app in the playstore and provides the link to the app in playstore and fetchs app details with Xpl0iter request link. \
+        "
+    }
+)
