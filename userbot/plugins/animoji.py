@@ -196,9 +196,9 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "animation2": """**Plugin : **`animation2`
+        "animoji": """**Plugin : **`animoji`
         
-**Commands in animation2 are **
+**Commands in animoji are **
   •  `.think`
   •  `.lmao`
   •  `.nothappy`
@@ -211,6 +211,6 @@ CMD_HELP.update(
   •  `.smoon`
   •  `.tmoon`
   
-**Function : **__Different kinds of animation commands check yourself for their animation .__"""
+**Function : **__Different kinds of emoji animation commands check yourself for their animation .__"""
     }
 )
