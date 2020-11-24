@@ -30,6 +30,53 @@ AUTOBIOSTART = False
 AUTONAMESTART = False
 DIGITALPICSTART = False
 
+@bot.on(admin_cmd(pattern="bloom$"))
+async def autopic(event):
+    if event.fwd_from:
+        return
+    global BLOOMSTART
+    downloaded_file_name = "userbot/original_pic.png"
+    downloader = SmartDL(
+        Config.DOWNLOAD_PFP_URL_CLOCK, downloaded_file_name, progress_bar=True
+    )
+    downloader.start(blocking=False)
+    photo = "userbot/photo_pfp.png"
+    while not downloader.isFinished():
+        pass
+    if BLOOMSTART:
+        return await edit_delete(event, f"`Bloom is already enabled`")
+    else:
+        BLOOMSTART = True
+    await edit_delete(
+        event, "`Bloom colour profile pic have been enabled by my master`"
+    )
+    while BLOOMSTART:
+        # RIP Danger zone Here no editing here plox
+        R = random.randint(0, 256)
+        B = random.randint(0, 256)
+        G = random.randint(0, 256)
+        FR = 256 - R
+        FB = 256 - B
+        FG = 256 - G
+        shutil.copy(downloaded_file_name, photo)
+        image = Image.open(photo)
+        image.paste((R, G, B), [0, 0, image.size[0], image.size[1]])
+        image.save(photo)
+        current_time = datetime.now().strftime("\n Time: %H:%M:%S \n \n Date: %d/%m/%y")
+        img = Image.open(photo)
+        drawn_text = ImageDraw.Draw(img)
+        fnt = ImageFont.truetype(FONT_FILE_TO_USE, 60)
+        ofnt = ImageFont.truetype(FONT_FILE_TO_USE, 250)
+        drawn_text.text((95, 250), current_time, font=fnt, fill=(FR, FG, FB))
+        drawn_text.text((95, 250), "      😈", font=ofnt, fill=(FR, FG, FB))
+        img.save(photo)
+        file = await event.client.upload_file(photo)
+        try:
+            await event.client(functions.photos.UploadProfilePhotoRequest(file))
+            os.remove(photo)
+            await asyncio.sleep(CHANGE_TIME)
+        except BaseException:
+            return
 
 @bot.on(admin_cmd(pattern="autoname$"))
 async def _(event):
@@ -81,6 +128,8 @@ CMD_HELP.update(
         "auto_profile": """**Plugin : **`auto_profile`
   •**Syntax : **`.autoname`
   •**Function : **__for time along with name, you must set __`ALIVE_NAME`__ in the heroku vars first for this to work__
+  •**Syntax : **`.bloom`
+  •**Function : **__autodp... May result in account ban... Use on your own risk__
   •**Syntax : **`.autobio`
   •**Function : **__for time along with your bio, Set __`BIO_MSG`__ in the heroku vars first__
 """
