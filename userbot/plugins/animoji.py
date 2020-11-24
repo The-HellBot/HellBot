@@ -193,6 +193,71 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 32])
 
+@bot.on(admin_cmd(pattern=f"hart$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"hart$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    animation_interval = 0.5
+    animation_ttl = range(20)
+    event = await edit_or_reply(event, "❤️")
+    animation_chars = ["🖤", "❤️", "🖤", "❤️", "‎"]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 4])
+
+
+@bot.on(admin_cmd(pattern=f"anim$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"anim$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    animation_interval = 1
+    animation_ttl = range(20)
+    event = await edit_or_reply(event, "😢")
+    animation_chars = [
+        "😁",
+        "😧",
+        "😡",
+        "😢",
+        "😁",
+        "😧",
+        "😡",
+        "😢",
+    ]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 10])
+
+
+@bot.on(admin_cmd(pattern=f"fnl$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"fnl$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    animation_interval = 2
+    animation_ttl = range(6)
+    event = await edit_or_reply(event, "Hey There....")
+    animation_chars = ["😁🏿", "😁🏾", "😁🏽", "😁🏼", "‎😁"]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 6])
+
+
+@bot.on(admin_cmd(pattern=f"monkey$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"monkey$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    animation_interval = 2
+    animation_ttl = range(12)
+    event = await edit_or_reply(event, "Hey There....")
+    animation_chars = ["🐵", "🙉", "🙈", "🙊", "🖕‎🐵🖕"]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 6])
+
+
 
 CMD_HELP.update(
     {
@@ -210,6 +275,10 @@ CMD_HELP.update(
   •  `.moon`
   •  `.smoon`
   •  `.tmoon`
+  •  `.hart`
+  •  `.anim`
+  •  `.fnl`
+  •  `.monkey`
   
 **Function : **__Different kinds of emoji animation commands check yourself for their animation .__"""
     }
