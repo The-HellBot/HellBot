@@ -76,3 +76,13 @@ async def _(event):
             await asyncio.sleep(ex.seconds)
         await asyncio.sleep(CHANGE_TIME)
 
+CMD_HELP.update(
+    {
+        "auto_profile": """**Plugin : **`auto_profile`
+  •**Syntax : **`.autoname`
+  •**Function : **__for time along with name, you must set __`ALIVE_NAME`__ in the heroku vars first for this to work__
+  •**Syntax : **`.autobio`
+  •**Function : **__for time along with your bio, Set __`BIO_MSG`__ in the heroku vars first__
+"""
+    }
+)
