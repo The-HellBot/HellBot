@@ -24,11 +24,11 @@ from telethon.tl.functions.photos import (DeletePhotosRequest,
                                           GetUserPhotosRequest,
                                           UploadProfilePhotoRequest)
 from telethon.tl.types import InputPhoto, MessageMediaPhoto, User, Chat, Channel
-from userbot import bot, CMD_HELP , AUTONAME , DEFAULT_BIO , ALIVE_NAME
+from userbot import bot, CMD_HELP , AUTONAME , BIO_MSG , ALIVE_NAME
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
-DEFAULTUSERBIO = str(DEFAULT_BIO) if DEFAULT_BIO else "Legends Says To @HellBot_Official"
+DEFAULTUSERBIO = str(BIO_MSG) if BIO_MSG else "THE LEGENDARY AF HELLBOT"
 BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
 BOTLOG = True
 
