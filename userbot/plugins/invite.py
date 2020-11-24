@@ -99,33 +99,50 @@ async def get_users(event):
     return await hell.edit(f"**Terminal Finished** \n\n• Successfully Invited `{s}` people \n• failed to invite `{f}` people")
 
 
-@borg.on(admin_cmd(pattern="add ?(.*)"))
+@bot.on(admin_cmd(pattern="add ?(.*)"))
+@bot.on(sudo_cmd(pattern="add ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     to_add_users = event.pattern_match.group(1)
     if event.is_private:
-        await event.edit("Umm.. Add user to a group..\nAnd I don't think this is group👀")
+        await edit_delete(
+            event, "`.add` users to a chat, not to a Private Message", 5
+        )
     else:
-        logger.info(to_add_users)
         if not event.is_channel and event.is_group:
+            # https://lonamiwebs.github.io/Telethon/methods/messages/add_chat_user.html
             for user_id in to_add_users.split(" "):
                 try:
-                    await borg(functions.messages.AddChatUserRequest(
-                        chat_id=event.chat_id,
-                        user_id=user_id,
-                        fwd_limit=1000000
-                    ))
+                    await event.client(
+                        functions.messages.AddChatUserRequest(
+                            chat_id=event.chat_id, user_id=user_id, fwd_limit=1000000
+                        )
+                    )
                 except Exception as e:
-                    await event.reply(str(e))
-            await event.edit("**Added User Successfully**")
+                    await edit_delete(event, f"`{str(e)}`", 5)
         else:
+            # https://lonamiwebs.github.io/Telethon/methods/channels/invite_to_channel.html
             for user_id in to_add_users.split(" "):
                 try:
-                    await borg(functions.channels.InviteToChannelRequest(
-                        channel=event.chat_id,
-                        users=[user_id]
-                    ))
+                    await event.client(
+                        functions.channels.InviteToChannelRequest(
+                            channel=event.chat_id, users=[user_id]
+                        )
+                    )
                 except Exception as e:
-                    await event.reply(str(e))
-            await event.edit("**ADDED the user to the chat successfully.**😙")
+                    await edit_delete(event, f"`{str(e)}`", 5)
+
+        await edit_or_reply(event, f"`Added {to_add_users} Successfully😄`")
+
+
+CMD_HELP.update(
+    {
+        "invite": """**Plugin : **`invite`
+  •  **Syntax : **`.add username(s)/userid(s)`
+  •  **Function : **__Add the given user/users to the group where u used the command__
+  •  **Syntax : **`.inviteall groups username`
+  •  **Function : **__Scrapes users from the given chat to your group__
+"""
+    }
+)
