@@ -9,31 +9,30 @@ import requests , re
 from PIL import Image
 from validators.url import url
 from userbot import CMD_HELP
-from userbot.helpers.functions import trumptweet, changemymind, kannagen, moditweet, miatweet, papputweet, sunnytweet, sinstweet, tweets
+from userbot.helpers.functions import trumptweet, changemymind, kannagen, moditweet, miatweet, papputweet, sunnytweet, sinstweet, deEmojify, tweets
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
-EMOJI_PATTERN = re.compile(
-    "["
-    "\U0001F1E0-\U0001F1FF"  # flags (iOS)
-    "\U0001F300-\U0001F5FF"  # symbols & pictographs
-    "\U0001F600-\U0001F64F"  # emoticons
-    "\U0001F680-\U0001F6FF"  # transport & map symbols
-    "\U0001F700-\U0001F77F"  # alchemical symbols
-    "\U0001F780-\U0001F7FF"  # Geometric Shapes Extended
-    "\U0001F800-\U0001F8FF"  # Supplemental Arrows-C
-    "\U0001F900-\U0001F9FF"  # Supplemental Symbols and Pictographs
-    "\U0001FA00-\U0001FA6F"  # Chess Symbols
-    "\U0001FA70-\U0001FAFF"  # Symbols and Pictographs Extended-A
-    "\U00002702-\U000027B0"  # Dingbats 
-    "]+")
-
-
-def deEmojify(inputString: str) -> str:
-    """Remove emojis and other non-safe characters from string"""
-    return re.sub(EMOJI_PATTERN, '', inputString)
-
+@bot.on(admin_cmd(pattern=r"tweet(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="tweet(?: |$)(.*)", allow_sudo=True))
+async def nope(kraken):
+    hell = kraken.pattern_match.group(1)
+    if not hell:
+        if kraken.is_reply:
+            what = (await kraken.get_reply_message()).message
+        else:
+            await kraken.edit("I need some text to make a tweet🚶")
+            return
+    tweeter = await bot.inline_query(
+        "TwitterStatusBot", f"{(deEmojify(hell))}")
+    await tweeter[0].click(kraken.chat_id,
+                            reply_to=kraken.reply_to_msg_id,
+                            silent=True if kraken.is_reply else False,
+                            hide_via=True)
+    await kraken.delete()
 
 
-@register(pattern="^.trump(?: |$)(.*)", outgoing=True)
+@bot.on(admin_cmd(pattern=r"trump(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="trump(?: |$)(.*)", allow_sudo=True))
 async def nekobot(borg):
     text = borg.pattern_match.group(1)
     reply_to_id = borg.message
@@ -60,7 +59,8 @@ async def nekobot(borg):
     await borg.client.send_file(borg.chat_id , borgfile , reply_to = reply_to_id ) 
     await borg.delete()
     
-@register(pattern="^.modi(?: |$)(.*)", outgoing=True)
+@bot.on(admin_cmd(pattern=r"modi(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="modi(?: |$)(.*)", allow_sudo=True))
 async def nekobot(borg):
     text = borg.pattern_match.group(1)
     reply_to_id = borg.message
@@ -86,9 +86,10 @@ async def nekobot(borg):
     borgfile = await moditweet(text)
     await borg.client.send_file(borg.chat_id , borgfile , reply_to = reply_to_id ) 
     await borg.delete() 
-    
 
-@register(pattern="^.mia(?: |$)(.*)", outgoing=True)
+    
+@bot.on(admin_cmd(pattern=r"mia(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="mia(?: |$)(.*)", allow_sudo=True))
 async def nekobot(borg):
     text = borg.pattern_match.group(1)
     reply_to_id = borg.message
@@ -115,7 +116,9 @@ async def nekobot(borg):
     await borg.client.send_file(borg.chat_id , borgfile , reply_to = reply_to_id ) 
     await borg.delete()
 
-@register(pattern="^.pappu(?: |$)(.*)", outgoing=True)
+#@register(pattern="^.pappu(?: |$)(.*)", outgoing=True)
+@bot.on(admin_cmd(pattern=r"pappu(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="pappu(?: |$)(.*)", allow_sudo=True))
 async def nekobot(borg):
     text = borg.pattern_match.group(1)
     reply_to_id = borg.message
@@ -142,7 +145,9 @@ async def nekobot(borg):
     await borg.client.send_file(borg.chat_id , borgfile , reply_to = reply_to_id ) 
     await borg.delete() 
 
-@register(pattern="^.sunny(?: |$)(.*)", outgoing=True)
+#@register(pattern="^.sunny(?: |$)(.*)", outgoing=True)
+@bot.on(admin_cmd(pattern=r"sunny(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="sunny(?: |$)(.*)", allow_sudo=True))
 async def nekobot(borg):
     text = borg.pattern_match.group(1)
     reply_to_id = borg.message
@@ -169,7 +174,9 @@ async def nekobot(borg):
     await borg.client.send_file(borg.chat_id , borgfile , reply_to = reply_to_id ) 
     await borg.delete() 
 
-@register(pattern="^.johhny(?: |$)(.*)", outgoing=True)
+#@register(pattern="^.johhny(?: |$)(.*)", outgoing=True)
+@bot.on(admin_cmd(pattern=r"johhny(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="johhny(?: |$)(.*)", allow_sudo=True))
 async def nekobot(borg):
     text = borg.pattern_match.group(1)
     reply_to_id = borg.message
@@ -196,7 +203,9 @@ async def nekobot(borg):
     await borg.client.send_file(borg.chat_id , borgfile , reply_to = reply_to_id ) 
     await borg.delete() 
 
-@register(pattern="^.cmm(?: |$)(.*)", outgoing=True)
+#@register(pattern="^.cmm(?: |$)(.*)", outgoing=True)
+@bot.on(admin_cmd(pattern=r"cmm(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="cmm(?: |$)(.*)", allow_sudo=True))
 async def nekobot(borg):
     text = borg.pattern_match.group(1)
     reply_to_id = borg.message
@@ -223,7 +232,9 @@ async def nekobot(borg):
     await borg.client.send_file(borg.chat_id , borgfile , reply_to = reply_to_id ) 
     await borg.delete()
     
-@register(pattern="^.kanna(?: |$)(.*)", outgoing=True)
+#@register(pattern="^.kanna(?: |$)(.*)", outgoing=True)
+@bot.on(admin_cmd(pattern=r"kanna(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="kanna(?: |$)(.*)", allow_sudo=True))
 async def nekobot(borg):
     text = borg.pattern_match.group(1)
     reply_to_id = borg.message
@@ -253,6 +264,8 @@ async def nekobot(borg):
 CMD_HELP.update({
 "imgmeme":
 "Fun purpose 😛😛😏😏\
+\n\n`.tweet` (text)\
+     \nUsage : Tweet with modi\
 \n\n`.modi` (text)\
      \nUsage : Tweet with modi\
 \n\n`.trump` (text)\
