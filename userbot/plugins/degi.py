@@ -1,15 +1,16 @@
-"""Fun pligon...for DC
-\nCode by DC , ©[Kraken_The_Badass](https://t.me/kraken_the_badass)
-type `.degi` and `.nehi` to see the fun.
-"""
+
 import random, re
-from uniborg.util import admin_cmd
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 import asyncio
 from telethon import events
+from userbot import CMD_HELP
 
-@borg.on(admin_cmd(pattern="degi ?(.*)"))
+@bot.on(admin_cmd(pattern=f"degi$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"degi$", allow_sudo=True))
 async def _(event):
-     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
+    if event.fwd_from:
+        return
+        event = await edit_or_reply(event, "degi")
         await event.edit("Wo")
         await asyncio.sleep(0.7)
         await event.edit("Degi")
@@ -28,9 +29,11 @@ async def _(event):
         await asyncio.sleep(1)
         await event.edit("`Wo Degi Tum Ekbar Mang Kar toh Dekho`")
 
-@borg.on(events.NewMessage(pattern=r"\.nehi", outgoing=True))
+@bot.on(admin_cmd(pattern=f"nehi$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"nehi$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
+    event = await edit_or_reply(event, "nehi")
     await event.edit("`Wo PaKkA DeGi Tu ManG KaR ToH DekH`")
     await asyncio.sleep(999)
