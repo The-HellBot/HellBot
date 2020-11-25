@@ -37,3 +37,15 @@ async def _(event):
     event = await edit_or_reply(event, "nehi")
     await event.edit("`Wo PaKkA DeGi Tu ManG KaR ToH DekH`")
     await asyncio.sleep(999)
+
+CMD_HELP.update(
+    {
+        "degi": """**Plugin : **`degi`
+        
+**Commands in degi are **
+  •  `.degi`
+  •  `.nehi`
+  
+**Function : **__Leni deni hogi bc...__"""
+    }
+)
