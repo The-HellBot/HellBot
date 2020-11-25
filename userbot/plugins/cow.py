@@ -6,7 +6,7 @@ and may cmd would be added soon."""
 import asyncio
 from telethon import events
 from cowpy import cow
-from uniborg.util import admin_cmd
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 @borg.on(events.NewMessage(pattern=r"^.(\w+)say (.*)", outgoing=True))
