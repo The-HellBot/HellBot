@@ -101,6 +101,14 @@ async def silently_send_message(conv, text):
 async def thumb_from_audio(audio_path, output):
     await runcmd(f"ffmpeg -i {audio_path} -filter:v scale=500:500 -an {output}")
 
+async def covidindia(state):
+    hburl = "https://www.mohfw.gov.in/data/datanew.json"
+    req = requests.get(hburl).json()
+    for i in states:
+        if i == state:
+            return req[states.index(i)]
+    return None
+
 async def simpmusic(simp , QUALITY):
   search = simp
   headers = {'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'}
