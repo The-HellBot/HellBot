@@ -4,7 +4,7 @@
 # mia, johhny, sunny
 # modi, rahul, trump
 
-from userbot.events import register
+
 import requests , re
 from PIL import Image
 from validators.url import url
