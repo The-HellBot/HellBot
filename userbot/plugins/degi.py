@@ -5,29 +5,30 @@ import asyncio
 from telethon import events
 from userbot import CMD_HELP
 
-@bot.on(admin_cmd(pattern=f"degi$", outgoing=True))
-@bot.on(sudo_cmd(pattern=f"degi$", allow_sudo=True))
+@bot.on(admin_cmd(pattern="degi$"))
+@bot.on(sudo_cmd(pattern="degi$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-        event = await edit_or_reply(event, "degi")
-        await event.edit("Wo")
-        await asyncio.sleep(0.7)
-        await event.edit("Degi")
-        await asyncio.sleep(1)
-        await event.edit("Tum")
-        await asyncio.sleep(0.8)
-        await event.edit("Ekbar")
-        await asyncio.sleep(0.9)
-        await event.edit("Mang")
-        await asyncio.sleep(1)
-        await event.edit("Kar")
-        await asyncio.sleep(0.8)
-        await event.edit("Toh")
-        await asyncio.sleep(0.7)
-        await event.edit("Dekho")
-        await asyncio.sleep(1)
-        await event.edit("`Wo Degi Tum Ekbar Mang Kar toh Dekho`")
+    event = await edit_or_reply(event, "degi")
+    await event.edit("WO")
+    await asyncio.sleep(1.5)
+    await event.edit("DegI")
+    await asyncio.sleep(1.5)
+    await event.edit("TuM")
+    await asyncio.sleep(1.5)
+    await event.edit("EkbaR")
+    await asyncio.sleep(1.5)
+    await event.edit("ManG")
+    await asyncio.sleep(1.5)
+    await event.edit("KaR")
+    await asyncio.sleep(1.5)
+    await event.edit("ToH")
+    await asyncio.sleep(1.5)
+    await event.edit("DekhO")
+    await asyncio.sleep(1.5)
+    await event.edit("Wo DeGi TuM eKbAr MaNg KaR tOh DeKhO😄")
+
 
 @bot.on(admin_cmd(pattern=f"nehi$", outgoing=True))
 @bot.on(sudo_cmd(pattern=f"nehi$", allow_sudo=True))
@@ -35,7 +36,7 @@ async def _(event):
     if event.fwd_from:
         return
     event = await edit_or_reply(event, "nehi")
-    await event.edit("`Wo PaKkA DeGi Tu ManG KaR ToH DekH`")
+    await event.edit("`Wo PaKkA DeGi Tu ManG KaR ToH DekH\n AuR NaA De To UskI BheN Ko PakaD😚😚`")
     await asyncio.sleep(999)
 
 CMD_HELP.update(
