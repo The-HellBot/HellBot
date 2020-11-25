@@ -118,7 +118,7 @@ async def on_afk(event):
         msg = None
         message_to_reply = (
             f"Hey!! My master is currently offline... Since when?\n**For** `{total_afk_time}`\n"
-            + f"\n\n__He left a reason BTW🧐__ :-\n**{reason}**"
+            + f"\n\n__He left a reason BTW🧐__ :-\n{reason}"
             if reason
             else f"**Heyy!**\n__I am currently unavailable. Since when, you ask? For {total_afk_time} .__\n\nWhen will I be back? Soon __Whenever I feel like coming back__🤧🚶🚶  "
         )
@@ -155,7 +155,7 @@ async def _(event):
         USER_AFK = f"yes: {reason}"  # pylint:disable=E0602
         if reason:
             await borg.send_message(
-                event.chat_id, f"**I shall be Going afk!** __because ~ {reason}__"
+                event.chat_id, f"__**I shall be Going afk because**__ ~ {reason}"
             )
         else:
             await borg.send_message(event.chat_id, f"**I am Going afk!**")
