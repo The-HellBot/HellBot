@@ -2,7 +2,7 @@
 #thanks to @ranger_op
 
 
-import shelx
+import shlex
 import os
 from os import getcwd
 from os.path import basename, join
