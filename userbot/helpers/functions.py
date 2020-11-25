@@ -1,7 +1,25 @@
 #Making it easy....
 #thanks to @ranger_op
 
+
+import shelx
 import os
+from os import getcwd
+from os.path import basename, join
+from textwrap import wrap
+from typing import Optional, Tuple
+
+import numpy as np
+
+try:
+    from colour import Color as asciiColor
+except:
+    os.system("pip install colour")
+from PIL import Image, ImageDraw, ImageFont
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+from wand.color import Color
+from wand.drawing import Drawing
+from wand.image import Image as hellimage
 import re
 import time
 import urllib.request
@@ -10,12 +28,31 @@ from random import choice
 import asyncio
 import PIL.ImageOps
 import requests
-from PIL import Image, ImageDraw, ImageFont
 from telethon.tl.types import Channel, PollAnswer
 from validators.url import url
 from bs4 import BeautifulSoup
 from asyncio import sleep
 from emoji import get_emoji_regexp
+
+MARGINS = [50, 150, 250, 350, 450]
+
+async def make_gif(event, file):
+    chat = "@tgstogifbot"
+    async with event.client.conversation(chat) as conv:
+        try:
+            await silently_send_message(conv, "/start")
+            await event.client.send_file(chat, file)
+            response = await conv.get_response()
+            await event.client.send_read_acknowledge(conv.chat_id)
+            if response.text.startswith("Send me an animated sticker!"):
+                return "`This file is not supported`"
+            response = response if response.media else await conv.get_response()
+            hellresponse = response if response.media else await conv.get_response()
+            await event.client.send_read_acknowledge(conv.chat_id)
+            hellfile = await event.client.download_media(hellresponse, "./temp")
+            return await unzip(hellfile)
+        except YouBlockedUserError:
+            return "Unblock @tgstogifbot"
 
 
 async def simpmusic(simp , QUALITY):
