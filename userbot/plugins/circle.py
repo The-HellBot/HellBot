@@ -1,6 +1,4 @@
 
-#Thanks to @TelescopyBot Owner........
-
 import datetime
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
@@ -27,7 +25,7 @@ async def _(event):
     if reply_message.sender.bot:
         await edit_or_reply(event, "Reply to actual users message.")
         return
-    kakashi = await edit_or_reply(event, "Trying to convert...")
+    kraken = await edit_or_reply(event, "Trying to convert...")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -36,14 +34,14 @@ async def _(event):
             await event.client.send_message(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            await kakashi.edit("```Please unblock @TelescopyBot and try again```")
+            await kraken.edit("```Please unblock @TelescopyBot and try again```")
             return
         if response.text.startswith("Forward"):
-            await kakashi.edit(
+            await kraken.edit(
                 "```can you kindly disable your forward privacy settings for good?```"
             )
         else:
-            await kakashi.delete()
+            await kraken.delete()
             await event.client.send_file(
                 event.chat_id,
                 response.message.media,
