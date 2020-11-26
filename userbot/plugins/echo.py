@@ -13,8 +13,8 @@ from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 from userbot.plugins.sql_helper.echo_sql import addecho, get_all_echos, is_echo, remove_echo
 
 
-@bot.on(admin_cmd(pattern="addecho$"))
-@bot.on(sudo_cmd(pattern="addecho$", allow_sudo=True))
+@bot.on(admin_cmd(pattern="echo$"))
+@bot.on(sudo_cmd(pattern="echo$", allow_sudo=True))
 async def echo(hell):
     if hell.fwd_from:
         return
@@ -32,7 +32,7 @@ async def echo(hell):
             await edit_or_reply(hell, "The user is already enabled with echo ")
             return
         addecho(user_id, chat_id)
-        await edit_or_reply(hell, "Hi")
+        await edit_or_reply(hell, "Hii....😄🤓")
     else:
         await edit_or_reply(hell, "Reply to a User's message to echo his messages")
 
