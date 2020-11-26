@@ -1,12 +1,10 @@
-#Ported to Hellbot by @Kraken_The_BadASS. 
-#Original credits to jaddubot owner @Ranger_op
+
 
 """
 Syntax : .gps <location name>
-credits :@ranger_op
 """
-
-#help from @sunda005 and @SpEcHIDe
+# Made by @mrconfused
+# help from @sunda005 and @SpEcHIDe
 # don't edit credits 
 
 from geopy.geocoders import Nominatim
