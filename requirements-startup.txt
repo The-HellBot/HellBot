@@ -1,5 +1,6 @@
 Pillow>=5.3.0
 PyGithub
+PyDictionary
 PyPDF2
 pygments
 aiofiles
