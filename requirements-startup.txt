@@ -5,6 +5,7 @@ PyPDF2
 pygments
 pymediainfo
 aiofiles
+asyncurban
 aiohttp
 aria2p
 async_generator
