@@ -3,6 +3,7 @@ PyGithub
 PyDictionary
 PyPDF2
 pygments
+pymediainfo
 aiofiles
 aiohttp
 aria2p
