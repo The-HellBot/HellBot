@@ -61,7 +61,6 @@ def load_module(shortname):
         mod.Config = Config
         mod.borg = bot
         mod.edit_or_reply = edit_or_reply
-        mod.edit_delete = edit_delete
         # support for paperplaneextended
         sys.modules["userbot.events"] = userbot.utils
         spec.loader.exec_module(mod)
