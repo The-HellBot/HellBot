@@ -12,69 +12,29 @@ from userbot.helpers.functions import deEmojify
 
 # RegEx by https://t.me/c/1220993104/500653 ( @SnapDragon7410 )
 
-async def waifutxt(text, chat_id, reply_to_id, bot, borg):
-    animus = [
-        0,
-        1,
-        2,
-        3,
-        4,
-        9,
-        15,
-        20,
-        22,
-        27,
-        29,
-        32,
-        33,
-        34,
-        37,
-        38,
-        41,
-        42,
-        44,
-        45,
-        47,
-        48,
-        51,
-        52,
-        53,
-        55,
-        56,
-        57,
-        58,
-        61,
-        62,
-        63,
-    ]
-    sticcers = await bot.inline_query("stickerizerbot", f"#{choice(animus)}{text}")
-    hell = await sticcers[0].click("me", hide_via=True)
-    if hell:
-        await bot.send_file(int(chat_id), hell, reply_to=reply_to_id)
-        await hell.delete()
-
-
-@bot.on(admin_cmd(outgoing=True, pattern="waifu(?: |$)(.*)"))
-@bot.on(sudo_cmd(allow_sudo=True, pattern="waifu(?: |$)(.*)"))
-async def waifu(animu):
-    text = animu.pattern_match.group(1)
-    reply_to_id = animu.message
-    if animu.reply_to_msg_id:
-        reply_to_id = await animu.get_reply_message()
-    if not text:
-        if animu.is_reply:
-            text = (await animu.get_reply_message()).message
+@borg.on(admin_cmd(pattern="waifu(?: |$)(.*)"))
+async def nope(kraken):
+    hell = kraken.pattern_match.group(1)
+    if not hell:
+        if kraken.is_reply:
+            what = (await kraken.get_reply_message()).message
         else:
-            await edit_or_reply(
-                animu, "`Waifu needs some text.... Give me text vro..`"
-            )
+            await kraken.edit("`Sir please give some query to search and download it for you..!`")
             return
-    text = deEmojify(text)
-    await animu.delete()
-    await waifutxt(text, animu.chat_id, reply_to_id, bot, animu.client)
 
+    troll = await bot.inline_query(
 
-# 12 21 28 30
+        "StickerizerBot", f"{(deEmojify(hell))}")
+
+    await troll[0].click(kraken.chat_id,
+
+                            reply_to=kraken.reply_to_msg_id,
+
+                            silent=True if kraken.is_reply else False,
+
+                            hide_via=True)
+
+    await kraken.delete()
 
 
 @bot.on(admin_cmd(pattern=r"stcr ?(?:(.*?) \| )?(.*)", outgoing=True))
