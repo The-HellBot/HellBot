@@ -41,6 +41,75 @@ MARGINS = [50, 150, 250, 350, 450]
 # function takes  take a screenshot and stores ported from userge
 
 
+async def take_screen_shot(video_file, output_directory, ttl):
+    # https://stackoverflow.com/a/13891070/4723940
+    out_put_file_name = output_directory + \
+        "/" + str(time.time()) + ".jpg"
+    file_genertor_command = [
+        "ffmpeg",
+        "-ss",
+        str(ttl),
+        "-i",
+        video_file,
+        "-vframes",
+        "1",
+        out_put_file_name
+    ]
+    # width = "90"
+    process = await asyncio.create_subprocess_exec(
+        *file_genertor_command,
+        # stdout must a pipe to be accessible as process.stdout
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE,
+    )
+    # Wait for the subprocess to finish
+    stdout, stderr = await process.communicate()
+    e_response = stderr.decode().strip()
+    t_response = stdout.decode().strip()
+    if os.path.lexists(out_put_file_name):
+        return out_put_file_name
+    else:
+        logger.info(e_response)
+        logger.info(t_response)
+        return None
+
+# https://github.com/Nekmo/telegram-upload/blob/master/telegram_upload/video.py#L26
+
+async def cult_small_video(video_file, output_directory, start_time, end_time):
+    # https://stackoverflow.com/a/13891070/4723940
+    out_put_file_name = output_directory + \
+        "/" + str(round(time.time())) + ".mp4"
+    file_genertor_command = [
+        "ffmpeg",
+        "-i",
+        video_file,
+        "-ss",
+        start_time,
+        "-to",
+        end_time,
+        "-async",
+        "1",
+        "-strict",
+        "-2",
+        out_put_file_name
+    ]
+    process = await asyncio.create_subprocess_exec(
+        *file_genertor_command,
+        # stdout must a pipe to be accessible as process.stdout
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE,
+    )
+    # Wait for the subprocess to finish
+    stdout, stderr = await process.communicate()
+    e_response = stderr.decode().strip()
+    t_response = stdout.decode().strip()
+    if os.path.lexists(out_put_file_name):
+        return out_put_file_name
+    else:
+        logger.info(e_response)
+        logger.info(t_response)
+        return None
+
 async def make_gif(event, file):
     chat = "@tgstogifbot"
     async with event.client.conversation(chat) as conv:
@@ -424,44 +493,3 @@ EMOJI_PATTERN = re.compile(
 def deEmojify(inputString: str) -> str:
     """Remove emojis and other non-safe characters from string"""
     return re.sub(EMOJI_PATTERN, "", inputString)
-
-async def waifutxt(text, chat_id, reply_to_id, bot, borg):
-    animus = [
-        0,
-        1,
-        2,
-        3,
-        4,
-        9,
-        15,
-        20,
-        22,
-        27,
-        29,
-        32,
-        33,
-        34,
-        37,
-        38,
-        41,
-        42,
-        44,
-        45,
-        47,
-        48,
-        51,
-        52,
-        53,
-        55,
-        56,
-        57,
-        58,
-        61,
-        62,
-        63,
-    ]
-    sticcers = await bot.inline_query("stickerizerbot", f"#{choice(animus)}{text}")
-    hell = await sticcers[0].click("me", hide_via=True)
-    if hell:
-        await bot.send_file(int(chat_id), hell, reply_to=reply_to_id)
-        await hell.delete()
