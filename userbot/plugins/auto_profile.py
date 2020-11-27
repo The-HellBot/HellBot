@@ -91,7 +91,9 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "autoname": "**Autoname**\
+        "auto_profile": "**Auto_Profile**\
+\n\n**Syntax : **`.autobio`\
+\n**Usage :** Change your bio with time\
 \n\n**Syntax : **`.autoname`\
 \n**Usage :** Change your Name With Time"
     }
