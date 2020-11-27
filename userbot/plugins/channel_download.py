@@ -9,7 +9,8 @@ import asyncio
 import os
 import subprocess
 import sys
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
+from userbot.utils import admin_cmd, humanbytes, progress, time_formatter
+from userbot import CMD_HELP
 
 @borg.on(admin_cmd(pattern=r"getc"))
 async def get_media(event):
