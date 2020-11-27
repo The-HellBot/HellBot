@@ -37,39 +37,8 @@ from emoji import get_emoji_regexp
 MARGINS = [50, 150, 250, 350, 450]
 
 
-async def runcmd(cmd: str) -> Tuple[str, str, int, int]:
-    args = shlex.split(cmd)
-    process = await asyncio.create_subprocess_exec(
-        *args, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
-    )
-    stdout, stderr = await process.communicate()
-    return (
-        stdout.decode("utf-8", "replace").strip(),
-        stderr.decode("utf-8", "replace").strip(),
-        process.returncode,
-        process.pid,
-    )
-
-
 # For using gif , animated stickers and videos in some parts , this
 # function takes  take a screenshot and stores ported from userge
-
-
-async def take_screen_shot(
-    video_file: str, duration: int, path: str = ""
-) -> Optional[str]:
-    print(
-        "[[[Extracting a frame from %s ||| Video duration => %s]]]",
-        video_file,
-        duration,
-    )
-    ttl = duration // 2
-    thumb_image_path = path or os.path.join("./temp/", f"{basename(video_file)}.jpg")
-    command = f"ffmpeg -ss {ttl} -i '{video_file}' -vframes 1 '{thumb_image_path}'"
-    err = (await runcmd(command))[1]
-    if err:
-        print(err)
-    return thumb_image_path if os.path.exists(thumb_image_path) else None
 
 
 async def make_gif(event, file):
@@ -101,13 +70,6 @@ async def silently_send_message(conv, text):
 async def thumb_from_audio(audio_path, output):
     await runcmd(f"ffmpeg -i {audio_path} -filter:v scale=500:500 -an {output}")
 
-async def covidindia(state):
-    hburl = "https://www.mohfw.gov.in/data/datanew.json"
-    req = requests.get(hburl).json()
-    for i in states:
-        if i == state:
-            return req[states.index(i)]
-    return None
 
 async def simpmusic(simp , QUALITY):
   search = simp
