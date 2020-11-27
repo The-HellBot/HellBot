@@ -1,6 +1,7 @@
-#Making it easy....
-#thanks to @ranger_op
-
+# Making it easy....
+# thanks to @ranger_op for idea
+# codes by @mrconfused 
+# catuserbot
 
 import shlex
 import os
