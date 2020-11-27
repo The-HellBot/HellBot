@@ -89,8 +89,6 @@ CMD_HELP.update(
   • **Function : **__will  download all media from channel into your bot server but there is limit of 3000 to prevent API limits.__
   
   • **Syntax : **`.getc number channel_username` 
-  • **Function : **__will  download latest given number of media from channel into your bot server .__
-  
-**Note : **__The downloaded media files will be at__ `.ls {location}`"""
+  • **Function : **__will  download latest given number of media from channel into your bot server .__"""
     }
 )
