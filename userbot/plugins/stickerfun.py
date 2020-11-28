@@ -13,8 +13,8 @@ from userbot.helpers.functions import deEmojify
 
 # RegEx by https://t.me/c/1220993104/50065
 
-@bot.on(admin_cmd(outgoing=True, pattern="wai(?: |$)(.*)"))
-@bot.on(sudo_cmd(pattern="wai(?: |$)(.*)"))
+@bot.on(admin_cmd(outgoing=True, pattern="waifu(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="waifu(?: |$)(.*)"))
 async def waifu(animu):
     # """Creates random anime sticker!"""
 
@@ -36,9 +36,6 @@ async def waifu(animu):
         hide_via=True,
     )
     await animu.delete()
-
-
-CMD_HELP.update({"waifu": "`.waifu` : Anime that makes your writing fun."})
 
 @bot.on(admin_cmd(pattern=r"stcr ?(?:(.*?) \| )?(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern=r"stcr ?(?:(.*?) \| )?(.*)", allow_sudo=True))
