@@ -36,3 +36,15 @@ async def butts(event):
     os.remove(pic_loc)
     await event.delete()
     await a.delete()
+
+CMD_HELP.update(
+    {
+        "adultzone": "**Plugin : **`adultzone`\
+        \n\n**Syntax : **`.boobs`\
+        \n**Usage :** Searchs and sends random B××Bs image\
+        \n\n**Syntax :**`.butts`\
+        \n**Usage :** Searchs and sends random Butts image\
+        \n\n\n     __**WARNING!! 18+ MODULE**__"
+    }
+)
+
