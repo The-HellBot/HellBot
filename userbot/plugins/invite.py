@@ -101,12 +101,6 @@ async def get_users(event):
     return await hell.edit(f"**Terminal Finished** \n\n• Successfully Invited `{s}` people \n• failed to invite `{f}` people")
 
 
-
-from telethon import functions
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
-
-
 @bot.on(admin_cmd(pattern="add ?(.*)"))
 @bot.on(sudo_cmd(pattern="add ?(.*)", allow_sudo=True))
 async def _(event):
