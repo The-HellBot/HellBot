@@ -1,45 +1,13 @@
-# made for hellbot by mayank
-# inspired by @javes05
-# https://t.me/pldhsys/372
-# edited by kraken_the_badass
-# keep credits else gay
-
 from math import ceil
 import asyncio
 import json
 import random
 import re
-from telethon.tl.custom import Button 
 from telethon import events, errors, custom
 from userbot import CMD_LIST
 import io
 
-
 if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
-
-    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"back"))) #https://t.me/pldhsys/372
-   
-    async def backr(event):
-            if event.query.user_id == bot.uid :
-                current_page_number=0
-                buttons = paginate_help(current_page_number, CMD_LIST, "helpme")
-                await event.edit("📜Userbot Helper to reveal all the commands📜\n\n🔥This is main menu....🔥", buttons=buttons)
-            else:
-                reply_pop_up_alert = "Kya daba rha h bsdk... Jake apna khudka bot bna mera use naa kar....😏 @HellBot_Official"
-                await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-
-    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"open")))
-   
-    async def opner(event):
-            if event.query.user_id == bot.uid :
-                current_page_number=0
-                buttons = paginate_help(current_page_number, CMD_LIST, "helpme")
-                await event.edit("📜Userbot Helper to reveal all the commands📜\n\n🔥You opened the menu again🔥", buttons=buttons)
-            else:
-                reply_pop_up_alert = "Kya daba rha h bsdk... Jake apna khudka bot bna mera use naa kar....😏 @HellBot_Official"
-                await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-               #https://t.me/pldhsys/372
-
     @tgbot.on(events.InlineQuery)  # pylint:disable=E0602
     async def inline_handler(event):
         builder = event.builder
@@ -48,11 +16,14 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         if event.query.user_id == bot.uid and query.startswith("Userbot"):
             rev_text = query[::-1]
             buttons = paginate_help(0, CMD_LIST, "helpme")
-            result = builder.article("© Userbot Help",text="{}\nCurrently Loaded Plugins: {}".format(query, len(CMD_LIST)),buttons=buttons,link_preview=False)
-            await event.answer([result] if result else None)
-        else:
-              reply_pop_up_alert = "Kya daba rha h bsdk... Jake apna khudka bot bna mera use naa kar....😏 @HellBot_Official"
-              await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+            result = builder.article(
+                "© Userbot Help",
+                text="{}\nCurrently Loaded Plugins: {}".format(
+                    query, len(CMD_LIST)),
+                buttons=buttons,
+                link_preview=False
+            )
+        await event.answer([result] if result else None)
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"helpme_next\((.+?)\)")
     ))
@@ -60,13 +31,12 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         if event.query.user_id == bot.uid:  # pylint:disable=E0602
             current_page_number = int(
                 event.data_match.group(1).decode("UTF-8"))
-            
             buttons = paginate_help(
                 current_page_number + 1, CMD_LIST, "helpme")
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "Kya daba rha h bsdk... Jake apna khudka bot bna mera use naa kar....😏 @HellBot_Official"
+            reply_pop_up_alert = "Kya dabae ja rha h bsdk. Apna khudka bot bna jake... @HellBot_Official!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
 
@@ -77,7 +47,6 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         if event.query.user_id == bot.uid:  # pylint:disable=E0602
             current_page_number = int(
                 event.data_match.group(1).decode("UTF-8"))
-            
             buttons = paginate_help(
                 current_page_number - 1,
                 CMD_LIST,  # pylint:disable=E0602
@@ -86,16 +55,15 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "Kya daba rha h bsdk... Jake apna khudka bot bna mera use naa kar....😏 @HellBot_Official"
+            reply_pop_up_alert = "Kya dabae ja rha h bsdk. Apna khudka bot bna jake... @HellBot_Official!!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == bot.uid:
-            hellbot = custom.Button.inline("🔹 Open Again 🔸", data="open")
-            await event.edit("🚨 Closed Userbot Helper Main menu 🚨", buttons=hellbot)
-            
-  #https://t.me/pldhsys/372
+            await event.edit("⚜️Hêllẞø† Menu Provider Is now Closed⚜️\n\n      © Hêllẞø† ™")
+
+
 
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"us_plugin_(.*)")
@@ -114,18 +82,12 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         else:
             reply_pop_up_alert = help_string
         reply_pop_up_alert += "\n Use .unload {} to remove this plugin\n\
-            ©HellBot".format(plugin_name)
+            © Hêllẞø†™".format(plugin_name)
         try:
-            #hellbot = [[Button.inline('Go back', 'back')]] 
-            if event.query.user_id == bot.uid :
-                hellbot = custom.Button.inline("⚜️ Back To Menu ⚜️", data="back")
-                await event.edit(reply_pop_up_alert, buttons=hellbot)
-            else:
-                reply_pop_up_alert = "Kya daba rha h bsdk... Jake apna khudka bot bna mera use naa kar.... @HellBot_Official"
-                await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
         except: 
-            kraken = "Do .help {} to get the list of commands.".format(plugin_name)
-            await event.edit(kraken)
+            halps = "Do .help {} to get the list of commands.".format(plugin_name)
+            await event.answer(halps, cache_time=0, alert=True)
 
 def paginate_help(page_number, loaded_plugins, prefix):
     number_of_rows = Config.NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD
@@ -149,9 +111,7 @@ def paginate_help(page_number, loaded_plugins, prefix):
         pairs = pairs[modulo_page * number_of_rows:number_of_rows * (modulo_page + 1)] + \
             [
             (custom.Button.inline("• 👈 •", data="{}_prev({})".format(prefix, modulo_page)),
-             custom.Button.inline("• 🙏 •", data="close"),
+             custom.Button.inline("• ❌ •", data="close"),
              custom.Button.inline("• 👉 •", data="{}_next({})".format(prefix, modulo_page)))
         ]
     return pairs
-
-#https://t.me/pldhsys/372
