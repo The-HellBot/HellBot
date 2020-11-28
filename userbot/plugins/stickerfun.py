@@ -2,6 +2,7 @@ import io
 import os
 import random
 import textwrap
+import re
 
 from PIL import Image, ImageDraw, ImageFont
 from telethon.tl.types import InputMessagesFilterDocument
@@ -10,32 +11,34 @@ from userbot import CMD_HELP, bot
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 from userbot.helpers.functions import deEmojify
 
-# RegEx by https://t.me/c/1220993104/500653 ( @SnapDragon7410 )
+# RegEx by https://t.me/c/1220993104/50065
 
-@borg.on(admin_cmd(pattern="waifu(?: |$)(.*)"))
-async def nope(kraken):
-    hell = kraken.pattern_match.group(1)
-    if not hell:
-        if kraken.is_reply:
-            what = (await kraken.get_reply_message()).message
+@bot.on(admin_cmd(outgoing=True, pattern="wai(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="wai(?: |$)(.*)"))
+async def waifu(animu):
+    # """Creates random anime sticker!"""
+
+    text = animu.pattern_match.group(1)
+    if not text:
+        if animu.is_reply:
+            text = (await animu.get_reply_message()).message
         else:
-            await kraken.edit("`Sir please give some query to search and download it for you..!`")
+            await animu.edit("`You haven't written any article, Waifu is going away.`")
             return
+    animus = [1, 3, 7, 9, 13, 22, 34, 35, 36, 37, 43, 44, 45, 52, 53, 55]
+    sticcers = await bot.inline_query(
+        "stickerizerbot", f"#{random.choice(animus)}{(deEmojify(text))}"
+    )
+    await sticcers[0].click(
+        animu.chat_id,
+        reply_to=animu.reply_to_msg_id,
+        silent=True if animu.is_reply else False,
+        hide_via=True,
+    )
+    await animu.delete()
 
-    troll = await bot.inline_query(
 
-        "StickerizerBot", f"{(deEmojify(hell))}")
-
-    await troll[0].click(kraken.chat_id,
-
-                            reply_to=kraken.reply_to_msg_id,
-
-                            silent=True if kraken.is_reply else False,
-
-                            hide_via=True)
-
-    await kraken.delete()
-
+CMD_HELP.update({"waifu": "`.waifu` : Anime that makes your writing fun."})
 
 @bot.on(admin_cmd(pattern=r"stcr ?(?:(.*?) \| )?(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern=r"stcr ?(?:(.*?) \| )?(.*)", allow_sudo=True))
