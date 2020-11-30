@@ -102,7 +102,7 @@
        "value": ""
     }, 
     "STRING_SESSION": {
-      "description": "Get this value by running https://Hellbot.hellboyop.repl.run/ ",
+      "description": "Get this value by running https://repl.it/@HellBoyOP/HellBot#main.py ",
       "value": ""
     },
     "GITHUB_ACCESS_TOKEN": {
@@ -165,7 +165,7 @@
     "EMOJI_TO_DISPLAY_IN_HELP": {
       "description": "Set The emojies You Want to Add In Help Command!!",
       "value": "",
-      "required": true
+      "required": false
     }, 
     "TZ": {
       "description": "Required for Correct Time for autopic get from http://www.timezoneconverter.com/cgi-bin/findzone.tzc",
