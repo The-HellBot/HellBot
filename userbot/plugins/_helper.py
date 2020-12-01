@@ -9,7 +9,6 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
 
 @bot.on(admin_cmd(pattern="help ?(.*)", outgoing=True))
-@bot.on(sudo_cmd(pattern="help ?(.*)", allow_sudo=True))
 async def cmd_list(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!", "-", "_"):
         tgbotusername = Var.TG_BOT_USER_NAME_BF_HER
