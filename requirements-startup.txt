@@ -34,6 +34,7 @@ httplib2
 humanize
 justwatch
 lxml
+lottie
 oauth2client
 patool
 psycopg2
