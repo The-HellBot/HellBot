@@ -1,5 +1,4 @@
-#Hello guys... Nub here @Kraken_the_badass
-#Pro is @Hellboi_atul. Who never kanged a single plugin...
+
 """Check if userbot working or not . 
 
 """
@@ -18,9 +17,9 @@ from telethon import events, errors, custom
 import io
 from platform import python_version, uname
 
-ALIVE_PIC = Config.ALIVE_PHOTTO
-if ALIVE_PIC is None:
-   ALIVE_PIC = "https://telegra.ph/file/f34675b4e94d4290c0b6b.mp4"
+ALIVE_IMG = Config.ALIVE_PIC
+if ALIVE_IMG is None:
+   ALIVE_IMG = "https://telegra.ph/file/f34675b4e94d4290c0b6b.mp4"
 
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"
