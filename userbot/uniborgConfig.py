@@ -120,6 +120,7 @@ if ENV:
             t_file = open(TMP_DOWNLOAD_DIRECTORY+"auth_token.txt","w")
             t_file.write(AUTH_TOKEN_DATA)
             t_file.close()
+        CUSTOM_STICKER_PACK_NAME = os.environ.get("CUSTOM_STICKER_PACK_NAME", None)
         YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", None)
         GDRIVE_FOLDER_ID = os.environ.get("GDRIVE_FOLDER_ID", None)
         #MongoDB
