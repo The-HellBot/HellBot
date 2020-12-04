@@ -1,16 +1,17 @@
-from userbot import CMD_LIST, CMD_HELP
+from userbot import CMD_LIST
 from userbot import ALIVE_NAME
-from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot.utils import admin_cmd, sudo_cmd
 from platform import uname
 import sys
 from telethon import events, functions, __version__
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "@Dark_cobra_support_group"
 
 
-@bot.on(admin_cmd(pattern="help ?(.*)", outgoing=True))
+@borg.on(admin_cmd(pattern=r"help ?(.*)", outgoing=True))
+@borg.on(sudo_cmd(pattern=r"help ?(.*)", outgoing=True, allow_sudo=True))
 async def cmd_list(event):
-    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!", "-", "_"):
+    if not event.text[0].isalpha() and event.text[0] not in ("/" , "#", "-", "_", "@"):
         tgbotusername = Var.TG_BOT_USER_NAME_BF_HER
         input_str = event.pattern_match.group(1)
         if tgbotusername is None or input_str == "text":
@@ -29,7 +30,7 @@ async def cmd_list(event):
                         out_file,
                         force_document=True,
                         allow_cache=False,
-                        caption="**COMMANDS** In HellBot",
+                        caption="**COMMANDS** In __**Hêllẞø†**__",
                         reply_to=reply_to_id
                     )
                     await event.delete()
@@ -37,9 +38,9 @@ async def cmd_list(event):
                 await event.edit(string)
         elif input_str:
             if input_str in CMD_LIST:
-                string = "Commands found in {}:".format(input_str)
+                string = "Commands found in {}:\n".format(input_str)
                 for i in CMD_LIST[input_str]:
-                    string += "    " + i
+                    string += "  " + i
                     string += "\n"
                 await event.edit(string)
             else:
@@ -57,7 +58,7 @@ async def cmd_list(event):
                 hide_via=True
             )
             await event.delete()
-
+            
 @borg.on(admin_cmd(pattern="dc"))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
