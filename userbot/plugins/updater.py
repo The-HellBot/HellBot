@@ -64,7 +64,7 @@ async def updater(message):
 
     if not changelog:
         await message.edit("`Updation in Progress......`")
-        await asyncio.sleep(8)
+        await asyncio.sleep(5)
 
     message_one = NEW_BOT_UP_DATE_FOUND.format(
         branch_name=active_branch_name, changelog=changelog
