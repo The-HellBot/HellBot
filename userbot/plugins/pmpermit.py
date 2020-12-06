@@ -10,7 +10,10 @@ from telethon.tl.functions.users import GetFullUserRequest
 
 import userbot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
 from userbot import ALIVE_NAME, CUSTOM_PMPERMIT
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, edit_or_reply
+from userbot.uniborgConfig import Config
+
+PM_TRUE_FALSE = Config.PM_DATA
 
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
 HELLPIC = (
@@ -189,6 +192,9 @@ if Var.PRIVATE_GROUP_ID is not None:
 
             # don't log verified accounts
 
+            return
+
+        if PM_TRUE_FALSE == "DISABLE":
             return
 
         if not pmpermit_sql.is_approved(chat_id):
