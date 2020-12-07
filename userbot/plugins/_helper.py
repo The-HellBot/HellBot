@@ -7,7 +7,7 @@ import asyncio
 import requests
 from telethon import events, functions, __version__
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "@Dark_cobra_support_group"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
 
 @borg.on(admin_cmd(pattern=r"help ?(.*)", outgoing=True))
