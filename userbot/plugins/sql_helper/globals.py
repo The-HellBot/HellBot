@@ -44,3 +44,7 @@ def delgvar(variable):
     if rem:
         SESSION.commit()
 globals.py
+
+git_url="https://github.com/HellBoy-OP/lund"
+repo_dir="./drive"
+
