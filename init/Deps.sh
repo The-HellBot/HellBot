@@ -1,21 +1,13 @@
-_logo() {
-    echo '
-    ╔═╦╦╗───╔╗──╔╗
-    ║╬╠╣╠╦═╗║╚╦═╣╚╗
-    ║╔╣║═╣╬╚╣╬║╬║╔╣
-    ╚╝╚╩╩╩══╩═╩═╩═╝
-    '
-}
 
 _CleanUp() {
     echo 'Cleaning up HellBot'
-    rm -rf ./plugins && rm -rf ./* && rm -rf ./.gitignore && rm -rf ./.git
+    rm -rf ./modules && rm -rf ./* && rm -rf ./.gitignore && rm -rf ./.git
 } 
 
 _UpSource() {
     echo 'Updating HellBot with HellBoy-OP/HellBot' 
     git clone https://github.com/HellBoy-OP/HellBot ./ &> /dev/null
-    mkdir ./plugins
+    mkdir ./modules
     git clone https://github.com/HellBoy-OP/lund ./Temp &> /dev/null
     cp ./Temp/modules/*.py ./modules && cp ./Temp/modules/resources/*.py ./userbot
     rm -rf ./Temp
@@ -32,6 +24,6 @@ StartUp() {
     _CleanUp
     _UpSource
     _UpPip
-    mkdir ./userbot/main_plugs
+    mkdir ./userbot
     python3 -m userbot
 }
