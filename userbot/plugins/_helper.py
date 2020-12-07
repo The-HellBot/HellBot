@@ -1,15 +1,16 @@
-from userbot import CMD_LIST
+from userbot import CMD_LIST, SUDO_LIST
 from userbot import ALIVE_NAME
-from userbot.utils import admin_cmd, sudo_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply 
 from platform import uname
 import sys
+import asyncio
+import requests
 from telethon import events, functions, __version__
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "@Dark_cobra_support_group"
 
 
 @borg.on(admin_cmd(pattern=r"help ?(.*)", outgoing=True))
-@borg.on(sudo_cmd(pattern=r"help ?(.*)", outgoing=True, allow_sudo=True))
 async def cmd_list(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/" , "#", "-", "_", "@"):
         tgbotusername = Var.TG_BOT_USER_NAME_BF_HER
@@ -96,3 +97,63 @@ async def _(event):
         plugin_syntax = "Enter valid **Plugin** name.\nDo `.plinfo` or `.help` to get list of valid plugin names."
 
     await event.edit(plugin_syntax)
+
+@bot.on(sudo_cmd(allow_sudo=True, pattern="help ?(.*)"))
+async def info(event):
+    input_str = event.pattern_match.group(1)
+    if input_str == "text":
+        string = "Total {count} commands found in {plugincount} sudo plugins of Hêllẞø†\n\n"
+        hellcount = 0
+        plugincount = 0
+        for i in sorted(SUDO_LIST):
+            plugincount += 1
+            string += f"{plugincount}) Commands found in Plugin " + i + " are \n"
+            for iter_list in SUDO_LIST[i]:
+                string += "    " + str(iter_list)
+                string += "\n"
+                hellcount += 1
+            string += "\n"
+        if len(string) > 4095:
+            data = string.format(count=hellcount, plugincount=plugincount)
+            key = (
+                requests.post(
+                    "https://nekobin.com/api/documents", json={"content": data}
+                )
+                .json()
+                .get("result")
+                .get("key")
+            )
+            url = f"https://nekobin.com/{key}"
+            reply_text = f"All commands of the Hêllẞø† are [here]({url})"
+            await event.reply(reply_text, link_preview=False)
+            return
+        await event.reply(
+            string.format(count=hellcount, plugincount=plugincount), link_preview=False
+        )
+        return
+    if input_str:
+        if input_str in SUDO_LIST:
+            string = "<b>{count} Commands found in plugin {input_str}:</b>\n\n"
+            hellcount = 0
+            for i in SUDO_LIST[input_str]:
+                string += f"  •  <code>{i}</code>"
+                string += "\n"
+                hellcount += 1
+            await event.reply(
+                string.format(count=hellcount, input_str=input_str), parse_mode="HTML"
+            )
+        else:
+            reply = await event.reply(input_str + " is not a valid plugin!")
+            await asyncio.sleep(3)
+            await event.delete()
+            await reply.delete()
+    else:
+        string = "<b>Please specify which plugin do you want help for !!\
+            \nNumber of plugins : </b><code>{count}</code>\
+            \n<b>Usage:</b> <code>.help plugin name</code>\n\n"
+        hellcount = 0
+        for i in sorted(SUDO_LIST):
+            string += "≈ " + f"<code>{str(i)}</code>"
+            string += " "
+            hellcount += 1
+        await event.reply(string.format(count=hellcount), parse_mode="HTML")
