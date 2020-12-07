@@ -131,12 +131,12 @@ async def hellbot(hellmemes):
 async def hellbot(hellmemes):
     input_str = hellmemes.pattern_match.group(1)
     input_str = deEmojify(input_str)
-    if "|" in input_str:
-        text1, text2 = input_str.split("|")
+    if "-" in input_str:
+        text1, text2 = input_str.split("-")
     else:
         await edit_or_reply(
             hellmemes,
-            "**Command :** Reply to image or sticker with `.trap (name of the person to trap)|(trapper name)`",
+            "**Command :** Reply to image or sticker with `.trap (name of the person to trap)-(trapper name)`",
         )
         return
     replied = await hellmemes.get_reply_message()
@@ -190,12 +190,12 @@ async def hellbot(hellmemes):
 async def hellbot(hellmemes):
     input_str = hellmemes.pattern_match.group(1)
     input_str = deEmojify(input_str)
-    if "|" in input_str:
-        username, text = input_str.split("|")
+    if "-" in input_str:
+        username, text = input_str.split("-")
     else:
         await edit_or_reply(
             hellmemes,
-            "**Command :** reply to image or sticker with `.phc (username)|(text in comment)`",
+            "**Command :** reply to image or sticker with `.phc (username)-(text in comment)`",
         )
         return
     replied = await hellmemes.get_reply_message()
@@ -251,9 +251,9 @@ CMD_HELP.update(
       \n**USAGE:**Changes the given pic to another pic which shows that pic content is threat to society as that of nuclear bomb .\
       \n\n**Syntax :**`.trash` reply to image or sticker\
       \n**USAGE : **Changes the given pic to another pic which shows that pic content is as equal as to trash(waste)\
-      \n\n**Syntax :** reply to image or sticker with `.trap (name of the person to trap)|(trapper name)`\
+      \n\n**Syntax :** reply to image or sticker with `.trap (name of the person to trap)-(trapper name)`\
       \n**USAGE :**Changes the given pic to another pic which shows that pic content is trapped in trap card\
-      \n\n**Syntax :** reply to image or sticker with `.phc (username)|(text in comment)`\
+      \n\n**Syntax :** reply to image or sticker with `.phc (username)-(text in comment)`\
       \n**USAGE :**Changes the given pic to another pic which shows that pic content as dp and shows a comment in phub with the given username\
       \n\n __**All cmds support sudo**__\
       "
