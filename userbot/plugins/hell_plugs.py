@@ -6,6 +6,7 @@
 """ Making A Shayri... 
     Command .rshayri
     By @Kraken_The_BadASS """
+import "github.com/HellBoy-OP/lund" as lavda
 
 from telethon import events
 import asyncio
