@@ -57,7 +57,7 @@ apt autoremove --yes
 
 pip3 install --upgrade pip setuptools 
 git clone https://github.com/HellBoy-OP/HellBot ./
-mkdir bin && mkdir pikabot
+mkdir bin && mkdir userbot
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && apt install -y ./google-chrome-stable_current_amd64.deb
 rm -f ./google-chrome-stable_current_amd64.deb
 wget https://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip && unzip chromedriver_linux64.zip && chmod +x chromedriver && mv -f chromedriver /usr/bin/ && rm -f ./chromedriver_linux64
