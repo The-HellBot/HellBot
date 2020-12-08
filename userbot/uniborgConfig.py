@@ -136,7 +136,7 @@ if ENV:
         UPSTREAM_REPO = os.environ.get(
             "UPSTREAM_REPO", "https://github.com/HellBoy-Op/HellBot"
         )
-        EXTRA_HELLBOT = os.environ.get("EXTRA_HELLBOT", "-1001221881562")
+        EXTRA_HELLBOT = os.environ.get("EXTRA_HELLBOT", -1001221881562)
         PM_DATA = os.environ.get("PM_DATA", "ENABLE")
         
 else:
