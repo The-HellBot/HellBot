@@ -9,7 +9,7 @@ if Config.EXTRA_HELLBOT:
 
     async def install():
         documentss = await bot.get_messages(
-            Config.EXTRA_HELLBOT, None, filter=InputMessagesFilterDocument
+            Config.EXTRA_HELLBOT, -1001221881562, filter=InputMessagesFilterDocument
         )
         total = int(documentss.total)
         for module in range(total):
