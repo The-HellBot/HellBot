@@ -11,4 +11,4 @@ hey master
 HELLBOT ZINDA THA HAI AUR RHEGA
 "
 
-python -m Userbot
+python -m userbot
