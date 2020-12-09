@@ -22,23 +22,18 @@
       "value": "./userbot/DOWNLOADS/",
       "required": false
     },
-    "F_BAN_LOGGER_GROUP": {
-      "description": "Put Group id Same As PRIVATE_GROUP_ID.",
-      "value": "",
-      "required": false
-    },
     "ALIVE_NAME": {
-      "description": "Fill your Full name or Username like @Kraken_The_BadASS.",
+      "description": "Fill your Full name. By default it is Hell User",
       "value": "",
       "required": false
     },
     "ALIVE_MSG": {
-      "description": "Set Custom awake Message When entering .hell command.",
+      "description": "Set Custom Alive Message When entering .hell Command.",
       "value": "",
       "required": false
     },
     "ALIVE_PIC": {
-      "description": "put here any telegraph media link for alive pic.",
+      "description": "Put here any telegraph media link for alive pic in .hell command.",
       "value": "",
       "required": false
     },
@@ -48,26 +43,26 @@
       "required": false
     },
     "PMPERMIT_PIC": {
-      "description": "put here any telegraph media link for pmpermit custom pic.",
+      "description": "put here any telegraph media link for custom pmpermit pic.",
       "value": "",
       "required": true
     },
     "CUSTOM_PMPERMIT": {
-      "description": "Your custom pm permit msg.",
+      "description": "Enter Your custom pm permit msg.",
       "value": "",
       "required": false
     },
     "PM_PERMIT_GROUP_ID": {
       "description": "Put an Group Id Same As PRIVATE_GROUP_ID Required For Pmpermit plugin.",
       "value": "",
-      "required": false
+      "required": true
     },
     "APP_ID": {
       "description": "Get this value from my.telegram.org! Putting Others Value may result In Account Ban.",
       "value": ""
     },
     "REM_BG_API_KEY": {
-      "description": "Required for Removing image background functionality. Get from https://www.remove.bg/",
+      "description": "Required for Removing image background. Get your api key from https://www.remove.bg/",
       "value": "",
       "required": false
     },
@@ -105,16 +100,6 @@
       "description": "Get this value by running https://repl.it/@HellBoyOP/HellBot#main.py ",
       "value": ""
     },
-    "GITHUB_ACCESS_TOKEN": {
-      "description": "Your Github Access Token for gitcommit plugin.Google 'Github access token' to find.",
-      "value": "",
-      "required": false
-    },
-    "GIT_REPO_NAME": {
-      "description": "Your repo name Example: HellBoy-OP/HellBot , but GITHUB_ACCESS_TOKEN must be setup first.",
-      "value": "",
-      "required": false
-    },
     "HEROKU_API_KEY": {
       "description": "Go to https://dashboard.heroku.com/account, scroll down and press Reveal API.Required for updater to work.",
       "value": "",
@@ -140,13 +125,8 @@
       "required": false
     },
     "TG_BOT_USER_NAME_BF_HER": {
-      "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the username of your bot",
+      "description": "Needed for inline buttons maker. Make a bot at @BotFather and get the username of your bot",
       "value": ""
-    },
-    "DOWNLOAD_PFP_URL_CLOCK": {
-      "description": "Needed for autopic module. A url that is a preview link of your Profile Pic",
-      "value": "",
-      "required": false
     },
     "OPEN_WEATHER_MAP_APPID": {
       "description": "Get your own APPID from https://api.openweathermap.org/data/2.5/weather",
@@ -164,7 +144,7 @@
     },
     "EMOJI_TO_DISPLAY_IN_HELP": {
       "description": "Set The emojies You Want to Add In Help Command!!",
-      "value": "",
+      "value": "⚜️",
       "required": false
     }, 
     "TZ": {
