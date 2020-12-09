@@ -13,6 +13,68 @@ SUDO_LIST = Config.SUDO_USERS
 handler = "\\" + Config.COMMAND_HAND_LER
 sudo_hndlr = "\\" + Config.SUDO_COMMAND_HAND_LER
 
+ENV = bool(os.environ.get("ENV", False))
+if ENV:
+    from userbot.uniborgConfig import Config
+else:
+    if os.path.exists("config.py"):
+        from config import Development as Config
+
+def load_module(shortname):
+    if shortname.startswith("__"):
+        pass
+    elif shortname.endswith("_"):
+        import userbot.utils
+
+        path = Path(f"userbot/plugins/{shortname}.py")
+        name = "userbot.plugins.{}".format(shortname)
+        spec = importlib.util.spec_from_file_location(name, path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        LOGS.info("Successfully imported " + shortname)
+    else:
+        import userbot.utils
+
+        path = Path(f"userbot/plugins/{shortname}.py")
+        name = "userbot.plugins.{}".format(shortname)
+        spec = importlib.util.spec_from_file_location(name, path)
+        mod = importlib.util.module_from_spec(spec)
+        mod.bot = bot
+        mod.tgbot = bot.tgbot
+        mod.Var = Var
+        mod.command = command
+        mod.logger = logging.getLogger(shortname)
+        # support for uniborg
+        sys.modules["uniborg.util"] = userbot.utils
+        mod.Config = Config
+        mod.borg = bot
+        mod.edit_or_reply = edit_or_reply
+        # support for paperplaneextended
+        sys.modules["userbot.events"] = userbot.utils
+        spec.loader.exec_module(mod)
+        # for imports
+        sys.modules["userbot.plugins." + shortname] = mod
+        LOGS.info("Successfully imported " + shortname)
+
+
+def remove_plugin(shortname):
+    try:
+        try:
+            for i in LOAD_PLUG[shortname]:
+                bot.remove_event_handler(i)
+            del LOAD_PLUG[shortname]
+
+        except BaseException:
+            name = f"userbot.plugins.{shortname}"
+
+            for i in reversed(range(len(bot._event_builders))):
+                ev, cb = bot._event_builders[i]
+                if cb.__module__ == name:
+                    del bot._event_builders[i]
+    except BaseException:
+        raise ValueError
+
+
 
 def command(**args):
     args["func"] = lambda e: e.via_bot_id is None
@@ -363,71 +425,6 @@ class Loader:
     def __init__(self, func=None, **args):
         self.Var = Var
         bot.add_event_handler(func, events.NewMessage(**args))
-
-
-# Userbot
-def load_module(shortname):
-    if shortname.startswith("__"):
-        pass
-    elif shortname.endswith("_"):
-        import importlib
-        import sys
-        from pathlib import Path
-
-        import userbot.utils
-
-        path = Path(f"userbot/plugins/{shortname}.py")
-        name = "userbot.plugins.{}".format(shortname)
-        spec = importlib.util.spec_from_file_location(name, path)
-        mod = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(mod)
-        # print("Hêllẞø† Has Been Started Sucessfully")
-    else:
-        import importlib
-        import sys
-        from pathlib import Path
-
-        import userbot.utils
-
-        path = Path(f"userbot/plugins/{shortname}.py")
-        name = "userbot.plugins.{}".format(shortname)
-        spec = importlib.util.spec_from_file_location(name, path)
-        mod = importlib.util.module_from_spec(spec)
-        mod.bot = bot
-        mod.tgbot = bot.tgbot
-        mod.userbot = bot.tgbot
-        mod.Var = Var
-        mod.command = command
-        mod.logger = logging.getLogger(shortname)
-        # support for Extermis
-        sys.modules["uniborg.util"] = userbot.utils
-        mod.Config = Config
-        mod.borg = bot
-        mod.userbot = bot
-        # support for Extremis
-        sys.modules["userbot.events"] = userbot.utils
-        spec.loader.exec_module(mod)
-        # for imports
-        sys.modules["userbot.plugins." + shortname] = mod
-        # print("Hêllẞø† Has Been Started Sucessfully")
-
-
-def remove_plugin(shortname):
-    try:
-        try:
-            for i in LOAD_PLUG[shortname]:
-                bot.remove_event_handler(i)
-            del LOAD_PLUG[shortname]
-
-        except:
-            name = f"userbot.plugins.{shortname}"
-
-            for i in reversed(range(len(bot._event_builders))):
-                ev, cb = bot._event_builders[i]
-                if cb.__module__ == name:
-                    del bot._event_builders[i]
-    except:
-        raise ValueError
 
 
 # Assistant
