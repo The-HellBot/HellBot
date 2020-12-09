@@ -55,22 +55,22 @@ for name in files:
 plugin_channel = "@module_hellbot"
 
 test1 = await client.get_messages(plugin_channel, None , filter=InputMessagesFilterDocument) ; total = int(test1.total) ; total_doxx = range(0, total)
-  for ixo in total_doxx:
-       mxo = test1[ixo].id ; await client.download_media(await client.get_messages(cIient, ids=mxo), "userbot/plugins/")
-  ar = glob.glob("userbot/plugins/*.py")
-  f = len(ar)
-  LOGS.info(f" loading {f} modules it may take 1 minute please wait")
-  for i in ar:
-     br = os.path.basename(i)
-     cr = (os.path.splitext(br)[0])
-     import_module(f"userbot.plugins.{cr}")
-     la += 1
-     LOGS.info(f" loaded {la}/{f} modules")  
-  os.system("rm userbot/plugins/*.py") ; LOGS.info(f"Sucessfully deployed your Hêllẞø†. Type .ping or .alive check if its on. For help join @HellBot_Official")
-  if len(argv) not in (1, 3, 4):
-       await bot.disconnect()
-  else:
-       await bot.run_until_disconnected()
+for ixo in total_doxx:
+   mxo = test1[ixo].id ; await client.download_media(await client.get_messages(cIient, ids=mxo), "userbot/plugins/")
+ar = glob.glob("userbot/plugins/*.py")
+f = len(ar)
+LOGS.info(f" loading {f} modules it may take 1 minute please wait")
+for i in ar:
+   br = os.path.basename(i)
+   cr = (os.path.splitext(br)[0])
+   import_module(f"userbot.plugins.{cr}")
+   la += 1
+   LOGS.info(f" loaded {la}/{f} modules")  
+os.system("rm userbot/plugins/*.py") ; LOGS.info(f"Sucessfully deployed your Hêllẞø†. Type .ping or .alive check if its on. For help join @HellBot_Official")
+if len(argv) not in (1, 3, 4):
+     await bot.disconnect()
+else:
+     await bot.run_until_disconnected()
        
 
         
