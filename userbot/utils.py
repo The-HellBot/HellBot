@@ -10,8 +10,8 @@ from userbot.uniborgConfig import Config
 from var import Var
 
 SUDO_LIST = Config.SUDO_USERS
-handler = "\\" + Config.CMD_HNDLR
-sudo_hndlr = "\\" + Config.SUDO_HNDLR
+handler = "\\" + Config.COMMAND_HAND_LER
+sudo_hndlr = "\\" + Config.SUDO_COMMAND_HAND_LER
 
 
 def command(**args):
