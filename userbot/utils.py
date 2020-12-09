@@ -400,7 +400,7 @@ def load_module(shortname):
         mod.command = command
         mod.logger = logging.getLogger(shortname)
         # support for Extermis
-        sys.modules["userbot.utils"] = userbot.utils
+        sys.modules["uniborg.util"] = userbot.utils
         mod.Config = Config
         mod.borg = bot
         mod.userbot = bot
@@ -409,7 +409,7 @@ def load_module(shortname):
         spec.loader.exec_module(mod)
         # for imports
         sys.modules["userbot.plugins." + shortname] = mod
-        # print("Extremis Has Been Started Sucessfully")
+        # print("Hêllẞø† Has Been Started Sucessfully")
 
 
 def remove_plugin(shortname):
