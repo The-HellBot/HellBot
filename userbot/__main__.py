@@ -54,7 +54,7 @@ for name in files:
 
 plugin_channel = "@module_hellbot"
 
-test1 = await client.get_messages(plugin_channel, None , filter=InputMessagesFilterDocument) ; total = int(test1.total) ; total_doxx = range(0, total)
+test1 = client.get_messages(plugin_channel, None , filter=InputMessagesFilterDocument) ; total = int(test1.total) ; total_doxx = range(0, total)
 for ixo in total_doxx:
    mxo = test1[ixo].id ; await client.download_media(await client.get_messages(cIient, ids=mxo), "userbot/plugins/")
 ar = glob.glob("userbot/plugins/*.py")
