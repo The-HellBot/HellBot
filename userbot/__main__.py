@@ -51,6 +51,7 @@ for name in files:
         load_module(shortname.replace(".py", ""))
 
 
+tgbot = client 
 
 plugin_channel = "@module_hellbot"
 
