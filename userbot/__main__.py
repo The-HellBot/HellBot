@@ -68,9 +68,9 @@ for i in ar:
    LOGS.info(f" loaded {la}/{f} modules")  
 os.system("rm userbot/plugins/*.py") ; LOGS.info(f"Sucessfully deployed your Hêllẞø†. Type .ping or .alive check if its on. For help join @HellBot_Official")
 if len(argv) not in (1, 3, 4):
-     await bot.disconnect()
+     bot.disconnect()
 else:
-     await bot.run_until_disconnected()
+     bot.run_until_disconnected()
        
 
         
