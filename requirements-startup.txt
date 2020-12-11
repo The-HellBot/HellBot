@@ -34,7 +34,6 @@ humanize
 justwatch
 lxml
 lottie
-numpy
 oauth2client
 patool
 psycopg2
