@@ -17,6 +17,7 @@ coffeehouse
 cowpy
 cryptg
 opencv-contrib-python
+opencv-python--headless
 dnspython
 emoji
 gTTS-token>=1.1.3
