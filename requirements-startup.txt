@@ -16,14 +16,11 @@ cfscrape
 coffeehouse
 cowpy
 cryptg
-opencv-contrib-python
-opencv-python--headless
 dnspython
 emoji
 gTTS-token>=1.1.3
 gTTS>=2.0.1
 gitpython
-glitch_this
 google-api-python-client==1.8.0
 google-auth-oauthlib
 google_images_download>=2.8.0
@@ -71,5 +68,4 @@ validators
 wikipedia>=1.4.0
 youtube-dl
 youtube-search-python
-covid
 tswift
