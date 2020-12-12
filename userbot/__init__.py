@@ -103,7 +103,7 @@ if bool(ENV):
     ANTI_SPAMBOT = sb(os.environ.get("ANTI_SPAMBOT", "False"))
 
     ANTI_SPAMBOT_SHOUT = sb(os.environ.get("ANTI_SPAMBOT_SHOUT", "False"))
-
+  
     # FedBan Premium Module
     F_BAN_LOGGER_GROUP = os.environ.get("F_BAN_LOGGER_GROUP", None)
 
@@ -112,6 +112,7 @@ if bool(ENV):
     HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
     HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
 
+    OTOMATIK_KATILMA = sb(os.environ.get("OTOMATIK_KATILMA", "True"))
    
     # Youtube API key
     YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", None)
