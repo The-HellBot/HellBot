@@ -187,8 +187,8 @@ for binary, path in binaries.items():
 if not Config.TG_BOT_TOKEN_BF_HER == None:
     tgbot = TelegramClient(
         "TG_BOT_TOKEN",
-        api_id=API_KEY,
-        api_hash=API_HASH
+        api_id=Var.API_ID,
+        api_hash=Var.API_HASH
     ).start(bot_token=Config.TG_BOT_TOKEN_BF_HER)
 else:
     tgbot = None
