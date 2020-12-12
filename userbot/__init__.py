@@ -5,7 +5,7 @@ import time
 from telethon.sessions import StringSession
 from telethon import TelegramClient
 from userbot.helpers import functions as simpdef
-
+from userbot.uniborgConfig import Config
 from var import Var
 
 StartTime = time.time()
@@ -184,12 +184,12 @@ for binary, path in binaries.items():
     downloader.start()
     os.chmod(path, 0o755)
 
-if not TG_BOT_TOKEN_BF_HER == None:
+if not Config.TG_BOT_TOKEN_BF_HER == None:
     tgbot = TelegramClient(
         "TG_BOT_TOKEN",
         api_id=API_KEY,
         api_hash=API_HASH
-    ).start(bot_token=TG_BOT_TOKEN_BF_HER)
+    ).start(bot_token=Config.TG_BOT_TOKEN_BF_HER)
 else:
     tgbot = None
 
