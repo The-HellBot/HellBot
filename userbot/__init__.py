@@ -213,14 +213,12 @@ with bot:
 #Changing this line may give error in bot as i added some special cmds in hellbot channel to get this module work...
 
     modules = CMD_HELP
-    me = bot.get_me()
-    uid = bot.uid
 
     try:
         @tgbot.on(NewMessage(pattern='/start'))
         async def start_bot_handler(event):
-            if not event.message.from_id == uid:
-                await event.reply(f'Hoo gya aapka. Kabse tapar tapar dabae jaa rhe h. Khudka bna lo na agr chaiye to. © Hêllẞø† ™')
+            if not event.message.from_id == bot.uid:
+                await event.reply(f'Jai hind Dosto.. © Hêllẞø† ™') #for testing will add better lines
             else:
                 await event.reply(f'`Aa gae aap🚶`')
 
