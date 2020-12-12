@@ -23,6 +23,7 @@ else:
 CMD_LIST = {}
 # for later purposes
 CMD_HELP = {}
+CMD_HELP_BOT = {}
 INT_PLUG = ""
 LOAD_PLUG = {}
 
