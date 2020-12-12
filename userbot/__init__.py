@@ -214,7 +214,7 @@ with bot:
 
     modules = CMD_HELP
     me = bot.get_me()
-    uid = me.id
+    uid = bot.uid
 
     try:
         @tgbot.on(NewMessage(pattern='/start'))
