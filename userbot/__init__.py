@@ -184,15 +184,6 @@ for binary, path in binaries.items():
     downloader.start()
     os.chmod(path, 0o755)
 
-if not Config.TG_BOT_TOKEN_BF_HER == None:
-    tgbot = TelegramClient(
-        "TG_BOT_TOKEN",
-        api_id=Var.API_ID,
-        api_hash=Var.API_HASH
-    ).start(bot_token=Config.TG_BOT_TOKEN_BF_HER)
-else:
-    tgbot = None
-
 def button(page, modules):
     Row = 5
     Column = 2
@@ -222,15 +213,7 @@ with bot:
 #Changing this line may give error in bot as i added some special cmds in hellbot channel to get this module work...
 
     modules = CMD_HELP
-
-    try:
-        @tgbot.on(NewMessage(pattern='/start'))
-        async def start_bot_handler(event):
-            if not event.message.from_id == bot.uid:
-                await event.reply(f'Jai hind Dosto.. © Hêllẞø† ™') #for testing will add better lines
-            else:
-                await event.reply(f'`Aa gae aap🚶`')
-
+if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         @tgbot.on(InlineQuery)  # pylint:disable=E0602
         async def inline_handler(event):
             builder = event.builder
