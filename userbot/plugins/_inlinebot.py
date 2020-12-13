@@ -168,14 +168,5 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 buttons=[custom.Button.inline("◀️ ᏰᎯᏣᏦ", data=f"Information[{page}]({cmd})")],
                 link_preview=False
             )
-
-    try:
-        bot.loop.run_until_complete(check_botlog_chatid())
-    except:
-        LOGS.info(
-            "BOTLOG_CHATID is not a valid entity"
-            "Check your config vars"
-        )
-        quit(1)
-
+     
 # Ask owner before using it in your codes.
