@@ -7,7 +7,8 @@ import requests
 from telethon.tl.types import InputMessagesFilterDocument
 from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
 from telethon.tl.functions.channels import GetMessagesRequest
-from userbot import BRAIN_CHECKER, LOGS, bot, PLUGIN_CHANNEL, CMD_HELP, hellverison, PATTERNS
+from userbot import BRAIN_CHECKER, LOGS, bot, CMD_HELP, hellverison, PATTERNS
+from userbot.uniborgConfig import Config
 from userbot.plugins import ALL_MODULES
 import userbot.plugins.sql_helper.message_sql as MSJ_SQL
 import userbot.plugins.sql_helper.gallery_sql as GALLERY_SQL
@@ -131,15 +132,15 @@ def extractCommands(file):
         else:
             if dmsj.startswith("MEDIA_"):
                 media = int(dmsj.split("MEDIA_")[1])
-                media = bot.get_messages(PLUGIN_CHANNEL, ids=media)
+                media = bot.get_messages(Config.PLUGIN_CHANNEL, ids=media)
 
                 PLUGIN_MESSAGES[message] = media
             else:
                 PLUGIN_MESSAGES[message] = dmsj
-    if not PLUGIN_CHANNEL == None:
+    if not Config.PLUGIN_CHANNEL == None:
         LOGS.info("Loading plugins")
         try:
-            KanalId = bot.get_entity(PLUGIN_CHANNEL)
+            KanalId = bot.get_entity(Config.PLUGIN_CHANNEL)
         except: 
             KanalId = "me"
 
@@ -151,7 +152,7 @@ def extractCommands(file):
                 if not os.path.exists("./userbot/plugins/" + plugin.file.name):
                     dosya = bot.download_media(plugin, "./userbot/plugins/")
                 else:
-                    LOGS.info("Bu Plugin Zaten Yüklü " + plugin.file.name)
+                    LOGS.info("The plugin is already installed" + plugin.file.name)
                     extractCommands('./userbot/plugins/' + plugin.file.name)
                     dosya = plugin.file.name
                     continue 
