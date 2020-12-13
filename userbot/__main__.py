@@ -175,7 +175,8 @@ def extractCommands(file):
                 extractCommands('./userbot/plugins/' + plugin.file.name)
     else:
         bot.send_message("me", f"`Please set var PLUGIN_CHANNEL to help bot work smoothly`")
-except PhoneNumberInvalidError:
+except 
+PhoneNumberInvalidError:
     print(INVALID_PH)
     exit(1)
 
