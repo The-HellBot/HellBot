@@ -49,6 +49,3 @@ def sil_foto(gid):
     try:
         SESSION.query(Gallery).filter(Gallery.g_id == gid).delete()
         SESSION.commit()
-    except Exception as e:
-        return e
-    return True
