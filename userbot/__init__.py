@@ -188,6 +188,7 @@ for binary, path in binaries.items():
 COUNT_MSG = 0
 USERS = {}
 COUNT_PM = {}
+BRAIN_CHECKER =[]
 LASTMSG = {}
 CMD_HELP = {}
 ISAFK = False
