@@ -169,14 +169,6 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 link_preview=False
             )
 
-        except Exception as e:
-           print(e)
-           LOGS.info(
-              "Inline Mode is being disabled. Please turn it on."
-              "Get a Bot token and turn on inline mode to work"
-              "If you think there is problem other than these then contact us."
-              )
-
     try:
         bot.loop.run_until_complete(check_botlog_chatid())
     except:
