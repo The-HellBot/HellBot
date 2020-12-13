@@ -8,8 +8,8 @@ import urllib
 
 import requests
 
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd, sudo_cmd
+from userbot import *
+from userbot.utils import *
 
 
 @bot.on(admin_cmd("boobs$"))
