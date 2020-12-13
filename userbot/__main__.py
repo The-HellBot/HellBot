@@ -32,21 +32,6 @@ UNAPPROVED_MSG = [
     "To start a valid conversation\n🔱Register Your Request!🔱\nSend `/start` To Register Your Request\nHopefully u will get a reply🔥",
 ]
 
-DB = connect("learning-data-root.check")
-CURSOR = DB.cursor()
-CURSOR.execute("""SELECT * FROM BRAIN1""")
-ALL_ROWS = CURSOR.fetchall()
-INVALID_PH = (
-    "\nERROR: The given phone number is invalid"
-    "\n  TIP: Enter your phone number using your country code"
-    "\n       Check your phone number again"
-)
-
-for i in ALL_ROWS:
-    BRAIN_CHECKER.append(i[0])
-connect("learning-data-root.check").close()
-
-
 def extractCommands(file):
     FileRead = open(file, "r").read()
 
