@@ -1,36 +1,25 @@
 """Get Telegram Profile Picture and other information
 and set as own profile.
 Syntax: .clone @username"""
-#Copy That Plugin by @ViperAdnan
-#modified by @Kraken_The_BadASS
-#Give credit if you are going to kang it.
+# Copy That Plugin by @ViperAdnan
+# modified by @Kraken_The_BadASS
+# Give credit if you are going to kang it.
 
 import html
-import os
-from telethon.tl.functions.photos import GetUserPhotosRequest
+
+from telethon.tl import functions
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
-from telethon.utils import get_input_location
+
+from userbot import ALIVE_NAME, BIO_MSG, CMD_HELP
 from userbot.utils import admin_cmd
-from telethon.tl import functions
-from telethon import events
-from telethon.errors import ImageProcessFailedError, PhotoCropSizeSmallError
-from telethon.errors.rpcerrorlist import (PhotoExtInvalidError,
-                                          UsernameOccupiedError)
-from telethon.tl.functions.account import (UpdateProfileRequest,
-                                           UpdateUsernameRequest)
-from telethon.tl.functions.channels import GetAdminedPublicChannelsRequest
-from telethon.tl.functions.photos import (DeletePhotosRequest,
-                                          GetUserPhotosRequest,
-                                          UploadProfilePhotoRequest)
-from telethon.tl.types import InputPhoto, MessageMediaPhoto, User, Chat, Channel
-from userbot import bot, CMD_HELP , AUTONAME , BIO_MSG , ALIVE_NAME
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
 DEFAULTUSERBIO = str(BIO_MSG) if BIO_MSG else "ʟɛɢɛռɖaʀʏ ᴀғ ɦɛʟʟɮօt"
 BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
 BOTLOG = True
+
 
 @borg.on(admin_cmd(pattern="clone ?(.*)"))
 async def _(event):
@@ -42,7 +31,9 @@ async def _(event):
         await event.edit(str(error_i_a))
         return False
     user_id = replied_user.user.id
-    profile_pic = await event.client.download_profile_photo(user_id, Config.TMP_DOWNLOAD_DIRECTORY)
+    profile_pic = await event.client.download_profile_photo(
+        user_id, Config.TMP_DOWNLOAD_DIRECTORY
+    )
     # some people have weird HTML in their names
     first_name = html.escape(replied_user.user.first_name)
     # https://stackoverflow.com/a/5072031/4723940
@@ -56,34 +47,29 @@ async def _(event):
         last_name = html.escape(last_name)
         last_name = last_name.replace("\u2060", "")
     if last_name is None:
-      last_name = "⁪⁬⁮⁮⁮⁮ ‌‌‌‌"
+        last_name = "⁪⁬⁮⁮⁮⁮ ‌‌‌‌"
     # inspired by https://telegram.dog/afsaI181
     user_bio = replied_user.about
     if user_bio is not None:
         user_bio = replied_user.about
-    await borg(functions.account.UpdateProfileRequest(
-        first_name=first_name
-    ))
-    await borg(functions.account.UpdateProfileRequest(
-        last_name=last_name
-    ))
-    await borg(functions.account.UpdateProfileRequest(
-        about=user_bio
-    ))
-    n = 1
-    pfile = await borg.upload_file(profile_pic)  # pylint:disable=E060      
-    await borg(functions.photos.UploadProfilePhotoRequest(  # pylint:disable=E0602
-        pfile
-    ))
+    await borg(functions.account.UpdateProfileRequest(first_name=first_name))
+    await borg(functions.account.UpdateProfileRequest(last_name=last_name))
+    await borg(functions.account.UpdateProfileRequest(about=user_bio))
+    pfile = await borg.upload_file(profile_pic)  # pylint:disable=E060
+    await borg(
+        functions.photos.UploadProfilePhotoRequest(pfile)  # pylint:disable=E0602
+    )
     await event.delete()
     await borg.send_message(
-      event.chat_id,
-      "**Who Are You? .. **",
-      reply_to=reply_message
-      )
+        event.chat_id, "**Who Are You? .. **", reply_to=reply_message
+    )
     if BOTLOG:
-        await event.client.send_message(BOTLOG_CHATID, f"#CLONED\nSuccesfulley cloned [{first_name}](tg://user?id={user_id })")
-    
+        await event.client.send_message(
+            BOTLOG_CHATID,
+            f"#CLONED\nSuccesfulley cloned [{first_name}](tg://user?id={user_id })",
+        )
+
+
 @borg.on(admin_cmd(pattern="revert$"))
 async def _(event):
     if event.fwd_from:
@@ -91,30 +77,34 @@ async def _(event):
     name = f"{DEFAULTUSER}"
     bio = f"{DEFAULTUSERBIO}"
     n = 1
-    await borg(functions.photos.DeletePhotosRequest(await event.client.get_profile_photos("me", limit= n)))    
+    await borg(
+        functions.photos.DeletePhotosRequest(
+            await event.client.get_profile_photos("me", limit=n)
+        )
+    )
     await borg(functions.account.UpdateProfileRequest(about=f"{bio}"))
     await borg(functions.account.UpdateProfileRequest(first_name=f"{name}"))
     await event.edit("succesfully reverted to your account back")
     if BOTLOG:
-        await event.client.send_message(BOTLOG_CHATID, f"#REVERT\nSuccesfully reverted back to your profile")
-    
-    
-    
+        await event.client.send_message(
+            BOTLOG_CHATID, f"#REVERT\nSuccesfully reverted back to your profile"
+        )
+
+
 async def get_full_user(event):
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
         if previous_message.forward:
             replied_user = await event.client(
                 GetFullUserRequest(
-                    previous_message.forward.from_id or previous_message.forward.channel_id
+                    previous_message.forward.from_id
+                    or previous_message.forward.channel_id
                 )
             )
             return replied_user, None
         else:
             replied_user = await event.client(
-                GetFullUserRequest(
-                    previous_message.from_id
-                )
+                GetFullUserRequest(previous_message.from_id)
             )
             return replied_user, None
     else:
@@ -154,10 +144,13 @@ async def get_full_user(event):
             except Exception as e:
                 return None, e
 
-CMD_HELP.update({
-    "clone":
-    ".clone <username/reply>\
+
+CMD_HELP.update(
+    {
+        "clone": ".clone <username/reply>\
 \nUsage: steals others profile including dp, name.\
 \n\n.revert\
 \nUsage: To back to your profile but it'll show ALIVE_NAME instead of your current name and DEFAULT_BIO instead of your current bio\
-"})
+"
+    }
+)

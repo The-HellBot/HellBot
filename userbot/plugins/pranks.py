@@ -18,14 +18,20 @@ import base64
 import os
 
 from telegraph import exceptions, upload_file
-from telethon import events
-from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
 from userbot import CMD_HELP
+from userbot.helpers.functions import (
+    convert_toimage,
+    deEmojify,
+    phcomment,
+    threats,
+    trap,
+    trash,
+)
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+
 from . import *
-from userbot.helpers.functions import convert_toimage, threats, trash, trap, phcomment, deEmojify, iphonex
 
 
 @bot.on(admin_cmd(pattern="threats(?: |$)(.*)"))
@@ -35,12 +41,16 @@ async def hellbot(hellmemes):
     if not os.path.isdir("./temp/"):
         os.makedirs("./temp/")
     if not replied:
-        await edit_or_reply(hellmemes, "`Media file not supported. Reply to a supported media`")
+        await edit_or_reply(
+            hellmemes, "`Media file not supported. Reply to a supported media`"
+        )
         return
     if replied.media:
         hellmemmes = await edit_or_reply(hellmemes, "`Detecting Threats.........`")
     else:
-        await edit_or_reply(hellmemes, "`Media file not supported. Reply to a suported media`")
+        await edit_or_reply(
+            hellmemes, "`Media file not supported. Reply to a suported media`"
+        )
         return
     try:
         hell = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
@@ -84,12 +94,16 @@ async def hellbot(hellmemes):
     if not os.path.isdir("./temp/"):
         os.makedirs("./temp/")
     if not replied:
-        await edit_or_reply(hellmemes, "`Media file not supported. Reply to a suported media`")
+        await edit_or_reply(
+            hellmemes, "`Media file not supported. Reply to a suported media`"
+        )
         return
     if replied.media:
         hellmemmes = await edit_or_reply(hellmemes, "`Detecting Trash....`")
     else:
-        await edit_or_reply(hellmemes, "`Media file not supported. Reply to a suported media`")
+        await edit_or_reply(
+            hellmemes, "`Media file not supported. Reply to a suported media`"
+        )
         return
     try:
         hell = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
@@ -143,12 +157,16 @@ async def hellbot(hellmemes):
     if not os.path.isdir("./temp/"):
         os.makedirs("./temp/")
     if not replied:
-        await edit_or_reply(hellmemes, "Media file not supported. Reply to a suported media")
+        await edit_or_reply(
+            hellmemes, "Media file not supported. Reply to a suported media"
+        )
         return
     if replied.media:
         hellmemmes = await edit_or_reply(hellmemes, "`Trapping.....`")
     else:
-        await edit_or_reply(hellmemes, "Media file not supported. Reply to a suported media")
+        await edit_or_reply(
+            hellmemes, "Media file not supported. Reply to a suported media"
+        )
         return
     try:
         hell = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
@@ -202,12 +220,16 @@ async def hellbot(hellmemes):
     if not os.path.isdir("./temp/"):
         os.makedirs("./temp/")
     if not replied:
-        await edit_or_reply(hellmemes, "Media file not supported. Reply to a suported media")
+        await edit_or_reply(
+            hellmemes, "Media file not supported. Reply to a suported media"
+        )
         return
     if replied.media:
         hellmemmes = await edit_or_reply(hellmemes, "`Making A Comment`.")
     else:
-        await edit_or_reply(hellmemes, "Media file not supported. Reply to a suported media")
+        await edit_or_reply(
+            hellmemes, "Media file not supported. Reply to a suported media"
+        )
         return
     try:
         hell = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
@@ -242,7 +264,7 @@ async def hellbot(hellmemes):
     hell = await phcomment(hell, text, username)
     await hellmemmes.delete()
     await hellmemes.client.send_file(hellmemes.chat_id, hell, reply_to=replied)
-  
+
 
 CMD_HELP.update(
     {

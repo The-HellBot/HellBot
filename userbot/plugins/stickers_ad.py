@@ -3,29 +3,16 @@ Available Commands:
 .kangsticker [Optional Emoji]
 .packinfo
 .getsticker"""
-from telethon import events
-from io import BytesIO
-from PIL import Image
-import asyncio
 import datetime
-from collections import defaultdict
 import math
 import os
-import requests
-import zipfile
+from io import BytesIO
+
+from PIL import Image
 from telethon.errors.rpcerrorlist import StickersetInvalidError
-from telethon.errors import MessageNotModifiedError
-from telethon.tl.functions.account import UpdateNotifySettingsRequest
 from telethon.tl.functions.messages import GetStickerSetRequest
-from telethon.tl.types import (
-    DocumentAttributeFilename,
-    DocumentAttributeSticker,
-    InputMediaUploadedDocument,
-    InputPeerNotifySettings,
-    InputStickerSetID,
-    InputStickerSetShortName,
-    MessageMediaPhoto
-)
+from telethon.tl.types import InputStickerSetShortName, MessageMediaPhoto
+
 from userbot.utils import admin_cmd
 
 
@@ -42,7 +29,7 @@ async def _(event):
     if input_str:
         sticker_emoji = input_str
 
-    me = borg.me
+    borg.me
     userid = event.from_id
     packname = f"JayukeAdultStickers"
     packshortname = f"Jayu_ke_adult_stickers"  # format: Uni_Borg_userid
@@ -58,7 +45,7 @@ async def _(event):
         if userid == 719877937:
             packshortname = "Jayu_Adult_Animated"
         else:
-            packshortname = f"Jayu_Adult_nimated" # format: Uni_Borg_userid
+            packshortname = f"Jayu_Adult_nimated"  # format: Uni_Borg_userid
     elif not is_message_image(reply_message):
         await event.edit("Invalid message type")
         return
@@ -66,7 +53,9 @@ async def _(event):
         with BytesIO(file) as mem_file, BytesIO() as sticker:
             resize_image(mem_file, sticker)
             sticker.seek(0)
-            uploaded_sticker = await borg.upload_file(sticker, file_name=file_ext_ns_ion)
+            uploaded_sticker = await borg.upload_file(
+                sticker, file_name=file_ext_ns_ion
+            )
 
     await event.edit("Processing this sticker. Please Wait!")
 
@@ -87,9 +76,7 @@ async def _(event):
                 await event.edit(f"**FAILED**! @Stickers replied: {response.text}")
                 return
             w = await bot_conv.send_file(
-                file=uploaded_sticker,
-                allow_cache=False,
-                force_document=True
+                file=uploaded_sticker, allow_cache=False, force_document=True
             )
             response = await bot_conv.get_response()
             if "Sorry" in response.text:
@@ -108,9 +95,7 @@ async def _(event):
             await silently_send_message(bot_conv, "/addsticker")
             await silently_send_message(bot_conv, packshortname)
             await bot_conv.send_file(
-                file=uploaded_sticker,
-                allow_cache=False,
-                force_document=True
+                file=uploaded_sticker, allow_cache=False, force_document=True
             )
             response = await bot_conv.get_response()
             if "Sorry" in response.text:
@@ -120,12 +105,13 @@ async def _(event):
             await silently_send_message(bot_conv, sticker_emoji)
             await silently_send_message(bot_conv, "/done")
 
-    await event.edit(f"sticker added! Your pack can be found [here](t.me/addstickers/{packshortname})")
-
-
+    await event.edit(
+        f"sticker added! Your pack can be found [here](t.me/addstickers/{packshortname})"
+    )
 
 
 # Helpers
+
 
 def is_it_animated_sticker(message):
     try:
@@ -173,8 +159,8 @@ async def stickerset_exists(conv, setname):
 
 
 def resize_image(image, save_locaton):
-    """ Copyright Rhyse Simpson:
-        https://github.com/skittles9823/SkittBot/blob/master/tg_bot/modules/stickers.py
+    """Copyright Rhyse Simpson:
+    https://github.com/skittles9823/SkittBot/blob/master/tg_bot/modules/stickers.py
     """
     im = Image.open(image)
     maxsize = (512, 512)
@@ -199,7 +185,11 @@ def resize_image(image, save_locaton):
 
 
 def progress(current, total):
-    logger.info("Uploaded: {} of {}\nCompleted {}".format(current, total, (current / total) * 100))
+    logger.info(
+        "Uploaded: {} of {}\nCompleted {}".format(
+            current, total, (current / total) * 100
+        )
+    )
 
 
 def find_instance(items, class_or_tuple):

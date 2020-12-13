@@ -1,8 +1,8 @@
 import asyncio
 from collections import deque
 
-from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 from userbot import CMD_HELP
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 @bot.on(admin_cmd(pattern="think$", outgoing=True))
@@ -193,6 +193,7 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 32])
 
+
 @bot.on(admin_cmd(pattern=f"hart$", outgoing=True))
 @bot.on(sudo_cmd(pattern=f"hart$", allow_sudo=True))
 async def _(event):
@@ -256,6 +257,7 @@ async def _(event):
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 6])
+
 
 @bot.on(admin_cmd(pattern=f"hand$", outgoing=True))
 @bot.on(sudo_cmd(pattern=f"hand$", allow_sudo=True))
@@ -343,7 +345,6 @@ async def _(event):
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 18])
-
 
 
 CMD_HELP.update(

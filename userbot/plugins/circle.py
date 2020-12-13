@@ -1,11 +1,7 @@
-
-import datetime
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.functions.account import UpdateNotifySettingsRequest
-from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
-from userbot import CMD_HELP
 
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 @bot.on(admin_cmd("circle ?(.*)"))
@@ -47,4 +43,3 @@ async def _(event):
                 response.message.media,
             )
             await event.client.send_read_acknowledge(conv.chat_id)
-

@@ -1,4 +1,4 @@
-#pmpermit for HellBot.....
+# pmpermit for HellBot.....
 
 import asyncio
 import io
@@ -10,8 +10,8 @@ from telethon.tl.functions.users import GetFullUserRequest
 
 import userbot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
 from userbot import ALIVE_NAME, CUSTOM_PMPERMIT
-from userbot.utils import admin_cmd, edit_or_reply
 from userbot.uniborgConfig import Config
+from userbot.utils import admin_cmd
 
 PM_TRUE_FALSE = Config.PM_DATA
 
@@ -33,9 +33,9 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hêll Usêr"
 USER_BOT_WARN_ZERO = "**You were spamming my sweet master's inbox, henceforth you have been blocked by my master's Hêllẞø†.**\n__Now GTFO, i'm busy__"
 USER_BOT_NO_WARN = (
     "Hello, This is **Hêllẞø† Úl†rã Pr¡va†e Security Protocol⚠️**.\n"
-                   f"This is my master {DEFAULTUSER}'s Inbox\n"
-                   f"\n**{KRAKEN}**\n\n"
-                    "To start a valid conversation\n🔱Register Your Request!🔱\nSend `/start` To Register Your Request\nHopefully u will get a reply🔥"
+    f"This is my master {DEFAULTUSER}'s Inbox\n"
+    f"\n**{KRAKEN}**\n\n"
+    "To start a valid conversation\n🔱Register Your Request!🔱\nSend `/start` To Register Your Request\nHopefully u will get a reply🔥"
 )
 
 if Var.PRIVATE_GROUP_ID is not None:
@@ -246,5 +246,7 @@ async def hehehe(event):
     chat = await event.get_chat()
     if event.is_private:
         if not pmpermit_sql.is_approved(chat.id):
-            pmpermit_sql.approve(chat.id, "**My Boss iz here.... It's your lucky day nibba😏**")
+            pmpermit_sql.approve(
+                chat.id, "**My Boss iz here.... It's your lucky day nibba😏**"
+            )
             await borg.send_message(chat, "**Here comes my Master! Lucky you!!😏**")

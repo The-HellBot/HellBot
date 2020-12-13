@@ -1,4 +1,4 @@
-# by uniborg...Thanks @spechide 
+# by uniborg...Thanks @spechide
 # Now will be used in HellBot too....
 """Syntax: .afk REASON"""
 import asyncio
@@ -54,7 +54,9 @@ async def set_not_afk(event):
                 event.chat_id,
                 "Please set `PRIVATE_GROUP_BOT_API_ID` "
                 + "for the proper functioning of afk functionality "
-                + "Ask In @HellBot_Official Chat grp to get help..\n\n `{}`".format(str(e)),
+                + "Ask In @HellBot_Official Chat grp to get help..\n\n `{}`".format(
+                    str(e)
+                ),
                 reply_to=event.message.id,
                 silent=True,
             )

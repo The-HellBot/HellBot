@@ -1,12 +1,14 @@
 from telethon.tl.functions.messages import EditChatDefaultBannedRightsRequest
 from telethon.tl.types import ChatBannedRights
-from userbot import ALIVE_NAME
-from userbot import CMD_HELP
-from userbot.events import register, errors_handler
+
+from userbot import ALIVE_NAME, CMD_HELP
+from userbot.events import errors_handler, register
 from userbot.utils import admin_cmd
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"
-#@register(outgoing=True, pattern=r"^.lock ?(.*)")
+DEFAULTUSER = (
+    str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"
+)
+# @register(outgoing=True, pattern=r"^.lock ?(.*)")
 @borg.on(admin_cmd(pattern=r"lock ?(.*)"))
 @errors_handler
 async def locks(event):
@@ -87,12 +89,11 @@ async def locks(event):
     )
     try:
         await event.client(
-            EditChatDefaultBannedRightsRequest(peer=peer_id,
-                                               banned_rights=lock_rights))
+            EditChatDefaultBannedRightsRequest(peer=peer_id, banned_rights=lock_rights)
+        )
         await event.edit(f"{DEFAULTUSER} `locked {what} Because its Rest Time Nimba!!`")
     except BaseException as e:
-        await event.edit(
-            f"`Do I have proper rights for that ??`\n**Error:** {str(e)}")
+        await event.edit(f"`Do I have proper rights for that ??`\n**Error:** {str(e)}")
         return
 
 
@@ -176,20 +177,22 @@ async def rem_locks(event):
     )
     try:
         await event.client(
-            EditChatDefaultBannedRightsRequest(peer=peer_id,
-                                               banned_rights=unlock_rights))
+            EditChatDefaultBannedRightsRequest(
+                peer=peer_id, banned_rights=unlock_rights
+            )
+        )
         await event.edit(f"{DEFAULTUSER} `Unlocked {what} now Start Chit Chat !!`")
     except BaseException as e:
-        await event.edit(
-            f"`Do I have proper rights for that ??`\n**Error:** {str(e)}")
+        await event.edit(f"`Do I have proper rights for that ??`\n**Error:** {str(e)}")
         return
 
 
-CMD_HELP.update({
-    "locks":
-    ".lock <all (or) type(s)> or .unlock <all (or) type(s)>\
+CMD_HELP.update(
+    {
+        "locks": ".lock <all (or) type(s)> or .unlock <all (or) type(s)>\
 \nUsage: Allows you to lock/unlock some common message types in the chat.\
 [NOTE: Requires proper admin rights in the chat !!]\
 \n\nAvailable message types to lock/unlock are: \
 \n`all, msg, media, sticker, gif, game, inline, poll, invite, pin, info`"
-})
+    }
+)

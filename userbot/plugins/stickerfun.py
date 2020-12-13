@@ -2,16 +2,16 @@ import io
 import os
 import random
 import textwrap
-import re
 
 from PIL import Image, ImageDraw, ImageFont
 from telethon.tl.types import InputMessagesFilterDocument
 
 from userbot import CMD_HELP, bot
-from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 from userbot.helpers.functions import deEmojify
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 # RegEx by https://t.me/c/1220993104/50065
+
 
 @bot.on(admin_cmd(outgoing=True, pattern="waifu(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="waifu(?: |$)(.*)"))
@@ -36,6 +36,7 @@ async def waifu(animu):
         hide_via=True,
     )
     await animu.delete()
+
 
 @bot.on(admin_cmd(pattern=r"stcr ?(?:(.*?) \| )?(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern=r"stcr ?(?:(.*?) \| )?(.*)", allow_sudo=True))

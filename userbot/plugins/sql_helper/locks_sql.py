@@ -1,5 +1,6 @@
 from sqlalchemy import Boolean, Column, String
-from userbot.plugins.sql_helper import SESSION, BASE
+
+from userbot.plugins.sql_helper import BASE, SESSION
 
 
 class Locks(BASE):
@@ -11,7 +12,6 @@ class Locks(BASE):
     email = Column(Boolean, default=False)
     forward = Column(Boolean, default=False)
     url = Column(Boolean, default=False)
-
 
     def __init__(self, chat_id):
         self.chat_id = str(chat_id)  # ensure string

@@ -1,8 +1,9 @@
 # This is a troll indeed ffs *facepalm*
 import asyncio
-from telethon import events
+
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import ChannelParticipantsAdmins
+
 from userbot.utils import admin_cmd
 
 
@@ -28,21 +29,24 @@ async def gbun(event):
         idd = reply_message.from_id
         # make meself invulnerable cuz why not xD
         if idd == 924138714:
-            await reply_message.reply("`Wait a second, This is my master!`\n**How dare you threaten to ban my master nigger!**\n\n__Your account has been hacked! Pay 69$ to my master__ [HellBoy](https://t.me/kraken_the_badass) __to release your account__😏")
+            await reply_message.reply(
+                "`Wait a second, This is my master!`\n**How dare you threaten to ban my master nigger!**\n\n__Your account has been hacked! Pay 69$ to my master__ [HellBoy](https://t.me/kraken_the_badass) __to release your account__😏"
+            )
         else:
-            jnl=("`Warning!! `"
-                  "[{}](tg://user?id={})"
-                  "` 𝙂𝘽𝘼𝙉𝙉𝙀𝘿 By Admin...\n\n`"
-                  "**Person's Name: ** __{}__\n"
-                  "**ID : ** `{}`\n"
-                ).format(firstname, idd, firstname, idd)
+            jnl = (
+                "`Warning!! `"
+                "[{}](tg://user?id={})"
+                "` 𝙂𝘽𝘼𝙉𝙉𝙀𝘿 By Admin...\n\n`"
+                "**Person's Name: ** __{}__\n"
+                "**ID : ** `{}`\n"
+            ).format(firstname, idd, firstname, idd)
             if usname == None:
                 jnl += "**Victim Nigga's username: ** `Doesn't own a username!`\n"
             elif usname != "None":
                 jnl += "**Victim Nigga's username** : @{}\n".format(usname)
             if len(gbunVar) > 0:
                 gbunm = "`{}`".format(gbunVar)
-                gbunr = "**Reason: **"+gbunm
+                gbunr = "**Reason: **" + gbunm
                 jnl += gbunr
             else:
                 jnl += no_reason

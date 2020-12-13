@@ -2,10 +2,11 @@
 Syntax: .weather <Location>
 .wttr <location> """
 
-import aiohttp
 import io
 import time
-from datetime import tzinfo, datetime
+
+import aiohttp
+
 from userbot.utils import admin_cmd
 
 
@@ -13,10 +14,14 @@ from userbot.utils import admin_cmd
 async def _(event):
     if event.fwd_from:
         return
-    sample_url = "https://api.openweathermap.org/data/2.5/weather?q={}&APPID={}&units=metric"
+    sample_url = (
+        "https://api.openweathermap.org/data/2.5/weather?q={}&APPID={}&units=metric"
+    )
     input_str = event.pattern_match.group(1)
     async with aiohttp.ClientSession() as session:
-        response_api_zero = await session.get(sample_url.format(input_str, Config.OPEN_WEATHER_MAP_APPID))
+        response_api_zero = await session.get(
+            sample_url.format(input_str, Config.OPEN_WEATHER_MAP_APPID)
+        )
     response_api = await response_api_zero.json()
     if response_api["cod"] == 200:
         country_code = response_api["sys"]["country"]
@@ -44,7 +49,7 @@ async def _(event):
                 time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime(sun_rise_time)),
                 country_code,
                 time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime(sun_set_time)),
-                country_code
+                country_code,
             )
         )
     else:
@@ -63,7 +68,5 @@ async def _(event):
         # logger.info(response_api_zero)
         response_api = await response_api_zero.read()
         with io.BytesIO(response_api) as out_file:
-            await event.reply(
-                file=out_file
-            )
+            await event.reply(file=out_file)
     await event.edit(input_str)

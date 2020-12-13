@@ -2,8 +2,6 @@
 Syntax: .whois @username/userid"""
 
 
-
-
 import html
 import os
 
@@ -13,12 +11,8 @@ from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
 
-from .. import CMD_HELP, LOGS, TEMP_DOWNLOAD_DIRECTORY
+from .. import LOGS, TEMP_DOWNLOAD_DIRECTORY
 from ..utils import admin_cmd, edit_or_reply
-
-
-
-
 
 # Copyright (C) 2019 The Raphielscape Company LLC.
 #
@@ -38,7 +32,7 @@ from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
 
-from .. import CMD_HELP, LOGS, TEMP_DOWNLOAD_DIRECTORY
+from .. import LOGS, TEMP_DOWNLOAD_DIRECTORY
 from ..utils import admin_cmd, edit_or_reply
 
 

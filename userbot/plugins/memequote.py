@@ -1,19 +1,14 @@
 # Copyright (C) 2019 The Raphielscape Company LLC.
 # Licensed under the Raphielscape Public License, Version 1.d (the "License");
 # you may not use this file except in compliance with the License.
-#custom cmds by @heyworld to make it look more gayish
-#Thanks to @AbhinavShinde @jisan7509 for strings
-#Edited by @Sur_vivor
+# custom cmds by @heyworld to make it look more gayish
+# Thanks to @AbhinavShinde @jisan7509 for strings
+# Edited by @Sur_vivor
 """ Userbot module for having some fun with people. """
 
-import asyncio
-import random
-from random import choice, getrandbits, randint
-from re import sub
-from random import randint
-from telethon import events, functions
-from userbot.utils import admin_cmd
+from random import choice
 
+from userbot.utils import admin_cmd
 
 # ================= CONSTANT =================
 
@@ -40,7 +35,7 @@ LOVESTR = [
     "I love you not because of who you are, but because of who I am when I am with you.",
 ]
 
-DHOKA = [ 
+DHOKA = [
     "Humne Unse Wafa Ki, Aur Dil Bhi Gya Toot, Wo Bhi Chinaal Nikli, Uski Maa ki Chut.",
     "Dabbe Me Dabba, Dabbe Me Cake ..Tu Chutiya Hai Zara Seesha To Dekh.",
     "Kaam Se Kaam Rakhoge Toh Naam Hoga, Randi Log Ke Chakkkar Me Padoge to Naam Badnaam Hoga.",
@@ -140,7 +135,7 @@ CHASE_STR = [
     "May the odds be ever in your favour.",
     "Famous last words.",
     "And they disappeared forever, never to be seen again.",
-    "\"Oh, look at me! I'm so cool, I can run from a bot!\" - this person",
+    '"Oh, look at me! I\'m so cool, I can run from a bot!" - this person',
     "Yeah yeah, just tap /kickme already.",
     "Here, take this ring and head to Mordor while you're at it.",
     "Legend has it, they're still running...",
@@ -287,45 +282,54 @@ GDMORNING = [
     "`The more you count yourself as blessed, the more blessed you will be. Thank God for this beautiful morning and let friendship and love prevail this morning.`",
     "`Wake up and sip a cup of loving friendship. Eat your heart out from a plate of hope. To top it up, a fork full of kindness and love. Enough for a happy good morning!`",
     "`It is easy to imagine the world coming to an end. But it is difficult to imagine spending a day without my friends. Good morning.`",
-]    
+]
 
 
 @borg.on(admin_cmd(pattern=f"love$", outgoing=True))
 async def love(chutiyappa):
     await chutiyappa.edit(choice(LOVESTR))
-        
+
+
 @borg.on(admin_cmd(pattern=f"dhoka$", outgoing=True))
 async def katgya(chutiya):
     await chutiya.edit(choice(DHOKA))
+
 
 @borg.on(admin_cmd(pattern=f"metoo$", outgoing=True))
 async def metoo(hahayes):
     await hahayes.edit(choice(METOOSTR))
 
+
 @borg.on(admin_cmd(pattern=f"gdnoon$", outgoing=True))
 async def noon(noon):
-    await noon.edit(choice(GDNOON))    
-    
+    await noon.edit(choice(GDNOON))
+
+
 @borg.on(admin_cmd(pattern=f"chase$", outgoing=True))
 async def police(chase):
     await chase.edit(choice(CHASE_STR))
-       
+
+
 @borg.on(admin_cmd(pattern=f"congo$", outgoing=True))
 async def Sahih(congrats):
     await congrats.edit(choice(CONGRATULATION))
-        
+
+
 @borg.on(admin_cmd(pattern=f"qhi$", outgoing=True))
 async def hoi(hello):
     await hello.edit(choice(HELLOSTR))
-    
+
+
 @borg.on(admin_cmd(pattern=f"gdbye$", outgoing=True))
 async def bhago(bhagobc):
     await bhagobc.edit(choice(BYESTR))
-    
+
+
 @borg.on(admin_cmd(pattern=f"gdnyt$", outgoing=True))
 async def night(night):
     await night.edit(choice(GDNIGHT))
-    
+
+
 @borg.on(admin_cmd(pattern=f"gdmng$", outgoing=True))
 async def morning(morning):
     await morning.edit(choice(GDMORNING))

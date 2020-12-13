@@ -1,8 +1,8 @@
 try:
-    from userbot.modules.sql_helper import SESSION, BASE
+    from userbot.modules.sql_helper import BASE, SESSION
 except ImportError:
     raise Exception("Hello!")
-from sqlalchemy import Column, String, UnicodeText, Boolean, Integer, distinct, func
+from sqlalchemy import Column, String, UnicodeText
 
 
 class Notes(BASE):
@@ -38,10 +38,13 @@ def add_note(chat_id, keyword, reply):
 
 
 def rm_note(chat_id, keyword):
-    note = SESSION.query(Notes).filter(Notes.chat_id == str(chat_id), Notes.keyword == keyword)
+    note = SESSION.query(Notes).filter(
+        Notes.chat_id == str(chat_id), Notes.keyword == keyword
+    )
     if note:
         note.delete()
         SESSION.commit()
+
 
 def rm_all_notes(chat_id):
     notes = SESSION.query(Notes).filter(Notes.chat_id == str(chat_id))

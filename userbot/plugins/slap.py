@@ -4,12 +4,12 @@ usage:- .slap in reply to any message, or u gonna slap urself.
 
 """
 
-import sys
-from telethon import events, functions
-from uniborg.util import admin_cmd
 import random
+
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
+from uniborg.util import admin_cmd
+
 from userbot import ALIVE_NAME
 
 SLAP_TEMPLATES = [
@@ -23,7 +23,7 @@ SLAP_TEMPLATES = [
     "{user1} pins {user2} down and repeatedly {hits} them with a {item}.",
     "{user1} grabs up a {item} and {hits} {user2} with it.",
     "{user1} ties {user2} to a chair and {throws} a {item} at them.",
-    "{user1} gave a friendly push to help {user2} learn to swim in lava."
+    "{user1} gave a friendly push to help {user2} learn to swim in lava.",
 ]
 
 ITEMS = [
@@ -75,6 +75,7 @@ HIT = [
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "IndianBot"
 
+
 @borg.on(admin_cmd(pattern="slap ?(.*)", allow_sudo=True))
 async def who(event):
     if event.fwd_from:
@@ -91,6 +92,7 @@ async def who(event):
 
     except:
         await event.edit("`Can't slap this nibba !!`")
+
 
 async def get_user(event):
     if event.reply_to_msg_id:
@@ -123,6 +125,7 @@ async def get_user(event):
 
     return replied_user
 
+
 async def slap(replied_user, event):
     user_id = replied_user.user.id
     first_name = replied_user.user.first_name
@@ -137,6 +140,8 @@ async def slap(replied_user, event):
     hit = random.choice(HIT)
     throw = random.choice(THROW)
 
-    caption = temp.format(user1=DEFAULTUSER, user2=slapped, item=item, hits=hit, throws=throw)
+    caption = temp.format(
+        user1=DEFAULTUSER, user2=slapped, item=item, hits=hit, throws=throw
+    )
 
     return caption

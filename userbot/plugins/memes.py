@@ -7,23 +7,17 @@
 
 """ Userbot module for having some fun with people. """
 
-import asyncio
 import random
 import re
 import time
-from userbot import ALIVE_NAME
-
-from collections import deque
 
 import requests
-
+from cowpy import cow
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
-from cowpy import cow
-
-from userbot import CMD_HELP,YOUTUBE_API_KEY
-from userbot.utils import register,admin_cmd
+from userbot import CMD_HELP
+from userbot.utils import admin_cmd, register
 
 # ================= CONSTANT =================
 RENDISTR = [
@@ -52,116 +46,121 @@ NOOBSTR = [
     "`Kysa kysaaaa haaan? Phir MAAR nhi Khayega tu?`",
     "`Zikr Jinka hota hai galiyo meh woh bhosdika ajj paya gya naliyo me`",
 ]
-ZALG_LIST = [["̖",
-              " ̗",
-              " ̘",
-              " ̙",
-              " ̜",
-              " ̝",
-              " ̞",
-              " ̟",
-              " ̠",
-              " ̤",
-              " ̥",
-              " ̦",
-              " ̩",
-              " ̪",
-              " ̫",
-              " ̬",
-              " ̭",
-              " ̮",
-              " ̯",
-              " ̰",
-              " ̱",
-              " ̲",
-              " ̳",
-              " ̹",
-              " ̺",
-              " ̻",
-              " ̼",
-              " ͅ",
-              " ͇",
-              " ͈",
-              " ͉",
-              " ͍",
-              " ͎",
-              " ͓",
-              " ͔",
-              " ͕",
-              " ͖",
-              " ͙",
-              " ͚",
-              " ",
-              ],
-             [" ̍",
-              " ̎",
-              " ̄",
-              " ̅",
-              " ̿",
-              " ̑",
-              " ̆",
-              " ̐",
-              " ͒",
-              " ͗",
-              " ͑",
-              " ̇",
-              " ̈",
-              " ̊",
-              " ͂",
-              " ̓",
-              " ̈́",
-              " ͊",
-              " ͋",
-              " ͌",
-              " ̃",
-              " ̂",
-              " ̌",
-              " ͐",
-              " ́",
-              " ̋",
-              " ̏",
-              " ̽",
-              " ̉",
-              " ͣ",
-              " ͤ",
-              " ͥ",
-              " ͦ",
-              " ͧ",
-              " ͨ",
-              " ͩ",
-              " ͪ",
-              " ͫ",
-              " ͬ",
-              " ͭ",
-              " ͮ",
-              " ͯ",
-              " ̾",
-              " ͛",
-              " ͆",
-              " ̚",
-              ],
-             [" ̕",
-              " ̛",
-              " ̀",
-              " ́",
-              " ͘",
-              " ̡",
-              " ̢",
-              " ̧",
-              " ̨",
-              " ̴",
-              " ̵",
-              " ̶",
-              " ͜",
-              " ͝",
-              " ͞",
-              " ͟",
-              " ͠",
-              " ͢",
-              " ̸",
-              " ̷",
-              " ͡",
-              ]]
+ZALG_LIST = [
+    [
+        "̖",
+        " ̗",
+        " ̘",
+        " ̙",
+        " ̜",
+        " ̝",
+        " ̞",
+        " ̟",
+        " ̠",
+        " ̤",
+        " ̥",
+        " ̦",
+        " ̩",
+        " ̪",
+        " ̫",
+        " ̬",
+        " ̭",
+        " ̮",
+        " ̯",
+        " ̰",
+        " ̱",
+        " ̲",
+        " ̳",
+        " ̹",
+        " ̺",
+        " ̻",
+        " ̼",
+        " ͅ",
+        " ͇",
+        " ͈",
+        " ͉",
+        " ͍",
+        " ͎",
+        " ͓",
+        " ͔",
+        " ͕",
+        " ͖",
+        " ͙",
+        " ͚",
+        " ",
+    ],
+    [
+        " ̍",
+        " ̎",
+        " ̄",
+        " ̅",
+        " ̿",
+        " ̑",
+        " ̆",
+        " ̐",
+        " ͒",
+        " ͗",
+        " ͑",
+        " ̇",
+        " ̈",
+        " ̊",
+        " ͂",
+        " ̓",
+        " ̈́",
+        " ͊",
+        " ͋",
+        " ͌",
+        " ̃",
+        " ̂",
+        " ̌",
+        " ͐",
+        " ́",
+        " ̋",
+        " ̏",
+        " ̽",
+        " ̉",
+        " ͣ",
+        " ͤ",
+        " ͥ",
+        " ͦ",
+        " ͧ",
+        " ͨ",
+        " ͩ",
+        " ͪ",
+        " ͫ",
+        " ͬ",
+        " ͭ",
+        " ͮ",
+        " ͯ",
+        " ̾",
+        " ͛",
+        " ͆",
+        " ̚",
+    ],
+    [
+        " ̕",
+        " ̛",
+        " ̀",
+        " ́",
+        " ͘",
+        " ̡",
+        " ̢",
+        " ̧",
+        " ̨",
+        " ̴",
+        " ̵",
+        " ̶",
+        " ͜",
+        " ͝",
+        " ͞",
+        " ͟",
+        " ͠",
+        " ͢",
+        " ̸",
+        " ̷",
+        " ͡",
+    ],
+]
 
 
 EMOJIS = [
@@ -196,7 +195,7 @@ EMOJIS = [
 ]
 
 INSULT_STRINGS = [
-     "`Owww ... Such a stupid idiot.`",
+    "`Owww ... Such a stupid idiot.`",
     "`Don't drink and type.`",
     "`Command not found. Just like your brain.`",
     "`Bot rule 420 section 69 prevents me from replying to stupid nubfuks like you.`",
@@ -383,7 +382,7 @@ RUNSREACTS = [
     "May the odds be ever in your favour.",
     "Famous last words.",
     "And they disappeared forever, never to be seen again.",
-    "\"Oh, look at me! I'm so cool, I can run from a bot!\" - this person",
+    '"Oh, look at me! I\'m so cool, I can run from a bot!" - this person',
     "Yeah yeah, just tap /kickme already.",
     "Here, take this ring and head to Mordor while you're at it.",
     "Legend has it, they're still running...",
@@ -411,117 +410,116 @@ RUNSREACTS = [
 ]
 
 RAPE_STRINGS = [
-     "`Rape Done Drink The Cum`",
-     "`EK baat yaad rkhio, Chut ka Chakkar matlab maut se takkar`",
-     "`The user has been successfully raped`",
-     "`Dekho Bhaiyya esa hai! Izzat bachailo apni warna Gaand maar lenge tumhari`",
-     "`Relax your Rear, ders nothing to fear,The Rape train is finally here`",
-     "`Rape coming... Raped! haha 😆`",
-     "`Kitni baar Rape krvyega mujhse?`",
-     "`Tu Randi hai Sabko pta hai😂`",
-     "`Don't rape too much bossdk, else problem....`",
-     "`Tu sasti rendi hai Sabko pta hai😂`",
-     "`Lodu Andha hai kya Yaha tera rape ho raha hai aur tu abhi tak yahi gaand mara raha hai lulz`",
-] 
+    "`Rape Done Drink The Cum`",
+    "`EK baat yaad rkhio, Chut ka Chakkar matlab maut se takkar`",
+    "`The user has been successfully raped`",
+    "`Dekho Bhaiyya esa hai! Izzat bachailo apni warna Gaand maar lenge tumhari`",
+    "`Relax your Rear, ders nothing to fear,The Rape train is finally here`",
+    "`Rape coming... Raped! haha 😆`",
+    "`Kitni baar Rape krvyega mujhse?`",
+    "`Tu Randi hai Sabko pta hai😂`",
+    "`Don't rape too much bossdk, else problem....`",
+    "`Tu sasti rendi hai Sabko pta hai😂`",
+    "`Lodu Andha hai kya Yaha tera rape ho raha hai aur tu abhi tak yahi gaand mara raha hai lulz`",
+]
 ABUSE_STRINGS = [
-	   "`Chutiya he rah jaye ga`",
-	   "`Kya Phooka Tha Kal?`",
-	   "`Abe Bhang mar ke aya hei kya ?`",
-	   "`Tum Ek baat Batao Roj RandiPa Karte Ho Uska Koi Fayeda hei?`",
-       "`Jaa Jake Bartan Manj Bakchodi mat kar`",
-       "`Lund Choos Le {DEFAULTUSER} Ka Bhosdk `",
-       "`Phir A Gya Tu Bhosdk Chut Si Sakal Ka`",
-       "`Randi Kahike Lund Pasad Hei to Choss Le {DEFAULTUSER} Ka",
+    "`Chutiya he rah jaye ga`",
+    "`Kya Phooka Tha Kal?`",
+    "`Abe Bhang mar ke aya hei kya ?`",
+    "`Tum Ek baat Batao Roj RandiPa Karte Ho Uska Koi Fayeda hei?`",
+    "`Jaa Jake Bartan Manj Bakchodi mat kar`",
+    "`Lund Choos Le {DEFAULTUSER} Ka Bhosdk `",
+    "`Phir A Gya Tu Bhosdk Chut Si Sakal Ka`",
+    "`Randi Kahike Lund Pasad Hei to Choss Le {DEFAULTUSER} Ka",
 ]
 GEY_STRINGS = [
-     "`you gey bsdk`",
-     "`you gey`",
-     "`you gey in the house`",
-     "`you chakka`",
-     "`Bhago BC! Chakka aya`",
-     "`you gey gey gey gey gey gey gey gey`",
-     "`you gey go away`",
+    "`you gey bsdk`",
+    "`you gey`",
+    "`you gey in the house`",
+    "`you chakka`",
+    "`Bhago BC! Chakka aya`",
+    "`you gey gey gey gey gey gey gey gey`",
+    "`you gey go away`",
 ]
 PRO_STRINGS = [
-     "`This gey is pro as phack.`",
-     "`Proness Lebel: 6969696969`",
-     "`Itna pro banda dekhlia bc, ab to marna hoga.`",
-     "`U iz pro but i iz ur DAD, KeK`",
-     "`NOOB NIMBA TRYING TO BE FAMOUS KEK`",
-     "`Sometimes one middle finger isnâ€™t enough to let someone know how you feel. Thatâ€™s why you have two hands`",
-     "`Some Nimbas need to open their small minds instead of their big mouths`",
-     "`UH DONT KNOW MEH SO STAY AWAY LAWDE`",
-     "`Kysa kysaaaa haaan? Phir MAAR nhi Khayega tu?`",
-     "`Zikr Jinka hota hai galiyo meh woh bhosdika ajj paya gya naliyo me`",
-
+    "`This gey is pro as phack.`",
+    "`Proness Lebel: 6969696969`",
+    "`Itna pro banda dekhlia bc, ab to marna hoga.`",
+    "`U iz pro but i iz ur DAD, KeK`",
+    "`NOOB NIMBA TRYING TO BE FAMOUS KEK`",
+    "`Sometimes one middle finger isnâ€™t enough to let someone know how you feel. Thatâ€™s why you have two hands`",
+    "`Some Nimbas need to open their small minds instead of their big mouths`",
+    "`UH DONT KNOW MEH SO STAY AWAY LAWDE`",
+    "`Kysa kysaaaa haaan? Phir MAAR nhi Khayega tu?`",
+    "`Zikr Jinka hota hai galiyo meh woh bhosdika ajj paya gya naliyo me`",
 ]
 CHU_STRINGS = [
-     "`Taare hai Asmaan me very very bright jaat na jla bskd dekh le apni hight.`",
-     "`jindagi ki na toote lari iski lulli hoti nhi khadi`",
-     "`Kbhi kbhi meri dil me khyaal ata hai ayse chutiyo ko kon paida kr jata hai😂.`",
-     "`Saawan ka mahina pawan kare shor jake gand mara bskd kahi aur.`", 
-     "`Dil ke armaa ansuon me beh jaye tum bskd ke chutiye hi reh gye.`",
-     "`Ishq Se Tabiyat Ne Zeest Ka Mazaa aya maine is lodu ko randi khane me paya.`",
-     "`Mirza galib ki yeh khani hai tu bhosdika hai yeh sab ki jubani hai.`",
-     "`Ek dora hai ek nora hai charo taraf kohra hi kohra hai ye sabse bada behan ka lawda hai.`",
-     "`Phool murjhate achhe nahi lagte aap land khujate acche nahi lagte yehi umar hai chodne ki yaaro aap bathroom mein hilaate acche nahi lagte.`",
-     "`Badi hasrat thi ki khole iski maa ki salwaar ka  nara par iski maa ki berukhi dekho ki aagayi nangi dobara.`",
-     "`Na jaane konsi shilajit hai iski maa ki yadon mein jab bhi sochta hun jhanajhana jaata hun.`",
-     "`Yaara Teri Yaari Pe Mujhe Shak Nahi Tha; Lekin Sabne Teri Gaand Maari, Kya Mera Koi Haq Nahi Tha.`",
-     "`Yehi to kamal hai hamara baap bante ho tum aur naam aata hai humara.`",
-     "`Chinti chadi pahad pe angrejon ka jamana tha lund ki pistol thi chut pe nishana tha.`",
-     "`Bhola khada bich bazaar fut fut kr roye  gaand  Maar Sab Chal Diyo Paisa Diyo N Koye.`",
-     "`Pani kam hain  matke mein gand mardunga jhatke mein.`",
-     "`Duniya haseeno ka mela fir bhi mera chutiya dost akela.`",
-     "`8 ko kehte hain hindi mein aath ja bsdk tu ja ke kutiya ki chaat.`",
-     "`Purani baatein bhool ja mera lund pakad ke jhool ja.`",
-     "`Permanent hai pakka tera baap chaka.`",
-     "`Yaar azab tera nakhra ghazab tera style hai gand dhone ki tameez nahi haath mein mobile hain.`",
+    "`Taare hai Asmaan me very very bright jaat na jla bskd dekh le apni hight.`",
+    "`jindagi ki na toote lari iski lulli hoti nhi khadi`",
+    "`Kbhi kbhi meri dil me khyaal ata hai ayse chutiyo ko kon paida kr jata hai😂.`",
+    "`Saawan ka mahina pawan kare shor jake gand mara bskd kahi aur.`",
+    "`Dil ke armaa ansuon me beh jaye tum bskd ke chutiye hi reh gye.`",
+    "`Ishq Se Tabiyat Ne Zeest Ka Mazaa aya maine is lodu ko randi khane me paya.`",
+    "`Mirza galib ki yeh khani hai tu bhosdika hai yeh sab ki jubani hai.`",
+    "`Ek dora hai ek nora hai charo taraf kohra hi kohra hai ye sabse bada behan ka lawda hai.`",
+    "`Phool murjhate achhe nahi lagte aap land khujate acche nahi lagte yehi umar hai chodne ki yaaro aap bathroom mein hilaate acche nahi lagte.`",
+    "`Badi hasrat thi ki khole iski maa ki salwaar ka  nara par iski maa ki berukhi dekho ki aagayi nangi dobara.`",
+    "`Na jaane konsi shilajit hai iski maa ki yadon mein jab bhi sochta hun jhanajhana jaata hun.`",
+    "`Yaara Teri Yaari Pe Mujhe Shak Nahi Tha; Lekin Sabne Teri Gaand Maari, Kya Mera Koi Haq Nahi Tha.`",
+    "`Yehi to kamal hai hamara baap bante ho tum aur naam aata hai humara.`",
+    "`Chinti chadi pahad pe angrejon ka jamana tha lund ki pistol thi chut pe nishana tha.`",
+    "`Bhola khada bich bazaar fut fut kr roye  gaand  Maar Sab Chal Diyo Paisa Diyo N Koye.`",
+    "`Pani kam hain  matke mein gand mardunga jhatke mein.`",
+    "`Duniya haseeno ka mela fir bhi mera chutiya dost akela.`",
+    "`8 ko kehte hain hindi mein aath ja bsdk tu ja ke kutiya ki chaat.`",
+    "`Purani baatein bhool ja mera lund pakad ke jhool ja.`",
+    "`Permanent hai pakka tera baap chaka.`",
+    "`Yaar azab tera nakhra ghazab tera style hai gand dhone ki tameez nahi haath mein mobile hain.`",
 ]
 FUK_STRINGS = [
-   "`It's better to let someone think you are an Idiot than to open your mouth and prove it.`",
-   "`Talking to a liberal is like trying to explain social media to a 70 years old`",
-   "`CHAND PE HAI APUN LAWDE.`",
-   "`Pehle main tereko chakna dega, fir daru pilayega, fir jab aap dimag se nahi L*nd se sochoge, tab bolega..`",
-   "`Pardhan mantri se number liya, parliament apne :__;baap ka hai...`",
-   "`Cachaa Ooo bhosdi wale Chacha`",
-   "`Aaisi Londiya Chodiye, L*nd Ka Aapa Khoye, Auro Se Chudi Na Ho, Biwi Wo Hi Hoye`",
-   "`Nachoo Bhosdike Nachoo`",
-   "`Jinda toh jaat ke baal bhi hai`",
-   "`Sab ko pta tu randi ka baccha hai (its just a joke)`", 
+    "`It's better to let someone think you are an Idiot than to open your mouth and prove it.`",
+    "`Talking to a liberal is like trying to explain social media to a 70 years old`",
+    "`CHAND PE HAI APUN LAWDE.`",
+    "`Pehle main tereko chakna dega, fir daru pilayega, fir jab aap dimag se nahi L*nd se sochoge, tab bolega..`",
+    "`Pardhan mantri se number liya, parliament apne :__;baap ka hai...`",
+    "`Cachaa Ooo bhosdi wale Chacha`",
+    "`Aaisi Londiya Chodiye, L*nd Ka Aapa Khoye, Auro Se Chudi Na Ho, Biwi Wo Hi Hoye`",
+    "`Nachoo Bhosdike Nachoo`",
+    "`Jinda toh jaat ke baal bhi hai`",
+    "`Sab ko pta tu randi ka baccha hai (its just a joke)`",
 ]
 THANOS_STRINGS = [
-     "`Mashoor Rand, Ne Arz Kiya Hai. Aane Wale Aate Hai, Jaane Wale Jaate Hai. Yaade Bas Unki Reh Jaati Hai, Jo G**Nd Sujaa Ke Jaate Hai`",
-     "`Pani kam hai matkey me ga*d mardunga teri ek jatke me`",
-     "`Aand kitne bhi bade ho, lund ke niche hi rehte hai`",
-     "`Tum Ameer hum gareeb hum jhopdiwale Tum bhosiwale`",
-     "`Sisi Bhari Gulab ki padi palang ke pass chodne wale chod gye ab q baitha udaas`",
-     "`Phuloo Ka Raja Gulaab Kaato me Rehta hai Jeewan ka Nirmata jaato me rehta hai😂`",
-     "`Chude hue maal ko yaad mt krna Jo Chut na de usse kabhi friyad mt karna jise chudna hai wo chud ke rhegi bekar me muth maar ke apni jindagi barbaad mt krna`",
-     "`Gand mare gandu Chut mare Chutiya Sabse accha mutti 2 mint me chutti😛`",
-     "`Marzi Ka Sex Pap Nahi Hota.. Piche Se Dalne Wala Kabhi Baap Nahi Hota.. Condom Zarur Lagana Mere Dost Qki.. Sex K Waqt Popat Ke Pass Dimag Nahi Hota.`",
-     "`Uss Ne Hothon Se Chhu Kar Lowd* Pe Nasha Kar Diya; Lu*D Ki Baat To Aur Thi, Uss Ne To Jhato* Ko Bhi Khada Kar Diya!`",
+    "`Mashoor Rand, Ne Arz Kiya Hai. Aane Wale Aate Hai, Jaane Wale Jaate Hai. Yaade Bas Unki Reh Jaati Hai, Jo G**Nd Sujaa Ke Jaate Hai`",
+    "`Pani kam hai matkey me ga*d mardunga teri ek jatke me`",
+    "`Aand kitne bhi bade ho, lund ke niche hi rehte hai`",
+    "`Tum Ameer hum gareeb hum jhopdiwale Tum bhosiwale`",
+    "`Sisi Bhari Gulab ki padi palang ke pass chodne wale chod gye ab q baitha udaas`",
+    "`Phuloo Ka Raja Gulaab Kaato me Rehta hai Jeewan ka Nirmata jaato me rehta hai😂`",
+    "`Chude hue maal ko yaad mt krna Jo Chut na de usse kabhi friyad mt karna jise chudna hai wo chud ke rhegi bekar me muth maar ke apni jindagi barbaad mt krna`",
+    "`Gand mare gandu Chut mare Chutiya Sabse accha mutti 2 mint me chutti😛`",
+    "`Marzi Ka Sex Pap Nahi Hota.. Piche Se Dalne Wala Kabhi Baap Nahi Hota.. Condom Zarur Lagana Mere Dost Qki.. Sex K Waqt Popat Ke Pass Dimag Nahi Hota.`",
+    "`Uss Ne Hothon Se Chhu Kar Lowd* Pe Nasha Kar Diya; Lu*D Ki Baat To Aur Thi, Uss Ne To Jhato* Ko Bhi Khada Kar Diya!`",
 ]
 ABUSEHARD_STRING = [
-	"`Madarchod Randi ke bacche.Oye bosdike madarchod bhen ke lode tere gand me lohe ka danda garam karke dalu randwe tujhetho gali ke kutte gand pe chut rakh ke katenge me bata raha hu tere lode pe madhu makkhi Katelode ke ando pe Road roller chale tu kab bathroom me muthne Jaye tho Tera loda ghir Jaye fir tere ando me se lizard ke bacche nikle teko kidnap Kare aur childporn banaye maa ke chuttad ke lode tere saat Johnny sins rape Kare aur jab wo teko anal de tab loda andar fas Jaye bkl tere jhaat pe waxing karunga me dhek lio fir jab tu chillayega na tab tere muh me Mai gai ka gobar dalunga sale tere gand ke balo pe tel laga ke jala du me teko Anaconda leke gand me dalu tho muh se nikle maa ke lode hamesha chutiyo jaisa bartav kartha he tu maa ke Dai chawal drugs tere gand Me dalunga thi tatti nahi nikle maa darchod kabhi teko Marne ka mouka mil gaya na tho bas I'll do my best to get that tatti outof you aur tere jaise chutio ko is duniya me jagaha bhi nahi maa ke lode bandarchod tere gand me chitiya Kate wo bhi bullet ants maadarchod samj nahi aaraha tere baap NE teko kya khake paida kiya Tha kesa chutiya he tu rand ke bacche teko shadi me khana khane na mile teko gand pe 4 thappad mare sab log aur blade se likhe I want anal madarchod bosdike maccharki tatte ke baal chutiye maa ke chut pe ghode ka Lund tere gand me jaltha hu koila Dale bhen ke lode MAA KI CHUT MAI TALWAR DUNGA BC CHUT FAT JAEGI AUR USME SE ITNA KHOON NIKLEGA MZA AJAEGA DEKHNE KA SALE MAA KE BHOSDE SE BAHR AJA FIR BAAP SE ZUBAN DA TERI MAA KI CHUT CHOD CHOD KE BHOSDABNADU MADARCHOD AUR USKE UPAR CENENT LAGADU KI TERE JESA GANDU INSAAN KABHI BAHR NA A SKE ESI GANDI CHUT MAI SE LODA LASUN MADRCHOD TERI MAA KI CHUT GASTI AMA KA CHUTIA BACHA TERI MAA KO CHOD CHOD K PAGAL KAR DUNGA MAA K LODY KISI SASTIII RANDII K BACHY TERI MAA KI CHOOT MAIN TEER MAARUN GANDU HARAMI TERI COLLEGE JATI BAJI KA ROAD PEY RAPE KARONGANDU KI OLAAD HARAM KI NASAL PAPA HUN TERA BHEN PESH KAR AB PAPA KO TERI MAA KKALE KUSS MAIN KIS`",
-	"`Main roz teri behno ki banjar chut me apna lawda daalke andar haryali lata tha magar aaj unke ke baare me sunke mujhe bhut afsos huwa..ki unko ab bada loudha chahye..ab mera balatkaaari lawda lagataar 4 ghante tk apne muh me kon rakhega..vo teri behne hi thi jo apni kaali magar rasilli chut mere saamne khol deti aur zameen pe naagin ki tarah rengne lgti thi jaise ki kisine unki chut pe naariyal tod diya ho vo b bada wala mumbai ka naariyal..apni chennal maa ko b nhi bhej rahe mere paas to main kaixe tum logo se vaada karu ki main teri maa chodd dungaw..ab agar tun sach me chahta hai ki main tum dono k mc ki chut me dhammal karu to mera lawda apne muh me rakho aur kaho Sameer hamare sage papa hain... Aur agar tb b the apni maa ki kaali chut mere saamne nahi rakhi to tumhare ghar me ghuske tumhari maa ka balatkaar kar dungaw jaixe delhi me huwa tha...ab teri chudi hui kuttiyo ki tarah apni gaand hilaate hue mere aage kalapna mt ni to tumhari fatti bhoxdi me 100 ched karunga`",
-	"`Taare hai Asmaan me very very bright jaat na jla bskd dekh le apni hight.`",
-        "`Zindagi ki na toote lari iski lulli hoti nhi khadi`",
-        "`Kbhi kbhi meri dil me khyaal ata hai ayse chutiyo ko kon paida kr jata hai😂.`",
-        "`Saawan ka mahina pawan kare shor jake gand mara bskd kahi aur.`", 
-        "`Dil ke armaa ansuon me beh jaye tum bskd ke chutiye hi reh gye.`",
-        "`Ishq Se Tabiyat Ne Zeest Ka Mazaa aya maine is lodu ko randi khane me paya.`",
-        "`Mirza galib ki yeh khani hai tu bhosdika hai yeh sab ki jubani hai.`",
-	"`Mashoor Rand, Ne Arz Kiya Hai. Aane Wale Aate Hai, Jaane Wale Jaate Hai. Yaade Bas Unki Reh Jaati Hai, Jo G**Nd Sujaa Ke Jaate Hai`",
-        "`Pani kam hai matke me gand marlunga jhatke me.`",
-        "`Aand kitne bhi bade ho, lund ke niche hi rehte hai`",
-        "`Tum Ameer hum gareeb hum jhopdiwale Tum bhosiwale`",
-        "`Sisi Bhari Gulab ki padi palang ke pass chodne wale chod gye ab q baitha udaas`",
-        "`Phuloo Ka Raja Gulaab Kaato me Rehta hai Jeewan ka Nirmata jaato me rehta hai😂`",
-        "`Chude hue maal ko yaad mt krna Jo Chut na de usse kabhi friyad mt karna jise chudna hai wo chud ke rhegi bekar me muth maar ke apni jindagi barbaad mt krna`",
-        "`Gand mare gandu Chut mare Chutiya Sabse accha mutti 2 mint me chutti😛`",
-        "`Marzi Ka Sex Pap Nahi Hota.. Piche Se Dalne Wala Kabhi Baap Nahi Hota.. Condom Zarur Lagana Mere Dost Qki.. Sex K Waqt Popat Ke Pass Dimag Nahi Hota.`",
-        "`Uss Ne Hothon Se Chhu Kar Lowd* Pe Nasha Kar Diya; Lu*D Ki Baat To Aur Thi, Uss Ne To Jhato* Ko Bhi Khada Kar Diya!`",
+    "`Madarchod Randi ke bacche.Oye bosdike madarchod bhen ke lode tere gand me lohe ka danda garam karke dalu randwe tujhetho gali ke kutte gand pe chut rakh ke katenge me bata raha hu tere lode pe madhu makkhi Katelode ke ando pe Road roller chale tu kab bathroom me muthne Jaye tho Tera loda ghir Jaye fir tere ando me se lizard ke bacche nikle teko kidnap Kare aur childporn banaye maa ke chuttad ke lode tere saat Johnny sins rape Kare aur jab wo teko anal de tab loda andar fas Jaye bkl tere jhaat pe waxing karunga me dhek lio fir jab tu chillayega na tab tere muh me Mai gai ka gobar dalunga sale tere gand ke balo pe tel laga ke jala du me teko Anaconda leke gand me dalu tho muh se nikle maa ke lode hamesha chutiyo jaisa bartav kartha he tu maa ke Dai chawal drugs tere gand Me dalunga thi tatti nahi nikle maa darchod kabhi teko Marne ka mouka mil gaya na tho bas I'll do my best to get that tatti outof you aur tere jaise chutio ko is duniya me jagaha bhi nahi maa ke lode bandarchod tere gand me chitiya Kate wo bhi bullet ants maadarchod samj nahi aaraha tere baap NE teko kya khake paida kiya Tha kesa chutiya he tu rand ke bacche teko shadi me khana khane na mile teko gand pe 4 thappad mare sab log aur blade se likhe I want anal madarchod bosdike maccharki tatte ke baal chutiye maa ke chut pe ghode ka Lund tere gand me jaltha hu koila Dale bhen ke lode MAA KI CHUT MAI TALWAR DUNGA BC CHUT FAT JAEGI AUR USME SE ITNA KHOON NIKLEGA MZA AJAEGA DEKHNE KA SALE MAA KE BHOSDE SE BAHR AJA FIR BAAP SE ZUBAN DA TERI MAA KI CHUT CHOD CHOD KE BHOSDABNADU MADARCHOD AUR USKE UPAR CENENT LAGADU KI TERE JESA GANDU INSAAN KABHI BAHR NA A SKE ESI GANDI CHUT MAI SE LODA LASUN MADRCHOD TERI MAA KI CHUT GASTI AMA KA CHUTIA BACHA TERI MAA KO CHOD CHOD K PAGAL KAR DUNGA MAA K LODY KISI SASTIII RANDII K BACHY TERI MAA KI CHOOT MAIN TEER MAARUN GANDU HARAMI TERI COLLEGE JATI BAJI KA ROAD PEY RAPE KARONGANDU KI OLAAD HARAM KI NASAL PAPA HUN TERA BHEN PESH KAR AB PAPA KO TERI MAA KKALE KUSS MAIN KIS`",
+    "`Main roz teri behno ki banjar chut me apna lawda daalke andar haryali lata tha magar aaj unke ke baare me sunke mujhe bhut afsos huwa..ki unko ab bada loudha chahye..ab mera balatkaaari lawda lagataar 4 ghante tk apne muh me kon rakhega..vo teri behne hi thi jo apni kaali magar rasilli chut mere saamne khol deti aur zameen pe naagin ki tarah rengne lgti thi jaise ki kisine unki chut pe naariyal tod diya ho vo b bada wala mumbai ka naariyal..apni chennal maa ko b nhi bhej rahe mere paas to main kaixe tum logo se vaada karu ki main teri maa chodd dungaw..ab agar tun sach me chahta hai ki main tum dono k mc ki chut me dhammal karu to mera lawda apne muh me rakho aur kaho Sameer hamare sage papa hain... Aur agar tb b the apni maa ki kaali chut mere saamne nahi rakhi to tumhare ghar me ghuske tumhari maa ka balatkaar kar dungaw jaixe delhi me huwa tha...ab teri chudi hui kuttiyo ki tarah apni gaand hilaate hue mere aage kalapna mt ni to tumhari fatti bhoxdi me 100 ched karunga`",
+    "`Taare hai Asmaan me very very bright jaat na jla bskd dekh le apni hight.`",
+    "`Zindagi ki na toote lari iski lulli hoti nhi khadi`",
+    "`Kbhi kbhi meri dil me khyaal ata hai ayse chutiyo ko kon paida kr jata hai😂.`",
+    "`Saawan ka mahina pawan kare shor jake gand mara bskd kahi aur.`",
+    "`Dil ke armaa ansuon me beh jaye tum bskd ke chutiye hi reh gye.`",
+    "`Ishq Se Tabiyat Ne Zeest Ka Mazaa aya maine is lodu ko randi khane me paya.`",
+    "`Mirza galib ki yeh khani hai tu bhosdika hai yeh sab ki jubani hai.`",
+    "`Mashoor Rand, Ne Arz Kiya Hai. Aane Wale Aate Hai, Jaane Wale Jaate Hai. Yaade Bas Unki Reh Jaati Hai, Jo G**Nd Sujaa Ke Jaate Hai`",
+    "`Pani kam hai matke me gand marlunga jhatke me.`",
+    "`Aand kitne bhi bade ho, lund ke niche hi rehte hai`",
+    "`Tum Ameer hum gareeb hum jhopdiwale Tum bhosiwale`",
+    "`Sisi Bhari Gulab ki padi palang ke pass chodne wale chod gye ab q baitha udaas`",
+    "`Phuloo Ka Raja Gulaab Kaato me Rehta hai Jeewan ka Nirmata jaato me rehta hai😂`",
+    "`Chude hue maal ko yaad mt krna Jo Chut na de usse kabhi friyad mt karna jise chudna hai wo chud ke rhegi bekar me muth maar ke apni jindagi barbaad mt krna`",
+    "`Gand mare gandu Chut mare Chutiya Sabse accha mutti 2 mint me chutti😛`",
+    "`Marzi Ka Sex Pap Nahi Hota.. Piche Se Dalne Wala Kabhi Baap Nahi Hota.. Condom Zarur Lagana Mere Dost Qki.. Sex K Waqt Popat Ke Pass Dimag Nahi Hota.`",
+    "`Uss Ne Hothon Se Chhu Kar Lowd* Pe Nasha Kar Diya; Lu*D Ki Baat To Aur Thi, Uss Ne To Jhato* Ko Bhi Khada Kar Diya!`",
 ]
 
 SHGS = [
@@ -601,7 +599,7 @@ SLAP_TEMPLATES = [
     "pins {victim} down and repeatedly {hits} them with a {item}.",
     "grabs up a {item} and {hits} {victim} with it.",
     "ties {victim} to a chair and {throws} a {item} at them.",
-    "gave a friendly push to help {victim} learn to swim in lava."
+    "gave a friendly push to help {victim} learn to swim in lava.",
 ]
 
 ITEMS = [
@@ -655,7 +653,7 @@ HIT = [
 # ===========================================
 
 
-#@register(outgoing=True, pattern=r"^.(\w+)say (.*)")
+# @register(outgoing=True, pattern=r"^.(\w+)say (.*)")
 @borg.on(admin_cmd(pattern=r"(\w+)say (.*)"))
 async def univsaye(cowmsg):
     """ For .cowsay module, userbot wrapper for cow which says things. """
@@ -701,7 +699,10 @@ async def who(event):
             await event.edit(caption)
 
         except:
-            await event.edit("`Can't slap this person, need to fetch some sticks and stones !!`")
+            await event.edit(
+                "`Can't slap this person, need to fetch some sticks and stones !!`"
+            )
+
 
 async def get_user(event):
     """ Get the user from argument or replied message. """
@@ -735,6 +736,7 @@ async def get_user(event):
 
     return replied_user
 
+
 async def slap(replied_user, event):
     """ Construct a funny slap sentence !! """
     user_id = replied_user.user.id
@@ -755,6 +757,7 @@ async def slap(replied_user, event):
 
     return caption
 
+
 @register(outgoing=True, pattern="^.-_-$")
 async def lol(lel):
     if not lel.text[0].isalpha() and lel.text[0] not in ("/", "#", "@", "!"):
@@ -764,7 +767,7 @@ async def lol(lel):
             okay = okay[:-1] + "_-"
             await lel.edit(okay)
 
- 
+
 @register(outgoing=True, pattern="^.;_;$")
 async def fun(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
@@ -773,17 +776,20 @@ async def fun(e):
             t = t[:-1] + "_;"
             await e.edit(t)
 
+
 @register(outgoing=True, pattern="^.cry$")
 async def cry(e):
     """ y u du dis, i cry everytime !! """
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(random.choice(CRI))
 
+
 @register(outgoing=True, pattern="^.insult$")
 async def insult(e):
     """ I make you cry !! """
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(random.choice(INSULT_STRINGS))
+
 
 @register(outgoing=True, pattern="^.cp(?: |$)(.*)")
 async def copypasta(cp_e):
@@ -846,13 +852,15 @@ async def vapor(vpr):
 
         await vpr.edit("".join(reply_text))
 
-			  
+
 @register(outgoing=True, pattern="^.repo$")
 async def source(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
-        await e.edit("Click [here](https://github.com/HellBoy-OP/HellBot) to open this 🔥**Lit AF!!**🔥 __Hêllẞø†__ Repo.. Join channel :- @HellBot_Official")
-			  
-			  
+        await e.edit(
+            "Click [here](https://github.com/HellBoy-OP/HellBot) to open this 🔥**Lit AF!!**🔥 __Hêllẞø†__ Repo.. Join channel :- @HellBot_Official"
+        )
+
+
 @register(outgoing=True, pattern="^.str(?: |$)(.*)")
 async def stretch(stret):
     """ Stretch it."""
@@ -870,9 +878,7 @@ async def stretch(stret):
 
         count = random.randint(3, 10)
         reply_text = re.sub(
-            r"([aeiouAEIOUａｅｉｏｕＡＥＩＯＵаеиоуюяыэё])",
-            (r"\1"*count),
-            message
+            r"([aeiouAEIOUａｅｉｏｕＡＥＩＯＵаеиоуюяыэё])", (r"\1" * count), message
         )
         await stret.edit(reply_text)
 
@@ -903,29 +909,28 @@ async def zal(zgfy):
                 randint = random.randint(0, 2)
 
                 if randint == 0:
-                    charac = charac.strip() + \
-                        random.choice(ZALG_LIST[0]).strip()
+                    charac = charac.strip() + random.choice(ZALG_LIST[0]).strip()
                 elif randint == 1:
-                    charac = charac.strip() + \
-                        random.choice(ZALG_LIST[1]).strip()
+                    charac = charac.strip() + random.choice(ZALG_LIST[1]).strip()
                 else:
-                    charac = charac.strip() + \
-                        random.choice(ZALG_LIST[2]).strip()
+                    charac = charac.strip() + random.choice(ZALG_LIST[2]).strip()
 
             reply_text.append(charac)
 
         await zgfy.edit("".join(reply_text))
-			  
+
+
 @register(outgoing=True, pattern="^.pkill$")
-async def killing (killed):
+async def killing(killed):
     """ Dont Kill Too much -_-"""
     if not killed.text[0].isalpha() and killed.text[0] not in ("/", "#", "@", "!"):
         if await killed.get_reply_message():
             await killed.edit(
                 "`My Master killed targeted user by Headshot 😈......`\n"
-		"#Sad_Reacts_Onli\n"
+                "#Sad_Reacts_Onli\n"
             )
-			  
+
+
 @register(outgoing=True, pattern="^.bt$")
 async def bluetext(bte):
     """ Believe me, you will find this useful. """
@@ -935,67 +940,78 @@ async def bluetext(bte):
                 "`BLUETEXT MUST CLICK.`\n"
                 "`Are you a stupid animal which is attracted to colours?`"
             )
-			  
+
+
 @register(outgoing=True, pattern="^.rape$")
-async def raping (raped):
+async def raping(raped):
     """ Dont Rape Too much -_-"""
     if not raped.text[0].isalpha() and raped.text[0] not in ("/", "#", "@", "!"):
         index = random.randint(0, len(RAPE_STRINGS) - 1)
         reply_text = RAPE_STRINGS[index]
         await raped.edit(reply_text)
-			  
+
+
 @register(outgoing=True, pattern="^.pro$")
-async def proo (pros):
+async def proo(pros):
     """ String for Pros only -_-"""
     if not pros.text[0].isalpha() and pros.text[0] not in ("/", "#", "@", "!"):
         index = random.randint(0, len(PRO_STRINGS) - 1)
         reply_text = PRO_STRINGS[index]
         await pros.edit(reply_text)
 
+
 @register(outgoing=True, pattern="^.fuk$")
-async def chutiya (fuks):
+async def chutiya(fuks):
     """ String for fhu only -_-"""
     if not fuks.text[0].isalpha() and fuks.text[0] not in ("/", "#", "@", "!"):
         index = random.randint(0, len(FUK_STRINGS) - 1)
         reply_text = FUK_STRINGS[index]
         await fuks.edit(reply_text)
 
+
 @register(outgoing=True, pattern="^.chu$")
-async def chutiya (chus):
+async def chutiya(chus):
     """ String for Chu only -_-"""
     if not chus.text[0].isalpha() and chus.text[0] not in ("/", "#", "@", "!"):
         index = random.randint(0, len(CHU_STRINGS) - 1)
         reply_text = CHU_STRINGS[index]
         await chus.edit(reply_text)
-			  			  
+
+
 @register(outgoing=True, pattern="^.thanos$")
-async def thanos (thanos):
+async def thanos(thanos):
     """ String for thanos only -_-"""
     if not thanos.text[0].isalpha() and thanos.text[0] not in ("/", "#", "@", "!"):
         index = random.randint(0, len(THANOS_STRINGS) - 1)
         reply_text = THANOS_STRINGS[index]
-        await thanos.edit(reply_text)	
-			  
+        await thanos.edit(reply_text)
+
+
 @register(outgoing=True, pattern="^.hardabuse$")
-async def fuckedd (abusehard):
+async def fuckedd(abusehard):
     """ Dont Use this Too much bsdk -_-"""
-    if not abusehard.text[0].isalpha() and abusehard.text[0] not in ("/", "#", "@", "!"):
+    if not abusehard.text[0].isalpha() and abusehard.text[0] not in (
+        "/",
+        "#",
+        "@",
+        "!",
+    ):
         index = random.randint(0, len(ABUSEHARD_STRING) - 1)
         reply_text = ABUSEHARD_STRING[index]
         await abusehard.edit(reply_text)
-			  
-			  
+
+
 @register(outgoing=True, pattern="^.gey$")
-async def geys (geyed):
+async def geys(geyed):
     """ Use only for gey ppl -_-"""
     if not geyed.text[0].isalpha() and geyed.text[0] not in ("/", "#", "@", "!"):
         index = random.randint(0, len(GEY_STRINGS) - 1)
         reply_text = GEY_STRINGS[index]
         await geyed.edit(reply_text)
-			  
-			  
+
+
 @register(outgoing=True, pattern="^.abuse$")
-async def abusing (abused):
+async def abusing(abused):
     """ Dont Abuse Too much bsdk -_-"""
     if not abused.text[0].isalpha() and abused.text[0] not in ("/", "#", "@", "!"):
         index = random.randint(0, len(ABUSE_STRINGS) - 1)
@@ -1041,20 +1057,20 @@ async def shrugger(shg):
         await shg.edit(random.choice(SHGS))
 
 
-
-
 @register(outgoing=True, pattern="^.noob$")
 async def metoo(hahayes):
     """ Haha yes """
     if not hahayes.text[0].isalpha() and hahayes.text[0] not in ("/", "#", "@", "!"):
         await hahayes.edit(random.choice(NOOBSTR))
-			  
+
+
 @register(outgoing=True, pattern="^.rendi$")
 async def metoo(hahayes):
     """ Haha yes """
     if not hahayes.text[0].isalpha() and hahayes.text[0] not in ("/", "#", "@", "!"):
         await hahayes.edit(random.choice(RENDISTR))
-			 			  
+
+
 @register(outgoing=True, pattern="^.oof$")
 async def Oof(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
@@ -1063,12 +1079,11 @@ async def Oof(e):
             t = t[:-1] + "of"
             await e.edit(t)
 
+
 @register(outgoing=True, pattern="^.10iq$")
 async def iqless(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("♿")
-
-
 
 
 @register(outgoing=True, pattern="^.mock(?: |$)(.*)")
@@ -1099,7 +1114,12 @@ async def spongemocktext(mock):
 @register(outgoing=True, pattern="^.clap(?: |$)(.*)")
 async def claptext(memereview):
     """ Praise people! """
-    if not memereview.text[0].isalpha() and memereview.text[0] not in ("/", "#", "@", "!"):
+    if not memereview.text[0].isalpha() and memereview.text[0] not in (
+        "/",
+        "#",
+        "@",
+        "!",
+    ):
         textx = await memereview.get_reply_message()
         message = memereview.pattern_match.group(1)
         if message:
@@ -1115,31 +1135,29 @@ async def claptext(memereview):
         await memereview.edit(reply_text)
 
 
-
-
 @register(outgoing=True, pattern="^.smk (.*)")
 async def smrk(smk):
-        if not smk.text[0].isalpha() and smk.text[0] not in ("/", "#", "@", "!"):
-            textx = await smk.get_reply_message()
-            message = smk.text
-        if message[5:]:
-            message = str(message[5:])
-        elif textx:
-            message = textx
-            message = str(message.message)
-        if message == 'dele':
-            await smk.edit( message +'te the hell' + "ツ" )
-            await smk.edit("ツ")
-        else:
-             smirk = " ツ"
-             reply_text = message + smirk
-             await smk.edit(reply_text)
+    if not smk.text[0].isalpha() and smk.text[0] not in ("/", "#", "@", "!"):
+        textx = await smk.get_reply_message()
+        message = smk.text
+    if message[5:]:
+        message = str(message[5:])
+    elif textx:
+        message = textx
+        message = str(message.message)
+    if message == "dele":
+        await smk.edit(message + "te the hell" + "ツ")
+        await smk.edit("ツ")
+    else:
+        smirk = " ツ"
+        reply_text = message + smirk
+        await smk.edit(reply_text)
 
 
-
-
-
-@register(outgoing=True, pattern="^.lfy (.*)",)
+@register(
+    outgoing=True,
+    pattern="^.lfy (.*)",
+)
 async def let_me_google_that_for_you(lmgtfy_q):
     if not lmgtfy_q.text[0].isalpha() and lmgtfy_q.text[0] not in ("/", "#", "@", "!"):
         textx = await lmgtfy_q.get_reply_message()
@@ -1151,8 +1169,8 @@ async def let_me_google_that_for_you(lmgtfy_q):
             query = query.message
         query_encoded = query.replace(" ", "+")
         lfy_url = f"http://lmgtfy.com/?s=g&iie=1&q={query_encoded}"
-        payload = {'format': 'json', 'url': lfy_url}
-        r = requests.get('http://is.gd/create.php', params=payload)
+        payload = {"format": "json", "url": lfy_url}
+        r = requests.get("http://is.gd/create.php", params=payload)
         await lmgtfy_q.edit(f"[{query}]({r.json()['shorturl']})")
         if BOTLOG:
             await bot.send_message(
@@ -1161,15 +1179,9 @@ async def let_me_google_that_for_you(lmgtfy_q):
             )
 
 
-
-               
-			  
-
-            
-			  
-
-CMD_HELP.update({
-    "memes": ".cowsay\
+CMD_HELP.update(
+    {
+        "memes": ".cowsay\
 \nUsage: cow which says things.\
 \n\n.milksay\
 \nUsage: Weird Milk that can speak\
@@ -1246,4 +1258,5 @@ CMD_HELP.update({
 \n\n.abuse\
 \nUsage: Protects you from unwanted peeps.\
 \n\n\nThanks to 🅱️ottom🅱️ext🅱️ot (@NotAMemeBot) for some of these."
-})
+    }
+)

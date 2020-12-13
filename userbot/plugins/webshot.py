@@ -2,21 +2,14 @@
 Syntax: .screencapture <Website URL>"""
 
 
-
 import io
 
 import requests
 
-from telethon import events
-
 from userbot.utils import admin_cmd
 
 
-
-
-
 @borg.on(admin_cmd("screencapture (.*)"))
-
 async def _(event):
 
     if event.fwd_from:
@@ -25,7 +18,9 @@ async def _(event):
 
     if Config.SCREEN_SHOT_LAYER_ACCESS_KEY is None:
 
-        await event.edit("Need to get an API key from https://screenshotlayer.com/product \nModule stopping!")
+        await event.edit(
+            "Need to get an API key from https://screenshotlayer.com/product \nModule stopping!"
+        )
 
         return
 
@@ -35,25 +30,15 @@ async def _(event):
 
     input_str = event.pattern_match.group(1)
 
-    response_api = requests.get(sample_url.format(
-
-        Config.SCREEN_SHOT_LAYER_ACCESS_KEY,
-
-        input_str,
-
-        "1",
-
-        "2560x1440",
-
-        "PNG",
-
-        "1"
-
-    ))
+    response_api = requests.get(
+        sample_url.format(
+            Config.SCREEN_SHOT_LAYER_ACCESS_KEY, input_str, "1", "2560x1440", "PNG", "1"
+        )
+    )
 
     # https://stackoverflow.com/a/23718458/4723940
 
-    contentType = response_api.headers['content-type']
+    contentType = response_api.headers["content-type"]
 
     if "image" in contentType:
 
@@ -64,17 +49,11 @@ async def _(event):
             try:
 
                 await borg.send_file(
-
                     event.chat_id,
-
                     screenshot_image,
-
                     caption=input_str,
-
                     force_document=True,
-
-                    reply_to=event.message.reply_to_msg_id
-
+                    reply_to=event.message.reply_to_msg_id,
                 )
 
                 await event.delete()

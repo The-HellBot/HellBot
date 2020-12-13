@@ -1,5 +1,5 @@
-from telethon import events
-import random, re
+import random
+
 from uniborg.util import admin_cmd
 
 METOOSTR = [
@@ -24,36 +24,36 @@ RUNSREACTS = [
     "`I Fugged off!`",
 ]
 RAPE_STRINGS = [
-     "`Rape Done Drink The Cum`",
-     "`The user has been successfully raped`",
-     "`Dekho Bhaiyya esa hai! Izzat bachailo apni warna Gaand maar lenge tumhari`",
-     "`Relax your Rear, ders nothing to fear,The Rape train is finally here`",
-     "`Rape coming... Raped! haha 😆`",
-     "`Lodu Andha hai kya Yaha tera rape ho raha hai aur tu abhi tak yahi gaand mara raha hai lulz`",
-] 
+    "`Rape Done Drink The Cum`",
+    "`The user has been successfully raped`",
+    "`Dekho Bhaiyya esa hai! Izzat bachailo apni warna Gaand maar lenge tumhari`",
+    "`Relax your Rear, ders nothing to fear,The Rape train is finally here`",
+    "`Rape coming... Raped! haha 😆`",
+    "`Lodu Andha hai kya Yaha tera rape ho raha hai aur tu abhi tak yahi gaand mara raha hai lulz`",
+]
 ABUSE_STRINGS = [
-       "`Madharchod`",
-	   "`Gaandu`",
-	   "`Chutiya he rah jaye ga`",
-	   "`Ja be Gaandu`",
-	   "`Ma ka Bhodsa madharchod`",
-	   "`mml`",
-	   "`You MotherFukcer`",
-	   "`Muh Me Lega Bhosdike ?`"
+    "`Madharchod`",
+    "`Gaandu`",
+    "`Chutiya he rah jaye ga`",
+    "`Ja be Gaandu`",
+    "`Ma ka Bhodsa madharchod`",
+    "`mml`",
+    "`You MotherFukcer`",
+    "`Muh Me Lega Bhosdike ?`",
 ]
 GEY_STRINGS = [
-     "`you gey bsdk`",
-     "`you gey`",
-     "`you gey in the house`",
-     "`you chakka`",
-     "`you gey gey gey gey gey gey gey gey`",
-     "`you gey go away`",
+    "`you gey bsdk`",
+    "`you gey`",
+    "`you gey in the house`",
+    "`you chakka`",
+    "`you gey gey gey gey gey gey gey gey`",
+    "`you gey go away`",
 ]
 PRO_STRINGS = [
-     "`This gey is pro as phack.`",
-     "`Pros here -_- Time to Leave`",
+    "`This gey is pro as phack.`",
+    "`Pros here -_- Time to Leave`",
 ]
-INSULT_STRINGS = [ 
+INSULT_STRINGS = [
     "`Owww ... Such a stupid idiot.`",
     "`Don't drink and type.`",
     "`Command not found. Just like your brain.`",
@@ -85,14 +85,14 @@ INSULT_STRINGS = [
     "`If you’re talking behind my back then you’re in a perfect position to kiss my a**!.`",
 ]
 # ===========================================
-                          
+
 
 @borg.on(admin_cmd(pattern="run ?(.*)"))
 async def _(event):
     if event.fwd_from:
-         return
-    bro = random.randint(0, len(RUNSREACTS) - 1)    
-    input_str = event.pattern_match.group(1)
+        return
+    bro = random.randint(0, len(RUNSREACTS) - 1)
+    event.pattern_match.group(1)
     reply_text = RUNSREACTS[bro]
     await event.edit(reply_text)
 
@@ -100,9 +100,9 @@ async def _(event):
 @borg.on(admin_cmd(pattern="metoo ?(.*)"))
 async def _(event):
     if event.fwd_from:
-         return
-    bro = random.randint(0, len(METOOSTR) - 1)    
-    input_str = event.pattern_match.group(1)
+        return
+    bro = random.randint(0, len(METOOSTR) - 1)
+    event.pattern_match.group(1)
     reply_text = METOOSTR[bro]
     await event.edit(reply_text)
 
@@ -110,48 +110,48 @@ async def _(event):
 @borg.on(admin_cmd(pattern="rapee ?(.*)"))
 async def _(event):
     if event.fwd_from:
-         return
-    bro = random.randint(0, len(RAPE_STRINGS) - 1)    
-    input_str = event.pattern_match.group(1)
+        return
+    bro = random.randint(0, len(RAPE_STRINGS) - 1)
+    event.pattern_match.group(1)
     reply_text = RAPE_STRINGS[bro]
     await event.edit(reply_text)
-			  
-                          
+
+
 @borg.on(admin_cmd(pattern="insultt ?(.*)"))
 async def _(event):
     if event.fwd_from:
-         return
-    bro = random.randint(0, len(INSULT_STRINGS) - 1)    
-    input_str = event.pattern_match.group(1)
+        return
+    bro = random.randint(0, len(INSULT_STRINGS) - 1)
+    event.pattern_match.group(1)
     reply_text = INSULT_STRINGS[bro]
     await event.edit(reply_text)
-			  
-			  
+
+
 @borg.on(admin_cmd(pattern="proo ?(.*)"))
 async def _(event):
     if event.fwd_from:
-         return
-    bro = random.randint(0, len(PRO_STRINGS) - 1)    
-    input_str = event.pattern_match.group(1)
+        return
+    bro = random.randint(0, len(PRO_STRINGS) - 1)
+    event.pattern_match.group(1)
     reply_text = PRO_STRINGS[bro]
     await event.edit(reply_text)
-			  
-			  
+
+
 @borg.on(admin_cmd(pattern="abusee ?(.*)"))
 async def _(event):
     if event.fwd_from:
-         return
-    bro = random.randint(0, len(ABUSE_STRINGS) - 1)    
-    input_str = event.pattern_match.group(1)
+        return
+    bro = random.randint(0, len(ABUSE_STRINGS) - 1)
+    event.pattern_match.group(1)
     reply_text = ABUSE_STRINGS[bro]
     await event.edit(reply_text)
-			  
-			  
+
+
 @borg.on(admin_cmd(pattern="geyy ?(.*)"))
 async def _(event):
     if event.fwd_from:
-         return
-    bro = random.randint(0, len(GEY_STRINGS) - 1)    
-    input_str = event.pattern_match.group(1)
+        return
+    bro = random.randint(0, len(GEY_STRINGS) - 1)
+    event.pattern_match.group(1)
     reply_text = GEY_STRINGS[bro]
-    await event.edit(reply_text) 
+    await event.edit(reply_text)

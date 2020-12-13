@@ -6,20 +6,14 @@ import asyncio
 import os
 import time
 import time as t
-from datetime import datetime
-import subprocess
-from pySmartDL import SmartDL
-from telethon import events
-from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
-from userbot.utils import admin_cmd, humanbytes, progress, time_formatter
-from hachoir.metadata import extractMetadata
-from hachoir.parser import createParser
-from telethon import events
 import zipfile
+from datetime import datetime
 
+from userbot.utils import admin_cmd
 
 extracted = Config.TMP_DOWNLOAD_DIRECTORY + "extracted/"
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
+
 
 @borg.on(admin_cmd("zip"))
 async def _(event):
@@ -42,7 +36,9 @@ async def _(event):
             await event.edit(downloaded_file_name)
         except Exception as e:  # pylint:disable=C0103,W0703
             await mone.edit(str(e))
-    zipfile.ZipFile(directory_name + '.zip', 'w', zipfile.ZIP_DEFLATED).write(directory_name)
+    zipfile.ZipFile(directory_name + ".zip", "w", zipfile.ZIP_DEFLATED).write(
+        directory_name
+    )
     await borg.send_file(
         event.chat_id,
         directory_name + ".zip",
@@ -74,7 +70,7 @@ async def _(event):
         start = datetime.now()
         reply_message = await event.get_reply_message()
         try:
-            c_time = t.time()
+            t.time()
             downloaded_file_name = await bot.download_media(
                 reply_message,
                 Config.TMP_DOWNLOAD_DIRECTORY,
@@ -84,12 +80,14 @@ async def _(event):
         else:
             end = datetime.now()
             ms = (end - start).seconds
-            await mone.edit("Stored the zip to `{}` in {} seconds.".format(downloaded_file_name, ms))
+            await mone.edit(
+                "Stored the zip to `{}` in {} seconds.".format(downloaded_file_name, ms)
+            )
 
-        with zipfile.ZipFile(downloaded_file_name, 'r') as zip_ref:
+        with zipfile.ZipFile(downloaded_file_name, "r") as zip_ref:
             zip_ref.extractall(extracted)
         filename = sorted(get_lst_of_files(extracted, []))
-        #filename = filename + "/"
+        # filename = filename + "/"
         await event.edit("Unzipping now")
         # r=root, d=directories, f = files
         for single_file in filename:
@@ -117,13 +115,14 @@ async def _(event):
                     await bot.send_message(
                         event.chat_id,
                         "{} caused `{}`".format(caption_rts, str(e)),
-                        reply_to=event.message.id
+                        reply_to=event.message.id,
                     )
                     # some media were having some issues
                     continue
                 os.remove(single_file)
         os.remove(downloaded_file_name)
-        
+
+
 def get_lst_of_files(input_directory, output_lst):
     filesinfolder = os.listdir(input_directory)
     for file_name in filesinfolder:

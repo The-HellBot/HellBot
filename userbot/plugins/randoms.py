@@ -1,4 +1,3 @@
-
 """
 inspired from @Deonnn @Mayur_Karaniya
 Quotes credits: Being Biblical Channel : @BeingBiblical
@@ -13,8 +12,8 @@ merged by @kraken_the_badass
 import random
 from asyncio import sleep
 
-from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 from userbot import CMD_HELP
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 @bot.on(admin_cmd(pattern=r"sing$", outgoing=True))

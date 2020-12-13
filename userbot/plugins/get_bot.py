@@ -1,7 +1,7 @@
 """ Get the Bots in any chat*
 Syntax: .get_bot"""
-from telethon import events
 from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantsBots
+
 from userbot.utils import admin_cmd
 
 
@@ -25,9 +25,13 @@ async def _(event):
     try:
         async for x in borg.iter_participants(chat, filter=ChannelParticipantsBots):
             if isinstance(x.participant, ChannelParticipantAdmin):
-                mentions += "\n ⚜️ [{}](tg://user?id={}) `{}`".format(x.first_name, x.id, x.id)
+                mentions += "\n ⚜️ [{}](tg://user?id={}) `{}`".format(
+                    x.first_name, x.id, x.id
+                )
             else:
-                mentions += "\n [{}](tg://user?id={}) `{}`".format(x.first_name, x.id, x.id)
+                mentions += "\n [{}](tg://user?id={}) `{}`".format(
+                    x.first_name, x.id, x.id
+                )
     except Exception as e:
         mentions += " " + str(e) + "\n"
     await event.edit(mentions)

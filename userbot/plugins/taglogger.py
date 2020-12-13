@@ -1,4 +1,4 @@
-from telethon import custom, events, Button
+from telethon import custom, events
 from telethon.tl.types import Channel
 from telethon.utils import get_display_name
 

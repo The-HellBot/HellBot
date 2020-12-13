@@ -4,22 +4,23 @@ accroding to ur spotify songs u listening
 \n.disp (to disable and back to default name)
 \nPorted by @NeoMatrix90 , @kirito6969 (both are same person)"""
 import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
+
+logging.basicConfig(
+    format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=logging.WARNING
+)
 from asyncio import sleep
 from json import loads
 from json.decoder import JSONDecodeError
 from os import environ
 from sys import setrecursionlimit
-from userbot.utils import admin_cmd
-from requests import get
-from telethon import events
-from telethon.tl import functions, types
-from telethon.tl.functions.account import UpdateProfileRequest
-
 
 import spotify_token as st
+from requests import get
+from telethon import events
+from telethon.tl.functions.account import UpdateProfileRequest
+
 from userbot.uniborgConfig import Config
+from userbot.utils import admin_cmd
 
 # =================== CONSTANT ===================
 SPO_BIO_ENABLED = "```Spotify Current Music to Name enabled.```"
@@ -42,6 +43,7 @@ OLDEXCEPT = False
 PARSE = False
 # ================================================
 
+
 async def get_spotify_token():
     sptoken = st.start_session(USERNAME, PASSWORD)
     access_token = sptoken[0]
@@ -61,12 +63,12 @@ async def update_spotify_info():
         try:
             RUNNING = True
             spftoken = environ.get("spftoken", None)
-            hed = {'Authorization': 'Bearer ' + spftoken}
-            url = 'https://api.spotify.com/v1/me/player/currently-playing'
+            hed = {"Authorization": "Bearer " + spftoken}
+            url = "https://api.spotify.com/v1/me/player/currently-playing"
             response = get(url, headers=hed)
             data = loads(response.content)
-            artist = data['item']['album']['artists'][0]['name']
-            song = data['item']['name']
+            artist = data["item"]["album"]["artists"][0]["name"]
+            song = data["item"]["name"]
             OLDEXCEPT = False
             oldsong = environ.get("oldsong", None)
             if song != oldsong and artist != oldartist:
@@ -84,9 +86,7 @@ async def update_spotify_info():
                 await borg(UpdateProfileRequest(first_name=Config.DEFAULT_NAME))
                 print(ERROR_MSG)
                 if Config.LOGGER:
-                    await borg.send_message(
-                        Config.PM_LOGGR_BOT_API_ID,
-                        ERROR_MSG)
+                    await borg.send_message(Config.PM_LOGGR_BOT_API_ID, ERROR_MSG)
         except JSONDecodeError:
             OLDEXCEPT = True
             await sleep(6)
@@ -114,7 +114,6 @@ async def dirtyfix():
     await update_spotify_info()
 
 
-
 @borg.on(admin_cmd(pattern=f"ensp", allow_sudo=True))
 @borg.on(events.NewMessage(pattern=r"\.ensp ?(.*)", outgoing=True))
 async def set_biostgraph(setstbio):
@@ -126,7 +125,6 @@ async def set_biostgraph(setstbio):
         await dirtyfix()
     else:
         await setstbio.edit(SPO_BIO_RUNNING)
-
 
 
 @borg.on(admin_cmd(pattern=f"disp", allow_sudo=True))

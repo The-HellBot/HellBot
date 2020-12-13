@@ -3,17 +3,15 @@ forked by: @kraken_the_badass
 created by: @A_Dark_Princ3
 """
 
-from PIL import Image, ImageFont, ImageDraw
+import os
+import textwrap
 
-import textwrap, os
+from PIL import Image, ImageDraw, ImageFont
+
 from userbot.utils import admin_cmd
 
 
-
-
-
 @borg.on(admin_cmd(pattern=r"mmf ?(.*)"))
-
 async def handler(event):
 
     if event.fwd_from:
@@ -55,15 +53,11 @@ async def handler(event):
     await a.delete()
 
 
-
-
 async def drawText(image_path, text):
 
     img = Image.open(image_path)
 
     os.remove(image_path)
-
-    shadowcolor = "black"
 
     i_width, i_height = img.size
 
@@ -85,7 +79,7 @@ async def drawText(image_path, text):
 
         upper_text = text
 
-        lower_text = ''
+        lower_text = ""
 
     draw = ImageDraw.Draw(img)
 
@@ -97,27 +91,40 @@ async def drawText(image_path, text):
 
             u_width, u_height = draw.textsize(u_text, font=m_font)
 
-            draw.text(xy=(((i_width - u_width) / 2) - 2, int((current_h / 640)*i_width)),
+            draw.text(
+                xy=(((i_width - u_width) / 2) - 2, int((current_h / 640) * i_width)),
+                text=u_text,
+                font=m_font,
+                fill=(0, 0, 0),
+            )
 
-                      text=u_text, font=m_font, fill=(0, 0, 0))
+            draw.text(
+                xy=(((i_width - u_width) / 2) + 2, int((current_h / 640) * i_width)),
+                text=u_text,
+                font=m_font,
+                fill=(0, 0, 0),
+            )
 
-            draw.text(xy=(((i_width - u_width) / 2) + 2, int((current_h / 640)*i_width)),
+            draw.text(
+                xy=((i_width - u_width) / 2, int(((current_h / 640) * i_width)) - 2),
+                text=u_text,
+                font=m_font,
+                fill=(0, 0, 0),
+            )
 
-                      text=u_text, font=m_font, fill=(0, 0, 0))
+            draw.text(
+                xy=(((i_width - u_width) / 2), int(((current_h / 640) * i_width)) + 2),
+                text=u_text,
+                font=m_font,
+                fill=(0, 0, 0),
+            )
 
-            draw.text(xy=((i_width - u_width) / 2, int(((current_h / 640)*i_width)) - 2),
-
-                      text=u_text, font=m_font, fill=(0, 0, 0))
-
-            draw.text(xy=(((i_width - u_width) / 2), int(((current_h / 640)*i_width)) + 2),
-
-                      text=u_text, font=m_font, fill=(0, 0, 0))
-
-
-
-            draw.text(xy=((i_width - u_width) / 2, int((current_h / 640)*i_width)),
-
-                      text=u_text, font=m_font, fill=(255, 255, 255))
+            draw.text(
+                xy=((i_width - u_width) / 2, int((current_h / 640) * i_width)),
+                text=u_text,
+                font=m_font,
+                fill=(255, 255, 255),
+            )
 
             current_h += u_height + pad
 
@@ -128,46 +135,54 @@ async def drawText(image_path, text):
             u_width, u_height = draw.textsize(l_text, font=m_font)
 
             draw.text(
-
-                xy=(((i_width - u_width) / 2) - 2, i_height -
-
-                    u_height - int((20 / 640)*i_width)),
-
-                text=l_text, font=m_font, fill=(0, 0, 0))
-
-            draw.text(
-
-                xy=(((i_width - u_width) / 2) + 2, i_height -
-
-                    u_height - int((20 / 640)*i_width)),
-
-                text=l_text, font=m_font, fill=(0, 0, 0))
+                xy=(
+                    ((i_width - u_width) / 2) - 2,
+                    i_height - u_height - int((20 / 640) * i_width),
+                ),
+                text=l_text,
+                font=m_font,
+                fill=(0, 0, 0),
+            )
 
             draw.text(
-
-                xy=((i_width - u_width) / 2, (i_height -
-
-                                              u_height - int((20 / 640)*i_width)) - 2),
-
-                text=l_text, font=m_font, fill=(0, 0, 0))
-
-            draw.text(
-
-                xy=((i_width - u_width) / 2, (i_height -
-
-                                              u_height - int((20 / 640)*i_width)) + 2),
-
-                text=l_text, font=m_font, fill=(0, 0, 0))
-
-
+                xy=(
+                    ((i_width - u_width) / 2) + 2,
+                    i_height - u_height - int((20 / 640) * i_width),
+                ),
+                text=l_text,
+                font=m_font,
+                fill=(0, 0, 0),
+            )
 
             draw.text(
+                xy=(
+                    (i_width - u_width) / 2,
+                    (i_height - u_height - int((20 / 640) * i_width)) - 2,
+                ),
+                text=l_text,
+                font=m_font,
+                fill=(0, 0, 0),
+            )
 
-                xy=((i_width - u_width) / 2, i_height -
+            draw.text(
+                xy=(
+                    (i_width - u_width) / 2,
+                    (i_height - u_height - int((20 / 640) * i_width)) + 2,
+                ),
+                text=l_text,
+                font=m_font,
+                fill=(0, 0, 0),
+            )
 
-                    u_height - int((20 / 640)*i_width)),
-
-                text=l_text, font=m_font, fill=(255, 255, 255))
+            draw.text(
+                xy=(
+                    (i_width - u_width) / 2,
+                    i_height - u_height - int((20 / 640) * i_width),
+                ),
+                text=l_text,
+                font=m_font,
+                fill=(255, 255, 255),
+            )
 
             current_h += u_height + pad
 

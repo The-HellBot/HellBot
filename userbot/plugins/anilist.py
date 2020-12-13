@@ -4,15 +4,17 @@
 	By :- @Zero_cool7870	
 """
 
-import requests 
-import re
 import json
-import asyncio
+import re
+
+import requests
+
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
+
 async def callAPI(search_str):
-    query = '''
+    query = """
     query ($id: Int,$search: String) { 
       Media (id: $id, type: ANIME,search: $search) { 
         id
@@ -37,14 +39,13 @@ async def callAPI(search_str):
           bannerImage
       }
     }
-    '''
-    variables = {
-        'search' : search_str
-    }
-    url = 'https://graphql.anilist.co'
-    response = requests.post(url, json={'query': query, 'variables': variables})
+    """
+    variables = {"search": search_str}
+    url = "https://graphql.anilist.co"
+    response = requests.post(url, json={"query": query, "variables": variables})
     return response.text
-    
+
+
 async def formatJSON(outData):
     msg = ""
     jsonData = json.loads(outData)
@@ -53,28 +54,29 @@ async def formatJSON(outData):
         msg += f"**Error** : `{jsonData['errors'][0]['message']}`"
         return msg
     else:
-        jsonData = jsonData['data']['Media']
+        jsonData = jsonData["data"]["Media"]
         if "bannerImage" in jsonData.keys():
             msg += f"[〽️]({jsonData['bannerImage']})"
-        else :
+        else:
             msg += "〽️"
-        title = jsonData['title']['romaji']
+        title = jsonData["title"]["romaji"]
         link = f"https://anilist.co/anime/{jsonData['id']}"
         msg += f"[{title}]({link})"
         msg += f"\n\n**Type** : {jsonData['format']}"
         msg += f"\n**Genres** : "
-        for g in jsonData['genres']:
-            msg += g+" "
+        for g in jsonData["genres"]:
+            msg += g + " "
         msg += f"\n**Status** : {jsonData['status']}"
         msg += f"\n**Episode** : {jsonData['episodes']}"
         msg += f"\n**Year** : {jsonData['startDate']['year']}"
         msg += f"\n**Score** : {jsonData['averageScore']}"
         msg += f"\n**Duration** : {jsonData['duration']} min\n\n"
-        #https://t.me/catuserbot_support/19496
+        # https://t.me/catuserbot_support/19496
         cat = f"{jsonData['description']}"
-        msg += " __" + re.sub("<br>", '\n', cat) +"__"
+        msg += " __" + re.sub("<br>", "\n", cat) + "__"
         return msg
-        
+
+
 @bot.on(admin_cmd(pattern="anilist (.*)"))
 @bot.on(sudo_cmd(pattern="anilist (.*)", allow_sudo=True))
 async def anilist(event):
@@ -86,8 +88,10 @@ async def anilist(event):
     msg = await formatJSON(result)
     await event.edit(msg, link_preview=True)
 
-CMD_HELP.update({
-    "anilist":
-    ".anilist <anime name >\
+
+CMD_HELP.update(
+    {
+        "anilist": ".anilist <anime name >\
      \nUSAGE: Shows you the details of the anime."
-})
+    }
+)

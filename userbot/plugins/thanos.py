@@ -4,8 +4,9 @@ Available Commands:
 .emoji apple
 .emoji :/
 .emoji -_-"""
-from telethon import events
 import asyncio
+
+from telethon import events
 
 
 @borg.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
@@ -21,7 +22,7 @@ async def _(event):
             "JINGLE BELLS",
             "THANOS SMELL LOKI NECKED SNAPPED AWAY",
             "PETER DIED TONY CRIED NOBODY SAVED THE DAY HEY!!",
-            "Jingle bells Thanos smells Loki's necked snapped away Peter died Tony cried And nobody saved the day"
+            "Jingle bells Thanos smells Loki's necked snapped away Peter died Tony cried And nobody saved the day",
         ]
         for i in animation_ttl:
             await asyncio.sleep(animation_interval)

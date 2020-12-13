@@ -3,20 +3,16 @@ coded by @By_Azade
 code rewritten my SnapDragon7410
 """
 
-import asyncio
 import os
 import time
 import zipfile
-
-from telethon import events
-from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
-from userbot.utils import admin_cmd, humanbytes, progress, time_formatter
-import time
 from datetime import datetime
-from pySmartDL import SmartDL
+
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
-from zipfile import ZipFile
+from telethon.tl.types import DocumentAttributeVideo
+
+from userbot.utils import admin_cmd
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 extracted = Config.TMP_DOWNLOAD_DIRECTORY + "extracted/"
@@ -35,23 +31,24 @@ async def _(event):
         start = datetime.now()
         reply_message = await event.get_reply_message()
         try:
-            c_time = time.time()
+            time.time()
             downloaded_file_name = await borg.download_media(
                 reply_message,
                 Config.TMP_DOWNLOAD_DIRECTORY,
-                
             )
         except Exception as e:  # pylint:disable=C0103,W0703
             await mone.edit(str(e))
         else:
             end = datetime.now()
             ms = (end - start).seconds
-            await mone.edit("Stored the zip to `{}` in {} seconds.".format(downloaded_file_name, ms))
+            await mone.edit(
+                "Stored the zip to `{}` in {} seconds.".format(downloaded_file_name, ms)
+            )
 
-        with zipfile.ZipFile(downloaded_file_name, 'r') as zip_ref:
+        with zipfile.ZipFile(downloaded_file_name, "r") as zip_ref:
             zip_ref.extractall(extracted)
         filename = sorted(get_lst_of_files(extracted, []))
-        #filename = filename + "/"
+        # filename = filename + "/"
         await event.edit("Unzipping now")
         # r=root, d=directories, f = files
         for single_file in filename:
@@ -67,7 +64,7 @@ async def _(event):
                     width = 0
                     height = 0
                     if metadata.has("duration"):
-                        duration = metadata.get('duration').seconds
+                        duration = metadata.get("duration").seconds
                     if os.path.exists(thumb_image_path):
                         metadata = extractMetadata(createParser(thumb_image_path))
                         if metadata.has("width"):
@@ -80,7 +77,7 @@ async def _(event):
                             w=width,
                             h=height,
                             round_message=False,
-                            supports_streaming=True
+                            supports_streaming=True,
                         )
                     ]
                 try:
@@ -101,17 +98,12 @@ async def _(event):
                     await borg.send_message(
                         event.chat_id,
                         "{} caused `{}`".format(caption_rts, str(e)),
-                        reply_to=event.message.id
+                        reply_to=event.message.id,
                     )
                     # some media were having some issues
                     continue
                 os.remove(single_file)
         os.remove(downloaded_file_name)
-
-
-
-
-
 
 
 def get_lst_of_files(input_directory, output_lst):

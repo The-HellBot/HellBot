@@ -2,16 +2,16 @@
 Syntax:
 .verystream"""
 
-import aiohttp
-import aiofiles
 import asyncio
 import hashlib
 import json
-import magic
 import os
-import requests
 import time
 from datetime import datetime
+
+import aiohttp
+import magic
+import requests
 from uniborg.util import admin_cmd, progress
 
 
@@ -21,7 +21,9 @@ async def _(event):
         return
     mone = await event.reply("Processing ...")
     if Config.VERY_STREAM_LOGIN is None or Config.VERY_STREAM_KEY is None:
-        await mone.edit("This module requires API key from https://verystream.com. Aborting!")
+        await mone.edit(
+            "This module requires API key from https://verystream.com. Aborting!"
+        )
         return False
     input_str = event.pattern_match.group(1)
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
@@ -37,7 +39,7 @@ async def _(event):
                 Config.TMP_DOWNLOAD_DIRECTORY,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                     progress(d, t, mone, c_time, "trying to download")
-                )
+                ),
             )
         except Exception as e:  # pylint:disable=C0103,W0703
             await mone.edit(str(e))
@@ -46,7 +48,9 @@ async def _(event):
             end = datetime.now()
             ms = (end - start).seconds
             required_file_name = downloaded_file_name
-            await mone.edit("Downloaded to `{}` in {} seconds.".format(downloaded_file_name, ms))
+            await mone.edit(
+                "Downloaded to `{}` in {} seconds.".format(downloaded_file_name, ms)
+            )
     elif input_str:
         input_str = input_str.strip()
         if os.path.exists(input_str):
@@ -64,7 +68,7 @@ async def _(event):
         if "." in file_name:
             file_name = file_name.rsplit(".", maxsplit=1)[0]
         file_name = file_name + str(time.time())
-        file_size = os.stat(required_file_name).st_size
+        os.stat(required_file_name).st_size
         # https://stackoverflow.com/a/22058673/4723940
         sha_one_file_hash = get_sha_one_hash(required_file_name, 65536)
         # /* STEP 1: get upload_key */
@@ -94,11 +98,15 @@ async def _(event):
                     step_two_response_text = resp.json()
                     # logger.info(step_two_response_text)
                     if step_two_response_text["status"] == 200:
-                        output_str = json.dumps(step_two_response_text["result"], sort_keys=True, indent=4)
+                        output_str = json.dumps(
+                            step_two_response_text["result"], sort_keys=True, indent=4
+                        )
                         stream_url = step_two_response_text["result"]["url"]
                         end = datetime.now()
                         ms = (end - start).seconds
-                        await mone.edit(f"Obtained {stream_url} in {ms} seconds.\n{output_str}")
+                        await mone.edit(
+                            f"Obtained {stream_url} in {ms} seconds.\n{output_str}"
+                        )
                         # cleanup
                         await event.delete()
                         try:
@@ -106,11 +114,17 @@ async def _(event):
                         except:
                             pass
                     else:
-                        await mone.edit(f"VeryStream returned {step_two_response_text['status']} => {step_two_response_text['msg']}, after STEP ONE")
+                        await mone.edit(
+                            f"VeryStream returned {step_two_response_text['status']} => {step_two_response_text['msg']}, after STEP ONE"
+                        )
                 else:
-                    await mone.edit(f"VeryStream returned {step_one_response_text['status']} => {step_one_response_text['msg']}, after STEP ONE")
+                    await mone.edit(
+                        f"VeryStream returned {step_one_response_text['status']} => {step_one_response_text['msg']}, after STEP ONE"
+                    )
             else:
-                await mone.edit(f"VeryStream returned {step_zero_response_text['status']} => {step_zero_response_text['msg']}, after STEP INIT")
+                await mone.edit(
+                    f"VeryStream returned {step_zero_response_text['status']} => {step_zero_response_text['msg']}, after STEP INIT"
+                )
     else:
         await mone.edit("File Not found in local server. Give me a file path :((")
 

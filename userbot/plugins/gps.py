@@ -1,16 +1,14 @@
-
-
 """
 Syntax : .gps <location name>
 """
 # Made by @mrconfused
 # help from @sunda005 and @SpEcHIDe
-# don't edit credits 
+# don't edit credits
 
 from geopy.geocoders import Nominatim
-from userbot.utils import admin_cmd
 from telethon.tl import types
 
+from userbot.utils import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="gps ?(.*)"))
@@ -34,12 +32,7 @@ async def gps(event):
         lon = geoloc.longitude
         lat = geoloc.latitude
         await reply_to_id.reply(
-            input_str,
-            file=types.InputMediaGeoPoint(
-                types.InputGeoPoint(
-                    lat, lon
-                )
-            )
+            input_str, file=types.InputMediaGeoPoint(types.InputGeoPoint(lat, lon))
         )
         await event.delete()
     else:

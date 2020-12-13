@@ -1,7 +1,7 @@
 """Get Detailed info about any message
 Syntax: .json"""
-from telethon import events
 import io
+
 from userbot.utils import admin_cmd
 
 
@@ -26,7 +26,7 @@ async def _(event):
                 out_file,
                 force_document=True,
                 allow_cache=False,
-                reply_to=reply_to_id
+                reply_to=reply_to_id,
             )
             await event.delete()
     else:

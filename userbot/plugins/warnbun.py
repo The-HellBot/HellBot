@@ -1,7 +1,6 @@
 """.admin Plugin for @UniBorg"""
-import asyncio
-from telethon import events
 from telethon.tl.types import ChannelParticipantsAdmins
+
 from userbot.utils import admin_cmd
 
 
@@ -9,7 +8,9 @@ from userbot.utils import admin_cmd
 async def _(event):
     if event.fwd_from:
         return
-    mentions = "`You Have  1/3  warnings...\nWatch out!....\nReason for warn: Not given`"
+    mentions = (
+        "`You Have  1/3  warnings...\nWatch out!....\nReason for warn: Not given`"
+    )
     chat = await event.get_input_chat()
     async for x in borg.iter_participants(chat, filter=ChannelParticipantsAdmins):
         mentions += f""
@@ -21,9 +22,8 @@ async def _(event):
         await event.reply(mentions)
     await event.delete()
 
+
 """.admin Plugin for @UniBorg"""
-import asyncio
-from telethon import events
 from telethon.tl.types import ChannelParticipantsAdmins
 from uniborg.util import admin_cmd
 
@@ -32,7 +32,9 @@ from uniborg.util import admin_cmd
 async def _(event):
     if event.fwd_from:
         return
-    mentions = "`You Have  2/3  warnings...\nWatch out!....\nReason for last warn: Not given`"
+    mentions = (
+        "`You Have  2/3  warnings...\nWatch out!....\nReason for last warn: Not given`"
+    )
     chat = await event.get_input_chat()
     async for x in borg.iter_participants(chat, filter=ChannelParticipantsAdmins):
         mentions += f""
@@ -44,9 +46,8 @@ async def _(event):
         await event.reply(mentions)
     await event.delete()
 
+
 """.admin Plugin for @UniBorg"""
-import asyncio
-from telethon import events
 from telethon.tl.types import ChannelParticipantsAdmins
 from uniborg.util import admin_cmd
 
@@ -67,9 +68,8 @@ async def _(event):
         await event.reply(mentions)
     await event.delete()
 
+
 """.admin Plugin for @UniBorg"""
-import asyncio
-from telethon import events
 from telethon.tl.types import ChannelParticipantsAdmins
 from uniborg.util import admin_cmd
 
@@ -90,12 +90,10 @@ async def _(event):
         await event.reply(mentions)
     await event.delete()
 
+
 """.admin Plugin for @UniBorg"""
-import asyncio
-from telethon import events
 from telethon.tl.types import ChannelParticipantsAdmins
 from uniborg.util import admin_cmd
-
 
 
 @borg.on(admin_cmd("ocb"))
@@ -113,6 +111,7 @@ async def _(event):
     else:
         await event.reply(mentions)
     await event.delete()
+
 
 @borg.on(admin_cmd("fw"))
 async def _(event):

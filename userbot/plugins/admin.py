@@ -29,9 +29,9 @@ from telethon.tl.types import (
     MessageMediaPhoto,
 )
 
-from userbot.utils import admin_cmd, edit_or_reply, errors_handler, sudo_cmd
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, LOGS
 from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
+from userbot.utils import admin_cmd, edit_or_reply, errors_handler, sudo_cmd
 
 # =================== CONSTANT ===================
 
@@ -218,9 +218,7 @@ async def ban(bon):
         if reply:
             await reply.delete()
     except BadRequestError:
-        await hellevent.edit(
-            "`I ain't got msg deleting right. But still Banned!`"
-        )
+        await hellevent.edit("`I ain't got msg deleting right. But still Banned!`")
         return
     if reason:
         await hellevent.edit(f"`{str(user.id)}` is banned !!\nReason: {reason}")
@@ -284,9 +282,7 @@ async def startmute(event):
         replied_user = await event.client(GetFullUserRequest(userid))
         chat_id = event.chat_id
         if is_muted(userid, chat_id):
-            return await event.edit(
-                "This user is already muted🤣🤣🤣"
-            )
+            return await event.edit("This user is already muted🤣🤣🤣")
         try:
             mute(userid, chat_id)
         except Exception as e:
@@ -421,9 +417,7 @@ async def endmute(event):
                     )
         except Exception as e:
             return await edit_or_reply(event, f"**Error : **`{str(e)}`")
-        await edit_or_reply(
-            event, "Abb bol gendu\n乁( ◔ ౪◔)「    ┑(￣Д ￣)┍"
-        )
+        await edit_or_reply(event, "Abb bol gendu\n乁( ◔ ౪◔)「    ┑(￣Д ￣)┍")
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,

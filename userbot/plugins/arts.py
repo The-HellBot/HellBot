@@ -1,7 +1,5 @@
-
-
+from userbot import ALIVE_NAME, CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
-from userbot import CMD_HELP, ALIVE_NAME
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
@@ -574,7 +572,6 @@ async def bluedevilshitos(shitos):
 @bot.on(sudo_cmd(pattern="dislike$", allow_sudo=True))
 async def bluedevildislike(dislike):
     await edit_or_reply(dislike, T)
-
 
 
 CMD_HELP.update(

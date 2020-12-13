@@ -1,9 +1,9 @@
 import asyncio
-import calendar
 import json
 import os
 from datetime import datetime
 from urllib.parse import quote
+
 import barcode
 import qrcode
 import requests
@@ -12,8 +12,9 @@ from bs4 import BeautifulSoup
 from PIL import Image, ImageColor
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+
 from userbot import CMD_HELP
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 @bot.on(admin_cmd(pattern="scan ?(.*)"))
@@ -187,11 +188,12 @@ async def make_qr(makeqr):
     await makeqr.delete()
 
 
-from telethon import events
 import asyncio
-from datetime import datetime
-import requests
 import json
+from datetime import datetime
+
+import requests
+from telethon import events
 from uniborg.util import admin_cmd
 
 
@@ -207,7 +209,9 @@ async def _(event):
         yyyy = input_sgra[0]
         mm = input_sgra[1]
         dd = input_sgra[2]
-        required_url = "https://calendar.kollavarsham.org/api/years/{}/months/{}/days/{}?lang={}".format(yyyy, mm, dd, "en")
+        required_url = "https://calendar.kollavarsham.org/api/years/{}/months/{}/days/{}?lang={}".format(
+            yyyy, mm, dd, "en"
+        )
         headers = {"Accept": "application/json"}
         response_content = requests.get(required_url, headers=headers).json()
         a = ""
@@ -220,7 +224,8 @@ async def _(event):
     else:
         await event.edit("SYNTAX: .calendar YYYY.MM.DD")
     end = datetime.now()
-    ms = (end - start).seconds
+    (end - start).seconds
+
 
 @bot.on(admin_cmd(pattern="currency (.*)"))
 @bot.on(sudo_cmd(pattern="currency (.*)", allow_sudo=True))

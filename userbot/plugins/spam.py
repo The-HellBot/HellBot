@@ -5,10 +5,9 @@
 #
 
 import asyncio
-from asyncio import wait
-
 
 from userbot.events import register
+
 
 @register(outgoing=True, pattern="^.tspam")
 async def tmeme(e):
@@ -17,6 +16,7 @@ async def tmeme(e):
     for letter in message:
         await e.respond(letter)
     await e.delete()
+
 
 @register(outgoing=True, pattern="^.spam")
 async def spammer(e):
@@ -28,11 +28,10 @@ async def spammer(e):
         await e.delete()
         if LOGGER:
             await e.client.send_message(
-                LOGGER_GROUP,
-                "#SPAM \n\n"
-                "Spam was executed successfully"
-                )
-                               
+                LOGGER_GROUP, "#SPAM \n\n" "Spam was executed successfully"
+            )
+
+
 @register(outgoing=True, pattern="^.bigspam")
 async def bigspam(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
@@ -44,12 +43,10 @@ async def bigspam(e):
         await e.delete()
         if LOGGER:
             await e.client.send_message(
-                LOGGER_GROUP,
-                "#BIGSPAM \n\n"
-                "Bigspam was executed successfully"
-                )
-        
-        
+                LOGGER_GROUP, "#BIGSPAM \n\n" "Bigspam was executed successfully"
+            )
+
+
 @register(outgoing=True, pattern="^.picspam")
 async def tiny_pic_spam(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
@@ -62,59 +59,66 @@ async def tiny_pic_spam(e):
         await e.delete()
         if LOGGER:
             await e.client.send_message(
-                LOGGER_GROUP,
-                "#PICSPAM \n\n"
-                "PicSpam was executed successfully"
-                )
+                LOGGER_GROUP, "#PICSPAM \n\n" "PicSpam was executed successfully"
+            )
+
+
 @register(outgoing=True, pattern="^.delayspam (.*)")
 async def spammer(e):
-    spamDelay = float(e.pattern_match.group(1).split(' ', 2)[0])
-    counter = int(e.pattern_match.group(1).split(' ', 2)[1])
-    spam_message = str(e.pattern_match.group(1).split(' ', 2)[2])
+    spamDelay = float(e.pattern_match.group(1).split(" ", 2)[0])
+    counter = int(e.pattern_match.group(1).split(" ", 2)[1])
+    spam_message = str(e.pattern_match.group(1).split(" ", 2)[2])
     await e.delete()
     for i in range(1, counter):
         await e.respond(spam_message)
         await sleep(spamDelay)
     if LOGGER:
         await e.client.send_message(
-            LOGGER_GROUP, "#DelaySPAM\n"
-            "DelaySpam was executed successfully")
-        
-            
-@register(outgoing=True, pattern="^.mspam (.*)")
+            LOGGER_GROUP, "#DelaySPAM\n" "DelaySpam was executed successfully"
+        )
 
+
+@register(outgoing=True, pattern="^.mspam (.*)")
 async def tiny_pic_spam(e):
 
-  sender = await e.get_sender() ; me = await e.client.get_me()
+    sender = await e.get_sender()
+    me = await e.client.get_me()
 
-  if not sender.id == me.id and not FULL_SUDO:
+    if not sender.id == me.id and not FULL_SUDO:
 
-       return await e.reply("`Sorry sudo users cant access this command..`")
+        return await e.reply("`Sorry sudo users cant access this command..`")
 
-  try:
+    try:
 
-       await e.delete()
+        await e.delete()
 
-  except:
+    except:
 
-    	pass
-    
-  try:
+        pass
 
-    counter = int(e.pattern_match.group(1).split(' ', 1)[0])
+    try:
 
-    reply_message = await e.get_reply_message() 
+        counter = int(e.pattern_match.group(1).split(" ", 1)[0])
 
-    if not reply_message or not e.reply_to_msg_id or not reply_message.media or not reply_message.media:
+        reply_message = await e.get_reply_message()
 
-       return await e.edit("```Reply to a pic/sticker/gif/video message```")
+        if (
+            not reply_message
+            or not e.reply_to_msg_id
+            or not reply_message.media
+            or not reply_message.media
+        ):
 
-    message = reply_message.media
+            return await e.edit("```Reply to a pic/sticker/gif/video message```")
 
-    for i in range(1, counter):
+        message = reply_message.media
 
-        await e.client.send_file(e.chat_id, message)
+        for i in range(1, counter):
 
-  except:      
+            await e.client.send_file(e.chat_id, message)
 
-        return await e.reply(f"**Error**\nUsage `!mspam <count> reply to a sticker/gif/photo/video`")
+    except:
+
+        return await e.reply(
+            f"**Error**\nUsage `!mspam <count> reply to a sticker/gif/photo/video`"
+        )

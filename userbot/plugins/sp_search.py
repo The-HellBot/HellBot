@@ -5,30 +5,29 @@ By: @Zero_cool7870
 
 """
 
-import os
-import asyncio
 import json
-from uniborg.util import admin_cmd
+import os
 
+from uniborg.util import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="sch ?(.*)", allow_sudo=True))
 async def sp_search(event):
-	search_str = event.pattern_match.group(1)
+    search_str = event.pattern_match.group(1)
 
-	await event.edit("**Searching for "+search_str+" ...**")
+    await event.edit("**Searching for " + search_str + " ...**")
 
-	command = "sp --json "+search_str+" > out.json"
+    command = "sp --json " + search_str + " > out.json"
 
-	os.system(command)
+    os.system(command)
 
-	f = open('out.json','r').read()
+    f = open("out.json", "r").read()
 
-	data = json.loads(str(f))
+    data = json.loads(str(f))
 
-	msg = "**Search Query** \n`"+search_str+"`\n**Results**\n"
+    msg = "**Search Query** \n`" + search_str + "`\n**Results**\n"
 
-	for element in data:
-		msg = msg + "⁍ ["+element['title']+"]("+element['link']+")\n\n"
+    for element in data:
+        msg = msg + "⁍ [" + element["title"] + "](" + element["link"] + ")\n\n"
 
-	await event.edit(msg)	
+    await event.edit(msg)

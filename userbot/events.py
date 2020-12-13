@@ -15,40 +15,40 @@ from traceback import format_exc
 
 from telethon import events
 
-from userbot import bot, BOTLOG_CHATID, LOGSPAMMER
+from userbot import BOTLOG_CHATID, LOGSPAMMER, bot
 
 
 def register(**args):
     """ Register a new event. """
-    pattern = args.get('pattern', None)
-    disable_edited = args.get('disable_edited', False)
-    ignore_unsafe = args.get('ignore_unsafe', False)
-    unsafe_pattern = r'^[^/!#@\$A-Za-z]'
-    groups_only = args.get('groups_only', False)
-    trigger_on_fwd = args.get('trigger_on_fwd', False)
-    disable_errors = args.get('disable_errors', False)
+    pattern = args.get("pattern", None)
+    disable_edited = args.get("disable_edited", False)
+    ignore_unsafe = args.get("ignore_unsafe", False)
+    unsafe_pattern = r"^[^/!#@\$A-Za-z]"
+    groups_only = args.get("groups_only", False)
+    trigger_on_fwd = args.get("trigger_on_fwd", False)
+    disable_errors = args.get("disable_errors", False)
 
-    if pattern is not None and not pattern.startswith('(?i)'):
-        args['pattern'] = '(?i)' + pattern
+    if pattern is not None and not pattern.startswith("(?i)"):
+        args["pattern"] = "(?i)" + pattern
 
     if "disable_edited" in args:
-        del args['disable_edited']
+        del args["disable_edited"]
 
     if "ignore_unsafe" in args:
-        del args['ignore_unsafe']
+        del args["ignore_unsafe"]
 
     if "groups_only" in args:
-        del args['groups_only']
+        del args["groups_only"]
 
     if "disable_errors" in args:
-        del args['disable_errors']
+        del args["disable_errors"]
 
     if "trigger_on_fwd" in args:
-        del args['trigger_on_fwd']
+        del args["trigger_on_fwd"]
 
     if pattern:
         if not ignore_unsafe:
-            args['pattern'] = pattern.replace('^.', unsafe_pattern, 1)
+            args["pattern"] = pattern.replace("^.", unsafe_pattern, 1)
 
     def decorator(func):
         async def wrapper(check):
@@ -110,16 +110,15 @@ def register(**args):
                     ftext += str(sys.exc_info()[1])
                     ftext += "\n\n--------END USERBOT TRACEBACK LOG--------"
 
-                    command = "git log --pretty=format:\"%an: %s\" -10"
+                    command = 'git log --pretty=format:"%an: %s" -10'
 
                     ftext += "\n\n\nLast 10 commits:\n"
 
-                    process = await asyncsubshell(command,
-                                                  stdout=asyncsub.PIPE,
-                                                  stderr=asyncsub.PIPE)
+                    process = await asyncsubshell(
+                        command, stdout=asyncsub.PIPE, stderr=asyncsub.PIPE
+                    )
                     stdout, stderr = await process.communicate()
-                    result = str(stdout.decode().strip()) \
-                        + str(stderr.decode().strip())
+                    result = str(stdout.decode().strip()) + str(stderr.decode().strip())
 
                     ftext += result
 
@@ -133,9 +132,7 @@ def register(**args):
                         \nThe error logs are stored in the userbot's log chat.`"
                         )
 
-                    await check.client.send_file(send_to,
-                                                 "error.log",
-                                                 caption=text)
+                    await check.client.send_file(send_to, "error.log", caption=text)
                     remove("error.log")
             else:
                 pass

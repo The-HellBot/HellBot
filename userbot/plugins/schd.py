@@ -1,7 +1,7 @@
 """Schedule Plugin for @UniBorg
 Syntax: .schd <time_in_seconds> ;=; <message to send>"""
-from telethon import events
 import asyncio
+
 from userbot.utils import admin_cmd
 
 

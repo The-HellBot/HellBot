@@ -4,15 +4,10 @@
 Userbot module to help you manage a group
 """
 
-from asyncio import sleep
-from os import remove
-from telethon.errors import BadRequestError, UserAdminInvalidError
-from telethon.errors.rpcerrorlist import UserIdInvalidError
+from telethon.tl.types import MessageEntityMentionName
+
 from userbot.utils import admin_cmd
-from telethon.tl.types import (PeerChannel, ChannelParticipantsAdmins,
-                               ChatAdminRights, ChatBannedRights,
-                               MessageEntityMentionName,
-                               ChannelParticipantsBots)
+
 
 @borg.on(admin_cmd(pattern="link(?: |$)(.*)"))
 async def permalink(mention):
@@ -23,14 +18,15 @@ async def permalink(mention):
     if custom:
         await mention.edit(f"[{custom}](tg://user?id={user.id})")
     else:
-        tag = user.first_name.replace("\u2060",
-                                      "") if user.first_name else user.username
+        tag = (
+            user.first_name.replace("\u2060", "") if user.first_name else user.username
+        )
         await mention.edit(f"[{tag}](tg://user?id={user.id})")
 
 
 async def get_user_from_event(event):
     """ Get the user from argument or replied message. """
-    args = event.pattern_match.group(1).split(':', 1)
+    args = event.pattern_match.group(1).split(":", 1)
     extra = None
     if event.reply_to_msg_id and not len(args) == 2:
         previous_message = await event.get_reply_message()
@@ -48,11 +44,10 @@ async def get_user_from_event(event):
             await event.edit("`Pass the user's username, id or reply!`")
             return
 
-        if event.message.entities :
+        if event.message.entities:
             probable_user_mention_entity = event.message.entities[0]
 
-            if isinstance(probable_user_mention_entity,
-                          MessageEntityMentionName):
+            if isinstance(probable_user_mention_entity, MessageEntityMentionName):
                 user_id = probable_user_mention_entity.user_id
                 user_obj = await event.client.get_entity(user_id)
                 return user_obj

@@ -1,37 +1,24 @@
 # Making it easy....
 # thanks to @ranger_op for idea
-# codes by @mrconfused 
+# codes by @mrconfused
 # catuserbot
 
-import shlex
 import os
-from os import getcwd
-from os.path import basename, join
-from textwrap import wrap
-from typing import Optional, Tuple
 
 try:
-    from colour import Color as asciiColor
+    pass
 except:
     os.system("pip install colour")
-from PIL import Image, ImageDraw, ImageFont
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-from wand.color import Color
-from wand.drawing import Drawing
-from wand.image import Image as hellimage
+import asyncio
 import re
 import time
-import urllib.request
-import zipfile
-from random import choice
-import asyncio
+
 import PIL.ImageOps
 import requests
-from telethon.tl.types import Channel, PollAnswer
-from validators.url import url
 from bs4 import BeautifulSoup
-from asyncio import sleep
-from emoji import get_emoji_regexp
+from PIL import Image
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+from validators.url import url
 
 MARGINS = [50, 150, 250, 350, 450]
 
@@ -42,8 +29,7 @@ MARGINS = [50, 150, 250, 350, 450]
 
 async def take_screen_shot(video_file, output_directory, ttl):
     # https://stackoverflow.com/a/13891070/4723940
-    out_put_file_name = output_directory + \
-        "/" + str(time.time()) + ".jpg"
+    out_put_file_name = output_directory + "/" + str(time.time()) + ".jpg"
     file_genertor_command = [
         "ffmpeg",
         "-ss",
@@ -52,7 +38,7 @@ async def take_screen_shot(video_file, output_directory, ttl):
         video_file,
         "-vframes",
         "1",
-        out_put_file_name
+        out_put_file_name,
     ]
     # width = "90"
     process = await asyncio.create_subprocess_exec(
@@ -72,12 +58,13 @@ async def take_screen_shot(video_file, output_directory, ttl):
         logger.info(t_response)
         return None
 
+
 # https://github.com/Nekmo/telegram-upload/blob/master/telegram_upload/video.py#L26
+
 
 async def cult_small_video(video_file, output_directory, start_time, end_time):
     # https://stackoverflow.com/a/13891070/4723940
-    out_put_file_name = output_directory + \
-        "/" + str(round(time.time())) + ".mp4"
+    out_put_file_name = output_directory + "/" + str(round(time.time())) + ".mp4"
     file_genertor_command = [
         "ffmpeg",
         "-i",
@@ -90,7 +77,7 @@ async def cult_small_video(video_file, output_directory, start_time, end_time):
         "1",
         "-strict",
         "-2",
-        out_put_file_name
+        out_put_file_name,
     ]
     process = await asyncio.create_subprocess_exec(
         *file_genertor_command,
@@ -108,6 +95,7 @@ async def cult_small_video(video_file, output_directory, start_time, end_time):
         logger.info(e_response)
         logger.info(t_response)
         return None
+
 
 async def make_gif(event, file):
     chat = "@tgstogifbot"
@@ -139,19 +127,29 @@ async def thumb_from_audio(audio_path, output):
     await runcmd(f"ffmpeg -i {audio_path} -filter:v scale=500:500 -an {output}")
 
 
-async def simpmusic(simp , QUALITY):
-  search = simp
-  headers = {'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'}
-  html = requests.get('https://www.youtube.com/results?search_query='+search, headers=headers).text
-  soup = BeautifulSoup(html, 'html.parser')
-  for link in soup.find_all('a'):
-    if '/watch?v=' in link.get('href'):
-        # May change when Youtube Website may get updated in the future.
-        video_link = link.get('href') 
-        break
-  video_link =  'http://www.youtube.com/'+video_link
-  command = ('youtube-dl --extract-audio --audio-format mp3 --audio-quality ' + QUALITY + ' ' + video_link)	
-  os.system(command)
+async def simpmusic(simp, QUALITY):
+    search = simp
+    headers = {
+        "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+    }
+    html = requests.get(
+        "https://www.youtube.com/results?search_query=" + search, headers=headers
+    ).text
+    soup = BeautifulSoup(html, "html.parser")
+    for link in soup.find_all("a"):
+        if "/watch?v=" in link.get("href"):
+            # May change when Youtube Website may get updated in the future.
+            video_link = link.get("href")
+            break
+    video_link = "http://www.youtube.com/" + video_link
+    command = (
+        "youtube-dl --extract-audio --audio-format mp3 --audio-quality "
+        + QUALITY
+        + " "
+        + video_link
+    )
+    os.system(command)
+
 
 song_dl = "youtube-dl --force-ipv4 --write-thumbnail -o './temp/%(title)s.%(ext)s' --extract-audio --audio-format mp3 --audio-quality {QUALITY} {video_link}"
 thumb_dl = "youtube-dl --force-ipv4 -o './temp/%(title)s.%(ext)s' --write-thumbnail --skip-download {video_link}"
@@ -160,21 +158,28 @@ name_dl = (
     "youtube-dl --force-ipv4 --get-filename -o './temp/%(title)s.%(ext)s' {video_link}"
 )
 
+
 async def simpmusicvideo(simp):
     search = simp
-    headers = {'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'}
-    html = requests.get('https://www.youtube.com/results?search_query='+search, headers=headers).text
-    soup = BeautifulSoup(html, 'html.parser')
-    for link in soup.find_all('a'):
-        if '/watch?v=' in link.get('href'):
+    headers = {
+        "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+    }
+    html = requests.get(
+        "https://www.youtube.com/results?search_query=" + search, headers=headers
+    ).text
+    soup = BeautifulSoup(html, "html.parser")
+    for link in soup.find_all("a"):
+        if "/watch?v=" in link.get("href"):
             # May change when Youtube Website may get updated in the future.
-            video_link = link.get('href') 
-            break    
-    video_link =  'http://www.youtube.com/'+video_link
-    command = ('youtube-dl -f "[filesize<20M]" ' +video_link)  
+            video_link = link.get("href")
+            break
+    video_link = "http://www.youtube.com/" + video_link
+    command = 'youtube-dl -f "[filesize<20M]" ' + video_link
     os.system(command)
 
-#convertion..
+
+# convertion..
+
 
 def convert_toimage(image):
     img = Image.open(image)
@@ -192,7 +197,8 @@ async def convert_tosticker(image):
     img.save("./temp/temp.webp", "webp")
     os.remove(image)
     return "./temp/temp.webp"
-    
+
+
 async def invert_colors(imagefile, endname):
     image = Image.open(imagefile)
     inverted_image = PIL.ImageOps.invert(image)
@@ -221,12 +227,12 @@ async def solarize(imagefile, endname):
     image = Image.open(imagefile)
     inverted_image = PIL.ImageOps.solarize(image, threshold=128)
     inverted_image.save(endname)
-    
-    
-#pranks....
-#source - https://nekobot.xyz/api
 
-    
+
+# pranks....
+# source - https://nekobot.xyz/api
+
+
 async def iphonex(text):
     r = requests.get(f"https://nekobot.xyz/api/imagegen?type=iphonex&url={text}").json()
     kraken = r.get("message")
@@ -253,8 +259,8 @@ async def baguette(text):
     img = Image.open("temp.png").convert("RGB")
     img.save("temp.jpg", "jpeg")
     return "temp.jpg"
-    
-    
+
+
 async def threats(text):
     r = requests.get(f"https://nekobot.xyz/api/imagegen?type=threats&url={text}").json()
     kraken = r.get("message")
@@ -348,143 +354,165 @@ async def phcomment(text1, text2, text3):
     img.save("temp.jpg", "jpeg")
     return "temp.jpg"
 
-#tweets...
-#source - https://nekobot.xyz/api
+
+# tweets...
+# source - https://nekobot.xyz/api
+
 
 async def trumptweet(text):
-        r = requests.get(
-            f"https://nekobot.xyz/api/imagegen?type=trumptweet&text={text}").json()
-        wew = r.get("message")
-        hburl = url(wew)
-        if not hburl:
-            return  "check syntax once more"
-        with open("temp.png", "wb") as f:
-            f.write(requests.get(wew).content)
-        img = Image.open("temp.png").convert("RGB")
-        img.save("temp.jpg", "jpeg")    
-        return "temp.jpg"
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=trumptweet&text={text}"
+    ).json()
+    wew = r.get("message")
+    hburl = url(wew)
+    if not hburl:
+        return "check syntax once more"
+    with open("temp.png", "wb") as f:
+        f.write(requests.get(wew).content)
+    img = Image.open("temp.png").convert("RGB")
+    img.save("temp.jpg", "jpeg")
+    return "temp.jpg"
+
 
 async def changemymind(text):
-        r = requests.get(
-            f"https://nekobot.xyz/api/imagegen?type=changemymind&text={text}").json()
-        wew = r.get("message")
-        hburl = url(wew)
-        if not hburl:
-            return  "check syntax once more"
-        with open("temp.png", "wb") as f:
-            f.write(requests.get(wew).content)
-        img = Image.open("temp.png").convert("RGB")
-        img.save("temp.jpg", "jpeg")    
-        return "temp.jpg"
-    
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=changemymind&text={text}"
+    ).json()
+    wew = r.get("message")
+    hburl = url(wew)
+    if not hburl:
+        return "check syntax once more"
+    with open("temp.png", "wb") as f:
+        f.write(requests.get(wew).content)
+    img = Image.open("temp.png").convert("RGB")
+    img.save("temp.jpg", "jpeg")
+    return "temp.jpg"
+
+
 async def kannagen(text):
-        r = requests.get(
-            f"https://nekobot.xyz/api/imagegen?type=kannagen&text={text}").json()
-        wew = r.get("message")
-        hburl = url(wew)
-        if not hburl:
-            return  "check syntax once more"
-        with open("temp.png", "wb") as f:
-            f.write(requests.get(wew).content)
-        img = Image.open("temp.png").convert("RGB")
-        img.save("temp.webp", "webp")    
-        return "temp.webp"    
-    
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=kannagen&text={text}"
+    ).json()
+    wew = r.get("message")
+    hburl = url(wew)
+    if not hburl:
+        return "check syntax once more"
+    with open("temp.png", "wb") as f:
+        f.write(requests.get(wew).content)
+    img = Image.open("temp.png").convert("RGB")
+    img.save("temp.webp", "webp")
+    return "temp.webp"
+
+
 async def moditweet(text):
-        r = requests.get(
-            f"https://nekobot.xyz/api/imagegen?type=tweet&text={text}&username=narendramodi").json()
-        wew = r.get("message")
-        hburl = url(wew)
-        if not hburl:
-            return  "check syntax once more"
-        with open("temp.png", "wb") as f:
-            f.write(requests.get(wew).content)
-        img = Image.open("temp.png").convert("RGB")
-        img.save("temp.jpg", "jpeg")    
-        return "temp.jpg"    
-        
-        
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=tweet&text={text}&username=narendramodi"
+    ).json()
+    wew = r.get("message")
+    hburl = url(wew)
+    if not hburl:
+        return "check syntax once more"
+    with open("temp.png", "wb") as f:
+        f.write(requests.get(wew).content)
+    img = Image.open("temp.png").convert("RGB")
+    img.save("temp.jpg", "jpeg")
+    return "temp.jpg"
+
+
 async def miatweet(text):
-        r = requests.get(
-            f"https://nekobot.xyz/api/imagegen?type=tweet&text={text}&username=miakhalifa").json()
-        wew = r.get("message")
-        hburl = url(wew)
-        if not hburl:
-            return  "check syntax once more"
-        with open("temp.png", "wb") as f:
-            f.write(requests.get(wew).content)
-        img = Image.open("temp.png").convert("RGB")
-        img.save("temp.jpg", "jpeg")    
-        return "temp.jpg"    
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=tweet&text={text}&username=miakhalifa"
+    ).json()
+    wew = r.get("message")
+    hburl = url(wew)
+    if not hburl:
+        return "check syntax once more"
+    with open("temp.png", "wb") as f:
+        f.write(requests.get(wew).content)
+    img = Image.open("temp.png").convert("RGB")
+    img.save("temp.jpg", "jpeg")
+    return "temp.jpg"
 
 
 async def papputweet(text):
-        r = requests.get(
-            f"https://nekobot.xyz/api/imagegen?type=tweet&text={text}&username=rahulgandhi").json()
-        wew = r.get("message")
-        hburl = url(wew)
-        if not hburl:
-            return  "check syntax once more"
-        with open("temp.png", "wb") as f:
-            f.write(requests.get(wew).content)
-        img = Image.open("temp.png").convert("RGB")
-        img.save("temp.jpg", "jpeg")    
-        return "temp.jpg"
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=tweet&text={text}&username=rahulgandhi"
+    ).json()
+    wew = r.get("message")
+    hburl = url(wew)
+    if not hburl:
+        return "check syntax once more"
+    with open("temp.png", "wb") as f:
+        f.write(requests.get(wew).content)
+    img = Image.open("temp.png").convert("RGB")
+    img.save("temp.jpg", "jpeg")
+    return "temp.jpg"
+
 
 async def sunnytweet(text):
-        r = requests.get(
-            f"https://nekobot.xyz/api/imagegen?type=tweet&text={text}&username=sunnyleone").json()
-        wew = r.get("message")
-        hburl = url(wew)
-        if not hburl:
-            return  "check syntax once more"
-        with open("temp.png", "wb") as f:
-            f.write(requests.get(wew).content)
-        img = Image.open("temp.png").convert("RGB")
-        img.save("temp.jpg", "jpeg")    
-        return "temp.jpg"    
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=tweet&text={text}&username=sunnyleone"
+    ).json()
+    wew = r.get("message")
+    hburl = url(wew)
+    if not hburl:
+        return "check syntax once more"
+    with open("temp.png", "wb") as f:
+        f.write(requests.get(wew).content)
+    img = Image.open("temp.png").convert("RGB")
+    img.save("temp.jpg", "jpeg")
+    return "temp.jpg"
+
 
 async def sinstweet(text):
-        r = requests.get(
-            f"https://nekobot.xyz/api/imagegen?type=tweet&text={text}&username=johnnysins").json()
-        wew = r.get("message")
-        hburl = url(wew)
-        if not hburl:
-            return  "check syntax once more"
-        with open("temp.png", "wb") as f:
-            f.write(requests.get(wew).content)
-        img = Image.open("temp.png").convert("RGB")
-        img.save("temp.jpg", "jpeg")    
-        return "temp.jpg" 
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=tweet&text={text}&username=johnnysins"
+    ).json()
+    wew = r.get("message")
+    hburl = url(wew)
+    if not hburl:
+        return "check syntax once more"
+    with open("temp.png", "wb") as f:
+        f.write(requests.get(wew).content)
+    img = Image.open("temp.png").convert("RGB")
+    img.save("temp.jpg", "jpeg")
+    return "temp.jpg"
 
-async def taklatweet(text): 
-        r = requests.get(
-            f"https://nekobot.xyz/api/imagegen?type=tweet&text={text}&username=Mahatma_Gandhi_").json()
-        wew = r.get("message")
-        hburl = url(wew)
-        if not hburl:
-            return  "check syntax once more"
-        with open("temp.png", "wb") as f:
-            f.write(requests.get(wew).content)
-        img = Image.open("temp.png").convert("RGB")
-        img.save("temp.jpg", "jpeg")    
-        return "temp.jpg"    
-    # no offense pliz -_-
 
-async def tweets(text1,text2):
-        r = requests.get(
-            f"https://nekobot.xyz/api/imagegen?type=tweet&text={text1}&username={text2}").json()
-        wew = r.get("message")
-        hburl = url(wew)
-        if not hburl:
-            return  "check syntax once more"
-        with open("temp.png", "wb") as f:
-            f.write(requests.get(wew).content)
-        img = Image.open("temp.png").convert("RGB")
-        img.save("temp.jpg", "jpeg")    
-        return "temp.jpg"    
+async def taklatweet(text):
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=tweet&text={text}&username=Mahatma_Gandhi_"
+    ).json()
+    wew = r.get("message")
+    hburl = url(wew)
+    if not hburl:
+        return "check syntax once more"
+    with open("temp.png", "wb") as f:
+        f.write(requests.get(wew).content)
+    img = Image.open("temp.png").convert("RGB")
+    img.save("temp.jpg", "jpeg")
+    return "temp.jpg"
 
-#sticker text
+
+# no offense pliz -_-
+
+
+async def tweets(text1, text2):
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=tweet&text={text1}&username={text2}"
+    ).json()
+    wew = r.get("message")
+    hburl = url(wew)
+    if not hburl:
+        return "check syntax once more"
+    with open("temp.png", "wb") as f:
+        f.write(requests.get(wew).content)
+    img = Image.open("temp.png").convert("RGB")
+    img.save("temp.jpg", "jpeg")
+    return "temp.jpg"
+
+
+# sticker text
 
 EMOJI_PATTERN = re.compile(
     "["

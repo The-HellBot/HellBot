@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 # (c) @INF1N17Y
 
-from telethon import events
 import random
-import asyncio
+
+from telethon import events
+
 
 @borg.on(events.NewMessage(pattern=r"\.react (.*)", outgoing=True))
 async def _(event):
@@ -90,7 +91,7 @@ async def _(event):
             "-ᄒᴥᄒ-",
             "◖⚆ᴥ⚆◗",
         ]
-    else:    
+    else:
         emoticons = [
             "( ͡° ͜ʖ ͡°)",
             "¯\_(ツ)_/¯",

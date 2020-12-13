@@ -1,9 +1,11 @@
-#Ported to @HellBot_Official
-#Made by @Kraken_The_BadASS
-#ISKO BHI LELE MADARCHOD. KHUD APNI MAA CHUDWATE REHTE HO.....
+# Ported to @HellBot_Official
+# Made by @Kraken_The_BadASS
+# ISKO BHI LELE MADARCHOD. KHUD APNI MAA CHUDWATE REHTE HO.....
 
 import asyncio
+
 from userbot.utils import admin_cmd
+
 
 @borg.on(admin_cmd(pattern="hnd (.*)"))
 async def _(event):

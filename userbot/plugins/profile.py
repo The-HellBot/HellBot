@@ -5,20 +5,16 @@
 #
 
 import os
-from telethon import events
+
+from telethon.errors.rpcerrorlist import UsernameOccupiedError
 from telethon.tl import functions
-from userbot.utils import admin_cmd
-from telethon.errors import ImageProcessFailedError, PhotoCropSizeSmallError
-from telethon.errors.rpcerrorlist import (PhotoExtInvalidError,
-                                          UsernameOccupiedError)
-from telethon.tl.functions.account import (UpdateProfileRequest,
-                                           UpdateUsernameRequest)
+from telethon.tl.functions.account import UpdateUsernameRequest
 from telethon.tl.functions.channels import GetAdminedPublicChannelsRequest
-from telethon.tl.functions.photos import (DeletePhotosRequest,
-                                          GetUserPhotosRequest,
-                                          UploadProfilePhotoRequest)
-from telethon.tl.types import InputPhoto, MessageMediaPhoto, User, Chat, Channel
-from userbot import bot, CMD_HELP
+from telethon.tl.functions.photos import DeletePhotosRequest, GetUserPhotosRequest
+from telethon.tl.types import Channel, Chat, InputPhoto, User
+
+from userbot import CMD_HELP, bot
+from userbot.utils import admin_cmd
 
 # ====================== CONSTANT ===============================
 INVALID_MEDIA = "```The extension of the media entity is invalid.```"
@@ -38,9 +34,9 @@ async def _(event):
         return
     bio = event.pattern_match.group(1)
     try:
-        await borg(functions.account.UpdateProfileRequest(  # pylint:disable=E0602
-            about=bio
-        ))
+        await borg(
+            functions.account.UpdateProfileRequest(about=bio)  # pylint:disable=E0602
+        )
         await event.edit("Succesfully changed my profile bio")
     except Exception as e:  # pylint:disable=C0103,W0703
         await event.edit(str(e))
@@ -53,13 +49,14 @@ async def _(event):
     names = event.pattern_match.group(1)
     first_name = names
     last_name = ""
-    if  "|" in names:
+    if "|" in names:
         first_name, last_name = names.split("|", 1)
     try:
-        await borg(functions.account.UpdateProfileRequest(  # pylint:disable=E0602
-            first_name=first_name,
-            last_name=last_name
-        ))
+        await borg(
+            functions.account.UpdateProfileRequest(  # pylint:disable=E0602
+                first_name=first_name, last_name=last_name
+            )
+        )
         await event.edit("My name was changed successfully")
     except Exception as e:  # pylint:disable=C0103,W0703
         await event.edit(str(e))
@@ -76,8 +73,7 @@ async def _(event):
     photo = None
     try:
         photo = await borg.download_media(  # pylint:disable=E0602
-            reply_message,
-            Config.TMP_DOWNLOAD_DIRECTORY  # pylint:disable=E0602
+            reply_message, Config.TMP_DOWNLOAD_DIRECTORY  # pylint:disable=E0602
         )
     except Exception as e:  # pylint:disable=C0103,W0703
         await event.edit(str(e))
@@ -86,9 +82,11 @@ async def _(event):
             await event.edit("now, Uploading to @Telegram ...")
             file = await borg.upload_file(photo)  # pylint:disable=E0602
             try:
-                await borg(functions.photos.UploadProfilePhotoRequest(  # pylint:disable=E0602
-                    file
-                ))
+                await borg(
+                    functions.photos.UploadProfilePhotoRequest(  # pylint:disable=E0602
+                        file
+                    )
+                )
             except Exception as e:  # pylint:disable=C0103,W0703
                 await event.edit(str(e))
             else:
@@ -151,7 +149,7 @@ async def count(event):
 async def remove_profilepic(delpfp):
     """ For .delpfp command, delete your current profile picture in Telegram. """
     group = delpfp.text[8:]
-    if group == 'all':
+    if group == "all":
         lim = 0
     elif group.isdigit():
         lim = int(group)
@@ -159,19 +157,20 @@ async def remove_profilepic(delpfp):
         lim = 1
 
     pfplist = await delpfp.client(
-        GetUserPhotosRequest(user_id=delpfp.from_id,
-                             offset=0,
-                             max_id=0,
-                             limit=lim))
+        GetUserPhotosRequest(user_id=delpfp.from_id, offset=0, max_id=0, limit=lim)
+    )
     input_photos = []
     for sep in pfplist.photos:
         input_photos.append(
-            InputPhoto(id=sep.id,
-                       access_hash=sep.access_hash,
-                       file_reference=sep.file_reference))
+            InputPhoto(
+                id=sep.id,
+                access_hash=sep.access_hash,
+                file_reference=sep.file_reference,
+            )
+        )
     await delpfp.client(DeletePhotosRequest(id=input_photos))
-    await delpfp.edit(
-        f"`Successfully deleted {len(input_photos)} profile picture(s).`")
+    await delpfp.edit(f"`Successfully deleted {len(input_photos)} profile picture(s).`")
+
 
 @borg.on(admin_cmd(pattern="myusernames$"))
 async def _(event):
@@ -182,10 +181,11 @@ async def _(event):
     for channel_obj in result.chats:
         output_str += f"- {channel_obj.title} @{channel_obj.username} \n"
     await event.edit(output_str)
-    
-CMD_HELP.update({
-    "profile":
-    ".username <new_username>\
+
+
+CMD_HELP.update(
+    {
+        "profile": ".username <new_username>\
 \nUsage: Changes your Telegram username.\
 \n\n.pname <firstname> or .pname <firstname> <lastname>\
 \nUsage: Changes your Telegram name.(First and last name will get split by the first space)\
@@ -199,4 +199,5 @@ CMD_HELP.update({
 \nUsage: Shows usernames reserved by you.that is created by you channels or groups\
 \n\n.count\
 \nUsage: Counts your groups, chats, bots etc..."
-})
+    }
+)

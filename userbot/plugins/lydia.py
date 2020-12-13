@@ -1,6 +1,7 @@
+import asyncio
+
 import coffeehouse
 from coffeehouse.lydia import LydiaAI
-import asyncio
 from telethon import events
 
 # Non-SQL Mode
@@ -11,6 +12,7 @@ if Var.LYDIA_API_KEY:
     api_key = Var.LYDIA_API_KEY
     api_client = coffeehouse.API(api_key)
     Lydia = LydiaAI(api_client)
+
 
 @command(pattern="^.repcf", outgoing=True)
 async def repcf(event):
@@ -27,6 +29,7 @@ async def repcf(event):
     except Exception as e:
         await event.edit(str(e))
 
+
 @command(pattern="^.eai", outgoing=True)
 async def addcf(event):
     if event.fwd_from:
@@ -39,10 +42,17 @@ async def addcf(event):
         session = Lydia.create_session()
         session_id = session.id
         ACC_LYDIA.update({str(event.chat_id) + " " + str(reply_msg.from_id): session})
-        SESSION_ID.update({str(event.chat_id) + " " + str(reply_msg.from_id): session_id})
-        await event.edit("Lydia successfully enabled for user: {} in chat: {}".format(str(reply_msg.from_id), str(event.chat_id)))
+        SESSION_ID.update(
+            {str(event.chat_id) + " " + str(reply_msg.from_id): session_id}
+        )
+        await event.edit(
+            "Lydia successfully enabled for user: {} in chat: {}".format(
+                str(reply_msg.from_id), str(event.chat_id)
+            )
+        )
     else:
         await event.edit("Reply to a user to activate Lydia AI on them")
+
 
 @command(pattern="^.dai", outgoing=True)
 async def remcf(event):
@@ -55,13 +65,18 @@ async def remcf(event):
     try:
         del ACC_LYDIA[str(event.chat_id) + " " + str(reply_msg.from_id)]
         del SESSION_ID[str(event.chat_id) + " " + str(reply_msg.from_id)]
-        await event.edit("Lydia successfully disabled for user: {} in chat: {}".format(str(reply_msg.from_id), str(event.chat_id)))
+        await event.edit(
+            "Lydia successfully disabled for user: {} in chat: {}".format(
+                str(reply_msg.from_id), str(event.chat_id)
+            )
+        )
     except KeyError:
         await event.edit("This person does not have Lydia activated on him/her.")
 
+
 @bot.on(events.NewMessage(incoming=True))
 async def user(event):
-    user_text = event.text
+    event.text
     try:
         session = ACC_LYDIA[str(event.chat_id) + " " + str(event.from_id)]
         session_id = SESSION_ID[str(event.chat_id) + " " + str(event.from_id)]

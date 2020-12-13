@@ -1,4 +1,4 @@
-#credits to @mrconfused 
+# credits to @mrconfused
 import io
 import sys
 import traceback
