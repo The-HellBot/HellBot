@@ -52,6 +52,3 @@ def sil_message(komu):
     try:
         SESSION.query(messages).filter(messages.cmd == komu).delete()
         SESSION.commit()
-    except Exception as e:
-        return e
-    return True
