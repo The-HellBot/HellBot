@@ -20,10 +20,12 @@ else:
     session_name = "startup"
     bot = TelegramClient(session_name, Var.APP_ID, Var.API_HASH)
 
-if not TG_BOT_TOKEN_BF_HER == None:
+if not Var.TG_BOT_TOKEN_BF_HER == None:
     tgbot = TelegramClient(
-        "TG_BOT_TOKEN_BF_HER", api_id=API_ID, api_hash=API_HASH
-    ).start(bot_token=TG_BOT_TOKEN_BF_HER)
+        "TG_BOT_TOKEN",
+        api_id=Var.APP_ID,
+        api_hash=Var.API_HASH
+    ).start(bot_token=Var.TG_BOT_TOKEN_BF_HER)
 else:
     tgbot = None
 
