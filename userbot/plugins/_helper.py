@@ -1,4 +1,5 @@
 from userbot.uniborgConfig import Config
+from userbot.events import register
 
 @register(outgoing=True, pattern="^.help")
 async def yardim(event):
