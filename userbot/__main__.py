@@ -194,8 +194,7 @@ async def FotoDegistir (foto):
 for module_name in ALL_MODULES:
     imported_module = import_module("userbot.plugins." + module_name)
 
-LOGS.info("Aree On Ho Gaya Bhenchod!! Abb jake .alive likh ke dekho!! Abb Jaao aur sabki maroo.... Join @HellBot_Official for any help..
-")
+LOGS.info("Aree On Ho Gaya Bhenchod!! Abb jake .alive likh ke dekho!! Abb Jaao aur sabki maroo.... Join @HellBot_Official for any help..")
 LOGS.info(f"Bot version : HellBot • {hellverison}")
 
 """
