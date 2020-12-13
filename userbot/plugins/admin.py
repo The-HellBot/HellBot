@@ -29,9 +29,9 @@ from telethon.tl.types import (
     MessageMediaPhoto,
 )
 
-from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, LOGS, bot
+from userbot import *
 from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
-from userbot.utils import admin_cmd, edit_or_reply, errors_handler, sudo_cmd
+from userbot.utils import *
 
 # =================== CONSTANT ===================
 
