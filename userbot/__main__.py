@@ -67,7 +67,7 @@ def extractCommands(file):
         pass
     else:
       dosyaAdi = file.replace('.py', '')
-        CmdHelp = userbot.cmdhelp.CmdHelp(dosyaAdi, False)
+      CmdHelp = userbot.cmdhelp.CmdHelp(dosyaAdi, False)
 
         for Command in Pattern:
             Command = Command[1]
