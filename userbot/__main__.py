@@ -53,3 +53,5 @@ print("Aree On Ho Gaya Bhenchod!! Abb jake .alive likh ke dekho!! Abb Jaao aur s
 
 if len(argv) not in (1, 3, 4):
     bot.disconnect()
+else:
+    bot.run_until_disconnected()
