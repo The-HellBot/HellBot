@@ -1,11 +1,10 @@
 import re
 from importlib import import_module
-from sqlite3 import connect
 
 import chromedriver_autoinstaller
 
 import userbot.cmdhelp
-from userbot import BRAIN_CHECKER, LOGS, bot
+from userbot import LOGS, bot
 from userbot.plugins import ALL_MODULES
 
 KANGING_STR = [
@@ -31,6 +30,7 @@ UNAPPROVED_MSG = [
     "\n**Trespassing this area may lead to destruction**\n\n"
     "To start a valid conversation\n🔱Register Your Request!🔱\nSend `/start` To Register Your Request\nHopefully u will get a reply🔥",
 ]
+
 
 def extractCommands(file):
     FileRead = open(file, "r").read()
