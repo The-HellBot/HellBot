@@ -11,8 +11,8 @@ import re
 from bs4 import BeautifulSoup
 from requests import get
 
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot import *
+from userbot.utils import *
 
 GITHUB = "https://github.com"
 DEVICES_DATA = (
