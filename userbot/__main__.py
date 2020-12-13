@@ -7,7 +7,7 @@ import requests
 from telethon.tl.types import InputMessagesFilterDocument
 from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
 from telethon.tl.functions.channels import GetMessagesRequest
-from userbot import BRAIN_CHECKER, LOGS, bot, CMD_HELP, hellverison, PATTERNS
+from userbot import BRAIN_CHECKER, LOGS, bot, CMD_HELP, PATTERNS
 from userbot.uniborgConfig import Config
 from userbot.plugins import ALL_MODULES
 import userbot.plugins.sql_helper.message_sql as MSJ_SQL
@@ -196,7 +196,7 @@ for module_name in ALL_MODULES:
     imported_module = import_module("userbot.plugins." + module_name)
 
 LOGS.info("Aree On Ho Gaya Bhenchod!! Abb jake .alive likh ke dekho!! Abb Jaao aur sabki maroo.... Join @HellBot_Official for any help..")
-LOGS.info(f"Bot version : HellBot • {hellverison}")
+LOGS.info(f"Bot version : HellBot • 2.0")
 
 """
 if len(argv) not in (1, 3, 4):
