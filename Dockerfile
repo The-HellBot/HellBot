@@ -22,30 +22,24 @@ RUN apt-get install -y\
     libxml2 \
     libxml2-dev \
     libxslt-dev \
-    musl \
-    neofetch \
     libcurl4-openssl-dev \
     postgresql \
     postgresql-client \
     postgresql-server-dev-all \
     openssl \
-    mediainfo \
     wget \
     python3 \
     python3-dev \
     python3-pip \
     libreadline-dev \
-    zipalign \
     sqlite3 \
     ffmpeg \
     libsqlite3-dev \
-    axel \
     zlib1g-dev \
     recoverjpeg \
     zip \
     megatools \
     libfreetype6-dev \
-    procps \
     policykit-1
 
 RUN pip3 install --upgrade pip setuptools 
