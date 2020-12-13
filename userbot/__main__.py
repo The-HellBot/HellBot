@@ -29,18 +29,18 @@ KANGING_STR = [
     "Ay look over there (☉｡☉)!→\nWhile I kang this...",
     "Roses are red violets are blue, kanging this sticker so my pacc looks cool",
     "Imprisoning this sticker...",
-    "Mr.Steal Your Sticker is stealing this
+    "Mr.Steal Your Sticker is stealing this sticker",
 ]
 
 AFKSTR = [
   "Maa chuda, maa chuda, maa chuda",
 ]
 
-UNAPPROVED_MSG = ("`Hello, This is **Hêllẞø† Úl†rã Pr¡va†e Security Protocol⚠️**.\n"
-                   f"This is my master Inbox\n"
-                   f"\n**Trespassing this area may lead to destruction**\n\n"
-                    "To start a valid conversation\n🔱Register Your Request!🔱\nSend `/start` To Register Your Request\nHopefully u will get a reply🔥"
-)
+UNAPPROVED_MSG = ["`Hello, This is **Hêllẞø† Úl†rã Pr¡va†e Security Protocol⚠️**.\n"
+                    "This is my master Inbox\n"
+                    "\n**Trespassing this area may lead to destruction**\n\n"
+                    "To start a valid conversation\n🔱Register Your Request!🔱\nSend `/start` To Register Your Request\nHopefully u will get a reply🔥",
+]
 
 DB = connect("learning-data-root.check")
 CURSOR = DB.cursor()
