@@ -8,8 +8,8 @@ from datetime import datetime
 from telethon import events
 from telethon.tl import functions, types
 
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd
+from userbot import *
+from userbot.utils import *
 
 global USER_AFK  # pylint:disable=E0602
 global afk_time  # pylint:disable=E0602
@@ -22,7 +22,7 @@ last_afk_message = {}
 afk_start = {}
 
 
-@borg.on(events.NewMessage(outgoing=True))  # pylint:disable=E0602
+@bot.on(events.NewMessage(outgoing=True))  # pylint:disable=E0602
 async def set_not_afk(event):
     global USER_AFK  # pylint:disable=E0602
     global afk_time  # pylint:disable=E0602
@@ -66,7 +66,7 @@ async def set_not_afk(event):
         afk_time = None  # pylint:disable=E0602
 
 
-@borg.on(
+@bot.on(
     events.NewMessage(  # pylint:disable=E0602
         incoming=True, func=lambda e: bool(e.mentioned or e.is_private)
     )
@@ -131,7 +131,7 @@ async def on_afk(event):
         last_afk_message[event.chat_id] = msg  # pylint:disable=E0602
 
 
-@borg.on(admin_cmd(pattern=r"afk ?(.*)", outgoing=True))  # pylint:disable=E0602
+@bot.on(admin_cmd(pattern=r"afk ?(.*)", outgoing=True))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
