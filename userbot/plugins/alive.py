@@ -1,5 +1,5 @@
-from userbot import ALIVE_NAME, hellversion
-from userbot.utils import admin_cmd, sudo_cmd
+from userbot import *
+from userbot.utils import *
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
