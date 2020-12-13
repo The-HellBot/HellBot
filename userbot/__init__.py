@@ -22,9 +22,7 @@ else:
 
 if not Var.TG_BOT_TOKEN_BF_HER == None:
     tgbot = TelegramClient(
-        "TG_BOT_TOKEN",
-        api_id=Var.APP_ID,
-        api_hash=Var.API_HASH
+        "TG_BOT_TOKEN", api_id=Var.APP_ID, api_hash=Var.API_HASH
     ).start(bot_token=Var.TG_BOT_TOKEN_BF_HER)
 else:
     tgbot = None
