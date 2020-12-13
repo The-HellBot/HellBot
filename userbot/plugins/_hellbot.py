@@ -6,6 +6,8 @@
 from userbot.cmdhelp import CmdHelp
 from userbot import cmdhelp
 from userbot import CMD_HELP
+from userbot import *
+from userbot.utils import *
 
 
 @bot.on(admin_cmd("myhell(?: |$)(.*)"))
