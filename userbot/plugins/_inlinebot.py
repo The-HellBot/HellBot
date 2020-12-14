@@ -42,15 +42,6 @@ def button(page, modules):
         ]
     )
     return [max_pages, buttons]
-
-
-with bot:
-    if OTOMATIK_KATILMA:
-        try:
-            bot(JoinChannelRequest("@HellBot_Official"))
-            bot(JoinChannelRequest("@HellBot_Official"))
-        except:
-            pass
     # Changing this line may give error in bot as i added some special cmds in hellbot channel to get this module work...
 
     modules = CMD_HELP
