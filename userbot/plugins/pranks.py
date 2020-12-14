@@ -268,7 +268,7 @@ async def hellbot(hellmemes):
 
 CMD_HELP.update(
     {
-        "trolls": "**Plugin : **`trolls`\
+        "pranks": "**Plugin : **`pranks`\
       \n\n**Syntax :**`.threats` reply to image or sticker \
       \n**USAGE:**Changes the given pic to another pic which shows that pic content is threat to society as that of nuclear bomb .\
       \n\n**Syntax :**`.trash` reply to image or sticker\
