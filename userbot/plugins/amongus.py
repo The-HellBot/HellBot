@@ -4,6 +4,7 @@
 
 
 import asyncio
+from userbot.cmdhelp import CmdHelp
 
 from userbot import *
 from userbot.utils import *
