@@ -1,6 +1,6 @@
 import asyncio
 
-from userbot import ALIVE_NAME, CMD_HELP
+from userbot import ALIVE_NAME, CmdHelp, CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell user"
@@ -413,24 +413,26 @@ async def _(event):
     )
     await asyncio.sleep(6)
 
-
-CMD_HELP.update(
-    {
-        "animation3": """**Plugin : **`animation3`
-        
-**Commands in animation3 are **
-  •  `.kilr <text>`
-  •  `.eye`
-  •  `.thinking`
-  •  `.snake`
-  •  `.human`
-  •  `.mc`
-  •  `.virus`
-  •  `.repe`
-  •  `.nikal`
-  •  `.music`
-  •  `.squ`
-  
-**Function : **__Different kinds of animation commands check yourself for their animation .__"""
-    }
-)
+CmdHelp("animation3").add_command(
+  'kiler', '.kiler <text>', 'Cool killing animation with name'
+).add_command(
+  'eye', None, 'Use and see'
+).add_command(
+  'thinking', None, 'Use and see'
+).add_command(
+  'snake', None, 'Use and see'
+).add_command(
+  'human', None, 'Use and see'
+).add_command(
+  'mc', None, 'Use and see'
+).add_command(
+  'virus', None, 'Use and see'
+).add_command(
+  'repe', None, 'Use and see'
+).add_command(
+  'nikal', None, 'Use and see'
+).add_command(
+  'music', None, 'Use and see'
+).add_command(
+  'squ', None, 'Use and see'
+).add()
