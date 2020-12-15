@@ -325,5 +325,5 @@ CmdHelp("animation2").add_command(
 ).add_command(
   'jio', None, 'Use and see'
 ).add_command(
-  'solarsystem' None, 'Use and see'
+  'solarsystem', None, 'Use and see'
 ).add()
