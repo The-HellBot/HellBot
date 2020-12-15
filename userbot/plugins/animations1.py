@@ -5,6 +5,7 @@ from telethon.tl.functions.users import GetFullUserRequest
 
 from userbot import *
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot.cmdhelp import CmdHelp
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
