@@ -1,7 +1,7 @@
 import asyncio
 from collections import deque
 
-from userbot import ALIVE_NAME, CMD_HELP
+from userbot import ALIVE_NAME, CmdHelp, CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
@@ -304,3 +304,25 @@ CMD_HELP.update(
 **Function : **__Different kinds of animation commands check yourself for their animation .__"""
     }
 )
+
+CmdHelp("animation2").add_command(
+  'boxs', None, 'Use and see'
+).add_command(
+  'rain', None, 'Use and see'
+).add_command(
+  'deploy', None, 'Use and see'
+).add_command(
+  'dump', None, 'Use and see'
+).add_command(
+  'fleaveme', None, 'Use and see'
+).add_command(
+  'loveu', None, 'Use and see'
+).add_command(
+  'plane', None, 'Use and see'
+).add_command(
+  'police', None, 'Use and see'
+).add_command(
+  'jio', None, 'Use and see'
+).add_command(
+  'solarsystem' None, 'Use and see'
+).add()
