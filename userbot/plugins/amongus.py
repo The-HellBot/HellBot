@@ -135,7 +135,7 @@ async def _(event):
 
 
 CmdHelp("amongus").add_command(
-  'imp', 'Name/username', 'Finds the imposter with sticker. Imposter-True
+  'imp', 'Name/username', 'Finds the imposter with sticker. Imposter-True'
 ).add_command(
   'impn', 'Name/Username', 'Finds the imposter with sticker. Imposter-False'
 ).add_command(
