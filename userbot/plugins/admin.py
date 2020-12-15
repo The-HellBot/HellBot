@@ -32,6 +32,7 @@ from telethon.tl.types import (
 from userbot import *
 from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
 from userbot.utils import *
+from userbot.cmdhelp import CmdHelp
 
 # =================== CONSTANT ===================
 
@@ -569,29 +570,25 @@ async def get_user_from_id(user, event):
         return None
     return user_obj
 
-
-CMD_HELP.update(
-    {
-        "admin": "**Plugin : **`admin`\
-        \n\n**Syntax : **`.setgpic` <reply to image>\
-        \n**Usage : **Changes the group's display picture\
-        \n\n**Syntax : **`.promote` <username/reply> <custom rank (optional)>\
-        \n**Usage : **Provides admin rights to the person in the chat.\
-        \n\n**Syntax : **`.demote `<username/reply>\
-        \n**Usage : **Revokes the person's admin permissions in the chat.\
-        \n\n**Syntax : **`.ban` <username/reply> <reason (optional)>\
-        \n**Usage : **Bans the person off your chat.\
-        \n\n**Syntax : **`.unban` <username/reply>\
-        \n**Usage : **Removes the ban from the person in the chat.\
-        \n\n**Syntax : **`.mute` <username/reply> <reason (optional)>\
-        \n**Usage : **Mutes the person in the chat, works on admins too.\
-        \n\n**Syntax : **`.unmute` <username/reply>\
-        \n**Usage : **Removes the person from the muted list.\
-        \n\n**Syntax : **`.pin `<reply> or `.pin loud`\
-        \n**Usage : **Pins the replied message in Group\
-        \n\n**Syntax : **`.kick `<username/reply> \
-        \n**Usage : **kick the person off your chat.\
-        \n\n**Syntax : **`.iundlt`\
-        \n**Usage : **display last 5 deleted messages in group."
-    }
-)
+CmdHelp("admin").add_command(
+       'setgpic', '<reply to image', 'Changes the groups display picture'
+).add_command(
+        'promote', '<username/reply> <custom rank (optional)>',
+        'Provides admins right to a person in the chat.'
+).add_command(
+        'demote', '<username/reply>', 'Revokes the person admin permissions    in the chat.'
+).add_command(
+        'ban', '<username/reply> <reason (optional)>', 'Bans the person off your chat.'
+).add_command(
+        'unban', '<username/reply>', 'Removes the ban from the person in the chat.'
+).add_command(
+        'mute', '<username/reply> <reason (optional)>', 'Mutes the person in the chat, works on admins too.'
+).add_command(
+        'unmute', '<username/reply>', 'Removes the person from the muted list.'
+).add_command(
+        'pin', '<reply> or .pin loud', 'Pins the replied message in Group'
+).add_command(
+        'kick', '<username/reply>', 'kick the person off your chat'
+).add_command(
+        'iundlt', None, 'display last 5 deleted messages in group.'
+).add()
