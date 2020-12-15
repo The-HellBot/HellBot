@@ -1,5 +1,6 @@
 from userbot import *
 from userbot.utils import *
+from userbot.cmdhelp import CmdHelp
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
