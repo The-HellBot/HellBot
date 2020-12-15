@@ -133,12 +133,12 @@ async def _(event):
         )
 
 
-CMD_HELP.update(
-    {
-        "imposter": "**Plugin :** `imposter__`\
-\n\n**Syntax : **`.imp` / `.impn` <text>\
-\n**Usage : ** Find imposter with stickers.\
-\n\n**Syntax : **`.timp` / `.timpn` <text>\
-\n**Usage : ** Find imposter only text."
-    }
-)
+CmdHelp("amongus").add_command(
+  'imp', 'Name/username', 'Finds the imposter with sticker. Imposter-True
+).add_command(
+  'impn', 'Name/Username', 'Finds the imposter with sticker. Imposter-False'
+).add_command(
+  'timp', 'name/username', 'Finds imposter without sticker(Text only). Imposter - True'
+).add_command(
+  'timpn', 'name/username', 'Finds imposter without sticker(Text Only). Imposter - False'
+).add()
