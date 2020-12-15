@@ -126,6 +126,7 @@ if ENV:
         CHROME_DRIVER = os.environ.get(
             "CHROME_DRIVER", "/app/.chromedriver/bin/chromedriver"
         )
+        CHROME_BIN = os.environ.get("CHROME_BIN", "/app/.apt/usr/bin/google-chrome")
         GOOGLE_CHROME_BIN = os.environ.get(
             "GOOGLE_CHROME_BIN", "/app/.apt/usr/bin/google-chrome"
         )
