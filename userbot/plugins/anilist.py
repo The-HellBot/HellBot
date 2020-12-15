@@ -11,6 +11,7 @@ import requests
 
 from userbot import *
 from userbot.utils import *
+from userbot.cmdhelp import CmdHelp
 
 
 async def callAPI(search_str):
