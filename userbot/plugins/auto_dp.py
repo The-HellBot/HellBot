@@ -20,6 +20,7 @@ from telethon.tl import functions
 
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd
+from userbot.cmdhelp import CmdHelp
 
 COLLECTION_STRING1 = [
     "awesome-batman-wallpapers",
@@ -378,22 +379,24 @@ async def main(event):
         await event.client(functions.photos.UploadProfilePhotoRequest(file))
         os.system("rm -rf donottouch.jpg")
         await asyncio.sleep(600)
+        
 
-
-CMD_HELP.update(
-    {
-        "auto_dp": """**Plugin : **`auto_dp`
-    
-**Commands found in auto_dp are **
-  •  `.batmandp`
-  •  `.thordp`
-  •  `.actressdp`
-  •  `.animedp`
-  •  `.avengersdp`
-  •  `.gamerdp`
-  •  `.hackerdp`
-  •  `.spacedp`
-  •  `.wallpapers`
-**Function : **__Changes your profile pic every 10 minutes with the command you used(mean the batman or thor or blah blah blah......)__"""
-    }
-)
+CmdHelp("auto_dp").add_command(
+  'batmandp', None, 'Starts autodp of batman'
+).add_command(
+  'thordp', None, 'Starts autodp of thor'
+).add_command(
+  'actressdp', None, 'Starts autodp of actress'
+).add_command(
+  'animedp', None, 'Starts autodp of anime'
+).add_command(
+  'avengersdp', None, 'Starts autodp of avengers'
+).add_command(
+  'gamerdp', None, 'Starts autodp of gamer theame'
+).add_command(
+  'hackerdp', None, 'Starts autodp of hackers theame'
+).add_command(
+  'spacedp', None, 'Starts autodp of space'
+).add_command(
+  'wallpapers', None, 'Starts autodp of random wallpapers'
+).add()
