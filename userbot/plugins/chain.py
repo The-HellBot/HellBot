@@ -5,6 +5,7 @@ from telethon.tl.functions.messages import SaveDraftRequest
 
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd, sudo_cmd
+from userbot.cmdhelp import CmdHelp
 
 
 @bot.on(admin_cmd(pattern="chain$"))
@@ -28,11 +29,6 @@ async def _(event):
     await event.edit(f"Chain length: {count}")
 
 
-CMD_HELP.update(
-    {
-        "chain": """**Plugin :**`chain`
-        
-  • **Syntax : **`.chain reply to message`
-  • **Function : **__Reply this command to any converstion(or message) so that it finds chain length of that message__"""
-    }
-)
+CmdHelp("chain").add_command(
+  'chain', 'Reply to a message', 'Reply this command to any msg so that it finds chain length of that msg'
+).add()
