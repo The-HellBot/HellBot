@@ -8,7 +8,7 @@ from telethon.tl import functions
 
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
-
+from userbot.cmdhelp import CmdHelp
 
 @bot.on(admin_cmd(pattern="create (b|g|c) (.*)"))  # pylint:disable=E0602
 @bot.on(sudo_cmd(pattern="create (b|g|c) (.*)", allow_sudo=True))
@@ -73,15 +73,10 @@ async def _(event):
         await event.edit("Read `.plinfo create` to know how to use me")
 
 
-CMD_HELP.update(
-    {
-        "create": "**SYNTAX :** `.create b`\
-    \n**USAGE : **Creates a super group and send you link\
-    \n\n**SYNTAX : **`.create g`\
-    \n**USAGE : **Creates a private group and sends you link\
-    \n\n**SYNTAX : **`.create c`\
-    \n**USAGE : **Creates a Channel and sends you link\
-    \n\nhere the bot accout is owner\
-    "
-    }
-)
+CmdHelp("create").add_command(
+  'create b', 'Name of your grp', 'Creates a super and send you link'
+).add_command(
+  'create g', 'Name of your grp', 'Creates a private grp and send you link'
+).add_command(
+  'create c', 'Name of your channel', 'Creates a channel and sends you link'
+).add()
