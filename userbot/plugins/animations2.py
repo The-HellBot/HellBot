@@ -284,27 +284,44 @@ async def _(event):
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 8])
-
-
-CMD_HELP.update(
-    {
-        "animation2": """**Plugin : **`animation2`
         
-**Commands in animation2 are **
-  •  `.boxs`
-  •  `.rain`
-  •  `.deploy`
-  •  `.dump`
-  •  `.fleaveme`
-  •  `.loveu`
-  •  `.plane`
-  •  `.police`
-  •  `.jio`
-  •  `.solarsystem`
-  
-**Function : **__Different kinds of animation commands check yourself for their animation .__"""
-    }
-)
+        
+@bot.on(admin_cmd(pattern="degi$"))
+@bot.on(sudo_cmd(pattern="degi$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    event = await edit_or_reply(event, "degi")
+    await event.edit("WO")
+    await asyncio.sleep(1.5)
+    await event.edit("DegI")
+    await asyncio.sleep(1.5)
+    await event.edit("TuM")
+    await asyncio.sleep(1.5)
+    await event.edit("EkbaR")
+    await asyncio.sleep(1.5)
+    await event.edit("ManG")
+    await asyncio.sleep(1.5)
+    await event.edit("KaR")
+    await asyncio.sleep(1.5)
+    await event.edit("ToH")
+    await asyncio.sleep(1.5)
+    await event.edit("DekhO")
+    await asyncio.sleep(1.5)
+    await event.edit("Wo DeGi TuM eKbAr MaNg KaR tOh DeKhO😄")
+
+
+@bot.on(admin_cmd(pattern=f"nehi$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"nehi$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    event = await edit_or_reply(event, "nehi")
+    await event.edit(
+        "`Wo PaKkA DeGi Tu ManG KaR ToH DekH\n AuR NaA De To UskI BheN Ko PakaD😚😚`"
+    )
+    await asyncio.sleep(999)
+
 
 CmdHelp("animation2").add_command(
   'boxs', None, 'Use and see'
@@ -326,4 +343,8 @@ CmdHelp("animation2").add_command(
   'jio', None, 'Use and see'
 ).add_command(
   'solarsystem', None, 'Use and see'
+).add_command(
+  'degi', None, 'Use and see'
+).add_command(
+  'nehi', None, 'Use and see'
 ).add()
