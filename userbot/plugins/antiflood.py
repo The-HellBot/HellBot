@@ -6,6 +6,7 @@ from telethon.tl.types import ChatBannedRights
 import userbot.plugins.sql_helper.antiflood_sql as sql
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot.cmdhelp import CmdHelp
 
 CHAT_FLOOD = sql.__load_flood_settings()
 # warn mode for anti flood
@@ -72,10 +73,6 @@ async def _(event):
         await event.edit(str(e))
 
 
-CMD_HELP.update(
-    {
-        "antiflood": ".setflood [number]\
-\nUsage: warns the user if he spams the chat and if you are an admin then it mutes him in that group.\
-"
-    }
-)
+CmdHelp("antiflood").add_command(
+  'setflood', '<number>', 'Warns the user if he/she spams the chat and if you are an admin then it mutes him/her in the grp'
+).add()
