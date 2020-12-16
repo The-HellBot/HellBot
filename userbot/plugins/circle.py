@@ -2,7 +2,7 @@ from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
-
+from userbot.cmdhelp import CmdHelp
 
 @bot.on(admin_cmd("circle ?(.*)"))
 @bot.on(sudo_cmd(pattern="circle ?(.*)", allow_sudo=True))
@@ -43,3 +43,7 @@ async def _(event):
                 response.message.media,
             )
             await event.client.send_read_acknowledge(conv.chat_id)
+
+CmdHelp("circle").add_command(
+  'circle', '<reply to a 4×4(square) media>', 'Converts the replied square media into circle telegram video'
+).add()
