@@ -6,6 +6,7 @@ from telethon.tl import functions
 
 from userbot import ALIVE_NAME, BIO_MSG, CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 DEFAULTUSERBIO = str(BIO_MSG) if BIO_MSG else "ʟɛɢɛռɖaʀʏ ᴀғ ɦɛʟʟɮօt"
 DEL_TIME_OUT = 60
@@ -86,12 +87,8 @@ async def _(event):
         await asyncio.sleep(DEL_TIME_OUT)
 
 
-CMD_HELP.update(
-    {
-        "auto_profile": "**Auto_Profile**\
-\n\n**Syntax : **`.autobio`\
-\n**Usage :** Change your bio with time\
-\n\n**Syntax : **`.autoname`\
-\n**Usage :** Change your Name With Time"
-    }
-)
+CmdHelp("auto_profile").add_command(
+  'autobio', None, 'Changes your bio with time. Need to set BIO_MSG in heroku vars(optional)'
+).add_command(
+  'autoname', None, 'Changes your name with time according to your ALIVE_NAME in heroku var'
+).add()
