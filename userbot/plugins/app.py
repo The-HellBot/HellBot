@@ -8,6 +8,7 @@ import requests
 
 from userbot import ALIVE_NAME, CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot.cmdhelp import CmdHelp
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
@@ -165,16 +166,10 @@ async def mod(event):
     await tap[0].click(event.chat_id)
     await event.delete()
 
-
-CMD_HELP.update(
-    {
-        "app": "**Plugin :** `app`\
-        \n**Syntax : **`.app [app name]`\
-        \n**Usage: **searches the app in the playstore and provides the link to the app in playstore and fetchs app details \
-        \n\n**Syntax : **`.mods [app name]`\
-        \n**Usage: **searches and downloads the modded app\
-        \n\n**Syntax : **`.appr [app name]`\
-        \n**Usage: **searches the app in the playstore and provides the link to the app in playstore and fetchs app details with Xpl0iter request link. \
-        "
-    }
-)
+CmdHelp("app").add_command(
+  'app', '<app name>', 'Searches the app in the playstore and provides the link to the app in playstore and fetchs app details'
+).add_command(
+  'mods', '<app name>', 'Searches the modded/premium app'
+).add_command(
+  'appr', '<app name>', 'Searches the app in the playstore and provides the link to the app in playstore and fetchs app details with Xpl0iter request link.'
+).add()
