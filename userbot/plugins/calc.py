@@ -5,6 +5,7 @@ import traceback
 
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot.cmdhelp import CmdHelp
 
 
 @bot.on(admin_cmd(pattern="calc (.*)"))
@@ -46,10 +47,6 @@ async def aexec(code, event):
     return await locals()["__aexec"](event)
 
 
-CMD_HELP.update(
-    {
-        "calc": "**Plugin : **`calc`\
-        \n\n**Syntax : **`.calc expression` \
-        \n**Function : **solves the given maths equation by BODMAS rule. "
-    }
-)
+CmdHelp("calc").add_command(
+  'calc', 'Your expression', 'Sopves the given maths equation by BODMAS rule'
+).add()
