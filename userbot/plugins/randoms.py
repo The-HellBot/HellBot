@@ -14,7 +14,7 @@ from asyncio import sleep
 
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
-
+from userbot.cmdhelp import CmdHelp
 
 @bot.on(admin_cmd(pattern=r"sing$", outgoing=True))
 @bot.on(sudo_cmd(pattern=r"sing$", allow_sudo=True))
@@ -1883,20 +1883,63 @@ async def _(event):
         )
     if x == 104:
         await event.edit("`Do You Know, We can't see Ghosts But Ghosts Can see Us...`")
+        
+@bot.on(admin_cmd(pattern=r"snow$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"sonw$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    event = await edit_or_reply(event, "Hmm....")
+    await asyncio.sleep(2)
+    x = random.randrange(1, 10)
+    if x == 1:
+        await event.edit(
+            "Never forget what you are. The rest of the world will not.Wear it like armor,\n and it can never be used to hurt you."
+        )
+    if x == 2:
+        await event.edit("There is only one thing we say to death: **Not today.**")
+    if x == 3:
+        await event.edit(
+            "If you think this has a happy ending, you haven’t been **paying attention**."
+        )
+    if x == 4:
+        await event.edit("Chaos isn’t a pit. Chaos is a ladder.")
+    if x == 5:
+        await event.edit("You know nothing, **Jon Snow**")
+    if x == 6:
+        await event.edit("**Winter** is coming.")
+    if x == 7:
+        await event.edit("When you play the **game of thrones**, you win or you die.")
+    if x == 8:
+        await event.edit(
+            "I'm not going to **stop** the wheel, I'm going to **break** the wheel."
+        )
+    if x == 9:
+        await event.edit(
+            "When people ask you what happened here, tell them the **North remembers**. Tell them winter came for **House Frey**."
+        )
+    if x == 10:
+        await event.edit(
+            "When the snows fall and the white winds blow,\n the lone wolf dies, but the pack **survives**."
+        )
+        
 
-
-CMD_HELP.update(
-    {
-        "randoms": """**Plugin : **`randoms`
-**Commands : **
-  •  `.sing`
-  •  `.hps`
-  •  `.gott`
-  •  `.gotm`
-  •  `.bello`
-  •  `.tip`
-  •  `.qt`
-  •  `.logic`  
-**Function : **__Random text strings are shown__"""
-    }
-)
+CmdHelp("randoms").add_command(
+  'sing', None, 'Sings a song'
+).add_command(
+  'hps', None, 'Random harry porter character'
+).add_command(
+  'gott', None, 'Sends a random thought'
+).add_command(
+  'gotm', None, 'Sends a random meme'
+).add_command(
+  'bello', None, 'Sends quote for being logical'
+).add_command(
+  'tip', None, 'Sends you a life changer tip'
+).add_command(
+  'qt', None, 'Sends a random question. solve it if you can!!'
+).add_command(
+  'logic', None, 'Sends you a logical quote'
+).add_command(
+  'snow', None, 'Sends random quote from Game of thrones'
+).add()
