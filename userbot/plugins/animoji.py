@@ -3,6 +3,7 @@ from collections import deque
 
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot.cmdhelp import CmdHelp
 
 
 @bot.on(admin_cmd(pattern="think$", outgoing=True))
@@ -347,30 +348,40 @@ async def _(event):
         await event.edit(animation_chars[i % 18])
 
 
-CMD_HELP.update(
-    {
-        "animoji": """**Plugin : **`animoji`
-        
-**Commands in animoji are **
-  •  `.think`
-  •  `.lmao`
-  •  `.nothappy`
-  •  `.clock`
-  •  `.muah`
-  •  `.heart`
-  •  `.gym`
-  •  `.earth`
-  •  `.moon`
-  •  `.smoon`
-  •  `.tmoon`
-  •  `.hart`
-  •  `.anim`
-  •  `.fnl`
-  •  `.monkey`
-  •  `.hand`
-  •  `.gsg`
-  •  `.theart`
-  
-**Function : **__Different kinds of emoji animation commands check yourself for their animation .__"""
-    }
-)
+CmdHelp("animoji").add_command(
+  'think', None, 'Use and see'
+).add_command(
+  'lmao', None, 'Use and see'
+).add_command(
+  'nothappy', None, 'Use and see'
+).add_command(
+  'clock', None, 'Use and see'
+).add_command(
+  'muah', None, 'Use and see'
+).add_command(
+  'heart', None, 'Use and see'
+).add_command(
+  'gym', None, 'Use and see'
+).add_command(
+  'earth', None, 'Use and see'
+).add_command(
+  'moon', None, 'Use and see'
+).add_command(
+  'smoon', None, 'Use and see'
+).add_command(
+  'tmoon', None, 'Use and see'
+).add_command(
+  'hart', None, 'Use and see'
+).add_command(
+  'anim', None, 'Use and see'
+).add_command(
+  'fnl', None, 'Use and see'
+).add_command(
+  'monkey', None, 'Use and see'
+).add_command(
+  'hand', None, 'Use and see'
+).add_command(
+  'gsg', None, 'Use and see'
+).add_command(
+  'theart', None, 'Use and see'
+).add()
