@@ -17,6 +17,7 @@ from userbot.plugins.sql_helper.echo_sql import (
     remove_echo,
 )
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot.cmdhelp import CmdHelp
 
 
 @bot.on(admin_cmd(pattern="echo$"))
@@ -113,14 +114,10 @@ async def samereply(hell):
             await hell.reply(hell.message)
 
 
-CMD_HELP.update(
-    {
-        "echo": "**Syntax :** `.echo` reply to user to whom you want to enable\
-    \n**Usage : **replays his every message for whom you enabled echo\
-    \n\n**Syntax : **`.rmecho` reply to user to whom you want to stop\
-    \n**Usage : **Stops replaying his messages\
-    \n\n**Syntax : **`.listecho`\
-    \n**Usage : **shows the list of users for whom you enabled echo\
-    "
-    }
-)
+CmdHelp("echo").add_command(
+  'echo', 'Reply to a user', 'Replays every message from whom you enabled echo'
+).add_command(
+  'rmecho', 'reply to a user', 'Stop replayings targeted user message'
+).add_command(
+  'listecho', None, 'Shows the list of users for whom you enabled echo'
+).add()
