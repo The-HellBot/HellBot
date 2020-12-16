@@ -91,5 +91,5 @@ async def anilist(event):
 
 
 CmdHelp("anilist").add_command(
-  'anilist', '.anilist <anime name>', 'Shows you the details of the anime'
+  'anilist', '<anime name>', 'Shows you the details of the anime'
 ).add()
