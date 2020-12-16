@@ -33,6 +33,10 @@ This is the one and only official HellBot Userbot made by [@Kraken_The_BadASS](h
 <a href="https://t.me/HellBot_Official"><img src="https://img.shields.io/badge/Join-Support%20Channel-red.svg?style=for-the-badge&logo=Telegram"></a>
 <a href="https://t.me/HellBot_Official_Chat"><img src="https://img.shields.io/badge/Join-Support%20Group-blue.svg?style=for-the-badge&logo=Telegram"></a>
 
+## Deploy/How To Setup Guide
+<details>
+<summary>Click Here🔥</summary>
+<br>
 ## The Normal Way
 
 Simply clone the repository and run the main file:
@@ -77,3 +81,5 @@ Fortunately there are no Mandatory vars for the UniBorg Support Config.
     - `APP_ID`:   You can get this value from https://my.telegram.org
     - `API_HASH`:   You can get this value from https://my.telegram.org
 - The userbot will not work without setting the mandatory vars.
+
+</details>
