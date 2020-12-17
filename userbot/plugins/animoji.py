@@ -18,6 +18,23 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
+@bot.on(admin_cmd(pattern="ccry$", outgoing=True))
+@bot.on(sudo_cmd(pattern="ccry$", allow_sudo=True))
+async def cry(e):
+    if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
+        await e.edit("(;´༎ຶД༎ຶ)")
+
+@bot.on(admin_cmd(pattern="fap$", outgoing=True))
+@bot.on(sudo_cmd(pattern="fap$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    event = await edit_or_reply(event, "fapping(°_°)")
+    deq = deque(list("🍆✊🏻💦"))
+    for _ in range(32):
+        await asyncio.sleep(0.1)
+        await event.edit("".join(deq))
+        deq.rotate(1)
 
 @bot.on(admin_cmd(pattern=r"lmao$"))
 @bot.on(sudo_cmd(pattern="lmao$", allow_sudo=True))
@@ -384,4 +401,8 @@ CmdHelp("animoji").add_command(
   'gsg', None, 'Use and see'
 ).add_command(
   'theart', None, 'Use and see'
+).add_command(
+  'ccry', None, 'Crying animation🥱'
+).add_command(
+  'fap', None, 'Cool fapping animation'
 ).add()
