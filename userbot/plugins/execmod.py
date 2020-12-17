@@ -210,7 +210,7 @@ async def _(event):
         await event.edit(OUTPUT)
 
 
-CmdHelp.("execmod").add_command(
+CmdHelp("execmod").add_command(
   'pips', '<query>', 'Gives the result of your query'
 ).add_command(
   'suicide', None, 'Suicide'
