@@ -9,6 +9,7 @@ import os
 import time
 
 from telethon import events
+from userbot.cmdhelp import CmdHelp
 
 if not os.path.isdir("./SAVED"):
     os.makedirs("./SAVED")
@@ -33,7 +34,7 @@ async def _(event):
     process = await asyncio.create_subprocess_shell(
         cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
     )
-    OUTPUT = f"**Files in [FRIDAY](tg://leobrownlee/) DOWNLOADS Folder:**\n"
+    OUTPUT = f"**Files in [Hêllẞø†](t.me/hellbot_official) DOWNLOADS Folder:**\n"
     stdout, stderr = await process.communicate()
     if len(stdout) > Config.MAX_MESSAGE_SIZE_LIMIT:
         with io.BytesIO(str.encode(stdout)) as out_file:
@@ -213,7 +214,7 @@ async def handler(event):
         await event.edit("✅ File Deleted 🗑")
 
     else:
-        await event.edit("⛔️File Not Found സാധനം കയ്യിലില്ല😬")
+        await event.edit("⛔️File Not Found😬")
 
 
 @borg.on(events.NewMessage(pattern=r"\.delocal (.*)", outgoing=True))
@@ -228,4 +229,21 @@ async def handler(event):
         await event.edit("✅ File Deleted 🗑")
 
     else:
-        await event.edit("⛔️File Not Found സാധനം കയ്യിലില്ല😬")
+        await event.edit("⛔️File Not Found😬")
+
+
+CmdHelp("filemanager").add_command(
+  'lslocal', None, 'Gives the list of downloaded medias in your hellbot server.'
+).add_command(
+  'lsroot', None, 'Gives the list of all files in root directory of Hellbot repo.'
+).add_command(
+  'lssaved', None, 'Gives the list of all files in Saved directory of your hellbot server'
+).add_command(
+  'rnsaved', 'saved file name', 'Renames the file in saved directory'
+).add_command(
+  'rnlocal', 'downloaded file name', 'Renames the file in downloaded directory'
+).add_command(
+  'delsave', 'saved path', 'Deletes the file from given saved path'
+).add_command(
+  'delocal', 'downloaded path', 'Deletes the file from given downloaded path'
+).add()
