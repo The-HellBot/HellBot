@@ -1,4 +1,4 @@
-"""COMMAND : .cpu, .uptime, .suicide, .env, .pip, .neofetch, .coffeehouse, .date, .stdplugins, .fast, .iwantsex, .telegram, .listpip, .pyfiglet, .kowsay, .name, .faast, .daddyjoke, .fortune, .qquote, .fakeid, .vpn, .kwot, .qpro, .covid"""
+
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -61,7 +61,7 @@ async def pipcheck(pip):
                 "`\n**Result: **\n`No Result Returned/False`"
             )
     else:
-        await pip.edit("`Use .help system to see an example`")
+        await pip.edit("`Use .help execmod to see an example`")
 
 
 @borg.on(admin_cmd(pattern="suicide$"))
@@ -84,42 +84,6 @@ async def _(event):
     stdout, stderr = await process.communicate()
     o = stdout.decode()
     OUTPUT = f"**[Hêllẞø†'s](tg://need_update_for_some_feature/) SUICIDE BOMB:**\n{o}"
-    if len(OUTPUT) > Config.MAX_MESSAGE_SIZE_LIMIT:
-        with io.BytesIO(str.encode(OUTPUT)) as out_file:
-            out_file.name = "env.text"
-            await borg.send_file(
-                event.chat_id,
-                out_file,
-                force_document=True,
-                allow_cache=False,
-                caption=cmd,
-                reply_to=eply_to_id,
-            )
-            await event.delete()
-    else:
-        await event.edit(OUTPUT)
-
-
-@borg.on(admin_cmd(pattern="plugins$"))
-async def _(event):
-    if event.fwd_from:
-        return
-    PROCESS_RUN_TIME = 100
-    #    dirname = event.pattern_match.group(1)
-    #    tempdir = "localdir"
-    cmd = "ls userbot/plugins"
-    #    if dirname == tempdir:
-
-    eply_to_id = event.message.id
-    if event.reply_to_msg_id:
-        event.reply_to_msg_id
-    time.time() + PROCESS_RUN_TIME
-    process = await asyncio.create_subprocess_shell(
-        cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
-    )
-    stdout, stderr = await process.communicate()
-    o = stdout.decode()
-    OUTPUT = f"**[Hêllẞø†'s](tg://need_update_for_some_feature/) PLUGINS:**\n{o}\n\n**HELP:** __If you want to know the commands for a plugin, do:-__ \n `.help <plugin name>` **without the < > brackets.**\n__All plugins might not work directly. Visit__ @HellBot_Official __for assistance.__"
     if len(OUTPUT) > Config.MAX_MESSAGE_SIZE_LIMIT:
         with io.BytesIO(str.encode(OUTPUT)) as out_file:
             out_file.name = "env.text"
@@ -208,7 +172,7 @@ async def _(event):
         await event.edit(OUTPUT)
 
 
-@borg.on(admin_cmd(pattern="fast$"))
+@borg.on(admin_cmd(pattern="speed$"))
 async def _(event):
     await event.edit("calculating...")
     if event.fwd_from:
@@ -245,181 +209,14 @@ async def _(event):
         await event.edit(OUTPUT)
 
 
-@borg.on(admin_cmd(pattern="fortune$"))
-async def _(event):
-    if event.fwd_from:
-        return
-    PROCESS_RUN_TIME = 100
-    #    dirname = event.pattern_match.group(1)
-    #    tempdir = "localdir"
-    cmd = "pytuneteller pisces --today"
-    #    if dirname == tempdir:
-
-    eply_to_id = event.message.id
-    if event.reply_to_msg_id:
-        event.reply_to_msg_id
-    time.time() + PROCESS_RUN_TIME
-    process = await asyncio.create_subprocess_shell(
-        cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
-    )
-    stdout, stderr = await process.communicate()
-    o = stdout.decode()
-    OUTPUT = f"{o}"
-    if len(OUTPUT) > Config.MAX_MESSAGE_SIZE_LIMIT:
-        with io.BytesIO(str.encode(OUTPUT)) as out_file:
-            out_file.name = "env.text"
-            await borg.send_file(
-                event.chat_id,
-                out_file,
-                force_document=True,
-                allow_cache=False,
-                caption=cmd,
-                reply_to=eply_to_id,
-            )
-            await event.delete()
-    else:
-        await event.edit(OUTPUT)
-
-
-@borg.on(admin_cmd(pattern="qquote$"))
-async def _(event):
-    if event.fwd_from:
-        return
-    PROCESS_RUN_TIME = 100
-    #    dirname = event.pattern_match.group(1)
-    #    tempdir = "localdir"
-    cmd = "jotquote"
-    #    if dirname == tempdir:
-
-    eply_to_id = event.message.id
-    if event.reply_to_msg_id:
-        event.reply_to_msg_id
-    time.time() + PROCESS_RUN_TIME
-    process = await asyncio.create_subprocess_shell(
-        cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
-    )
-    stdout, stderr = await process.communicate()
-    o = stdout.decode()
-    OUTPUT = f"{o}"
-    if len(OUTPUT) > Config.MAX_MESSAGE_SIZE_LIMIT:
-        with io.BytesIO(str.encode(OUTPUT)) as out_file:
-            out_file.name = "env.text"
-            await borg.send_file(
-                event.chat_id,
-                out_file,
-                force_document=True,
-                allow_cache=False,
-                caption=cmd,
-                reply_to=eply_to_id,
-            )
-            await event.delete()
-    else:
-        await event.edit(OUTPUT)
-
-
-@borg.on(admin_cmd(pattern="fakeid$"))
-async def _(event):
-    if event.fwd_from:
-        return
-    PROCESS_RUN_TIME = 100
-    #    dirname = event.pattern_match.group(1)
-    #    tempdir = "localdir"
-    cmd = "csvfaker -r 10 first_name last_name job"
-    #    if dirname == tempdir:
-
-    eply_to_id = event.message.id
-    if event.reply_to_msg_id:
-        event.reply_to_msg_id
-    time.time() + PROCESS_RUN_TIME
-    process = await asyncio.create_subprocess_shell(
-        cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
-    )
-    stdout, stderr = await process.communicate()
-    o = stdout.decode()
-    OUTPUT = f"{o}"
-    if len(OUTPUT) > Config.MAX_MESSAGE_SIZE_LIMIT:
-        with io.BytesIO(str.encode(OUTPUT)) as out_file:
-            out_file.name = "env.text"
-            await borg.send_file(
-                event.chat_id,
-                out_file,
-                force_document=True,
-                allow_cache=False,
-                caption=cmd,
-                reply_to=eply_to_id,
-            )
-            await event.delete()
-    else:
-        await event.edit(OUTPUT)
-
-
-@borg.on(admin_cmd(pattern="kwot$"))
-async def _(event):
-    if event.fwd_from:
-        return
-    PROCESS_RUN_TIME = 100
-    #    dirname = event.pattern_match.group(1)
-    #    tempdir = "localdir"
-    cmd = "kwot"
-    #    if dirname == tempdir:
-
-    eply_to_id = event.message.id
-    if event.reply_to_msg_id:
-        event.reply_to_msg_id
-    time.time() + PROCESS_RUN_TIME
-    process = await asyncio.create_subprocess_shell(
-        cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
-    )
-    stdout, stderr = await process.communicate()
-    o = stdout.decode()
-    OUTPUT = f"{o}"
-    if len(OUTPUT) > Config.MAX_MESSAGE_SIZE_LIMIT:
-        with io.BytesIO(str.encode(OUTPUT)) as out_file:
-            out_file.name = "kwot.text"
-            await borg.send_file(
-                event.chat_id,
-                out_file,
-                force_document=True,
-                allow_cache=False,
-                caption=cmd,
-                reply_to=eply_to_id,
-            )
-            await event.delete()
-    else:
-        await event.edit(OUTPUT)
-
-
-@borg.on(admin_cmd(pattern="qpro$"))
-async def _(event):
-    if event.fwd_from:
-        return
-    PROCESS_RUN_TIME = 100
-    #    dirname = event.pattern_match.group(1)
-    #    tempdir = "localdir"
-    cmd = "programmingquotes -l EN"
-    #    if dirname == tempdir:
-
-    eply_to_id = event.message.id
-    if event.reply_to_msg_id:
-        event.reply_to_msg_id
-    time.time() + PROCESS_RUN_TIME
-    process = await asyncio.create_subprocess_shell(
-        cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
-    )
-    stdout, stderr = await process.communicate()
-    o = stdout.decode()
-    OUTPUT = f"{o}"
-    if len(OUTPUT) > Config.MAX_MESSAGE_SIZE_LIMIT:
-        with io.BytesIO(str.encode(OUTPUT)) as out_file:
-            out_file.name = "env.text"
-            await borg.send_file(
-                event.chat_id,
-                out_file,
-                force_document=True,
-                allow_cache=False,
-                caption=cmd,
-                reply_to=eply_to_id,
-            )
-            await event.delete()
-    else:
-        await event.edit(OUTPUT)
+CmdHelp.("execmod").add_command(
+  'pips', '<query>', 'Gives the result of your query'
+).add_command(
+  'suicide', None, 'Suicide'
+).add_command(
+  'date', None, 'Shows current date and time'
+).add_command(
+  'env', None, 'Shows Environment veriables from Heroku'
+).add_command(
+  'speed', None, 'Showd server speed of your bot'
+).add()
