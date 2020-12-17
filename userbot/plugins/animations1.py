@@ -16,7 +16,7 @@ async def Ooo(e):
     for j in range(15):
         t = t[:-1] + "oo"
         await e.edit(t)
-
+        
 @bot.on(admin_cmd(pattern="stupid$"))
 @bot.on(sudo_cmd(pattern="stupid$", allow_sudo=True))
 async def _(event):
@@ -44,7 +44,24 @@ async def _(event):
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 14])
-
+        
+@bot.on(admin_cmd(pattern=f"evil$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"evil$", allow_sudo=True))
+async def _(event):
+    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
+        await event.edit("😒You Know I'm a good **PERSON**😏")
+        await asyncio.sleep(1.9)
+        await event.edit("BUT😡")
+        await asyncio.sleep(1.2)
+        await event.edit("😑Don't give me a reason😠")
+        await asyncio.sleep(1.9)
+        await event.edit("🤨To show my😎")
+        await asyncio.sleep(1.4)
+        await event.edit("**😈EVIL SIDE**😈")
+        await asyncio.sleep(1.3)
+        await event.edit(
+            "**😈YOU KNOW THAT I'M A GOOD PERSON. BUT DON'T GIVE ME REASON TO SHOW MY EVIL SIDE😈**"
+        )
 
 @bot.on(admin_cmd(pattern=f"bombs$", outgoing=True))
 @bot.on(sudo_cmd(pattern=f"bombs$", allow_sudo=True))
@@ -332,4 +349,6 @@ CmdHelp("animations1").add_command(
   'charging', None, 'Use and see'
 ).add_command(
   'yo', None, 'Shitty Yooooo animations. Like who wants it.. duhh'
+).add_command(
+  'evil', None, 'Wanna show your evilness?'
 ).add()
