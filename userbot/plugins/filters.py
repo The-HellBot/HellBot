@@ -1,140 +1,131 @@
-# This Source Code Form is subject to the terms of the Mozilla Public
-# License, v. 2.0. If a copy of the MPL was not distributed with this
-# file, You can obtain one at http://mozilla.org/MPL/2.0/.
-"""Filters
-Available Commands:
-.savefilter
-.listfilters
-.clearfilter"""
-import asyncio
 import re
 
-from telethon import utils
-from telethon.tl import types
-
-from userbot.plugins.sql_helper.filter_sql import (
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
+from userbot.cmdhelp import CmdHelp
+from .sql_helper.filter_sql import (
     add_filter,
-    get_all_filters,
+    get_filters,
     remove_all_filters,
     remove_filter,
 )
 
-DELETE_TIMEOUT = 0
-TYPE_TEXT = 0
-TYPE_PHOTO = 1
-TYPE_DOCUMENT = 2
+
+@bot.on(admin_cmd(incoming=True))
+async def filter_incoming_handler(handler):
+    try:
+        if not (await handler.get_sender()).bot:
+            name = handler.raw_text
+            filters = get_filters(handler.chat_id)
+            if not filters:
+                return
+            for trigger in filters:
+                pattern = r"( |^|[^\w])" + re.escape(trigger.keyword) + r"( |$|[^\w])"
+                if re.search(pattern, name, flags=re.IGNORECASE):
+                    if trigger.f_mesg_id:
+                        msg_o = await handler.client.get_messages(
+                            entity=BOTLOG_CHATID, ids=int(trigger.f_mesg_id)
+                        )
+                        await handler.reply(msg_o.message, file=msg_o.media)
+                    elif trigger.reply:
+                        await handler.reply(trigger.reply)
+    except AttributeError:
+        pass
 
 
-global last_triggered_filters
-last_triggered_filters = {}  # pylint:disable=E0602
-
-
-@command(incoming=True)
-async def on_snip(event):
-    global last_triggered_filters
-    name = event.raw_text
-    if event.chat_id in last_triggered_filters:
-        if name in last_triggered_filters[event.chat_id]:
-            # avoid userbot spam
-            # "I demand rights for us bots, we are equal to you humans." -Henri Koivuneva (t.me/UserbotTesting/2698)
-            return False
-    snips = get_all_filters(event.chat_id)
-    if snips:
-        for snip in snips:
-            pattern = r"( |^|[^\w])" + re.escape(snip.keyword) + r"( |$|[^\w])"
-            if re.search(pattern, name, flags=re.IGNORECASE):
-                if snip.snip_type == TYPE_PHOTO:
-                    media = types.InputPhoto(
-                        int(snip.media_id),
-                        int(snip.media_access_hash),
-                        snip.media_file_reference,
-                    )
-                elif snip.snip_type == TYPE_DOCUMENT:
-                    media = types.InputDocument(
-                        int(snip.media_id),
-                        int(snip.media_access_hash),
-                        snip.media_file_reference,
-                    )
-                else:
-                    media = None
-                event.message.id
-                if event.reply_to_msg_id:
-                    event.reply_to_msg_id
-                await event.reply(snip.reply, file=media)
-                if event.chat_id not in last_triggered_filters:
-                    last_triggered_filters[event.chat_id] = []
-                last_triggered_filters[event.chat_id].append(name)
-                await asyncio.sleep(DELETE_TIMEOUT)
-                last_triggered_filters[event.chat_id].remove(name)
-
-
-@command(pattern="^.savefilter (.*)")
-async def on_snip_save(event):
-    name = event.pattern_match.group(1)
-    msg = await event.get_reply_message()
-    if msg:
-        snip = {"type": TYPE_TEXT, "text": msg.message or ""}
-        if msg.media:
-            media = None
-            if isinstance(msg.media, types.MessageMediaPhoto):
-                media = utils.get_input_photo(msg.media.photo)
-                snip["type"] = TYPE_PHOTO
-            elif isinstance(msg.media, types.MessageMediaDocument):
-                media = utils.get_input_document(msg.media.document)
-                snip["type"] = TYPE_DOCUMENT
-            if media:
-                snip["id"] = media.id
-                snip["hash"] = media.access_hash
-                snip["fr"] = media.file_reference
-        add_filter(
-            event.chat_id,
-            name,
-            snip["text"],
-            snip["type"],
-            snip.get("id"),
-            snip.get("hash"),
-            snip.get("fr"),
-        )
-        await event.edit(f"filter {name} saved successfully. Get it with {name}")
-    else:
-        await event.edit(
-            "Reply to a message with `savefilter keyword` to save the filter"
-        )
-
-
-@command(pattern="^.listfilters$")
-async def on_snip_list(event):
-    all_snips = get_all_filters(event.chat_id)
-    OUT_STR = "Available Filters in the Current Chat:\n"
-    if len(all_snips) > 0:
-        for a_snip in all_snips:
-            OUT_STR += f"👉 {a_snip.keyword} \n"
-    else:
-        OUT_STR = "No Filters. Start Saving using `.savefilter`"
-    if len(OUT_STR) > 4096:
-        with io.BytesIO(str.encode(OUT_STR)) as out_file:
-            out_file.name = "filters.text"
-            await bot.send_file(
-                event.chat_id,
-                out_file,
-                force_document=True,
-                allow_cache=False,
-                caption="Available Filters in the Current Chat",
-                reply_to=event,
+@bot.on(admin_cmd(pattern="savefilter (.*)"))
+@bot.on(sudo_cmd(pattern="savefilter (.*)", allow_sudo=True))
+async def add_new_filter(new_handler):
+    if new_handler.fwd_from:
+        return
+    keyword = new_handler.pattern_match.group(1)
+    string = new_handler.text.partition(keyword)[2]
+    msg = await new_handler.get_reply_message()
+    msg_id = None
+    if msg and msg.media and not string:
+        if BOTLOG:
+            await new_handler.client.send_message(
+                BOTLOG_CHATID,
+                f"#FILTER\
+            \nCHAT ID: {new_handler.chat_id}\
+            \nTRIGGER: {keyword}\
+            \n\nThe following message is saved as the filter's reply data for the chat, please do NOT delete it !!",
             )
-            await event.delete()
+            msg_o = await new_handler.client.forward_messages(
+                entity=BOTLOG_CHATID,
+                messages=msg,
+                from_peer=new_handler.chat_id,
+                silent=True,
+            )
+            msg_id = msg_o.id
+        else:
+            await edit_or_reply(
+                new_handler,
+                "`Saving media as reply to the filter requires the BOTLOG_CHATID to be set.`",
+            )
+            return
+    elif new_handler.reply_to_msg_id and not string:
+        rep_msg = await new_handler.get_reply_message()
+        string = rep_msg.text
+    success = "`Filter` **{}** `{} successfully`"
+    if add_filter(str(new_handler.chat_id), keyword, string, msg_id) is True:
+        return await edit_or_reply(new_handler, success.format(keyword, "added"))
+    remove_filter(str(new_handler.chat_id), keyword)
+    if add_filter(str(new_handler.chat_id), keyword, string, msg_id) is True:
+        return await edit_or_reply(new_handler, success.format(keyword, "Updated"))
+    await edit_or_reply(new_handler, f"Error while setting filter for {keyword}")
+
+
+@bot.on(admin_cmd(pattern="listfilter$"))
+@bot.on(sudo_cmd(pattern="listfilter$", allow_sudo=True))
+async def on_snip_list(event):
+    if event.fwd_from:
+        return
+    OUT_STR = "There are no filters in this chat."
+    filters = get_filters(event.chat_id)
+    for filt in filters:
+        if OUT_STR == "There are no filters in this chat.":
+            OUT_STR = "Active filters in this chat:\n"
+        OUT_STR += "👉 `{}`\n".format(filt.keyword)
+    await edit_or_reply(
+        event,
+        OUT_STR,
+        caption="Available Filters in the Current Chat",
+        file_name="filters.text",
+    )
+
+
+@bot.on(admin_cmd(pattern="stop (.*)"))
+@bot.on(sudo_cmd(pattern="stop (.*)", allow_sudo=True))
+async def remove_a_filter(r_handler):
+    if r_handler.fwd_from:
+        return
+    filt = r_handler.pattern_match.group(1)
+    if not remove_filter(r_handler.chat_id, filt):
+        await r_handler.edit("Filter` {} `doesn't exist.".format(filt))
     else:
-        await event.edit(OUT_STR)
+        await r_handler.edit("Filter `{} `was deleted successfully".format(filt))
 
 
-@command(pattern="^.clearfilter (.*)")
-async def on_snip_delete(event):
-    name = event.pattern_match.group(1)
-    remove_filter(event.chat_id, name)
-    await event.edit(f"filter {name} deleted successfully")
-
-
-@command(pattern="^.clearallfilters$")
+@bot.on(admin_cmd(pattern="clearallfilter$"))
+@bot.on(sudo_cmd(pattern="clearallfilter$", allow_sudo=True))
 async def on_all_snip_delete(event):
-    remove_all_filters(event.chat_id)
-    await event.edit(f"filters **in current chat** deleted successfully")
+    if event.fwd_from:
+        return
+    filters = get_filters(event.chat_id)
+    if filters:
+        remove_all_filters(event.chat_id)
+        await edit_or_reply(event, f"filters in current chat deleted successfully")
+    else:
+        await edit_or_reply(event, f"There are no filters in this group")
+
+
+CmdHelp("filters").add_command(
+  'savefilter', 'reply to a msg with keyword', 'Saves the replied msg as a reply to keyword. The bot will reply that msg wheneverthe keyword is mentioned.'
+).add_command(
+  'listfilter', None, 'Lists all the filters in chat'
+).add_command(
+  'clearallfilter', None, 'Deletes all the filter saved in a chat.'
+).add_command(
+  'stop', 'keyword of saved filter', 'Stops reply to the keyword mentioned.'
+).add()
