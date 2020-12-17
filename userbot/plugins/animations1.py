@@ -9,6 +9,13 @@ from userbot.cmdhelp import CmdHelp
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
+@bot.on(admin_cmd(pattern="yo$"))
+@bot.on(sudo_cmd(pattern="yo$", allow_sudo=True))
+async def Ooo(e):
+    t = "yo"
+    for j in range(15):
+        t = t[:-1] + "oo"
+        await e.edit(t)
 
 @bot.on(admin_cmd(pattern="stupid$"))
 @bot.on(sudo_cmd(pattern="stupid$", allow_sudo=True))
@@ -323,4 +330,6 @@ CmdHelp("animations1").add_command(
   'bigoof', None, 'Big off animation'
 ).add_command(
   'charging', None, 'Use and see'
+).add_command(
+  'yo', None, 'Shitty Yooooo animations. Like who wants it.. duhh'
 ).add()
