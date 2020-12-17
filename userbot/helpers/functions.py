@@ -177,6 +177,11 @@ async def simpmusicvideo(simp):
     command = 'youtube-dl -f "[filesize<20M]" ' + video_link
     os.system(command)
 
+async def unzip(downloaded_file_name):
+    with zipfile.ZipFile(downloaded_file_name, "r") as zip_ref:
+        zip_ref.extractall("./temp")
+    downloaded_file_name = os.path.splitext(downloaded_file_name)[0]
+    return f"{downloaded_file_name}.gif"
 
 # convertion..
 
