@@ -35,6 +35,7 @@ humanize
 justwatch
 lxml
 lottie
+nekos.py
 oauth2client
 patool
 psycopg2
