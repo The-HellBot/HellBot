@@ -91,7 +91,7 @@ async def _(event):
         await event.client.forward_messages(destination, msg_cache[c])
 
 
-CmdHell("fpost").add_command(
+CmdHelp("fpost").add_command(
   'fpost', '<your msg>', 'Checks all your groups and sends the msg matching the given keyword'
 ).add_command(
   'frwd', '<reply to a msg>', 'Enables seen counter in replied msg. To know how many users have seen your msg.'
