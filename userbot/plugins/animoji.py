@@ -150,7 +150,8 @@ from userbot.utils import admin_cmd
 async def _(event):
     if event.fwd_from:
         return
-    animation_interval = 3    animation_ttl = range(0, 103)
+    animation_interval = 3
+    animation_ttl = range(0, 103)
     await edit_or_reply(event, "Let me tel you")
     animation_chars = [
         "1 ❤️ love story",
