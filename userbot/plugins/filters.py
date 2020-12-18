@@ -3,7 +3,7 @@ import re
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
 from userbot.cmdhelp import CmdHelp
-from .sql_helper.filter_sql import (
+from userbot.plugins.sql_helper.filter_sql import (
     add_filter,
     get_filters,
     remove_all_filters,
