@@ -1,7 +1,8 @@
 # Added more fonts by @Kraken_The_BadASS
 # Ported from saitama i guess
 
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 normiefont = [
     "a",
@@ -172,8 +173,8 @@ bubbletextfont = [
     "Ⓩ",
 ]
 
-
-@borg.on(admin_cmd(pattern="weeb ?(.*)"))
+@bot.on(admin_cmd(pattern="weeb(?: |$)(.*)", command="weeb"))
+@bot.on(sudo_cmd(pattern="weeb(?: |$)(.*)", command="weeb", allow_sudo=True))
 async def weebify(event):
 
     args = event.pattern_match.group(1)
@@ -181,17 +182,18 @@ async def weebify(event):
         get = await event.get_reply_message()
         args = get.text
     if not args:
-        await event.edit("`What I am Supposed to Weebify U Dumb`")
+        await edit_or_reply(event, "`What I am Supposed to Weebify U Dumb`")
         return
     string = "".join(args).lower()
     for normiecharacter in string:
         if normiecharacter in normiefont:
             weebycharacter = weebyfont[normiefont.index(normiecharacter)]
             string = string.replace(normiecharacter, weebycharacter)
-    await event.edit(string)
+    await edit_or_reply(event, string)
 
 
-@borg.on(admin_cmd(pattern="tantext ?(.*)"))
+@bot.on(admin_cmd(pattern="tanify(?: |$)(.*)", command="tanify"))
+@bot.on(sudo_cmd(pattern="tanify(?: |$)(.*)", command="tanify", allow_sudo=True))
 async def tantxt(event):
 
     args = event.pattern_match.group(1)
@@ -199,17 +201,18 @@ async def tantxt(event):
         get = await event.get_reply_message()
         args = get.text
     if not args:
-        await event.edit("`What I am Supposed to tanify U Dumb`")
+        await edit_or_reply(event, "`What I am Supposed to tanify U Dumb`")
         return
     string = "".join(args).lower()
     for normiecharacter in string:
         if normiecharacter in normiefont:
             tanycharacter = tantextfont[normiefont.index(normiecharacter)]
             string = string.replace(normiecharacter, tanycharacter)
-    await event.edit(string)
+    await edit_or_reply(event, string)
 
 
-@borg.on(admin_cmd(pattern="linetext ?(.*)"))
+@bot.on(admin_cmd(pattern="lintxt(?: |$)(.*)", command="lintxt"))
+@bot.on(sudo_cmd(pattern="lintxt(?: |$)(.*)", command="lintxt", allow_sudo=True))
 async def linetxt(event):
 
     args = event.pattern_match.group(1)
@@ -217,17 +220,18 @@ async def linetxt(event):
         get = await event.get_reply_message()
         args = get.text
     if not args:
-        await event.edit("`What I am Supposed to linefy U Dumb`")
+        await edit_or_reply(event, "`What I am Supposed to linefy U Dumb`")
         return
     string = "".join(args).lower()
     for normiecharacter in string:
         if normiecharacter in normiefont:
             linecharacter = linetextfont[normiefont.index(normiecharacter)]
             string = string.replace(normiecharacter, linecharacter)
-    await event.edit(string)
+    await edit_or_reply(event, string)
 
 
-@borg.on(admin_cmd(pattern="boxtext ?(.*)"))
+@bot.on(admin_cmd(pattern="boxify(?: |$)(.*)", command="boxify"))
+@bot.on(sudo_cmd(pattern="boxify(?: |$)(.*)", command="boxify", allow_sudo=True))
 async def boxtxt(event):
 
     args = event.pattern_match.group(1)
@@ -235,17 +239,18 @@ async def boxtxt(event):
         get = await event.get_reply_message()
         args = get.text
     if not args:
-        await event.edit("`What I am Supposed to boxify U Dumb`")
+        await edit_or_reply(event, "`What I am Supposed to boxify U Dumb`")
         return
     string = "".join(args).lower()
     for normiecharacter in string:
         if normiecharacter in normiefont:
             boxcharacter = boxtextfont[normiefont.index(normiecharacter)]
             string = string.replace(normiecharacter, boxcharacter)
-    await event.edit(string)
+    await edit_or_reply(event, string)
 
 
-@borg.on(admin_cmd(pattern="bubbletext ?(.*)"))
+@bot.on(admin_cmd(pattern="bubble(?: |$)(.*)", command="bubble"))
+@bot.on(sudo_cmd(pattern="bubble(?: |$)(.*)", command="bubble", allow_sudo=True))
 async def bubbletxt(event):
 
     args = event.pattern_match.group(1)
@@ -253,11 +258,23 @@ async def bubbletxt(event):
         get = await event.get_reply_message()
         args = get.text
     if not args:
-        await event.edit("`What I am Supposed to bubblify U Dumb`")
+        await edit_or_reply(event, "`What I am Supposed to bubblify U Dumb`")
         return
     string = "".join(args).lower()
     for normiecharacter in string:
         if normiecharacter in normiefont:
             bubblecharacter = bubbletextfont[normiefont.index(normiecharacter)]
             string = string.replace(normiecharacter, bubblecharacter)
-    await event.edit(string)
+    await edit_or_reply(event, string)
+
+CmdHelp("fonts").add_command(
+  'weeb', '<text>', 'Modifies your text in weeby font'
+).add_command(
+  'tanify', '<text>', 'Mofifies your text in tany font'
+).add_command(
+  'lintxt', '<text>', 'Modifies your text in liny font'
+).add_command(
+  'boxify', '<text>', 'Modifies your text in box font'
+).add_command(
+  'bubble', '<text>', 'Modifies your text in bubble font'
+).add()
