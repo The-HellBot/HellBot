@@ -140,6 +140,38 @@ async def _(event):
         deq.rotate(1)
 
 
+import asyncio
+
+from userbot.utils import admin_cmd
+
+
+@bot.on(admin_cmd(pattern="lovestory", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"lovestory", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    animation_interval = 3    animation_ttl = range(0, 103)
+    await edit_or_reply(event, "Let me tel you")
+    animation_chars = [
+        "1 ❤️ love story",
+        "  😐             😕 \n/👕\         <👗\ \n 👖               /|",
+        "  😉          😳 \n/👕\       /👗\ \n  👖            /|",
+        "  😚            😒 \n/👕\         <👗> \n  👖             /|",
+        "  😍         ☺️ \n/👕\      /👗\ \n  👖          /|",
+        "  😍          😍 \n/👕\       /👗\ \n  👖           /|",
+        "  😘   😊 \n /👕\/👗\ \n   👖   /|",
+        " 😳  😁 \n /|\ /👙\ \n /     / |",
+        "😈    /😰\ \n<|\      👙 \n /🍆    / |",
+        "😅 \n/(),✊😮 \n /\         _/\\/|",
+        "😎 \n/\\_,__😫 \n  //    //       \\",
+        "😖 \n/\\_,💦_😋  \n  //         //        \\",
+        "  😭      ☺️ \n  /|\   /(👶)\ \n  /!\   / \ ",
+        "Abee aur kitna dekhoge be besharmi ki bhi hadd hoti hai..,The End 😂...",
+    ]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 103])
+
 @bot.on(admin_cmd(pattern=f"smoon$", outgoing=True))
 @bot.on(sudo_cmd(pattern="smoon$", allow_sudo=True))
 async def _(event):
@@ -450,4 +482,6 @@ CmdHelp("animoji").add_command(
   'sux', None, 'Wanna do sex wid me?'
 ).add_command(
   'fuck', None, 'Tapa tap tapa tap'
+).add_command(
+  'lovestory', None, 'A true love story😃'
 ).add()
