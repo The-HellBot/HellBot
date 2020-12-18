@@ -35,7 +35,7 @@ class Filters(BASE):
 Filters.__table__.create(checkfirst=True)
 
 
-def get_filters(chat_id, keyword):
+def get_filter(chat_id, keyword):
     try:
         return SESSION.query(Filters).get((str(chat_id), keyword))
     except:
