@@ -323,7 +323,7 @@ async def _(event):
     await asyncio.sleep(999)
 
 
-CmdHelp("animation2").add_command(
+CmdHelp("animations2").add_command(
   'boxs', None, 'Use and see'
 ).add_command(
   'rain', None, 'Use and see'
