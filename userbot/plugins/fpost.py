@@ -7,6 +7,7 @@ credit: @r4v4n4"""
 import string
 
 from userbot.utils import admin_cmd
+from userbot.cmdhelp import CmdHelp
 
 msg_cache = {}
 
@@ -26,3 +27,7 @@ async def _(event):
                     msg_cache[c] = msg
                     break
         await borg.forward_messages(destination, msg_cache[c])
+
+CmdHell("fpost").add_command(
+  'fpost', '<your msg>', 'Checks all your groups and sends the msg matching the given keyword'
+).add()
