@@ -62,6 +62,19 @@ async def _(event):
         await event.edit(
             "**😈YOU KNOW THAT I'M A GOOD PERSON. BUT DON'T GIVE ME REASON TO SHOW MY EVIL SIDE😈**"
         )
+        
+@bot.on(admin_cmd(pattern="gnt$", outgoing=True))
+@bot.on(sudo_cmd(pattern="gnt$", allow_sudo=True))
+async def gn(event):
+    await edit_or_reply(event, "｡♥｡･ﾟ♡ﾟ･｡♥｡･｡･｡･｡♥｡･\n╱╱╱╱╱╱╱╭╮╱╱╱╭╮╱╭╮╭╮\n╭━┳━┳━┳╯┃╭━┳╋╋━┫╰┫╰╮\n┃╋┃╋┃╋┃╋┃┃┃┃┃┃╋┃┃┃╭┫\n┣╮┣━┻━┻━╯╰┻━┻╋╮┣┻┻━╯\n╰━╯╱╱╱╱╱╱╱╱╱╱╰━╯\n｡♥｡･ﾟ♡ﾟ･｡♥° ♥｡･ﾟ♡ﾟ･"
+    )
+
+
+@bot.on(admin_cmd(pattern="gmg$", outgoing=True))
+@bot.on(sudo_cmd(pattern="gmg$", allow_sudo=True))
+async def gm(event):
+    await edit_or_reply(event, "｡♥｡･ﾟ♡ﾟ･｡♥｡･｡･｡･｡♥｡･｡♥｡･ﾟ♡ﾟ･\n╱╱╱╱╱╱╱╭╮╱╱╱╱╱╱╱╱╱╱╭╮\n╭━┳━┳━┳╯┃╭━━┳━┳┳┳━┳╋╋━┳┳━╮\n┃╋┃╋┃╋┃╋┃┃┃┃┃╋┃╭┫┃┃┃┃┃┃┃╋┃\n┣╮┣━┻━┻━╯╰┻┻┻━┻╯╰┻━┻┻┻━╋╮┃\n╰━╯╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╰━╯\n｡♥｡･ﾟ♡ﾟ･｡♥｡･｡･｡･｡♥｡･｡♥｡･ﾟ♡ﾟ･"
+    )
 
 @bot.on(admin_cmd(pattern=f"bombs$", outgoing=True))
 @bot.on(sudo_cmd(pattern=f"bombs$", allow_sudo=True))
@@ -351,4 +364,8 @@ CmdHelp("animations1").add_command(
   'yo', None, 'Shitty Yooooo animations. Like who wants it.. duhh'
 ).add_command(
   'evil', None, 'Wanna show your evilness?'
+).add_command(
+  'gmg', None, 'Cool Good Morning Animation'
+).add_command(
+  'gnt', None, 'Cool Good Night Animation'
 ).add()
