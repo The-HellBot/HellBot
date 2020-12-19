@@ -12,7 +12,7 @@ import userbot.plugins.sql_helper.gban_sql_helper as gban_sql
 
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 from userbot.cmdhelp import CmdHelp
-from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, admin_groups, get_user_from_event, hell_ID
+from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, get_user_from_event, hell_ID
 from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
 
 BANNED_RIGHTS = ChatBannedRights(
@@ -37,6 +37,18 @@ UNBAN_RIGHTS = ChatBannedRights(
     send_inline=None,
     embed_links=None,
 )
+
+async def admin_groups(kraken):
+    krakengroups = []
+    async for dialog in kraken.client.iter_dialogs():
+        entity = dialog.entity
+        if (
+            isinstance(entity, Channel)
+            and entity.megagroup
+            and (entity.creator or entity.admin_rights)
+        ):
+            krakengroups.append(entity.id)
+    return krakengroups
 
 @bot.on(admin_cmd(pattern=r"gban(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern=r"gban(?: |$)(.*)", allow_sudo=True))
