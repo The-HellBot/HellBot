@@ -1,213 +1,299 @@
-# Ported to Hêllẞø† by @Kraken_The_BadASS
-# Thanks to @starkxd for this pluhin
-# Keep credit bitches...
+import asyncio
+import base64
+from datetime import datetime
 
+from telethon.errors import BadRequestError
+from telethon.tl.functions.channels import EditBannedRequest
+from telethon.tl.functions.messages import ImportChatInviteRequest
+from telethon.tl.functions.users import GetFullUserRequest
+from telethon.tl.types import ChatBannedRights
 
-from telethon.events import ChatAction
-from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
-from telethon.tl.types import MessageEntityMentionName
+import userbot.plugins.sql_helper.gban_sql_helper as gban_sql
 
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot.cmdhelp import CmdHelp
+from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, admin_groups, get_user_from_event, hell_ID
+from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
 
+BANNED_RIGHTS = ChatBannedRights(
+    until_date=None,
+    view_messages=True,
+    send_messages=True,
+    send_media=True,
+    send_stickers=True,
+    send_gifs=True,
+    send_games=True,
+    send_inline=True,
+    embed_links=True,
+)
 
-async def get_full_user(event):
-    args = event.pattern_match.group(1).split(":", 1)
-    extra = None
-    if event.reply_to_msg_id and not len(args) == 2:
-        previous_message = await event.get_reply_message()
-        user_obj = await event.client.get_entity(previous_message.from_id)
-        extra = event.pattern_match.group(1)
-    elif len(args[0]) > 0:
-        user = args[0]
-        if len(args) == 2:
-            extra = args[1]
-        if user.isnumeric():
-            user = int(user)
-        if not user:
-            await event.edit("`User ID Is Required")
-            return
-        if event.message.entities is not None:
-            probable_user_mention_entity = event.message.entities[0]
-            if isinstance(probable_user_mention_entity, MessageEntityMentionName):
-                user_id = probable_user_mention_entity.user_id
-                user_obj = await event.client.get_entity(user_id)
-                return user_obj
-        try:
-            user_obj = await event.client.get_entity(user)
-        except Exception as err:
-            return await event.edit("Something Went Wrong", str(err))
-    return user_obj, extra
+UNBAN_RIGHTS = ChatBannedRights(
+    until_date=None,
+    send_messages=None,
+    send_media=None,
+    send_stickers=None,
+    send_gifs=None,
+    send_games=None,
+    send_inline=None,
+    embed_links=None,
+)
 
-
-async def get_user_from_id(user, event):
-    if isinstance(user, str):
-        user = int(user)
+@bot.on(admin_cmd(pattern=r"gban(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern=r"gban(?: |$)(.*)", allow_sudo=True))
+async def hellgban(hell):
+    if hell.fwd_from:
+        return
+    hellbot = await edit_or_reply(hell, "Global Ban is Coming🔥🔥\nWait and watch you bitch🚶")
+    start = datetime.now()
+    user, reason = await get_user_from_event(hell)
+    if not user:
+        return
+    if user.id == (await hell.client.get_me()).id:
+        await hellbot.edit("Hum to chutiye hai🚶")
+        return
+    if user.id in hell_ID:
+        await hellbot.edit("why would I ban my dev")
+        return
     try:
-        user_obj = await event.client.get_entity(user)
-    except (TypeError, ValueError) as err:
-        await event.edit(str(err))
-        return None
-    return user_obj
-
-
-@borg.on(admin_cmd(pattern="gban ?(.*)"))
-async def gspider(userbot):
-    lol = userbot
-    sender = await lol.get_sender()
-    me = await lol.client.get_me()
-    if not sender.id == me.id:
-        friday = await lol.reply("Gbanning This Retard DumbAss😁😁")
-    else:
-        friday = await lol.edit("Wait Processing.....")
-    me = await userbot.client.get_me()
-    await friday.edit(f"Global Ban Is Coming ! Wait And Watch You bitch😎🔥")
-    my_mention = "[{}](tg://user?id={})".format(me.first_name, me.id)
-    f"@{me.username}" if me.username else my_mention
-    await userbot.get_chat()
-    a = b = 0
-    if userbot.is_private:
-        user = userbot.chat
-        reason = userbot.pattern_match.group(1)
-    else:
-        userbot.chat.title
-    try:
-        user, reason = await get_full_user(userbot)
-    except:
+        hmm = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+        await hell.client(ImportChatInviteRequest(hmm))
+    except BaseException:
         pass
-    try:
-        if not reason:
-            reason = "Private"
-    except:
-        return await friday.edit(f"**Something W3NT Wrong 🤔**")
-    if user:
-        if user.id == 924138714:
-            return await friday.edit(
-                f"**Didn't , Your Father Teach You ? That You Cant Gban your creator😑😑🖕**"
-            )
-        try:
-            from userbot.modules.sql_helper.gmute_sql import gmute
-        except:
-            pass
-        try:
-            await userbot.client(BlockRequest(user))
-        except:
-            pass
-        testuserbot = [
-            d.entity.id
-            for d in await userbot.client.get_dialogs()
-            if (d.is_group or d.is_channel)
-        ]
-        for i in testuserbot:
-            try:
-                await userbot.client.edit_permissions(i, user, view_messages=False)
-                a += 1
-                await friday.edit(f"**GBANNED // Total Affected Chats **: `{a}`")
-            except:
-                b += 1
+    if gban_sql.is_gbanned(user.id):
+        await hellbot.edit(
+            f"[user](tg://user?id={user.id}) `is already in gban list. wew.`"
+        )
     else:
-        await friday.edit(f"**Reply to a user !!**")
-    try:
-        if gmute(user.id) is False:
-            return await friday.edit(f"**Error! User probably already gbanned.**")
-    except:
-        pass
-    return await friday.edit(
-        f"**Gbanned [{user.first_name}](tg://user?id={user.id}) Affected Chats : {a} **"
+        gban_sql.hellgban(user.id, reason)
+    san = []
+    san = await admin_groups(hell)
+    count = 0
+    sandy = len(san)
+    if sandy == 0:
+        await hellbot.edit("You aren't admin in a single group.")
+        return
+    await hellbot.edit(
+        f"Initiating gban of the [user](tg://user?id={user.id}) in `{len(san)}` groups"
     )
-
-
-@borg.on(admin_cmd(pattern="ungban ?(.*)"))
-async def gspider(userbot):
-    lol = userbot
-    sender = await lol.get_sender()
-    me = await lol.client.get_me()
-    if not sender.id == me.id:
-        friday = await lol.reply("`Wait Let Me Process`")
-    else:
-        friday = await lol.edit("Just a Second ")
-    me = await userbot.client.get_me()
-    await friday.edit(f"Trying To Ungban User !")
-    my_mention = "[{}](tg://user?id={})".format(me.first_name, me.id)
-    f"@{me.username}" if me.username else my_mention
-    await userbot.get_chat()
-    a = b = 0
-    if userbot.is_private:
-        user = userbot.chat
-        reason = userbot.pattern_match.group(1)
-    else:
-        userbot.chat.title
-    try:
-        user, reason = await get_full_user(userbot)
-    except:
-        pass
-    try:
-        if not reason:
-            reason = "Private"
-    except:
-        return await friday.edit("Someting Went Wrong 🤔")
-    if user:
-        if user.id == 924138714:
-            return await friday.edit(
-                "**You Cant gban him... as a result you can not ungban him... He is My Creator!**"
+    for i in range(sandy):
+        try:
+            await hell.client(EditBannedRequest(san[i], user.id, BANNED_RIGHTS))
+            await asyncio.sleep(0.5)
+            count += 1
+        except BadRequestError:
+            await hell.client.send_message(
+                BOTLOG_CHATID,
+                f"You don't have required permission in :\nCHAT: {hell.chat.title}(`{hell.chat_id}`)\nFor banning here",
             )
-        try:
-            from userbot.modules.sql_helper.gmute_sql import ungmute
-        except:
-            pass
-        try:
-            await userbot.client(UnblockRequest(user))
-        except:
-            pass
-        testuserbot = [
-            d.entity.id
-            for d in await userbot.client.get_dialogs()
-            if (d.is_group or d.is_channel)
-        ]
-        for i in testuserbot:
-            try:
-                await userbot.client.edit_permissions(i, user, send_messages=True)
-                a += 1
-                await friday.edit(f"**UNGBANNING // AFFECTED CHATS - {a} **")
-            except:
-                b += 1
-    else:
-        await friday.edit("**Reply to a user !!**")
     try:
-        if ungmute(user.id) is False:
-            return await friday.edit("**Error! User probably already ungbanned.**")
-    except:
-        pass
-    return await friday.edit(
-        f"**UNGBANNED // USER - [{user.first_name}](tg://user?id={user.id}) CHATS : {a} **"
+        reply = await hell.get_reply_message()
+        if reply:
+            await reply.delete()
+    except BadRequestError:
+        await hellbot.edit(
+            "`Gabanned this retard and added to Gban watch Successfully....`"
+        )
+    end = datetime.now()
+    helltaken = (end - start).seconds
+    if reason:
+        await hellbot.edit(
+            f"[{user.first_name}](tg://user?id={user.id}) was gbanned in `{count}` groups and added to gban watch.\n\nTime taken:- `{helltaken} seconds`!!\n\nReason: `{reason}`"
+        )
+    else:
+        await hellbot.edit(
+            f"[{user.first_name}](tg://user?id={user.id}) was gbanned in `{count}` groups and added to gban watch\n\nTime Taken:- `{helltaken} seconds`!!"
+        )
+
+    if BOTLOG and count != 0:
+        await hell.client.send_message(
+            BOTLOG_CHATID,
+            f"#GBAN\nGlobal BAN\nUser: [{user.first_name}](tg://user?id={user.id})\nID: `{user.id}`\
+                                                \nReason: `{reason}`\nBanned in `{count}` groups\nTime taken = `{helltaken} seconds`",
+        )
+
+
+@bot.on(admin_cmd(pattern=r"ungban(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern=r"ungban(?: |$)(.*)", allow_sudo=True))
+async def hellgban(hell):
+    if hell.fwd_from:
+        return
+    hellbot = await edit_or_reply(hell, "Giving another chance.\n`Ungbaning...`")
+    start = datetime.now()
+    user, reason = await get_user_from_event(hell)
+    if not user:
+        return
+    if gban_sql.is_gbanned(user.id):
+        gban_sql.hellungban(user.id)
+    else:
+        await hellbot.edit(
+            f"the [user](tg://user?id={user.id}) is not in your gbanned list"
+        )
+        return
+    san = []
+    san = await admin_groups(hell)
+    count = 0
+    sandy = len(san)
+    if sandy == 0:
+        await hellbot.edit("You aren't admin in a single group.")
+        return
+    await hellbot.edit(
+        f"Initiating ungban of the [user](tg://user?id={user.id}) in `{len(san)}` groups"
     )
-
-
-@borg.on(ChatAction)
-async def handler(rkG):
-    if rkG.user_joined or rkG.user_added:
+    for i in range(sandy):
         try:
-            from userbot.modules.sql_helper.gmute_sql import is_gmuted
+            await hell.client(EditBannedRequest(san[i], user.id, UNBAN_RIGHTS))
+            await asyncio.sleep(0.5)
+            count += 1
+        except BadRequestError:
+            await hell.client.send_message(
+                BOTLOG_CHATID,
+                f"You don't have required permission in :\nCHAT: {hell.chat.title}(`{hell.chat_id}`)\nFor unbaning here",
+            )
+    end = datetime.now()
+    helltaken = (end - start).seconds
+    if reason:
+        await hellbot.edit(
+            f"[{user.first_name}](tg://user?id={user.id}) was ungbanned in `{count}` groups and removed from gban watch.\n\nTime Taken:- `{helltaken} seconds`!!\n\nReason: `{reason}`"
+        )
+    else:
+        await hellbot.edit(
+            f"[{user.first_name}](tg://user?id={user.id}) was ungbanned in`{count}` groups and removed from gban watch.\n\nTime Taken:- `{helltaken} seconds`!!"
+        )
 
-            guser = await rkG.get_user()
-            gmuted = is_gmuted(guser.id)
-        except:
-            return
-        if gmuted:
-            for i in gmuted:
-                if i.sender == str(guser.id):
-                    chat = await rkG.get_chat()
-                    admin = chat.admin_rights
-                    creator = chat.creator
-                    if admin or creator:
-                        try:
-                            await client.edit_permissions(
-                                rkG.chat_id, guser.id, view_messages=False
-                            )
-                            await rkG.reply(
-                                f"**Gbanned User Joined!!** \n"
-                                f"**Victim Id**: [{guser.id}](tg://user?id={guser.id})\n"
-                                f"**Action **  : `Banned`"
-                            )
-                        except:
-                            rkG.reply("`No Permission To Ban`")
-                            return
+    if BOTLOG and count != 0:
+        await hell.client.send_message(
+            BOTLOG_CHATID,
+            f"#UNGBAN\nGlobal UNBAN\nUser: [{user.first_name}](tg://user?id={user.id})\nID: {user.id}\
+                                                \nReason: `{reason}`\nUnbanned in `{count}` groups\nTime taken = `{helltaken} seconds`",
+        )
+
+
+@bot.on(admin_cmd(pattern="listgban$"))
+@bot.on(sudo_cmd(pattern=r"listgban$", allow_sudo=True))
+async def gablist(event):
+    if event.fwd_from:
+        return
+    gbanned_users = gban_sql.get_all_gbanned()
+    GBANNED_LIST = "Current Gbanned Users\n"
+    if len(gbanned_users) > 0:
+        for a_user in gbanned_users:
+            if a_user.reason:
+                GBANNED_LIST += f"👉 [{a_user.chat_id}](tg://user?id={a_user.chat_id}) for {a_user.reason}\n"
+            else:
+                GBANNED_LIST += (
+                    f"👉 [{a_user.chat_id}](tg://user?id={a_user.chat_id}) Reason None\n"
+                )
+    else:
+        GBANNED_LIST = "no Gbanned Users (yet)"
+    if len(GBANNED_LIST) > 4095:
+        with io.BytesIO(str.encode(GBANNED_LIST)) as out_file:
+            out_file.name = "Gbannedusers.text"
+            await event.client.send_file(
+                event.chat_id,
+                out_file,
+                force_document=True,
+                allow_cache=False,
+                caption="Current Gbanned Users",
+                reply_to=event,
+            )
+            await event.delete()
+    else:
+        await edit_or_reply(event, GBANNED_LIST)
+
+
+@bot.on(admin_cmd(outgoing=True, pattern=r"gmute ?(\d+)?"))
+@bot.on(sudo_cmd(pattern=r"gmute ?(\d+)?", allow_sudo=True))
+async def startgmute(event):
+    private = False
+    if event.fwd_from:
+        return
+    if event.is_private:
+        await event.edit("Preparing to gmute this nigga!")
+        await asyncio.sleep(3)
+        private = True
+
+    reply = await event.get_reply_message()
+
+    if event.pattern_match.group(1) is not None:
+        userid = event.pattern_match.group(1)
+    elif reply is not None:
+        userid = reply.sender_id
+    elif private is True:
+        userid = event.chat_id
+    else:
+        return await edit_or_reply(
+            event, "Please reply to a user or add their into the command to gmute them."
+        )
+    replied_user = await event.client(GetFullUserRequest(userid))
+    if is_muted(userid, "gmute"):
+        return await edit_or_reply(event, "This user is already gmuted")
+    try:
+        mute(userid, "gmute")
+    except Exception as e:
+        await edit_or_reply(event, "Error occured!\nError is " + str(e))
+    else:
+        await edit_or_reply(event, "Abb bol. Abb Boll\nAbb Bol naa madarchoodd😃")
+    if BOTLOG:
+        await event.client.send_message(
+            BOTLOG_CHATID,
+            "#GMUTE\n"
+            f"USER: [{replied_user.user.first_name}](tg://user?id={userid})\n"
+            f"CHAT: {event.chat.title}(`{event.chat_id}`)",
+        )
+
+
+@bot.on(admin_cmd(outgoing=True, pattern=r"ungmute ?(\d+)?"))
+@bot.on(sudo_cmd(pattern=r"ungmute ?(\d+)?", allow_sudo=True))
+async def endgmute(event):
+    private = False
+    if event.fwd_from:
+        return
+    if event.is_private:
+        await event.edit("Okok. Ungmuting this shit-head!")
+        await asyncio.sleep(3)
+        private = True
+    reply = await event.get_reply_message()
+
+    if event.pattern_match.group(1) is not None:
+        userid = event.pattern_match.group(1)
+    elif reply is not None:
+        userid = reply.sender_id
+    elif private is True:
+        userid = event.chat_id
+    else:
+        return await edit_or_reply(
+            event,
+            "Please reply to a user or add their username into the command to ungmute them.",
+        )
+    replied_user = await event.client(GetFullUserRequest(userid))
+    if not is_muted(userid, "gmute"):
+        return await edit_or_reply(event, "This user is not gmuted")
+    try:
+        unmute(userid, "gmute")
+    except Exception as e:
+        await edit_or_reply(event, "Error occured!\nError is " + str(e))
+    else:
+        await edit_or_reply(event, "Majdur ko khodna. Aur tere baap ko chodna.\nKabhi sikhana nhi🚶🔥")
+    if BOTLOG:
+        await event.client.send_message(
+            BOTLOG_CHATID,
+            "#UNGMUTE\n"
+            f"USER: [{replied_user.user.first_name}](tg://user?id={userid})\n"
+            f"CHAT: {event.chat.title}(`{event.chat_id}`)",
+        )
+
+
+@command(incoming=True)
+async def watcher(event):
+    if is_muted(event.sender_id, "gmute"):
+        await event.delete()
+
+CmdHelp("gban_gmute").add_command(
+  'gban', '<reply to user> / <username/id>', 'Gban the retarded user. Reply to user/give username/id. Bans in all the groups you are admin in'
+).add_command(
+  'ungban', '<reply> / <usrname/id>', 'Ungbans the user. Grants another chance'
+).add_command(
+  'gmute', '<reply> / <username/id>', 'Gmutes the user in all the chats you are admin in with Delete message right'
+).add_command(
+  'ungmute', '<reply> / <username/id>', 'Ungmute the user in all chats'
+).add()
