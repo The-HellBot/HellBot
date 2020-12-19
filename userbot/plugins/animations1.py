@@ -214,6 +214,33 @@ async def _(event):
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 5], link_preview=True)
+        
+        
+@bot.on(admin_cmd(pattern="muth$"))
+@bot.on(sudo_cmd(pattern="muth$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    animation_interval = 0.8
+    animation_ttl = range(12)
+    event = await edit_or_reply(event, "muth")
+animation_chars = [
+            "8✊️===D",
+            "8=✊️==D",
+            "8==✊️=D",
+            "8===✊️D",
+            "8==✊️=D",
+            "8=✊️==D",
+            "8✊️===D",
+            "8=✊==D",
+            "8==✊=D",
+            "8===✊️D💦",
+            "8==✊️=D💦💦",
+            "8=✊️==D💦💦💦",
+        ]
+        for i in animation_ttl:
+            await asyncio.sleep(animation_interval)
+            await event.edit(animation_chars[i % 12], link_preview=True)
 
 
 @bot.on(admin_cmd(pattern="ding$"))
@@ -386,4 +413,6 @@ CmdHelp("animations1").add_command(
   'gmg', None, 'Cool Good Morning Animation'
 ).add_command(
   'gnt', None, 'Cool Good Night Animation'
+).add_command(
+  'muth', None, 'Fapping✊'
 ).add()
