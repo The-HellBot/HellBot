@@ -228,15 +228,15 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 12])
         
-@bot.on(admin_cmd(pattern=r"hack$", outgoing=True))
-@bot.on(sudo_cmd(pattern=r"hack$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=f"hack$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"hack$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    animation_interval = 2
+    animation_interval = 0.3
     animation_ttl = range(15)
-    event = await edit_or_reply(event, "`Hacking targeted Account.`")
-animation_chars = [
+    event = await edit_or_reply(event, "`Hacking this kid....`")
+    animation_chars = [
             "Looking for WhatsApp databases in targeted person...",
             " User online: True\nTelegram access: True\nRead Storage: True ",
             "Hacking... 0%\n[░░░░░░░░░░░░░░░░░░░░]\n`Looking for WhatsApp...`\nETA: 0m, 20s",
