@@ -216,32 +216,6 @@ async def _(event):
         await event.edit(animation_chars[i % 5], link_preview=True)
         
         
-@bot.on(admin_cmd(pattern="muth$"))
-@bot.on(sudo_cmd(pattern="muth$", allow_sudo=True))
-async def _(event):
-    if event.fwd_from:
-        return
-    animation_interval = 0.8
-    animation_ttl = range(12)
-    event = await edit_or_reply(event, "muth")
-animation_chars = [
-            "8✊️===D",
-            "8=✊️==D",
-            "8==✊️=D",
-            "8===✊️D",
-            "8==✊️=D",
-            "8=✊️==D",
-            "8✊️===D",
-            "8=✊==D",
-            "8==✊=D",
-            "8===✊️D💦",
-            "8==✊️=D💦💦",
-            "8=✊️==D💦💦💦",
-    ]
-    for i in animation_ttl:
-      await asyncio.sleep(animation_interval)
-      await event.edit(animation_chars[i % 12], link_preview=True)
-
 
 @bot.on(admin_cmd(pattern="ding$"))
 @bot.on(sudo_cmd(pattern="ding$", allow_sudo=True))
@@ -297,6 +271,33 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 15])
 
+
+@bot.on(admin_cmd(pattern=f"hypno$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"hypno$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    animation_interval = 0.3
+    animation_ttl = range(15)
+    event = await edit_or_reply(event, "hypno....")
+    animation_chars = [
+        "8✊===D",
+        "8=✊==D",
+        "8==✊=D",
+        "8===✊D",
+        "8==✊=D",
+        "8=✊==D",
+        "8✊===D",
+        "8=✊==D",
+        "8==✊=D",
+        "8===✊D💦",
+        "8===✊D💦💦",
+        "8===✊D💦💦💦",
+    ]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 15])
+        
 
 @bot.on(admin_cmd(pattern=r"candy$"))
 @bot.on(sudo_cmd(pattern=r"candy$", allow_sudo=True))
