@@ -9,6 +9,22 @@ from userbot.cmdhelp import CmdHelp
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
+@bot.on(admin_cmd(pattern=f"indflag$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"indflag$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    animation_interval = 0.1
+    animation_ttl = range(0, 36)
+    await edit_or_reply(event, "Hello")
+    animation_chars = [
+        "Indian Flag",
+        "**🟧🟧🟧🟧🟧🟧🟧🟧🟧🟧🟧🟧🟧\n🟧🟧🟧🟧🟧🟧🟧🟧🟧🟧🟧🟧🟧\n🟧🟧🟧🟧🟧🟧🟧🟧🟧🟧🟧🟧🟧\n⬜️⬜️⬜️⬜️⬜️🟦🟦🟦⬜️⬜️⬜️⬜️⬜️\n⬜️⬜️⬜️⬜️⬜️🟦🟦🟦⬜️⬜️⬜️⬜️⬜️\n⬜️⬜️⬜️⬜️⬜️🟦🟦🟦⬜️⬜️⬜️⬜️⬜️\n🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩\n🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩\n🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩\n\n                🧡🤍💚\n\nProud To Be An Indian❣️!!**",
+    ]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 18])
+
 @bot.on(admin_cmd(pattern="yo$"))
 @bot.on(sudo_cmd(pattern="yo$", allow_sudo=True))
 async def Ooo(e):
@@ -339,6 +355,8 @@ async def timer_blankx(e):
 
 
 CmdHelp("animations1").add_command(
+  'indflag', None, '🇮🇳🇮🇳🇮🇳'
+).add_command(
   'stupid', None, 'Use and see'
 ).add_command(
   'bombs', None, 'Use and see'
