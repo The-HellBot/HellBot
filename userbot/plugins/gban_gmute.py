@@ -65,19 +65,19 @@ async def hellgban(hell):
         )
     else:
         gban_sql.hellgban(user.id, reason)
-    san = []
-    san = await admin_groups(hell)
+    gbun = []
+    gbun = await admin_groups(hell)
     count = 0
-    sandy = len(san)
-    if sandy == 0:
+    gbamm = len(gbun)
+    if gbamm == 0:
         await hellbot.edit("You aren't admin in a single group.")
         return
     await hellbot.edit(
-        f"Initiating gban of the [user](tg://user?id={user.id}) in `{len(san)}` groups"
+        f"Initiating gban of the [user](tg://user?id={user.id}) in `{len(gbun)}` groups"
     )
-    for i in range(sandy):
+    for i in range(gbamm):
         try:
-            await hell.client(EditBannedRequest(san[i], user.id, BANNED_RIGHTS))
+            await hell.client(EditBannedRequest(gbun[i], user.id, BANNED_RIGHTS))
             await asyncio.sleep(0.5)
             count += 1
         except BadRequestError:
@@ -129,19 +129,19 @@ async def hellgban(hell):
             f"the [user](tg://user?id={user.id}) is not in your gbanned list"
         )
         return
-    san = []
-    san = await admin_groups(hell)
+    gbun = []
+    gbun = await admin_groups(hell)
     count = 0
-    sandy = len(san)
-    if sandy == 0:
+    gbamm = len(gbun)
+    if gbamm == 0:
         await hellbot.edit("You aren't admin in a single group.")
         return
     await hellbot.edit(
-        f"Initiating ungban of the [user](tg://user?id={user.id}) in `{len(san)}` groups"
+        f"Initiating ungban of the [user](tg://user?id={user.id}) in `{len(gbun)}` groups"
     )
-    for i in range(sandy):
+    for i in range(gbamm):
         try:
-            await hell.client(EditBannedRequest(san[i], user.id, UNBAN_RIGHTS))
+            await hell.client(EditBannedRequest(gbun[i], user.id, UNBAN_RIGHTS))
             await asyncio.sleep(0.5)
             count += 1
         except BadRequestError:
