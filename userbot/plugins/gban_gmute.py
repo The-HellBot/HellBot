@@ -12,7 +12,7 @@ import userbot.plugins.sql_helper.gban_sql_helper as gban_sql
 
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 from userbot.cmdhelp import CmdHelp
-from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, get_user_from_event, hell_ID
+from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, hell_ID
 from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
 
 BANNED_RIGHTS = ChatBannedRights(
