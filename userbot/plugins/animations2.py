@@ -252,10 +252,10 @@ animation_chars = [
             "Hacking... 100%\n[████████████████████]\n`Scanning file...`\nETA: 0m, 00s",
             "Hacking complete!\nUploading file...",
             "Targeted Account Hacked...!\n\n ✅ File has been successfully uploaded to my server.\nWhatsApp Database:\n`./DOWNLOADS/msgstore.db.crypt12`",
-        ]
-        for i in animation_ttl:
-            await asyncio.sleep(animation_interval)
-            await event.edit(animation_chars[i % 15])
+    ]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 15])
 
 @bot.on(admin_cmd(pattern=r"jio$", outgoing=True))
 @bot.on(sudo_cmd(pattern=r"jio$", allow_sudo=True))
