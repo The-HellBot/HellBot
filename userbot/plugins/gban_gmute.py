@@ -56,7 +56,7 @@ async def get_user_from_id(user, event):
     return user_obj
 
 @bot.on(admin_cmd(pattern="gban ?(.*)"))
-@bot.on(sudo_cmd(pattern="gban ?(.*)", allow_sudo))
+@bot.on(sudo_cmd(pattern="gban ?(.*)", allow_sudo=True))
 async def gban(userbot):
     ids = userbot
     sender = await ids.get_sender()
@@ -213,3 +213,14 @@ async def handler(kraken):
                  except:       
                     kraken.reply("`Sheit!! No permission to ban users.\n@admins ban this retard.\nGlobally Banned User And A Potential Spammer`\n**Make your group a safe place by cleaning this shit**")                   
                     return
+                  
+                  
+CmdHelp("gban_gmute").add_command(
+  'gban', '<reply> / <userid> / <username>', 'Gbans the targeted user and adds to gban watch list'
+).add_command(
+  'ungban', '<reply> / <userid> / <username>', 'Unbans the targeted user and removes them from gban watch list. Grants another Chance'
+).add_command(
+  'gmute', '<reply>/ <userid>/ <username>', 'Gmutes the targeted user. Works only if you have delete msg permission. (Works on admins too)'
+).add_command(
+  'ungmute', '<reply>/ <userid>/ <username>', 'Ungmutes the user. Now targeted user is free'
+).add()
