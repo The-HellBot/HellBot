@@ -12,6 +12,7 @@ Syntax:
 # there might be some changes made to suit the needs for this repository
 # Licensed under MIT License
 # Fixed By @StarkxD
+# Added sudo_cmd and fixed bugs by @Kraken_The_BadASS
 
 import asyncio
 import json
@@ -28,7 +29,8 @@ from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.file import Storage
 from telethon import events
 
-from userbot.utils import admin_cmd, humanbytes, progress
+from userbot.utils import admin_cmd, humanbytes, progress, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 # Path to token json file, it should be in same directory as script
 G_DRIVE_TOKEN_FILE = Config.TMP_DOWNLOAD_DIRECTORY + "/auth_token.txt"
@@ -45,19 +47,19 @@ G_DRIVE_F_PARENT_ID = None
 G_DRIVE_DIR_MIME_TYPE = "application/vnd.google-apps.folder"
 
 
-@borg.on(admin_cmd(pattern="gdrive ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="gdrive ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="gdrive ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    mone = await event.reply("Processing The File ...")
+    mone = await edit_or_reply(event, "Processing The File ...")
     if CLIENT_ID is None or CLIENT_SECRET is None:
         await mone.edit(
             "This module requires credentials from https://da.gd/so63O. Aborting!"
         )
         return
     if Config.PLUGIN_CHANNEL is None:
-        await event.edit(
-            "Please set the required environment variable `PLUGIN_CHANNEL` for this plugin to work"
+        await edit_or_reply(event, "Please set the required environment variable `PLUGIN_CHANNEL` for this plugin to work"
         )
         return
     input_str = event.pattern_match.group(1)
@@ -128,7 +130,7 @@ async def _(event):
         await mone.edit("File Not found in local server. Give me a file path :((")
 
 
-@borg.on(
+@bot.on(
     admin_cmd(
         pattern="dfolder https?://drive\.google\.com/drive/u/\d/folders/([-\w]{25,})",
         allow_sudo=True,
@@ -137,7 +139,7 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    mone = await event.reply("Processing ...")
+    mone = await edit_or_reply(event, "Processing ...")
     input_str = event.pattern_match.group(1)
     if input_str:
         G_DRIVE_F_PARENT_ID = input_str
@@ -151,28 +153,29 @@ async def _(event):
         )
 
 
-@borg.on(admin_cmd(pattern="gclear", allow_sudo=True))
+@bot.on(admin_cmd(pattern="gclear", outgoing=True))
+@bot.on(sudo_cmd(pattern="gclear", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    mone = await event.reply("Processing ...")
+    mone = await edit_or_reply(event, "Processing ...")
     await mone.edit("Custom Folder ID cleared successfully.")
     await event.delete()
 
 
-@borg.on(admin_cmd(pattern="gdir ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="gdir ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="gdir ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    mone = await event.reply("Processing ...")
+    mone = await edit_or_reply(event, "Processing ...")
     if CLIENT_ID is None or CLIENT_SECRET is None:
         await mone.edit(
             "This module requires credentials from https://da.gd/so63O. Aborting!"
         )
         return
     if Config.PLUGIN_CHANNEL is None:
-        await event.edit(
-            "Please set the required environment variable `PLUGIN_CHANNEL` for this plugin to work"
+        await edit_or_reply(event, "Please set the required environment variable `PLUGIN_CHANNEL` for this plugin to work"
         )
         return
     input_str = event.pattern_match.group(1)
@@ -199,19 +202,19 @@ async def _(event):
         await mone.edit(f"directory {input_str} does not seem to exist")
 
 
-@borg.on(admin_cmd(pattern="drive (delete|get) ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="drive (delete|get) ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="drive (delete|get) ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    mone = await event.reply("Processing ...")
+    mone = await edit_or_reply(event, "Processing ...")
     if CLIENT_ID is None or CLIENT_SECRET is None:
         await mone.edit(
             "This module requires credentials from https://da.gd/so63O. Aborting!"
         )
         return
     if Config.PLUGIN_CHANNEL is None:
-        await event.edit(
-            "Please set the required environment variable `PLUGIN_CHANNEL` for this plugin to work"
+        await edit_or_reply(event, "Please set the required environment variable `PLUGIN_CHANNEL` for this plugin to work"
         )
         return
     t_reqd_comd = event.pattern_match.group(1)
@@ -235,19 +238,19 @@ async def _(event):
     await mone.edit(response_from_svc)
 
 
-@borg.on(admin_cmd(pattern="sdrive ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="sdrive ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="sdrive ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    mone = await event.reply("Processing ...")
+    mone = await edit_or_reply(event, "Processing ...")
     if CLIENT_ID is None or CLIENT_SECRET is None:
         await mone.edit(
             "This module requires credentials from https://da.gd/so63O. Aborting!"
         )
         return
     if Config.PLUGIN_CHANNEL is None:
-        await event.edit(
-            "Please set the required environment variable `PLUGIN_CHANNEL` for this plugin to work"
+        await edit_or_reply(event, "Please set the required environment variable `PLUGIN_CHANNEL` for this plugin to work"
         )
         return
     input_str = event.pattern_match.group(1).strip()
