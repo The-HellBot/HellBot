@@ -390,4 +390,6 @@ CmdHelp("gDrive").add_command(
   'drivesch', 'Keyword', 'Searchs for the file in gdrive'
 ).add_command(
   'ugdrive', 'link/reply', 'Uploads the file to gdrive'
+).add_command(
+  'gdl', '<link>', 'Downloads the file/media from the provided gdrive link'
 ).add()
