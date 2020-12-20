@@ -1,8 +1,11 @@
 from userbot import *
 from userbot.utils import *
 from userbot.cmdhelp import CmdHelp
+from telethon.events import NewMessage
+from telethon.tl.custom import Dialog
+from telethon.tl.types import Channel, Chat, User
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
+DEFAULTUSER = inline_mention(await event.client.get_me())
 
 ludosudo = Config.SUDO_USERS
 
