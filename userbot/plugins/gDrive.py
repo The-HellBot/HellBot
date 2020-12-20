@@ -19,7 +19,7 @@ from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.file import Storage
 from telethon import events
 
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 
 # Path to token json file, it should be in same directory as script
 G_DRIVE_TOKEN_FILE = Var.TEMP_DOWNLOAD_DIRECTORY + "/auth_token.txt"
@@ -35,11 +35,12 @@ G_DRIVE_DIR_MIME_TYPE = "application/vnd.google-apps.folder"
 
 
 # @command(pattern="^.ugdrive ?(.*)")
-@borg.on(admin_cmd(pattern=r"ugdrive ?(.*)"))
+@bot.on(admin_cmd(pattern=r"ugdrive ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"ugdrive ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    mone = await event.reply("Processing ...")
+    mone = await edit_or_reply(event, "Processing ...")
     if CLIENT_ID is None or CLIENT_SECRET is None:
         await mone.edit(
             "This module requires credentials from https://da.gd/so63O. Aborting!"
@@ -116,13 +117,13 @@ async def _(event):
 
 
 # @command(pattern="^.drivesch ?(.*)")
-@borg.on(admin_cmd(pattern=r"drivesch ?(.*)"))
+@bot.on(admin_cmd(pattern=r"drivesch ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pwttern=r"drivesch ?(.*)", allow_sudo=True))
 async def sch(event):
     if event.fwd_from:
         return
     if CLIENT_ID is None or CLIENT_SECRET is None:
-        await event.edit(
-            "This module requires credentials from https://da.gd/so63O. Aborting!"
+        await edit_or_reply(event, "This module requires credentials from https://da.gd/so63O. Aborting!"
         )
         return False
     try:
@@ -142,7 +143,7 @@ async def sch(event):
         # Authorize, get file parameters, upload file and print out result URL for download
     http = authorize(G_DRIVE_TOKEN_FILE, None)
     input_str = event.pattern_match.group(1).strip()
-    await event.edit("Searching for {} in G-Drive.".format(input_str))
+    await edit_or_reply(event, "Searching for {} in G-Drive.".format(input_str))
     if parent_id is not None:
         query = "'{}' in parents and (title contains '{}')".format(parent_id, input_str)
     else:
@@ -151,7 +152,7 @@ async def sch(event):
         parent_id, input_str
     )  # search_query(parent_id,input_str)
     msg = await gsearch(http, query, input_str)
-    await event.edit(str(msg))
+    await edit_or_reply(event, str(msg))
 
 
 async def gsearch(http, query, filename):
@@ -192,17 +193,18 @@ async def gsearch(http, query, filename):
 
 
 # @command(pattern="^.gdrivedir ?(.*)")
-@borg.on(admin_cmd(pattern=r"gdrivedir ?(.*)"))
+@bot.on(admin_cmd(pattern=r"gdrivedir ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"gdrivedir ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     if CLIENT_ID is None or CLIENT_SECRET is None:
-        await event.edit(
+        await edit_or_reply(event, 
             "This module requires credentials from https://da.gd/so63O. Aborting!"
         )
         return
     if Var.PRIVATE_GROUP_ID is None:
-        await event.edit(
+        await edit_or_reply(event, 
             "Please set the required environment variable `PRIVATE_GROUP_ID` for this plugin to work"
         )
         return
@@ -228,17 +230,17 @@ async def _(event):
         )
         # Authorize, get file parameters, upload file and print out result URL for download
         # first, create a sub-directory
-        await event.edit("Uploading `{}` to G-Drive...".format(input_str))
+        await edit_or_reply(event, "Uploading `{}` to G-Drive...".format(input_str))
         dir_id = await create_directory(
             http, os.path.basename(os.path.abspath(input_str)), parent_id
         )
         await DoTeskWithDir(http, input_str, event, dir_id)
         dir_link = "https://drive.google.com/folderview?id={}".format(dir_id)
-        await event.edit(
+        await edit_or_reply(event, 
             f"__Successfully Uploaded Folder To G-Drive...__\n[{input_str}]({dir_link})"
         )
     else:
-        await event.edit(f"directory {input_str} does not seem to exist")
+        await edit_or_reply(event, f"directory {input_str} does not seem to exist")
 
 
 async def create_directory(http, directory_name, parent_id):
@@ -357,7 +359,7 @@ async def upload_file(http, file_path, file_name, mime_type, event, parent_id):
             )
             if display_message != current_message:
                 try:
-                    await event.edit(current_message)
+                    await edit_or_reply(event, current_message)
                     display_message = current_message
                 except Exception as e:
                     logger.info(str(e))
@@ -371,9 +373,20 @@ async def upload_file(http, file_path, file_name, mime_type, event, parent_id):
 
 
 # @command(pattern="^.gfolder ?(.*)")
-@borg.on(admin_cmd(pattern=r"gfolder ?(.*)"))
+@bot.on(admin_cmd(pattern=r"gfolder ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"gfolder ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     folder_link = "https://drive.google.com/folderview?id=" + parent_id
-    await event.edit("`Here is Your G-Drive Folder link : `\n" + folder_link)
+    await edit_or_reply(event, "`Here is Your G-Drive Folder link : `\n" + folder_link)
+
+CmdHelp("gDrive").add_command(
+  'gfolder', '<reply>', 'Makes a gdive folder for you'
+).add_command(
+  'gdrivedir', '<reply>', 'Uplaods the folder to gdive directory'
+).add_command(
+  'drivesch', 'Keyword', 'Searchs for the file in gdrive'
+).add_command(
+  'ugdrive', 'link/reply', 'Uploads the file to gdrive'
+).add()
