@@ -119,7 +119,7 @@ async def _(event):
 
 # @command(pattern="^.drivesch ?(.*)")
 @bot.on(admin_cmd(pattern=r"drivesch ?(.*)", outgoing=True))
-@bot.on(sudo_cmd(pwttern=r"drivesch ?(.*)", allow_sudo=True))
+@bot.on(sudo_cmd(pattern=r"drivesch ?(.*)", allow_sudo=True))
 async def sch(event):
     if event.fwd_from:
         return
