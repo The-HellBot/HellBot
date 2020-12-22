@@ -13,8 +13,8 @@ from userbot.utils import *
 # hellbot
 
 def button(page, modules):
-    Row = 5
-    Column = 2
+    Row = 7
+    Column = 3
 
     modules = sorted([modul for modul in modules if not modul.startswith("_")])
     pairs = list(map(list, zip(modules[::2], modules[1::2])))
