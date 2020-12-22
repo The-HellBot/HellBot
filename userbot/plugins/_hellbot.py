@@ -5,9 +5,10 @@ from userbot import CMD_HELP
 from userbot.utils import *
 
 
-@bot.on(admin_cmd("myhell(?: |$)(.*)"))
-async def asena(event):
-    """ .myhell cmd """
+@bot.on(admin_cmd(pattern="plinfo(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="plinfo(?: |$)(.*)", allow_sudo=True))
+async def hellbott(event):
+    """ .plinfo cmd """
     args = event.pattern_match.group(1).lower()
     if args:
         if args in CMD_HELP:
