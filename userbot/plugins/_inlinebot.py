@@ -74,18 +74,21 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         else:
             result = builder.article(
                 "@HellBot_Official",
-                text="""Hey! This is [Hêllẞø†.](https://t.me/HellBot_Official) You can know more about this from the link given below""",
+                text="""**Hey! This is [Hêllẞø†.](https://t.me/HellBot_Official) \nYou can know more about me from the links given below 👇**""",
                 buttons=[
                     [
-                        custom.Button.url("Channel", "https://t.me/HellBot_Official"),
+                        custom.Button.url("🔥 CHANNEL 🔥", "https://t.me/HellBot_Official"),
                         custom.Button.url(
-                            "Group", "https://t.me/HellBot_Official_Chat"
+                            "⚡ GROUP ⚡", "https://t.me/HellBot_Official_Chat"
                         ),
                     ],
                     [
                         custom.Button.url(
-                            "GitHub", "https://github.com/HellBoy-OP/HellBot"
-                        )
+                            "✨ REPO ✨", "https://github.com/HellBoy-OP/HellBot"),
+                        custom.Button.url
+                    (
+                            "🔰 TUTORIAL 🔰", "https://youtu.be/M2FQJq_sHp4"
+                    )
                     ],
                 ],
                 link_preview=False,
