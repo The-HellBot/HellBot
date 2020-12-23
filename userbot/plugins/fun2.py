@@ -5,10 +5,11 @@ import random
 from telethon.tl.types import ChannelParticipantsAdmins
 
 from userbot import LOGS
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
-
-@borg.on(admin_cmd(pattern="join"))
+@borg.on(admin_cmd(pattern="join$", outgoing=True))
+@bot.on(sudo_cmd(pattern="join$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -21,11 +22,12 @@ async def _(event):
         reply_message = await event.get_reply_message()
         await reply_message.reply(mentions)
     else:
-        await event.reply(mentions)
+        await edit_or_reply(event, mentions)
     await event.delete()
 
 
-@borg.on(admin_cmd(pattern="pay"))
+@bot.on(admin_cmd(pattern="pay$", outgoing=True))
+@bot.on(sudo_cmd(pattern="pay$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -38,11 +40,12 @@ async def _(event):
         reply_message = await event.get_reply_message()
         await reply_message.reply(mentions)
     else:
-        await event.reply(mentions)
+        await edit_or_reply(event, mentions)
     await event.delete()
 
 
-@borg.on(admin_cmd(pattern="climb"))
+@bot.on(admin_cmd(pattern="climb$", outgoing=True))
+@bot.on(sudo_cmd(pattern="climb$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -55,11 +58,12 @@ async def _(event):
         reply_message = await event.get_reply_message()
         await reply_message.reply(mentions)
     else:
-        await event.reply(mentions)
+        await edit_or_reply(event, mentions)
     await event.delete()
 
 
-@borg.on(admin_cmd(pattern="aag"))
+@bot.on(admin_cmd(pattern="aag$", outgoing=True))
+@bot.on(sudo_cmd(pattern="aag$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -72,11 +76,12 @@ async def _(event):
         reply_message = await event.get_reply_message()
         await reply_message.reply(mentions)
     else:
-        await event.reply(mentions)
+        await edit_or_reply(event, mentions)
     await event.delete()
 
 
-@borg.on(admin_cmd(pattern="push"))
+@bot.on(admin_cmd(pattern="push$", outgoing=True))
+@bot.on(sudo_cmd(pattern="push$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -89,11 +94,12 @@ async def _(event):
         reply_message = await event.get_reply_message()
         await reply_message.reply(mentions)
     else:
-        await event.reply(mentions)
+        await edit_or_reply(event, mentions)
     await event.delete()
 
 
-@borg.on(admin_cmd(pattern="work"))
+@bot.on(admin_cmd(pattern="work$", outgoing=True))
+@bot.on(sudo_cmd(pattern="work$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -106,11 +112,12 @@ async def _(event):
         reply_message = await event.get_reply_message()
         await reply_message.reply(mentions)
     else:
-        await event.reply(mentions)
+        await edit_or_reply(event, mentions)
     await event.delete()
 
 
-@borg.on(admin_cmd(pattern="suckit"))
+@bot.on(admin_cmd(pattern="suckit$", outgoing=True))
+@bot.on(sudo_cmd(pattern="suckit$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -123,11 +130,12 @@ async def _(event):
         reply_message = await event.get_reply_message()
         await reply_message.reply(mentions)
     else:
-        await event.reply(mentions)
+        await edit_or_reply(event, mentions)
     await event.delete()
 
 
-@borg.on(admin_cmd(pattern="ohh"))
+@bot.on(admin_cmd(pattern="ohh$", outgoing=True))
+@bot.on(sudo_cmd(pattern="ohh$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -140,17 +148,18 @@ async def _(event):
         reply_message = await event.get_reply_message()
         await reply_message.reply(mentions)
     else:
-        await event.reply(mentions)
+        await edit_or_reply(event, mentions)
     await event.delete()
 
 
-@borg.on(admin_cmd(pattern="lovestory"))
+@bot.on(admin_cmd(pattern="lovestory$", outgoing=True))
+@bot.on(sudo_cmd(pattern="lovestory$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     animation_interval = 3
     animation_ttl = range(0, 103)
-    await event.edit("Starting asf")
+    await edit_or_reply(event, "Starting asf")
     animation_chars = [
         "1 ❤️ love story",
         "  😐             😕 \n/👕\         <👗\ \n 👖               /|",
@@ -173,7 +182,8 @@ async def _(event):
         await event.edit(animation_chars[i % 103])
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="bf"))
+@bot.on(admin_cmd(pattern="bf$", outgoing=True))
+@bot.on(sudo_cmd(pattern="bf$", allow_sudo=True))
 async def pressf(f):
     """Pays respects"""
     args = f.text.split()
@@ -182,9 +192,9 @@ async def pressf(f):
         r = random.randint(0, 3)
         LOGS.info(r)
         if r == 0:
-            await f.edit("┏━━━┓\n┃┏━━┛\n┃┗━━┓\n┃┏━━┛\n┃┃\n┗┛")
+            await edit_or_reply(event, "┏━━━┓\n┃┏━━┛\n┃┗━━┓\n┃┏━━┛\n┃┃\n┗┛")
         elif r == 1:
-            await f.edit("╭━━━╮\n┃╭━━╯\n┃╰━━╮\n┃╭━━╯\n┃┃\n╰╯")
+            await edit_or_reply(event, "╭━━━╮\n┃╭━━╯\n┃╰━━╮\n┃╭━━╯\n┃┃\n╰╯")
         else:
             arg = "F"
     if arg is not None:
@@ -196,9 +206,34 @@ async def pressf(f):
         await f.edit("`" + out + "`")
 
 
-@borg.on(admin_cmd(pattern="session$"))
+@bot.on(admin_cmd(pattern="session$", outgoing=True))
+@bot.on(sudo_cmd(pattern="session$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     mentions = "**telethon.errors.rpcerrorlist.AuthKeyDuplicatedError: The authorization key (session file) was used under two different IP addresses simultaneously, and can no longer be used. Use the same session exclusively, or use different sessions (caused by GetMessagesRequest)**"
-    await event.edit(mentions)
+    await edit_or_reply(event, mentions)
+
+CmdHelp("fun2").add_command(
+  "join", None, "Use and see"
+).add_command(
+  "bf", None, "Use and see"
+).add_command(
+  "push", None, "Use and see"
+).add_command(
+  "lovestory", None, "Use and see"
+).add_command(
+  "session", None, "Use and see"
+).add_command(
+  "ohh", None, "Use and see"
+).add_command(
+  "suckit", None, "Use and see"
+).add_command(
+  "work", None, "Use and see"
+).add_command(
+  "aag", None, "Use and see"
+).add_command(
+  "climb", None, "Use and see"
+).add_command(
+  "pay", None, "Use and see"
+).add()
