@@ -1,19 +1,9 @@
 # Made by @Kraken_the_badass for @HellBot_Official
 
-"""Emoji
-Available Commands:
-click gift as soon as fast as possible
-.hgame
-build by @Hack12R..
-Second game is a xogame
-Command:- .xogame .... By @Kraken_The_BadASS"""
-
 import asyncio
-
 from telethon import events
-
-from userbot.utils import admin_cmd
-
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 @borg.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
 async def _(event):
@@ -45,10 +35,8 @@ async def _(event):
             await event.edit(animation_chars[i % 14])
 
 
-from userbot.utils import admin_cmd
-
-
-@borg.on(admin_cmd(pattern="xogame$"))
+@bot.on(admin_cmd(pattern="xogame$", outgoing=True))
+@bot.on(sudo_cmd(pattern="xogame$", allow_sudo=True))
 async def gamez(event):
     if event.fwd_from:
         return
