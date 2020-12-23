@@ -17,7 +17,7 @@ from telethon.tl.functions.messages import GetFullChatRequest
 
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
-
+from userbot.cmdhelp import CmdHelp
 
 async def get_chatinfo(event):
     chat = event.pattern_match.group(1)
@@ -69,13 +69,13 @@ async def get_users(event):
     sender = await event.get_sender()
     me = await event.client.get_me()
     if not sender.id == me.id:
-        hell = await event.reply("`processing...`")
+        hell = await edit_or_reply(event, "`processing...`")
     else:
-        hell = await event.edit("`processing...`")
+        hell = await edit_or_reply(event, "`processing...`")
     kraken = await get_chatinfo(event)
     chat = await event.get_chat()
     if event.is_private:
-        return await hell.edit("`Sorry, Can add users here`")
+        return await hell.edit("`Sorry, Cant add users here`")
     s = 0
     f = 0
     error = "None"
@@ -138,13 +138,8 @@ async def _(event):
             await edit_or_reply(event, "Added user to the chat....")
 
 
-CMD_HELP.update(
-    {
-        "invite": """**Plugin : **`invite`
-  •  **Syntax : **`.add username(s)/userid(s)`
-  •  **Function : **__Add the given user/users to the group where u used the command__
-  •  **Syntax : **`.inviteall groups username`
-  •  **Function : **__Scrapes users from the given chat to your group__
-"""
-    }
-)
+CmdHelp("invite").add_command(
+  "add", "<username/id>", "Adds the given user to the group"
+).add_command(
+  "inviteall", "<group username>", "Scraps user from the targeted group to your group. Basically Kidnapps user from one chat to another"
+).add()
