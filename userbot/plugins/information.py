@@ -8,10 +8,11 @@ from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
 
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 
 
-@borg.on(admin_cmd("info ?(.*)"))
+@bot.on(admin_cmd(pattern="info ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="info ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -46,18 +47,21 @@ async def _(event):
     except Exception as e:
         dc_id = "`Need a Profile Picture to check **this**`"
         str(e)
-    caption = """<b>Extracted User info From Telegram By HellBot<b>
-<b>🆔️User ID</b>: <code>{}</code>
-<b>📎Link To Profile</b>: <a href='tg://user?id={}'>Click Here🚪</a>
-<b>🗣️First Name</b>: <code>{}</code>
-<b>🗣️Second Name</b>: <code>{}</code>
-<b>👨🏿‍💻BIO</b>: {}
-<b>🌐DC ID</b>: {}
-<b>📸NO OF PSS</b> : {}
-<b>🧐RESTRICTED</b>: {}
-<b>✅VERIFIED</b>: {}
-<b>🤖BOT</b>: {}
-<b>👥Groups in Common</b>: {}
+    caption = """<b>Extracted User info From Telegram<b>
+    
+<b>🆔️ User ID</b>: <code>{}</code>
+<b>📎 Link To Profile</b>: <a href='tg://user?id={}'>Click Here🚪</a>
+<b>🗣️ First Name</b>: <code>{}</code>
+<b>🗣️ Second Name</b>: <code>{}</code>
+<b>👨🏿‍💻 BIO</b>: {}
+<b>🌐 DC ID</b>: {}
+<b>📸 NO OF PSS</b> : {}
+<b>🧐 RESTRICTED</b>: {}
+<b>✅ VERIFIED</b>: {}
+<b>🤖 BOT</b>: {}
+<b>👥 Groups in Common</b>: {}
+
+<b>⚡ [From DataBase of HellBot](https://t.me/hellbot_official_chat) ⚡ </b>
 """.format(
         user_id,
         user_id,
