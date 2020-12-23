@@ -47,3 +47,7 @@ async def gamez(event):
     tap = await bot.inline_query(botusername, noob)
     await tap[0].click(event.chat_id)
     await event.delete()
+
+CmdHelp("games").add_command(
+  "xogame", None, "Lets play a game bruh. X-O Game iz here🔥"
+).add()
