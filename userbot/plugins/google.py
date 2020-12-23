@@ -160,4 +160,6 @@ CmdHelp("google").add_command(
   "image", "<query>", "Does a image search for the query provided"
 ).add_command(
   "reverse", "<reply to a sticker/pic>", "Does a reverse image search on google and provides the similar images"
+).add_command(
+  "gps", "<place>", "Gives the location of the given place/city/state."
 ).add()
