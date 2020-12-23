@@ -20,29 +20,21 @@ from telethon.tl.types import ChannelParticipantsAdmins, MessageActionChannelMig
 from telethon.utils import get_input_location
 
 from userbot import CMD_HELP
-from userbot.utils import admin_cmd, errors_handler
+from userbot.utils import admin_cmd, errors_handler, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
-@borg.on(admin_cmd(pattern="leave$"))
-async def leave(e):
-    await e.edit("`Legend is leaving this chat.....!Goodbye aren't forever..` ")
-    time.sleep(3)
-    if "-" in str(e.chat_id):
-        await bot(LeaveChannelRequest(e.chat_id))
-    else:
-        await e.edit("`Sar This is Not A Chat`")
-
-
-@borg.on(admin_cmd(pattern="chatinfo(?: |$)(.*)", outgoing=True))
+@bot.on(admin_cmd(pattern="chatinfo(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="chatinfo(?: |$)(.*)", allow_sudo=True))
 async def info(event):
-    await event.edit("`Analysing the chat...`")
+    await edit_or_reply(event, "`Analysing the chat...`")
     chat = await get_chatinfo(event)
     caption = await fetch_info(chat, event)
     try:
-        await event.edit(caption, parse_mode="html")
+        await edit_or_reply(event, caption, parse_mode="html")
     except Exception as e:
         print("Exception:", e)
-        await event.edit("`An unexpected error has occurred.`")
+        await edit_or_reply(event, "`An unexpected error has occurred.`")
     return
 
 
@@ -67,18 +59,18 @@ async def get_chatinfo(event):
         try:
             chat_info = await event.client(GetFullChannelRequest(chat))
         except ChannelInvalidError:
-            await event.reply("`Invalid channel/group`")
+            await edit_or_reply(event, "`Invalid channel/group`")
             return None
         except ChannelPrivateError:
-            await event.reply(
+            await edit_or_reply(event, 
                 "`This is a private channel/group or I am banned from there`"
             )
             return None
         except ChannelPublicGroupNaError:
-            await event.reply("`Channel or supergroup doesn't exist`")
+            await edit_or_reply(event, "`Channel or supergroup doesn't exist`")
             return None
         except (TypeError, ValueError) as err:
-            await event.reply(str(err))
+            await edit_or_reply(event, str(err))
             return None
     return chat_info
 
@@ -302,7 +294,8 @@ async def fetch_info(chat, event):
     return caption
 
 
-@borg.on(admin_cmd(pattern="adminlist", outgoing=True))
+@bot.on(admin_cmd(pattern="adminlist", outgoing=True))
+@bot.on(sudo_cmd(pattern="adminlist", allow_sudo=True))
 @errors_handler
 async def get_admin(show):
     """ For .admins command, list all of the admins of the chat. """
@@ -321,13 +314,14 @@ async def get_admin(show):
                 mentions += f"\nDeleted Account <code>{user.id}</code>"
     except ChatAdminRequiredError as err:
         mentions += " " + str(err) + "\n"
-    await show.edit(mentions, parse_mode="html")
+    await edit_or_reply(show, mentions, parse_mode="html")
 
 
-@borg.on(admin_cmd(pattern=r"users ?(.*)", outgoing=True))
+@bot.on(admin_cmd(pattern=r"users ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"users ?(.*)", allow_sudo=True))
 async def get_users(show):
     if not show.is_group:
-        await show.edit("Are you sure this is a group?")
+        await edit_or_reply(show, "Are you sure this is a group?")
         return
     info = await show.client.get_entity(show.chat_id)
     title = info.title if info.title else "this chat"
@@ -355,9 +349,9 @@ async def get_users(show):
     except ChatAdminRequiredError as err:
         mentions += " " + str(err) + "\n"
     try:
-        await show.edit(mentions)
+        await edit_or_reply(show, mentions)
     except MessageTooLongError:
-        await show.edit("Damn, this is a huge group. Uploading users lists as file.")
+        await edit_or_reply(show, "Damn, this is a huge group. Uploading users lists as file.")
         file = open("userslist.txt", "w+")
         file.write(mentions)
         file.close()
@@ -370,13 +364,10 @@ async def get_users(show):
         remove("userslist.txt")
 
 
-CMD_HELP.update(
-    {
-        "chatinfo": ".chatinfo or .chatinfo <username of group>\
-     \nUsage: Shows you the total information of the required chat.\
-     \n\n.adminlist\
-     \nUsage: Retrieves a list of admins in the chat.\
-     \n\n.users or .users <name of member>\
-     \nUsage: Retrieves all (or queried) users in the chat."
-    }
-)
+CndHelp("groupdata").add_command(
+  "chatinfo", "<username of group>", "Shows you the total information of the required chat"
+).add_command(
+  "adminlist", None, "Retrives a list of admins in the chat"
+).add_command(
+  "users", "<name of member> (optional)", "Retrives all the (or mentioned) users in the chat"
+).add()
