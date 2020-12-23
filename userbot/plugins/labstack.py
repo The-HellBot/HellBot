@@ -3,9 +3,12 @@ import os
 import subprocess
 
 import requests
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
-@command(pattern="^.labstack ?(.*)")
+@bot.on(admin_cmd(pattern="labstack ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="labstack ?(.*)", allow_sudo=True))
 async def labstack(event):
     if event.fwd_from:
         return
@@ -19,8 +22,7 @@ async def labstack(event):
             reply.media, Var.TEMP_DOWNLOAD_DIRECTORY
         )
     else:
-        await event.edit(
-            "Reply to a media file or provide a directory to upload the file to labstack"
+        await edit_or_reply(event, "Reply to a media file or provide a directory to upload the file to labstack"
         )
         return
     filesize = os.path.getsize(filebase)
@@ -52,13 +54,16 @@ async def labstack(event):
         t_response = subprocess.check_output(command_to_exec, stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError as exc:
         logger.info("Status : FAIL", exc.returncode, exc.output)
-        await event.edit(exc.output.decode("UTF-8"))
+        await edit_or_reply(event, exc.output.decode("UTF-8"))
         return
     else:
         logger.info(t_response)
         t_response_arry = "https://up.labstack.com/api/v1/links/{}/receive".format(
             r2json["code"]
         )
-    await event.edit(
-        t_response_arry + "\nMax Days:" + str(max_days), link_preview=False
+    await edit_or_reply(event, t_response_arry + "\nMax Days:" + str(max_days), link_preview=False
     )
+
+CmdHelp("labstack").add_command(
+  "labstack", "<reply to media>", "Makes a direct download link of the replied media for a limited time"
+).add()
