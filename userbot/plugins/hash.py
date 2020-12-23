@@ -10,11 +10,12 @@ from subprocess import run as runapp
 
 import pybase64
 
-from userbot import CMD_HELP
-from userbot.events import errors_handler, register
+#from userbot import CMD_HELP
+from userbot.utils import errors_handler, admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
-
-@register(outgoing=True, pattern="^.hash (.*)")
+@bot.on(admin_cmd(pattern="hash (.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="hash (.*)", allow_sudo=True))
 @errors_handler
 async def gethash(hash_q):
     """ For .hash command, find the md5, sha1, sha256, sha512 of the string. """
@@ -59,7 +60,8 @@ async def gethash(hash_q):
         await hash_q.reply(ans)
 
 
-@register(outgoing=True, pattern="^.hbase (en|de) (.*)")
+@bot.on(admin_cmd(pattern="hbase (en|de) (.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="hbase (en|de) (.*)", allow_sudo=True))
 @errors_handler
 async def endecrypt(query):
     """ For .base64 command, find the base64 encoding of the given string. """
@@ -77,10 +79,10 @@ async def endecrypt(query):
         await query.reply("Decoded: `" + lething[:-1] + "`")
 
 
-CMD_HELP.update({"base64": "Find the base64 encoding of the given string"})
-
-CMD_HELP.update(
-    {
-        "hash": "Find the md5, sha1, sha256, sha512 of the string when written into a txt file."
-    }
-)
+CmdHelp("hash").add_command(
+  "hash", "<query>", "Finds the md5, sha1, sha256, sha512 of the string when written into a txt file"
+).add_command(
+  "hbase en", "<query>", "Finds the base64 encoding of the given string"
+).add_command(
+  "hbase de", "<query>", "Finds the base64 decoding of the given string"
+).add()
