@@ -364,7 +364,7 @@ async def get_users(show):
         remove("userslist.txt")
 
 
-CndHelp("groupdata").add_command(
+CmdHelp("groupdata").add_command(
   "chatinfo", "<username of group>", "Shows you the total information of the required chat"
 ).add_command(
   "adminlist", None, "Retrives a list of admins in the chat"
