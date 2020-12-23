@@ -125,4 +125,6 @@ CmdHelp("get_them").add_command(
   'get_id', '<reply>', 'Gets the user id of the replied user.'
 ).add_command(
   'get_bot', None, 'Gets the list of all the bots in the chat.'
+).add_command(
+  'info', '<reply / username>', 'Fetches the information of the user'
 ).add()
