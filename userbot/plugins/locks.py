@@ -3,13 +3,18 @@ from telethon.tl.types import ChatBannedRights
 
 from userbot import ALIVE_NAME, CMD_HELP
 from userbot.events import errors_handler, register
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
+
 
 DEFAULTUSER = (
     str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"
 )
-# @register(outgoing=True, pattern=r"^.lock ?(.*)")
-@borg.on(admin_cmd(pattern=r"lock ?(.*)"))
+
+kraken = bot.uid
+
+@bot.on(admin_cmd(pattern=r"lock ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"lock ?(.*)", allow_sudo=True))
 @errors_handler
 async def locks(event):
     input_str = event.pattern_match.group(1).lower()
@@ -68,10 +73,10 @@ async def locks(event):
         what = "everything"
     else:
         if not input_str:
-            await event.edit("`I can't lock nothing !!`")
+            await edit_or_reply(event, "`Need something to lock sur!!`🚶")
             return
         else:
-            await event.edit(f"`Invalid lock type:` {input_str}")
+            await edit_or_reply(event, f"🤐 `Invalid lock type:` {input_str}")
             return
 
     lock_rights = ChatBannedRights(
@@ -91,13 +96,14 @@ async def locks(event):
         await event.client(
             EditChatDefaultBannedRightsRequest(peer=peer_id, banned_rights=lock_rights)
         )
-        await event.edit(f"{DEFAULTUSER} `locked {what} Because its Rest Time Nimba!!`")
+        await edit_or_reply(event, f"[{DEFAULTUSER}](tg://user?id={kraken}) Locked `{what}` \n__Cause its Rest Time Nimba!!__")
     except BaseException as e:
-        await event.edit(f"`Do I have proper rights for that ??`\n**Error:** {str(e)}")
+        await edit_or_reply(event, f"`Do I have proper rights for that ??`\n**Error:** {str(e)}")
         return
 
 
-@register(outgoing=True, pattern=r"^.unlock ?(.*)")
+@bot.on(admin_cmd(pattern="unlock ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="unlock ?(.*)", allow_sudo=True))
 @errors_handler
 async def rem_locks(event):
     input_str = event.pattern_match.group(1).lower()
@@ -156,10 +162,10 @@ async def rem_locks(event):
         what = "everything"
     else:
         if not input_str:
-            await event.edit("`I can't unlock nothing !!`")
+            await edit_or_reply(event, "`I need something to unlock sur!!`🚶")
             return
         else:
-            await event.edit(f"`Invalid unlock type:` {input_str}")
+            await edit_or_reply(event, f"🤐 `Invalid unlock type:` {input_str}")
             return
 
     unlock_rights = ChatBannedRights(
@@ -181,18 +187,24 @@ async def rem_locks(event):
                 peer=peer_id, banned_rights=unlock_rights
             )
         )
-        await event.edit(f"{DEFAULTUSER} `Unlocked {what} now Start Chit Chat !!`")
+        await edit_or_reply(event, f"[{DEFAULTUSER}](tg://user?id={kraken}) Unlocked `{what}` \n__Now Start Chit Chat !!__")
     except BaseException as e:
-        await event.edit(f"`Do I have proper rights for that ??`\n**Error:** {str(e)}")
+        await edit_or_reply(event, f"`Do I have proper rights for that ??`\n**Error:** {str(e)}")
         return
 
+@bot.on(admin_cmd(pattern="ltype$"))
+@bot.on(sudo_cmd(pattern="ltype$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    event = await edit_or_reply(event, "Lock Types")
+    await event.edit("**Following are the lock types :** \n\n• all\n• msg\n• media\n• sticker\n• gif\n• game\n• inline\n• poll\n• invite\n• pin\n• info\n")
 
-CMD_HELP.update(
-    {
-        "locks": ".lock <all (or) type(s)> or .unlock <all (or) type(s)>\
-\nUsage: Allows you to lock/unlock some common message types in the chat.\
-[NOTE: Requires proper admin rights in the chat !!]\
-\n\nAvailable message types to lock/unlock are: \
-\n`all, msg, media, sticker, gif, game, inline, poll, invite, pin, info`"
-    }
-)
+
+CmdHelp("locker").add_command(
+  "lock", "<lock type>", "Locks the mentioned lock type in current chat. You can Get all lock type by using '.ltype'."
+).add_command(
+  "unlock", "<lock type>", "Unlocks the mentioned lock type in current chat. You can Get all lock types by using '.ltype'."
+).add_command(
+  "ltype", None, "Use this to get the list of lock types..."
+).add()
