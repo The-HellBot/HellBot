@@ -8,7 +8,7 @@ from userbot import LOGS
 from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 
-@borg.on(admin_cmd(pattern="join$", outgoing=True))
+@bot.on(admin_cmd(pattern="join$", outgoing=True))
 @bot.on(sudo_cmd(pattern="join$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
@@ -23,7 +23,6 @@ async def _(event):
         await reply_message.reply(mentions)
     else:
         await edit_or_reply(event, mentions)
-    await event.delete()
 
 
 @bot.on(admin_cmd(pattern="pay$", outgoing=True))
@@ -41,8 +40,7 @@ async def _(event):
         await reply_message.reply(mentions)
     else:
         await edit_or_reply(event, mentions)
-    await event.delete()
-
+  
 
 @bot.on(admin_cmd(pattern="climb$", outgoing=True))
 @bot.on(sudo_cmd(pattern="climb$", allow_sudo=True))
@@ -59,8 +57,7 @@ async def _(event):
         await reply_message.reply(mentions)
     else:
         await edit_or_reply(event, mentions)
-    await event.delete()
-
+  
 
 @bot.on(admin_cmd(pattern="aag$", outgoing=True))
 @bot.on(sudo_cmd(pattern="aag$", allow_sudo=True))
@@ -77,8 +74,7 @@ async def _(event):
         await reply_message.reply(mentions)
     else:
         await edit_or_reply(event, mentions)
-    await event.delete()
-
+    
 
 @bot.on(admin_cmd(pattern="push$", outgoing=True))
 @bot.on(sudo_cmd(pattern="push$", allow_sudo=True))
@@ -95,8 +91,7 @@ async def _(event):
         await reply_message.reply(mentions)
     else:
         await edit_or_reply(event, mentions)
-    await event.delete()
-
+    
 
 @bot.on(admin_cmd(pattern="work$", outgoing=True))
 @bot.on(sudo_cmd(pattern="work$", allow_sudo=True))
@@ -113,8 +108,7 @@ async def _(event):
         await reply_message.reply(mentions)
     else:
         await edit_or_reply(event, mentions)
-    await event.delete()
-
+    
 
 @bot.on(admin_cmd(pattern="suckit$", outgoing=True))
 @bot.on(sudo_cmd(pattern="suckit$", allow_sudo=True))
@@ -131,8 +125,7 @@ async def _(event):
         await reply_message.reply(mentions)
     else:
         await edit_or_reply(event, mentions)
-    await event.delete()
-
+   
 
 @bot.on(admin_cmd(pattern="ohh$", outgoing=True))
 @bot.on(sudo_cmd(pattern="ohh$", allow_sudo=True))
@@ -149,8 +142,7 @@ async def _(event):
         await reply_message.reply(mentions)
     else:
         await edit_or_reply(event, mentions)
-    await event.delete()
-
+  
 
 @bot.on(admin_cmd(pattern="lovestory$", outgoing=True))
 @bot.on(sudo_cmd(pattern="lovestory$", allow_sudo=True))
@@ -192,9 +184,9 @@ async def pressf(f):
         r = random.randint(0, 3)
         LOGS.info(r)
         if r == 0:
-            await edit_or_reply(event, "┏━━━┓\n┃┏━━┛\n┃┗━━┓\n┃┏━━┛\n┃┃\n┗┛")
+            await edit_or_reply(f, "┏━━━┓\n┃┏━━┛\n┃┗━━┓\n┃┏━━┛\n┃┃\n┗┛")
         elif r == 1:
-            await edit_or_reply(event, "╭━━━╮\n┃╭━━╯\n┃╰━━╮\n┃╭━━╯\n┃┃\n╰╯")
+            await edit_or_reply(f, "╭━━━╮\n┃╭━━╯\n┃╰━━╮\n┃╭━━╯\n┃┃\n╰╯")
         else:
             arg = "F"
     if arg is not None:
@@ -203,7 +195,7 @@ async def pressf(f):
         for line in F_LENGTHS:
             c = max(round(line / len(arg)), 1)
             out += (arg * c) + "\n"
-        await f.edit("`" + out + "`")
+        await edit_or_reply(f"`" + out + "`")
 
 
 @bot.on(admin_cmd(pattern="session$", outgoing=True))
@@ -213,6 +205,7 @@ async def _(event):
         return
     mentions = "**telethon.errors.rpcerrorlist.AuthKeyDuplicatedError: The authorization key (session file) was used under two different IP addresses simultaneously, and can no longer be used. Use the same session exclusively, or use different sessions (caused by GetMessagesRequest)**"
     await edit_or_reply(event, mentions)
+
 
 CmdHelp("fun2").add_command(
   "join", None, "Use and see"
