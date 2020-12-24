@@ -618,7 +618,7 @@ async def vapor(vpr):
 @bot.on(sudo_cmd(pattern=f"repo", allow_sudo=True))
 async def source(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
-        await edit_or_reply(event, "Click [here](https://github.com/HellBoy-OP/HellBot) to open this 🔥**Lit AF!!**🔥 __Hêllẞø†__ Repo.. Join channel :- @HellBot_Official")
+        await edit_or_reply(e, "Click [here](https://github.com/HellBoy-OP/HellBot) to open this 🔥**Lit AF!!**🔥 __Hêllẞø†__ Repo.. Join channel :- @HellBot_Official")
 
 
 @register(outgoing=True, pattern="^.str(?: |$)(.*)")
