@@ -51,7 +51,7 @@ async def _(event):
         )
 
 
-CndHelp("links").add_command(
+CmdHelp("links").add_command(
   "dns", "<link>", "Shows you Domain Name System (DNS) of the given link", ".dns google.com"
 ).add_command(
   "unshort", "<link>", "Unshortens the given short link"
