@@ -10,10 +10,11 @@ from coffeehouse.lydia import LydiaAI
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 from userbot import BOTLOG, BOTLOG_CHATID
 from userbot.cmdhelp import CmdHelp
+from userbot.uniborgConfig import Config
 from userbot.plugins.sql_helper.lydia_sql import add_s, get_all_s, get_s, remove_s
 
-if Config.LYDIA_API_KEY:
-    api_key = Config.LYDIA_API_KEY
+if Config.LYDIA_API:
+    api_key = Config.LYDIA_API
     # Create the coffeehouse API
     coffeehouse_api = API(api_key)
     # Create Lydia instance
