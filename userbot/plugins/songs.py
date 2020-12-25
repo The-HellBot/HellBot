@@ -6,13 +6,43 @@
 
 
 import asyncio
-
+import re
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from userbot.utils import admin_cmd
+from userbot import bot
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply, progress
+from userbot.cmdhelp import CmdHelp
+from userbot.helpers.functions import deEmojify
 
 
-@borg.on(admin_cmd(pattern="gaana ?(.*)"))
+@bot.on(admin_cmd(pattern="lyrics(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="lyrics(?: |$)(.*)", allow_sudo=True))
+async def nope(kraken):
+    hell = kraken.pattern_match.group(1)
+    if not hell:
+        if kraken.is_reply:
+            (await kraken.get_reply_message()).message
+        else:
+            await kraken.edit(
+                "`Sir please give some query to search and download it for you..!`"
+            )
+            return
+
+    troll = await bot.inline_query("iLyricsBot", f"{(deEmojify(hell))}")
+
+    await troll[0].click(
+        kraken.chat_id,
+        reply_to=kraken.reply_to_msg_id,
+        silent=True if kraken.is_reply else False,
+        hide_via=True,
+    )
+
+    await kraken.delete()
+
+#>>>>>>>>>>>>>>>>>>✓✓✓✓✓<<<<<<<<<<<<<<<<<<<
+
+@bot.on(admin_cmd(pattern="gaana ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="gaana ?(.*)", allow_sudo=True))
 async def FindMusicPleaseBot(gaana):
 
     song = gaana.pattern_match.group(1)
@@ -45,7 +75,7 @@ async def FindMusicPleaseBot(gaana):
 
             await conv.get_response()
 
-            cobra = await conv.get_response()
+            lavde = await conv.get_response()
 
         except YouBlockedUserError:
 
@@ -57,7 +87,7 @@ async def FindMusicPleaseBot(gaana):
 
         await gaana.edit("`Sending Your Music...wait!!! 😉😎`")
 
-        await bot.send_file(gaana.chat_id, cobra)
+        await bot.send_file(gaana.chat_id, lavde)
 
         await bot.send_read_acknowledge(conv.chat_id)
 
@@ -67,7 +97,6 @@ async def FindMusicPleaseBot(gaana):
 # -------------------------------------------------------------------------------
 
 
-import asyncio
 import json
 import os
 import time
@@ -86,9 +115,6 @@ from youtube_dl.utils import (
     XAttrMetadataError,
 )
 
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd, progress
-
 try:
 
     from youtubesearchpython import SearchVideos
@@ -98,7 +124,8 @@ except:
     from youtubesearchpython import SearchVideos
 
 
-@borg.on(admin_cmd(pattern="song(?: |$)(.*)"))
+@bot.on(admin_cmd(pattern="song(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="song(?: |$)(.*)", allow_sudo=True))
 async def download_video(v_url):
 
     lazy = v_url
@@ -106,12 +133,12 @@ async def download_video(v_url):
     me = await lazy.client.get_me()
 
     if not sender.id == me.id:
-        rkp = await lazy.reply("`processing...`")
+        rkp = await edit_or_reply(lazy, "`Wait. Processing your request....`")
     else:
-        rkp = await lazy.edit("`processing...`")
+        rkp = await edit_or_reply(lazy, "`Wait. Processing your request....`")
     url = v_url.pattern_match.group(1)
     if not url:
-        return await rkp.edit("`Error \nusage song <song name>`")
+        return await rkp.edit("**Error** \n__Usage:__ `song <song name>`")
     search = SearchVideos(url, offset=1, mode="json", max_results=1)
     test = search.result()
     p = json.loads(test)
@@ -119,9 +146,9 @@ async def download_video(v_url):
     try:
         url = q[0]["link"]
     except:
-        return await rkp.edit("`failed to find`")
+        return await rkp.edit("`Failed to process your request....`")
     type = "audio"
-    await rkp.edit("`Preparing to download...`")
+    await rkp.edit("Request processed. **Downloading Now!!!**")
     if type == "audio":
         opts = {
             "format": "bestaudio",
@@ -145,7 +172,7 @@ async def download_video(v_url):
         video = False
         song = True
     try:
-        await rkp.edit("`Fetching data, please wait..`")
+        await rkp.edit("**Fetching Song**")
         with YoutubeDL(opts) as rip:
             rip_data = rip.extract_info(url)
     except DownloadError as DE:
@@ -180,9 +207,9 @@ async def download_video(v_url):
     c_time = time.time()
     if song:
         await rkp.edit(
-            f"`Preparing to upload song:`\
-        \n**{rip_data['title']}**\
-        \nby *{rip_data['uploader']}*"
+            f"🎶 Preparing to upload song 🎶 :-\
+        \n\n**{rip_data['title']}**\
+        \nby __{rip_data['uploader']}__"
         )
         await v_url.client.send_file(
             v_url.chat_id,
@@ -203,9 +230,9 @@ async def download_video(v_url):
         await v_url.delete()
     elif video:
         await rkp.edit(
-            f"`Preparing to upload song :`\
-        \n**{rip_data['title']}**\
-        \nby *{rip_data['uploader']}*"
+            f"🎶 Preparing to upload song 🎶 :-\
+        \n\n**{rip_data['title']}**\
+        \nby __{rip_data['uploader']}__"
         )
         await v_url.client.send_file(
             v_url.chat_id,
@@ -220,18 +247,19 @@ async def download_video(v_url):
         await rkp.delete()
 
 
-@borg.on(admin_cmd(pattern="vsong(?: |$)(.*)"))
+@bot.on(admin_cmd(pattern="vsong(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="vsong(?: |$)(.*)", allow_sudo=True))
 async def download_video(v_url):
     lazy = v_url
     sender = await lazy.get_sender()
     me = await lazy.client.get_me()
     if not sender.id == me.id:
-        rkp = await lazy.reply("`processing...`")
+        rkp = await edit_or_reply(lazy, "Processing video song request....")
     else:
-        rkp = await lazy.edit("`processing...`")
+        rkp = await edit_or_reply(lazy, "Processing video song request....")
     url = v_url.pattern_match.group(1)
     if not url:
-        return await rkp.edit("`Error \nusage song <song name>`")
+        return await rkp.edit("**Error** \n__Usage:__ `vsong <song name>`")
     search = SearchVideos(url, offset=1, mode="json", max_results=1)
     test = search.result()
     p = json.loads(test)
@@ -241,7 +269,7 @@ async def download_video(v_url):
     except:
         return await rkp.edit("`failed to find`")
     type = "audio"
-    await rkp.edit("`Preparing to download...`")
+    await rkp.edit("Video Song Request Processed. **Downloading Now!!**")
     if type == "audio":
         opts = {
             "format": "best",
@@ -260,7 +288,7 @@ async def download_video(v_url):
         song = False
         video = True
     try:
-        await rkp.edit("`Fetching data, please wait..`")
+        await rkp.edit("Fetching Video Song")
         with YoutubeDL(opts) as rip:
             rip_data = rip.extract_info(url)
     except DownloadError as DE:
@@ -295,9 +323,9 @@ async def download_video(v_url):
     c_time = time.time()
     if song:
         await rkp.edit(
-            f"`Preparing to upload song `\
-        \n**{rip_data['title']}**\
-        \nby *{rip_data['uploader']}*"
+            f"🎶 Preparing to upload video song 🎶 :-\
+        \n\n**{rip_data['title']}**\
+        \nby __{rip_data['uploader']}__"
         )
         await v_url.client.send_file(
             v_url.chat_id,
@@ -318,9 +346,9 @@ async def download_video(v_url):
         await v_url.delete()
     elif video:
         await rkp.edit(
-            f"`Preparing to upload video song :`\
-        \n**{rip_data['title']}**\
-        \nby *{rip_data['uploader']}*"
+            f"🎶 Preparing to upload video song 🎶 :-\
+        \n\n**{rip_data['title']}**\
+        \nby __{rip_data['uploader']}__"
         )
         await v_url.client.send_file(
             v_url.chat_id,
@@ -336,15 +364,8 @@ async def download_video(v_url):
 
 
 # -------------------------------------------------------------------------------
-
-import asyncio
 import os
-
-from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.channels import JoinChannelRequest
-
-from userbot import CMD_HELP, bot
-from userbot.events import register
 
 try:
     pass
@@ -360,7 +381,9 @@ def bruh(name):
     os.system("instantmusic -q -s " + name)
 
 
-@register(outgoing=True, pattern="^.getsong(?: |$)(.*)")
+
+@bot.on(admin_cmd(pattern="getsong(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="getsong(?: |$)(.*)", allow_sudo=True))
 async def getmusic(so):
     if so.fwd_from:
         return
@@ -368,10 +391,10 @@ async def getmusic(so):
     song = so.pattern_match.group(1)
     chat = "@SongsForYouBot"
     link = f"/song {song}"
-    await so.edit("🔹Ok wait... 📡Searching your song🔸")
+    await edit_or_reply(so, "🔹Ok wait... 📡Searching your song🔸")
     async with bot.conversation(chat) as conv:
         await asyncio.sleep(2)
-        await so.edit("📥Downloading...Please wait🤙")
+        await edit_or_reply(so, "📥Downloading...Please wait🤙")
         try:
             msg = await conv.send_message(link)
             response = await conv.get_response()
@@ -379,9 +402,9 @@ async def getmusic(so):
             """ - don't spam notif - """
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await so.edit("Please unblock @SongsForYouBot and try searching again🤐")
+            await edit_or_reply(so, "Please unblock @SongsForYouBot and try searching again🤐")
             return
-        await so.edit("Ohh.. I got something!! Wait sending😋🤙")
+        await edit_or_reply(so, "Ohh.. I got something!! Wait sending😋🤙")
         await asyncio.sleep(3)
         await bot.send_file(so.chat_id, respond)
     await so.client.delete_messages(conv.chat_id, [msg.id, response.id, respond.id])
@@ -394,11 +417,6 @@ import asyncio
 import os
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-
-from userbot import CMD_HELP, bot
-
-# from userbot.utils import admin_cmd
-from userbot.events import register
 
 try:
     pass
@@ -415,14 +433,16 @@ def bruh(name):
 
 
 @register(outgoing=True, pattern="^.dwlsong(?: |$)(.*)")
+@bot.on(admin_cmd(pattern="dwlsong(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="dwlsong(?: |$)(.*)", allow_sudo=True))
 async def DeezLoader(Deezlod):
     if Deezlod.fwd_from:
         return
     d_link = Deezlod.pattern_match.group(1)
     if ".com" not in d_link:
-        await Deezlod.edit("` I need a link to download something pro.`**(._.)**")
+        await edit_or_reply(Deezlod, "` I need a link to download something pro.`**(._.)**")
     else:
-        await Deezlod.edit("**Initiating Download!**")
+        await edit_or_reply(Deezlod, "**Initiating Download!**")
     chat = "@DeezLoadBot"
     async with bot.conversation(chat) as conv:
         try:
@@ -435,7 +455,7 @@ async def DeezLoader(Deezlod):
             """ - don't spam notif - """
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await Deezlod.edit("**Error:** `unblock` @DeezLoadBot `and retry!`")
+            await edit_or_reply(Deezlod, "**Error:** `unblock` @DeezLoadBot `and retry!`")
             return
         await bot.send_file(Deezlod.chat_id, song, caption=details.text)
         await Deezlod.client.delete_messages(
@@ -446,7 +466,6 @@ async def DeezLoader(Deezlod):
 
 # -------------------------------------------------------------------------------
 
-import asyncio
 
 from telethon.errors.rpcerrorlist import (
     UserAlreadyParticipantError,
@@ -454,10 +473,9 @@ from telethon.errors.rpcerrorlist import (
 )
 from telethon.tl.functions.messages import ImportChatInviteRequest
 
-from userbot.utils import admin_cmd
 
-
-@borg.on(admin_cmd("sdd ?(.*)"))
+@bot.on(admin_cmd(pattern="sdd ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="sdd?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -489,20 +507,19 @@ async def _(event):
         except YouBlockedUserError:
             await event.edit("**Error:** `unblock` @DeezLoadBot `and retry!`")
 
-
-CMD_HELP.update(
-    {
-        "songs": "`.song song name`\
-            \nUsage:For searching songs from youtube\
-            \n\n`.getsong` Song Title\
-            \nUsage:Download song from @SongsForYouBot\
-            \n\n`.gaana` Song name\
-            \nUsage:Download song from @FindmusicpleaseBot\
-            \n\n`.vsong` Song title\
-            \nUsage:Downloads video song from youtube\
-            \n\n`.sdd` song name\
-            \nUsage:Download song from @DeezLoadBot\
-            \n\n`.dwlsong` <Spotify/Deezer Link>\
-            \nUsage:Download music from Spotify or Deezer."
-    }
-)
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+CmdHelp("songs").add_command(
+  "song", "<song name>", "Searches the song from youtube and upload in current chat in audio(.mp3) format. •Highest Quality"
+).add_command(
+  "vsong", "<song name>", "Searches the song from youtube and upload in current chat in video(.mp4) format. •Highest Quality"
+).add_command(
+  "getsong", "<song name>", "Searches song from a local tg bot @Songsforyoubot and sends the music in current chat"
+).add_command(
+  "gaana", "<song name>", "Searches song from a local tg bot @FindmusicpleaseBot and sends the music in current chat"
+).add_command(
+  "sdd", "<song link>", "Downloads the song from given link"
+).add_command(
+  "dwlsong", "<song link>", "Same as .sdd but downloads from spotify and deezer"
+).add_command(
+  "lyrics", "<song name>", "Sends the lyrics of given song."
+).add()
