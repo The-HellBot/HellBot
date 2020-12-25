@@ -432,7 +432,6 @@ def bruh(name):
     os.system("instantmusic -q -s " + name)
 
 
-@register(outgoing=True, pattern="^.dwlsong(?: |$)(.*)")
 @bot.on(admin_cmd(pattern="dwlsong(?: |$)(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="dwlsong(?: |$)(.*)", allow_sudo=True))
 async def DeezLoader(Deezlod):
