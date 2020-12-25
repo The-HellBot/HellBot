@@ -1,148 +1,104 @@
-# imported from pornhub credits to pornhub
 import asyncio
-import io
-from datetime import datetime
-from time import time
 
-from coffeehouse.api import API
+import coffeehouse
 from coffeehouse.lydia import LydiaAI
+from telethon import events
 
-from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
-from userbot import BOTLOG, BOTLOG_CHATID
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
-from userbot.uniborgConfig import Config
-from userbot.plugins.sql_helper.lydia_sql import add_s, get_all_s, get_s, remove_s
 
-if Config.LYDIA_API:
-    api_key = Config.LYDIA_API
-    # Create the coffeehouse API
-    coffeehouse_api = API(api_key)
-    # Create Lydia instance
-    lydia = LydiaAI(coffeehouse_api)
+# Non-SQL Mode
+ACC_LYDIA = {}
+SESSION_ID = {}
+
+if Var.LYDIA_API_KEY:
+    api_key = Var.LYDIA_API_KEY
+    api_client = coffeehouse.API(api_key)
+    Lydia = LydiaAI(api_client)
 
 
-@bot.on(admin_cmd(pattern="(on|of|li)ai$", outgoing=True))
-@bot.on(sudo_cmd(pattern="(on|of|li)ai$", allow_sudo=True))
-async def lydia_disable_enable(event):
+@bot.on(admin_cmd(pattern="repcf", outgoing=True))
+@bot.on(sudo_cmd(pattern="repcf", allow_sudo=True))
+async def repcf(event):
     if event.fwd_from:
         return
-    if Config.LYDIA_API_KEY is None:
-        await edit_or_reply(event, "`Please add required LYDIA_API_KEY var`")
+    await edit_or_reply(event, "Processing...")
+    try:
+        session = Lydia.create_session()
+        session_id = session.id
+        reply = await event.get_reply_message()
+        msg = reply.text
+        text_rep = session.think_thought((session_id, msg))
+        await edit_or_reply(event, " {0}".format(text_rep))
+    except Exception as e:
+        await edit_or_reply(event, str(e))
+
+
+@bot.on(admin_cmd(pattern="eai", outgoing=True))
+@bot.on(sudo_cmd(pattern="eai", allow_sudo=True))
+async def addcf(event):
+    if event.fwd_from:
         return
-    hellevent = await edit_or_reply(event, "`Trying to connect lydia...`")
-    input_str = event.pattern_match.group(1)
-    if event.reply_to_msg_id is not None:
-        reply_msg = await event.get_reply_message()
-        user_id = reply_msg.sender_id
-        chat_id = event.chat_id
-        if input_str == "on":
-            # Create a new chat session (Like a conversation)
-            session = lydia.create_session()
-            if BOTLOG:
-                await event.client.send_message(
-                    BOTLOG_CHATID,
-                    f"**Session ID: **`{session.id}`\
-                                   \n**Session Available: **`{str(session.available)}`\
-                                   \n**Session Language: **`{str(session.language)}`\
-                                   \n**Session Expires : **`{datetime.fromtimestamp(session.expires).strftime('%Y-%m-%d %H:%M:%S')}`\
-                    ",
-                )
-            add_s(user_id, chat_id, session.id, session.expires)
-            await hellevent.edit(f"Activated AI for the user")
-        elif input_str == "of":
-            remove_s(user_id, chat_id)
-            await hellevent.edit(f"__[signal lost](tg://user?id={user_id})__")
-        else:
-            lsts = get_all_s()
-            if len(lsts) > 0:
-                output_str = "AI enabled users:\n\n"
-                for lydia_ai in lsts:
-                    output_str += f"[User](tg://user?id={lydia_ai.user_id}) in chat `{lydia_ai.chat_id}`\n"
-            else:
-                output_str = "I can't find any Lydia AI enabled users / chats"
-            if len(output_str) > Config.MAX_MESSAGE_SIZE_LIMIT:
-                with io.BytesIO(str.encode(output_str)) as out_file:
-                    out_file.name = "lydia_ai.text"
-                    await event.client.send_file(
-                        event.chat_id,
-                        out_file,
-                        force_document=True,
-                        allow_cache=False,
-                        caption="Users with Lydia AI enabled",
-                        reply_to=event,
-                    )
-            else:
-                await hellevent.edit(output_str)
-    else:
-        if input_str == "li":
-            lsts = get_all_s()
-            if len(lsts) > 0:
-                output_str = "AI enabled users:\n\n"
-                for lydia_ai in lsts:
-                    output_str += f"[User](tg://user?id={lydia_ai.user_id}) in chat `{lydia_ai.chat_id}`\n"
-            else:
-                output_str = "I can't find Lydia AI enabled users / chats!"
-            if len(output_str) > Config.MAX_MESSAGE_SIZE_LIMIT:
-                with io.BytesIO(str.encode(output_str)) as out_file:
-                    out_file.name = "lydia_ai.text"
-                    await event.client.send_file(
-                        event.chat_id,
-                        out_file,
-                        force_document=True,
-                        allow_cache=False,
-                        caption="Lydia AI enabled users",
-                        reply_to=event,
-                    )
-            else:
-                await hellevent.edit(output_str)
-        else:
-            await edit_or_reply(
-                hellevent,
-                "`Reply To A User's Message to Add / Remove them from Lydia Auto-Chat.`"
+    await edit_or_reply(event, "Running on Non-SQL mode for now...")
+    await asyncio.sleep(3)
+    await edit_or_reply(event, "Processing...")
+    reply_msg = await event.get_reply_message()
+    if reply_msg:
+        session = Lydia.create_session()
+        session_id = session.id
+        ACC_LYDIA.update({str(event.chat_id) + " " + str(reply_msg.from_id): session})
+        SESSION_ID.update(
+            {str(event.chat_id) + " " + str(reply_msg.from_id): session_id}
+        )
+        await edit_or_reply(event, 
+            "Lydia successfully enabled for user: {} in chat: {}".format(
+                str(reply_msg.from_id), str(event.chat_id)
             )
+        )
+    else:
+        await edit_or_reply(event, "Reply to a user to activate Lydia AI on them")
 
 
-@bot.on(admin_cmd(incoming=True))
-async def on_new_message(event):
-    if event.chat_id in Config.UB_BLACK_LIST_CHAT:
+@bot.on(admin_cmd(pattern="dai", outgoing=True))
+@bot.on(sudo_cmd(pattern="dai", allow_sudo=True))
+async def remcf(event):
+    if event.fwd_from:
         return
-    if Config.LYDIA_API_KEY is None:
-        return
-    reply = await event.get_reply_message()
-    if reply is not None and reply.sender_id != bot.uid:
-        return
-    if not event.media:
-        user_id = event.sender_id
-        chat_id = event.chat_id
-        s = get_s(user_id, chat_id)
-        if s is not None:
-            session_id = s.session_id
-            session_expires = s.session_expires
-            query = event.text
-            # Check if the session is expired
-            # If this method throws an exception at this point,
-            # then there's an issue with the API, Auth or Server.
-            if session_expires < time():
-                # re-generate session
-                session = lydia.create_session()
-                logger.info(session)
-                session_id = session.id
-                session_expires = session.expires
-                logger.info(add_s(user_id, chat_id, session_id, session_expires))
-            # Try to think a thought.
-            try:
-                async with event.client.action(event.chat_id, "location"):
-                    await asyncio.sleep(2)
-                    output = lydia.think_thought(session_id, query)
-                    await event.reply(output)
-            except cf.exception.CoffeeHouseError as e:
-                logger.info(str(e))
+    await edit_or_reply(event, "Running on Non-SQL mode for now...")
+    await asyncio.sleep(3)
+    await edit_or_reply(event, "Processing...")
+    reply_msg = await event.get_reply_message()
+    try:
+        del ACC_LYDIA[str(event.chat_id) + " " + str(reply_msg.from_id)]
+        del SESSION_ID[str(event.chat_id) + " " + str(reply_msg.from_id)]
+        await edit_or_reply(event, 
+            "Lydia successfully disabled for user: {} in chat: {}".format(
+                str(reply_msg.from_id), str(event.chat_id)
+            )
+        )
+    except KeyError:
+        await edit_or_reply(event, "This person does not have Lydia activated on him/her.")
 
+
+@bot.on(events.NewMessage(incoming=True))
+async def user(event):
+    event.text
+    try:
+        session = ACC_LYDIA[str(event.chat_id) + " " + str(event.from_id)]
+        session_id = SESSION_ID[str(event.chat_id) + " " + str(event.from_id)]
+        msg = event.text
+        async with event.client.action(event.chat_id, "typing"):
+            text_rep = session.think_thought((session_id, msg))
+            wait_time = 0
+            for i in range(len(text_rep)):
+                wait_time = wait_time + 0.1
+            await asyncio.sleep(wait_time)
+            await event.reply(text_rep)
+    except KeyError:
+        return
 
 CmdHelp("lydia").add_command(
-  "onai", "<reply to user>", "Your bot will auto reply to the tagged user. Until you disables it."
+  "eai", "<reply to user>", "Your bot will auto reply to the tagged user. Until you disables it."
 ).add_command(
-  "ofai", "<reply to user>", "Your bot will stop auto reply to the tagged user (if enabled)."
-).add_command(
-  "liai", None, "Gives the list of users / chats where lydia ai is enabled."
+  "dai", "<reply to user>", "Your bot will stop auto reply to the tagged user (if enabled)."
 ).add()
