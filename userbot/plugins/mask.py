@@ -19,9 +19,10 @@ from userbot.helpers.functions import (
     lolice,
 )
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot.cmdhelp import CmdHelp
 
 
-@bot.on(admin_cmd("mask$", outgoing=True))
+@bot.on(admin_cmd(pattern="mask$", outgoing=True))
 @bot.on(sudo_cmd(pattern="mask$", allow_sudo=True))
 async def _(hellbot):
     reply_message = await hellbot.get_reply_message()
@@ -41,18 +42,17 @@ async def _(hellbot):
             await hellbot.client.send_message(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            await event.edit("```Please unblock @hazmat_suit_bot and try again```")
+            await edit_or_reply(hellbot, "`Please unblock` @hazmat_suit_bot `and try again`")
             return
         if response.text.startswith("Forward"):
-            await event.edit(
-                "```can you kindly disable your forward privacy settings for good?```"
+            await edit_or_reply(hellbot, "```can you kindly disable your forward privacy settings for good?```"
             )
         else:
             await hellbot.client.send_file(event.chat_id, response.message.media)
             await event.delete()
 
 
-@bot.on(admin_cmd(pattern="awooify$"))
+@bot.on(admin_cmd(pattern="awooify$", outgoing=True))
 @bot.on(sudo_cmd(pattern="awooify$", allow_sudo=True))
 async def hellbot(hellmemes):
     replied = await hellmemes.get_reply_message()
@@ -256,10 +256,14 @@ async def hellbot(hellmemes):
     await hellmemes.client.send_file(hellmemes.chat_id, hell, reply_to=replied)
 
 
-CMD_HELP.update(
-    {
-        "mask": "`.mask` reply to any image file:\
-      \nUSAGE:makes an image a different style try out your own.\
-      "
-    }
-)
+CmdHelp("mask").add_command(
+  "mask", "<reply to img/stcr", "Makes an image a different style."
+).add_command(
+  "iphx", "<reply to img/stcr", "Covers the replied image or sticker into iphonex wallpaper"
+).add_command(
+  "bun", "<reply to img/stcr", "Gives the replied img a cool bun eating look"
+).add_command(
+  "lolice", "<reply to img/stcr", "Gives the replied img the face of Lolice Cheif"
+).add_command(
+  "awooify", "<reply to img/stcr", "Gives the replied img or stcr the face or wooify"
+).add()
