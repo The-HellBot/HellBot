@@ -17,7 +17,7 @@ from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
 from userbot.cmdhelp import CmdHelp
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply, register
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 
 # ================= CONSTANT =================
 
@@ -420,8 +420,6 @@ HIT = [
 
 # ===========================================
 
-
-# @register(outgoing=True, pattern=r"^.(\w+)say (.*)")
 @bot.on(admin_cmd(pattern=r"(\w+)say (.*)"))
 @bot.on(sudo_cmd(pattern=r"(\w+)say (.*)", allow_sudo=True))
 async def univsaye(cowmsg):
