@@ -1,9 +1,11 @@
 # Added by @Sur_vivor
+
 import asyncio
 
 import requests
 
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 # ================= CONSTANT =================
 
@@ -25,64 +27,60 @@ GAMBAR_TITIT = """
     🍆🍆       🍆🍆
 """
 
+CUSTOM_HII = """
+{hell}{hell}{hell}{hell}{hell}{hell}{hell}{hell}{hell}
+{hell}🔷🔷🔷🔷🔷🔷🔷{hell}
+{hell}{hell}{hell}{hell}🔷{hell}{hell}{hell}{hell}
+{hell}{hell}{hell}{hell}🔷{hell}{hell}{hell}{hell}
+{hell}{hell}{hell}{hell}🔷{hell}{hell}{hell}{hell}
+{hell}🔷🔷🔷🔷️🔷🔷🔷{hell}
+{hell}{hell}{hell}{hell}{hell}{hell}{hell}{hell}{hell}
+{hell}{hell}{hell}{hell}{hell}{hell}{hell}{hell}{hell}
+{hell}🔷{hell}{hell}️{hell}{hell}{hell}🔷{hell}
+{hell}🔷🔷🔷🔷🔷🔷🔷{hell}          
+{hell}🔷🔷🔷🔷🔷🔷️🔷{hell}
+{hell}🔷{hell}{hell}{hell}{hell}️{hell}🔷{hell}
+{hell}{hell}{hell}{hell}{hell}{hell}{hell}{hell}{hell}
+"""
+        
 # ===========================================
 
 
-@borg.on(admin_cmd(pattern=r"hf$"))
+@bot.on(admin_cmd(pattern=r"hf$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"hf$", allow_sudo=True))
 async def facepalm(e):
     """ Facepalm  🤦‍♂ """
-    await e.edit("🤦‍♂")
+    await edit_or_reply(e, "🤦‍♂")
 
-
-@borg.on(admin_cmd(pattern=r"corona$"))
+@bot.on(admin_cmd(pattern=r"corona$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"corona$", allow_sudo=True))
 async def iqless(e):
-    await e.edit(
-        "Antivirus scan was completed \n⚠️ Warning! This  donkey has Corona Virus"
+    await edit_or_reply(e, "Antivirus scan was completed \n⚠️ Warning! This  donkey has Corona Virus"
     )
 
-
-@borg.on(admin_cmd(pattern=r"ggl (.*)"))
-async def let_me_google_that_for_you(lmgtfy_q):
-    textx = await lmgtfy_q.get_reply_message()
-    qry = lmgtfy_q.pattern_match.group(1)
-    if qry:
-        query = str(qry)
-    elif textx:
-        query = textx
-        query = query.message
-    query_encoded = query.replace(" ", "+")
-    lfy_url = f"http://lmgtfy.com/?s=g&iie=1&q={query_encoded}"
-    payload = {"format": "json", "url": lfy_url}
-    r = requests.get("http://is.gd/create.php", params=payload)
-    await lmgtfy_q.edit(
-        f"Tap this blue, help yourself.\
-    \n[{query}]({r.json()['shorturl']})"
-    )
-
-
-@borg.on(admin_cmd(outgoing=True, pattern="fail$"))
+@bot.on(admin_cmd(pattern=r"fail$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"fail$", allow_sudo=True))
 async def fail(e):
-    await e.edit(
-        "`\n▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ `"
-        "`\n████▌▄▌▄▐▐▌█████ `"
-        "`\n████▌▄▌▄▐▐▌▀████ `"
-        "`\n▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ `"
-    )
+    await edit_or_reply(e, "`\n▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ `"
+      "`\n████▌▄▌▄▐▐▌█████ `"
+      "`\n████▌▄▌▄▐▐▌▀████ `"
+      "`\n▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ `"
+      )
 
-
-@borg.on(admin_cmd(outgoing=True, pattern="lol$"))
+@bot.on(admin_cmd(pattern=r"lol$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"lol$", allow_sudo=True))
 async def lol(e):
-    await e.edit(
-        "`\n╱┏┓╱╱╱╭━━━╮┏┓╱╱╱╱ `"
-        "`\n╱┃┃╱╱╱┃╭━╮┃┃┃╱╱╱╱ `"
-        "`\n╱┃┗━━┓┃╰━╯┃┃┗━━┓╱ `"
-        "`\n╱┗━━━┛╰━━━╯┗━━━┛╱ `"
-    )
+    await edit_or_reply(e, "`\n╱┏┓╱╱╱╭━━━╮┏┓╱╱╱╱ `"
+      "`\n╱┃┃╱╱╱┃╭━╮┃┃┃╱╱╱╱ `"
+      "`\n╱┃┗━━┓┃╰━╯┃┃┗━━┓╱ `"
+      "`\n╱┗━━━┛╰━━━╯┗━━━┛╱ `"
+      )
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="rock$"))
+@bot.on(admin_cmd(pattern=r"rock$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"rock$", allow_sudo=True))
 async def lol(e):
-    await e.edit(
+    await edit_or_reply(e, 
         "`\n┈╭╮┈┈┈┈┈┈┈┈┈┈┈┈ `"
         "`\n┈┃┃┈╭╮┈┏╮╭╮╭╮┃╭ `"
         "`\n┈┃┃┈┃┃┈┣┫┃┃┃┈┣┫ `"
@@ -93,18 +91,20 @@ async def lol(e):
     )
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="lool$"))
+@bot.on(admin_cmd(pattern=r"lool$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"lool$", allow_sudo=True))
 async def lool(e):
-    await e.edit(
+    await edit_or_reply(e, 
         "`\n╭╭━━━╮╮┈┈┈┈┈┈┈┈┈┈\n┈┃╭━━╯┈┈┈┈▕╲▂▂╱▏┈\n┈┃┃╱▔▔▔▔▔▔▔▏╱▋▋╮┈`"
         "`\n┈┃╰▏┃╱╭╮┃╱╱▏╱╱▆┃┈\n┈╰━▏┗━╰╯┗━╱╱╱╰┻┫┈\n┈┈┈▏┏┳━━━━▏┏┳━━╯┈`"
         "`\n┈┈┈▏┃┃┈┈┈┈▏┃┃┈┈┈┈ `"
     )
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="nih$"))
+@bot.on(admin_cmd(pattern=r"nih$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"nih$", allow_sudo=True))
 async def nih(e):
-    await e.edit(
+    await edit_or_reply(e, 
         "`\n(\_/)`"
         "`\n(•_•)`"
         "`\n >🌹 *`"
@@ -115,9 +115,10 @@ async def nih(e):
     )
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="hoi$"))
+@bot.on(admin_cmd(pattern=r"hoi$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"hoi$", allow_sudo=True))
 async def gtfo(e):
-    await e.edit(
+    await edit_or_reply(e, 
         "`\n█████████`"
         "`\n█▄█████▄█`"
         "`\n█▼▼▼▼▼`"
@@ -128,10 +129,11 @@ async def gtfo(e):
     )
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="ml(?: |$)(.*)"))
+@bot.on(admin_cmd(pattern=r"ml(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"ml(?: |$)(.*)", allow_sudo=True))
 async def gtfo(e):
     message = e.pattern_match.group(1)
-    await e.edit(
+    await edit_or_reply(e, 
         "`\n█████████`"
         "`\n█▄█████▄█`"
         "`\n█▼▼▼▼▼`"
@@ -142,24 +144,28 @@ async def gtfo(e):
     )
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="taco$"))
+@bot.on(admin_cmd(pattern=r"taco$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"taco$", allow_sudo=True))
 async def taco(e):
-    await e.edit("\n{\__/}" "\n(●_●)" "\n( >🌮 Want a taco?")
+    await edit_or_reply(e, "\n{\__/}" "\n(●_●)" "\n( >🌮 Want a taco?")
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="paw$"))
+@bot.on(admin_cmd(pattern=r"paw$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"paw$", allow_sudo=True))
 async def paw(e):
-    await e.edit("`(=ↀωↀ=)")
+    await edit_or_reply(e, "`(=ↀωↀ=)")
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="tf$"))
+@bot.on(admin_cmd(pattern=r"tf$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"tf$", allow_sudo=True))
 async def tf(e):
-    await e.edit("(̿▀̿ ̿Ĺ̯̿̿▀̿ ̿)̄  ")
+    await edit_or_reply(e, "(̿▀̿ ̿Ĺ̯̿̿▀̿ ̿)̄  ")
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="gay$"))
+@bot.on(admin_cmd(pattern=r"gay$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"gay$", allow_sudo=True))
 async def gey(e):
-    await e.edit(
+    await edit_or_reply(e, 
         "`\n┈┈┈╭━━━━━╮┈┈┈┈┈\n┈┈┈┃┊┊┊┊┊┃┈┈┈┈┈`"
         "`\n┈┈┈┃┊┊╭━╮┻╮┈┈┈┈\n┈┈┈╱╲┊┃▋┃▋┃┈┈┈┈\n┈┈╭┻┊┊╰━┻━╮┈┈┈┈`"
         "`\n┈┈╰┳┊╭━━━┳╯┈┈┈┈\n┈┈┈┃┊┃╰━━┫┈U GAY`"
@@ -167,26 +173,29 @@ async def gey(e):
     )
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="bot$"))
+@bot.on(admin_cmd(pattern=r"bot$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"bot$", allow_sudo=True))
 async def bot(e):
-    await e.edit(
+    await edit_or_reply(e, 
         "` \n   ╲╲╭━━━━╮ \n╭╮┃▆┈┈▆┃╭╮ \n┃╰┫▽▽▽┣╯┃ \n╰━┫△△△┣━╯`"
         "`\n╲╲┃┈┈┈┈┃  \n╲╲┃┈┏┓┈┃ `"
     )
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="hai$"))
+@bot.on(admin_cmd(pattern=r"hai$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"hai$", allow_sudo=True))
 async def hey(e):
-    await e.edit(
+    await edit_or_reply(e, 
         "\n┈┈┈╱▔▔▔▔╲┈╭━━━━━\n┈┈▕▂▂▂▂▂▂▏┃HELLO!┊😀`"
         "`\n┈┈▕▔▇▔▔┳▔▏╰┳╮HELLO!┊\n┈┈▕╭━╰╯━╮▏━╯╰━━━\n╱▔▔▏▅▅▅▅▕▔▔╲┈┈┈┈`"
         "`\n▏┈┈╲▂▂▂▂╱┈┈┈▏┈┈┈`"
     )
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="nou$"))
+@bot.on(admin_cmd(pattern=r"nou$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"nou$", allow_sudo=True))
 async def nou(e):
-    await e.edit(
+    await edit_or_reply(e, 
         "`\n┈╭╮╭╮\n┈┃┃┃┃\n╭┻┗┻┗╮`"
         "`\n┃┈▋┈▋┃\n┃┈╭▋━╮━╮\n┃┈┈╭╰╯╰╯╮`"
         "`\n┫┈┈  NoU\n┃┈╰╰━━━━╯`"
@@ -194,9 +203,10 @@ async def nou(e):
     )
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="mf$"))
+@bot.on(admin_cmd(pattern=r"mf$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"mf$", allow_sudo=True))
 async def gtfo(e):
-    await e.edit(
+    await edit_or_reply(e, 
         "\n......................................../´¯/) "
         "\n......................................,/¯../ "
         "\n...................................../..../ "
@@ -225,35 +235,28 @@ async def gtfo(e):
     )
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="sayhi$"))
-async def shalom(e):
-    await e.edit(
-        "\n💛💛💛💛💛💛💛💛💛"
-        "\n💛🔷🔷🔷🔷🔷🔷🔷💛"
-        "\n💛💛💛💛🔷💛💛💛💛"
-        "\n💛💛💛💛🔷💛💛💛💛"
-        "\n💛💛💛💛🔷💛💛💛💛"
-        "\n💛🔷🔷🔷🔷️🔷🔷🔷💛"
-        "\n💛💛💛💛💛💛💛💛💛"
-        "\n💛💛💛💛💛💛💛💛💛"
-        "\n💛🔷💛💛️💛💛💛🔷💛"
-        "\n💛🔷🔷🔷🔷🔷🔷🔷💛"
-        "\n💛🔷🔷🔷🔷🔷🔷️🔷💛"
-        "\n💛🔷💛💛💛💛️💛🔷💛"
-        "\n💛💛💛💛💛💛💛💛💛"
-    )
+@bot.on(admin_cmd(pattern=r"chi(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"chi(?: |$)(.*)", allow_sudo=True))
+async def cstm(e):
+    hell = e.pattern_match.group(1)
+    chii = CUSTOM_HII
+    if hell:
+        chii = chii.replace("💛", hell)
+    await edit_or_reply(e, chii)
 
 
-@borg.on(admin_cmd(outgoing=True, pattern=r"(?:penis|dick)\s?(.)?"))
+@bot.on(admin_cmd(pattern=r"(?:penis|dick)\s?(.)?", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"(?:penis|dick)\s?(.)?", allow_sudo=True))
 async def emoji_penis(e):
     emoji = e.pattern_match.group(1)
     titid = GAMBAR_TITIT
     if emoji:
         titid = titid.replace("🍆", emoji)
-    await e.edit(titid)
+    await edit_or_reply(e, titid)
 
 
-@borg.on(admin_cmd(pattern=f"muth", outgoing=True))
+@bot.on(admin_cmd(pattern=f"muth", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"muth", allow_sudo=True))
 async def _(event):
 
     if event.fwd_from:
@@ -305,13 +308,54 @@ for emoji in emojis:
     unpacked_emojis += f"`{emoji}`\n"
 
 
-@borg.on(admin_cmd(pattern="emoji ?(.*)"))
+@bot.on(admin_cmd(pattern="emoji ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
     try:
         req_emoji = emojis[str(input_str)]
-        await event.edit(req_emoji)
+        await edit_or_reply(event, req_emoji)
     except KeyError:
-        await event.edit("Emoji not found!")
+        await edit_or_reply(event, "Emoji not found!")
+
+
+CmdHelp("memes2").add_command(
+  "dick", "<emoji>", "A dick art in given emoji"
+).add_command(
+  "chi", "<emoji>", "Custom Hii message. Based on your emoji along with cmd"
+).add_command(
+  "mf", None, "Use and see"
+).add_command(
+  "nou", None, "Use and see"
+).add_command(
+  "hai", None, "Use and see"
+).add_command(
+  "bot", None, "Use and see"
+).add_command(
+  "gay", None, "Use and see"
+).add_command(
+  "tf", None, "Use and see"
+).add_command(
+  "paw", None, "Use and see"
+).add_command(
+  "taco", None, "Use and see"
+).add_command(
+  "ml", "<msg>", "Use and see"
+).add_command(
+  "hoi", None, "Use and see"
+).add_command(
+  "hf", None, "Use and see"
+).add_command(
+  "corona", None, "Use and see"
+).add_command(
+  "fail", None, "Use and see"
+).add_command(
+  "lol", None, "Use and see"
+).add_command(
+  "lool", None, "Use and see"
+).add_command(
+  "rock", None, "Use and see"
+).add_command(
+  "nih", None, "Use and see"
+).add()
