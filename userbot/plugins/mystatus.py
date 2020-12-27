@@ -1,35 +1,28 @@
-"""
-
-Commands - .offline .online
-Offline = Add an offline tag in your name and change profile pic to black.
-Online = Remove Offline Tag from your name and change profile pic to vars PROFILE_IMAGE.
-Note - If you have a last name remove it unless it automatically removed.
-"""
-
-
 import os
 import urllib
 
 from telethon.tl import functions
-from uniborg.util import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
-OFFLINE_TAG = "[OFFLINE]"
-ONLINE_TAG = "[ONLINE]"
+
+OFFLINE_TAG = "[•OFFLINE•]"
+ONLINE_TAG = "[•ONLINE•]"
 PROFILE_IMAGE = os.environ.get(
     "PROFILE_IMAGE", "https://telegra.ph/file/9f0638dbfa028162a8682.jpg"
 )
 
 
-@borg.on(admin_cmd(pattern="offline"))  # pylint:disable=E0602
+@bot.on(admin_cmd(pattern="offline", outgoing=True))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
     user_it = "me"
     user = await event.client.get_entity(user_it)
     if user.first_name.startswith(OFFLINE_TAG):
-        await event.edit("**Already in Offline Mode.**")
+        await edit_or_reply(event, "**Already in Offline Mode.**")
         return
-    await event.edit("**Changing Profile to Offline...**")
+    await edit_or_reply(event, "**Changing Profile to Offline...**")
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):  # pylint:disable=E0602
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)  # pylint:disable=E0602
     urllib.request.urlretrieve(
@@ -41,9 +34,9 @@ async def _(event):
         try:
             await borg(functions.photos.UploadProfilePhotoRequest(file))
         except Exception as e:  # pylint:disable=C0103,W0703
-            await event.edit(str(e))
+            await edit_or_reply(event, str(e))
         else:
-            await event.edit("**Changed profile to OffLine.**")
+            await edit_or_reply(event, "**Changed profile to OffLine.**")
     try:
         os.system("rm -fr donottouch.jpg")
     except Exception as e:  # pylint:disable=C0103,W0703
@@ -57,21 +50,21 @@ async def _(event):
             )
         )
         result = "**`{} {}`\nI am Offline now.**".format(first_name, last_name)
-        await event.edit(result)
+        await edit_or_reply(event, result)
     except Exception as e:  # pylint:disable=C0103,W0703
-        await event.edit(str(e))
+        await edit_or_reply(event, str(e))
 
 
-@borg.on(admin_cmd(pattern="online"))  # pylint:disable=E0602
+@bot.on(admin_cmd(pattern="online", outgoing=True))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
     user_it = "me"
     user = await event.client.get_entity(user_it)
     if user.first_name.startswith(OFFLINE_TAG):
-        await event.edit("**Changing Profile to Online...**")
+        await edit_or_reply(event, "**Changing Profile to Online...**")
     else:
-        await event.edit("**Already Online.**")
+        await edit_or_reply(event, "**Already Online.**")
         return
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):  # pylint:disable=E0602
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)  # pylint:disable=E0602
@@ -82,9 +75,9 @@ async def _(event):
         try:
             await borg(functions.photos.UploadProfilePhotoRequest(file))
         except Exception as e:  # pylint:disable=C0103,W0703
-            await event.edit(str(e))
+            await edit_or_reply(event, str(e))
         else:
-            await event.edit("**Changed profile to Online.**")
+            await edit_or_reply(event, "**Changed profile to Online.**")
     try:
         os.system("rm -fr donottouch.jpg")
     except Exception as e:  # pylint:disable=C0103,W0703
@@ -98,6 +91,12 @@ async def _(event):
             )
         )
         result = "**`{} {}`\nI am Online !**".format(first_name, last_name)
-        await event.edit(result)
+        await edit_or_reply(event, result)
     except Exception as e:  # pylint:disable=C0103,W0703
-        await event.edit(str(e))
+        await edit_or_reply(event, str(e))
+
+CmdHelp("mystatus").add_command(
+  "online", None, "Remove Offline Tag from your name and change profile pic to vars PROFILE_IMAGE."
+).add_command(
+  "offline", None, "Add an offline tag in your name and change profile pic to black."
+).add()
