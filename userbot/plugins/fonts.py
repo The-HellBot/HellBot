@@ -277,4 +277,13 @@ CmdHelp("fonts").add_command(
   'boxify', '<text>', 'Modifies your text in box font'
 ).add_command(
   'bubble', '<text>', 'Modifies your text in bubble font'
+).add_command(
+  'cp', '<text>', 'Gives the text a funny look'
+).add_command(
+  'vapor', '<text>', 'Vaporizes Your text'
+).add_command(
+  'str', '<text>', 'Streches the text'
+).add_command(
+  'zal', '<text>', 'Zagolifies your text'
 ).add()
+#Hellbot_Op
