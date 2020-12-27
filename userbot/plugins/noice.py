@@ -139,6 +139,29 @@ async def payf(e):
     )
     await edit_or_reply(e, pay)
 
+@bot.on(admin_cmd(pattern="nopee", outgoing=True))
+@bot.on(sudo_cmd(pattern="nopee", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    animation_interval = 0.1
+    animation_ttl = range(0, 36)
+    await edit_or_reply(event, "nope")
+    animation_chars = [
+        "No",
+        "Problem",
+        "Boss",
+        "Yeah ! No problem",
+        "No Problem Boss.lol",
+        "No Problem Boss😇.Lol",
+        "No Problem Man😇.Lol",
+    ]
+
+    for i in animation_ttl:
+
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 18])
+
 
 CmdHelp("noice").add_command(
   "f", "<text>", "Gives out the text in 'F' letter"
@@ -148,4 +171,6 @@ CmdHelp("noice").add_command(
   "hey", None, "Random 'Hello' String."
 ).add_command(
   "cri", None, "Random Crying emojies..."
+).add_command(
+  "nopee", None, "Use and see"
 ).add()
