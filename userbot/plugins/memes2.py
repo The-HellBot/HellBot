@@ -3,7 +3,7 @@
 import asyncio
 
 import requests
-
+from userbot import *
 from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 
@@ -182,8 +182,8 @@ async def bot(e):
     )
 
 
-@bot.on(admin_cmd(pattern=r"hai$", outgoing=True))
-@bot.on(sudo_cmd(pattern=r"hai$", allow_sudo=True))
+@bot.on(admin_cmd(pattern="hai$"))
+@bot.on(sudo_cmd(pattern="hai$", allow_sudo=True))
 async def hey(e):
     await edit_or_reply(e, 
         "\n┈┈┈╱▔▔▔▔╲┈╭━━━━━\n┈┈▕▂▂▂▂▂▂▏┃HELLO!┊😀`"
