@@ -7,29 +7,31 @@ import textwrap
 
 from PIL import Image, ImageDraw, ImageFont
 
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 from var import Var
 
 # how a lazy guy ports.
 client = borg
 
 
-@borg.on(admin_cmd("memify ?(.*)"))
+@bot.on(admin_cmd(pattern="memify ?(.*)"))
+@bot.on(sudo_cmd(pattern="memify ?(.*)", allow_sudo=True))
 async def handler(event):
     if event.fwd_from:
         return
     if not event.reply_to_msg_id:
-        await event.edit("You might want to try `.help memify`")
+        await edit_or_reply(event, "You might want to try `.help memify`")
         return
     reply_message = await event.get_reply_message()
     if not reply_message.media:
-        await event.edit("```Reply to a image/sticker.```")
+        await edit_or_reply(event, "```Reply to a image/sticker.```")
         return
     file = await client.download_media(reply_message, Var.TEMP_DOWNLOAD_DIRECTORY)
-    await event.edit("```Memifying this image! (」ﾟﾛﾟ)｣ ```")
+    await edit_or_reply(event, "```Memifying this image! (」ﾟﾛﾟ)｣ ```")
     text = str(event.pattern_match.group(1)).strip()
     if len(text) < 1:
-        return await event.edit("You might want to try `.help memify`")
+        return await edit_or_reply(event, "You might want to try `.help memify`")
     meme = await drawText(file, text)
     await client.send_file(event.chat_id, file=meme, force_document=False)
     os.remove(meme)
@@ -144,3 +146,9 @@ async def drawText(image_path, text):
     webp_file = os.path.join(Var.TEMP_DOWNLOAD_DIRECTORY, image_name)
     img.save(webp_file, "webp")
     return webp_file
+
+CmdHelp("memify").add_command(
+  "memify", "<reply to img/stcr> <text>", "Memifies the replied image or sticker with the text you entered. Use and see"
+).add_command(
+  "mmf", "<reply to img/stcr> <text>", "Memfies the replied image or sticker with the text you entered. Font changed"
+).add()
