@@ -16,7 +16,7 @@ from cowpy import cow
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
-from userbot import CMD_HELP
+from userbot.cmdhelp import CmdHelp
 from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply, register
 
 # ================= CONSTANT =================
@@ -422,7 +422,8 @@ HIT = [
 
 
 # @register(outgoing=True, pattern=r"^.(\w+)say (.*)")
-@borg.on(admin_cmd(pattern=r"(\w+)say (.*)"))
+@bot.on(admin_cmd(pattern=r"(\w+)say (.*)"))
+@bot.on(sudo_cmd(pattern=r"(\w+)say (.*)", allow_sudo=True))
 async def univsaye(cowmsg):
     """ For .cowsay module, userbot wrapper for cow which says things. """
     if not cowmsg.text[0].isalpha() and cowmsg.text[0] not in ("/", "#", "@", "!"):
@@ -436,10 +437,11 @@ async def univsaye(cowmsg):
         cheese = cow.get_cow(arg)
         cheese = cheese()
 
-        await cowmsg.edit(f"`{cheese.milk(text).replace('`', '´')}`")
+        await edit_or_reply(cowmsg, f"`{cheese.milk(text).replace('`', '´')}`")
 
 
-@register(outgoing=True, pattern="^.:/$")
+@bot.on(admin_cmd(pattern=":/$", outgoing=True))
+@bot.on(sudo_cmd(pattern=":/$", allow_sudo=True))
 async def kek(keks):
     if not keks.text[0].isalpha() and keks.text[0] not in ("/", "#", "@", "!"):
         """ Check yourself ;)"""
@@ -449,7 +451,8 @@ async def kek(keks):
             await keks.edit(":" + uio[i % 2])
 
 
-@register(pattern="^.slap(?: |$)(.*)", outgoing=True)
+@bot.on(admin_cmd(pattern="slap(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="slap(?: |$)(.*)", allow_sudo=True))
 async def who(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         """ slaps a user, or get slapped if not a reply. """
@@ -464,11 +467,10 @@ async def who(event):
             message_id_to_reply = None
 
         try:
-            await event.edit(caption)
+            await edit_or_reply(event, caption))
 
         except:
-            await event.edit(
-                "`Can't slap this person, need to fetch some sticks and stones !!`"
+            await edit_or_reply(event, "`Can't slap this person, need to fetch some sticks and stones !!`"
             )
 
 
@@ -499,7 +501,7 @@ async def get_user(event):
             replied_user = await event.client(GetFullUserRequest(user_object.id))
 
         except (TypeError, ValueError):
-            await event.edit("`I don't slap aliens, they ugly AF !!`")
+            await edit_or_reply(event, "`I don't slap aliens, they ugly AF !!`")
             return None
 
     return replied_user
@@ -526,33 +528,37 @@ async def slap(replied_user, event):
     return caption
 
 
-@register(outgoing=True, pattern="^.-_-$")
+@bot.on(admin_cmd(pattern="-_-$", outgoing=True))
+@bot.on(sudo_cmd(pattern="-_-$", allow_sudo=True))
 async def lol(lel):
     if not lel.text[0].isalpha() and lel.text[0] not in ("/", "#", "@", "!"):
         """ Ok... """
         okay = "-_-"
         for _ in range(10):
             okay = okay[:-1] + "_-"
-            await lel.edit(okay)
+            await edit_or_reply(lel, okay)
 
 
-@register(outgoing=True, pattern="^.;_;$")
+@bot.on(admin_cmd(pattern=";_;$", outgoing=True))
+@bot.on(sudo_cmd(pattern=";_;$", allow_sudo=True))
 async def fun(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         t = ";__;"
         for j in range(10):
             t = t[:-1] + "_;"
-            await e.edit(t)
+            await edit_or_reply(e, t)
 
 
-@register(outgoing=True, pattern="^.cry$")
+@bot.on(admin_cmd(pattern="cry$", outgoing=True))
+@bot.on(sudo_cmd(pattern="cry$", allow_sudo=True))
 async def cry(e):
     """ y u du dis, i cry everytime !! """
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
-        await e.edit(random.choice(CRI))
+        await edit_or_reply(e, random.choice(CRI))
 
 
-@register(outgoing=True, pattern="^.cp(?: |$)(.*)")
+@bot.on(admin_cmd(pattern="cp(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="cp(?:|$)(.*)", allow_sudo=True))
 async def copypasta(cp_e):
     """ Copypasta the famous meme """
     if not cp_e.text[0].isalpha() and cp_e.text[0] not in ("/", "#", "@", "!"):
@@ -564,7 +570,7 @@ async def copypasta(cp_e):
         elif textx:
             message = textx.text
         else:
-            await cp_e.edit("`😂🅱️IvE👐sOME👅text👅for✌️Me👌tO👐MAkE👀iT💞funNy!💦`")
+            await edit_or_reply(cp_e, "`😂🅱️IvE👐sOME👅text👅for✌️Me👌tO👐MAkE👀iT💞funNy!💦`")
             return
 
         reply_text = random.choice(EMOJIS)
@@ -585,10 +591,11 @@ async def copypasta(cp_e):
                 else:
                     reply_text += owo.lower()
         reply_text += random.choice(EMOJIS)
-        await cp_e.edit(reply_text)
+        await edit_or_reply(cp_e, reply_text)
 
 
-@register(outgoing=True, pattern="^.vapor(?: |$)(.*)")
+@bot.on(admin_cmd(pattern="vapor(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="vapor(?: |$)(.*)", allow_sudo=True))
 async def vapor(vpr):
     """ Vaporize everything! """
     if not vpr.text[0].isalpha() and vpr.text[0] not in ("/", "#", "@", "!"):
@@ -600,7 +607,7 @@ async def vapor(vpr):
         elif textx:
             message = textx.text
         else:
-            await vpr.edit("`Ｇｉｖｅ ｓｏｍｅ ｔｅｘｔ ｆｏｒ ｖａｐｏｒ！`")
+            await edit_or_reply(vpr, "`Ｇｉｖｅ ｓｏｍｅ ｔｅｘｔ ｆｏｒ ｖａｐｏｒ！`")
             return
 
         for charac in message:
@@ -611,7 +618,7 @@ async def vapor(vpr):
             else:
                 reply_text.append(charac)
 
-        await vpr.edit("".join(reply_text))
+        await edit_or_reply(vpr, "".join(reply_text))
 
 
 @bot.on(admin_cmd(pattern=f"repo", outgoing=True))
@@ -621,7 +628,8 @@ async def source(e):
         await edit_or_reply(e, "Click [here](https://github.com/HellBoy-OP/HellBot) to open this 🔥**Lit AF!!**🔥 __Hêllẞø†__ Repo.. Join channel :- @HellBot_Official")
 
 
-@register(outgoing=True, pattern="^.str(?: |$)(.*)")
+@bot.on(admin_cmd(pattern="str(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="str(?: |$)(.*)", allow_sudo=True))
 async def stretch(stret):
     """ Stretch it."""
     if not stret.text[0].isalpha() and stret.text[0] not in ("/", "#", "@", "!"):
@@ -633,17 +641,18 @@ async def stretch(stret):
         elif textx:
             message = textx.text
         else:
-            await stret.edit("`GiiiiiiiB sooooooomeeeeeee teeeeeeext!`")
+            await edit_or_reply(stret, "`GiiiiiiiB sooooooomeeeeeee teeeeeeext!`")
             return
 
         count = random.randint(3, 10)
         reply_text = re.sub(
             r"([aeiouAEIOUａｅｉｏｕＡＥＩＯＵаеиоуюяыэё])", (r"\1" * count), message
         )
-        await stret.edit(reply_text)
+        await edit_or_reply(stret, reply_text)
 
 
-@register(outgoing=True, pattern="^.zal(?: |$)(.*)")
+@bot.on(admin_cmd(pattern="zal(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="zal(?: |$)(.*)", allow_sudo=True))
 async def zal(zgfy):
     """ Invoke the feeling of chaos. """
     if not zgfy.text[0].isalpha() and zgfy.text[0] not in ("/", "#", "@", "!"):
@@ -655,8 +664,7 @@ async def zal(zgfy):
         elif textx:
             message = textx.text
         else:
-            await zgfy.edit(
-                "`gͫ ̆ i̛ ̺ v͇̆ ȅͅ   a̢ͦ   s̴̪ c̸̢ ä̸ rͩͣ y͖͞   t̨͚ é̠ x̢͖  t͔͛`"
+            await edit_or_reply(zgfy, "`gͫ ̆ i̛ ̺ v͇̆ ȅͅ   a̢ͦ   s̴̪ c̸̢ ä̸ rͩͣ y͖͞   t̨͚ é̠ x̢͖  t͔͛`"
             )
             return
 
@@ -677,32 +685,31 @@ async def zal(zgfy):
 
             reply_text.append(charac)
 
-        await zgfy.edit("".join(reply_text))
+        await edit_or_reply(zgfy, "".join(reply_text))
 
 
-@register(outgoing=True, pattern="^.pkill$")
+@bot.on(admin_cmd(pattern="pkill$", outgoing=True))
+@bot.on(sudo_cmd(pattern="pkill$", allow_sudo=True))
 async def killing(killed):
     """ Dont Kill Too much -_-"""
     if not killed.text[0].isalpha() and killed.text[0] not in ("/", "#", "@", "!"):
         if await killed.get_reply_message():
-            await killed.edit(
-                "`My Master killed targeted user by Headshot 😈......`\n"
+            await edit_or_reply(killed, "`My Master killed targeted user by Headshot 😈......`\n"
                 "#Sad_Reacts_Onli\n"
             )
 
-
-@register(outgoing=True, pattern="^.bt$")
+@bot.on(admin_cmd(pattern="bt$", outgoing=True))
+@bot.on(sudo_cmd(pattern="bt$", allow_sudo=True))
 async def bluetext(bte):
     """ Believe me, you will find this useful. """
     if not bte.text[0].isalpha() and bte.text[0] not in ("/", "#", "@", "!"):
         if await bte.get_reply_message():
-            await bte.edit(
-                "`BLUETEXT MUST CLICK.`\n"
+            await edit_or_reply(bte, "`BLUETEXT MUST CLICK.`\n"
                 "`Are you a stupid animal which is attracted to colours?`"
             )
 
-        
-@register(outgoing=True, pattern="^.owo(?: |$)(.*)")
+@bot.on(admin_cmd(pattern="owo(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="owo(?: |$)(.*)", allow_sudo=True))
 async def faces(owo):
     """ UwU """
     if not owo.text[0].isalpha() and owo.text[0] not in ("/", "#", "@", "!"):
@@ -713,7 +720,7 @@ async def faces(owo):
         elif textx:
             message = textx.text
         else:
-            await owo.edit("` UwU no text given! `")
+            await edit_or_reply(owo, "` UwU no text given! `")
             return
 
         reply_text = re.sub(r"(r|l)", "w", message)
@@ -723,30 +730,30 @@ async def faces(owo):
         reply_text = re.sub(r"\!+", " " + random.choice(UWUS), reply_text)
         reply_text = reply_text.replace("ove", "uv")
         reply_text += " " + random.choice(UWUS)
-        await owo.edit(reply_text)
+        await edit_or_reply(owo, reply_text)
 
-
-@register(outgoing=True, pattern="^.react$")
+@bot.on(admin_cmd(pattern="react$", outgoing=True))
+@bot.on(sudo_cmd(pattern="react$", allow_sudo=True))
 async def react_meme(react):
     """ Make your userbot react to everything. """
     if not react.text[0].isalpha() and react.text[0] not in ("/", "#", "@", "!"):
-        await react.edit(random.choice(FACEREACTS))
+        await edit(react, random.choice(FACEREACTS))
 
-
-@register(outgoing=True, pattern="^.shg$")
+@bot.on(admin_cmd(pattern="shg$", outgoing=True))
+@bot.on(sudo_cmd(pattern="shg$", allow_sudo=True))
 async def shrugger(shg):
     r""" ¯\_(ツ)_/¯ """
     if not shg.text[0].isalpha() and shg.text[0] not in ("/", "#", "@", "!"):
-        await shg.edit(random.choice(SHGS))
+        await edit_or_reply(shg, random.choice(SHGS))
 
-
-@register(outgoing=True, pattern="^.10iq$")
+@bot.on(admin_cmd(pattern="10iq$", outgoing=True))
+@bot.on(sudo_cmd(pattern="10iq$", allow_sudo=True))
 async def iqless(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
-        await e.edit("♿")
+        await edit_or_reply(e, "♿")
 
-
-@register(outgoing=True, pattern="^.mock(?: |$)(.*)")
+@bot.on(admin_cmd(pattern="mock(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="mock(?: |$)(.*)", allow_sudo=True))
 async def spongemocktext(mock):
     """ Do it and find the real fun. """
     if not mock.text[0].isalpha() and mock.text[0] not in ("/", "#", "@", "!"):
@@ -758,7 +765,7 @@ async def spongemocktext(mock):
         elif textx:
             message = textx.text
         else:
-            await mock.edit("`gIvE sOMEtHInG tO MoCk!`")
+            await edit_or_reply(mock, "`gIvE sOMEtHInG tO MoCk!`")
             return
 
         for charac in message:
@@ -768,10 +775,10 @@ async def spongemocktext(mock):
             else:
                 reply_text.append(charac)
 
-        await mock.edit("".join(reply_text))
+        await edit_or_reply(mock, "".join(reply_text))
 
-
-@register(outgoing=True, pattern="^.clap(?: |$)(.*)")
+@bot.on(admin_cmd(pattern="clap(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="clap(?: |$)(.*)", allow_sudo=True))
 async def claptext(memereview):
     """ Praise people! """
     if not memereview.text[0].isalpha() and memereview.text[0] not in (
@@ -787,15 +794,15 @@ async def claptext(memereview):
         elif textx:
             message = textx.text
         else:
-            await memereview.edit("`Hah, I don't clap pointlessly!`")
+            await edit_or_reply(memereview, "`Hah, I don't clap pointlessly!`")
             return
         reply_text = "👏 "
         reply_text += message.replace(" ", " 👏 ")
         reply_text += " 👏"
-        await memereview.edit(reply_text)
+        await edit_or_reply(memereview, reply_text)
 
-
-@register(outgoing=True, pattern="^.smk (.*)")
+@bot.on(admin_cmd(pattern="smk (.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="smk (.*)", allow_sudo=True))
 async def smrk(smk):
     if not smk.text[0].isalpha() and smk.text[0] not in ("/", "#", "@", "!"):
         textx = await smk.get_reply_message()
@@ -806,18 +813,15 @@ async def smrk(smk):
         message = textx
         message = str(message.message)
     if message == "dele":
-        await smk.edit(message + "te the hell" + "ツ")
-        await smk.edit("ツ")
+        await edit_or_reply(smk, message + "te the hell" + "ツ")
+        await edit_or_reply(smk, "ツ")
     else:
         smirk = " ツ"
         reply_text = message + smirk
-        await smk.edit(reply_text)
+        await edit_or_reply(smk, reply_text)
 
-
-@register(
-    outgoing=True,
-    pattern="^.lfy (.*)",
-)
+@bot.on(admin_cmd(pattern="lfy (.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="lfy (.*)", allow_sudo=True))
 async def let_me_google_that_for_you(lmgtfy_q):
     if not lmgtfy_q.text[0].isalpha() and lmgtfy_q.text[0] not in ("/", "#", "@", "!"):
         textx = await lmgtfy_q.get_reply_message()
@@ -831,9 +835,45 @@ async def let_me_google_that_for_you(lmgtfy_q):
         lfy_url = f"http://lmgtfy.com/?s=g&iie=1&q={query_encoded}"
         payload = {"format": "json", "url": lfy_url}
         r = requests.get("http://is.gd/create.php", params=payload)
-        await lmgtfy_q.edit(f"[{query}]({r.json()['shorturl']})")
+        await edit_or_reply(lmgtfy_q, f"[{query}]({r.json()['shorturl']})")
         if BOTLOG:
             await bot.send_message(
                 BOTLOG_CHATID,
                 "LMGTFY query `" + query + "` was executed successfully",
             )
+
+
+CmdHelp("memes").add_command(
+  "lfy", "<text>", "Search result from LMGTFY site."
+).add_command(
+  "smk", "<word>", "Adds ツ in last of given word"
+).add_command(
+  "clap", "<reply>", "Gives the replied text a clapping look👏"
+).add_command(
+  "mock", "<text>", "MoCkS yOuR tExT iN cOoL sTyLe"
+).add_command(
+  "10iq", None, "Iq tester iz here guys"
+).add_command(
+  "shg", None, "Random Shrug Emoji"
+).add_command(
+  "react", None, "Reacts randomly"
+).add_command(
+  "owo", "<text>", "OwO your text. Use and see"
+).add_command(
+  "bt", None, "Do it yourself"
+).add_command(
+  "pkill", None, "Targeted User Iz Killed"
+).add_command(
+  "cry", None, "Lemme cry in corner ;_;"
+).add_command(
+  ";_;", None, "Shit animation."
+).add_command(
+  "-_-", None, "Shite animation"
+).add_command(
+  ":/", None, "Shit animation"
+).add_command(
+  "slap", "<Reply>", "Slapps the user virtually"
+).add_command(
+  "cowsay", "<text>", "Use and see....."
+).add()
+#HellBot_OP
