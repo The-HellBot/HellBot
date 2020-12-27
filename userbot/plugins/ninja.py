@@ -6,7 +6,8 @@ import asyncio
 
 import telethon.utils
 from telethon import events
-from uniborg.util import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
 async def get_target_message(event):
@@ -32,8 +33,8 @@ async def await_read(chat, message):
     await fut
 
 
-@borg.on(admin_cmd(pattern="(del)(?:ete)?$"))
-@borg.on(admin_cmd(pattern="(edit)(?:\s+(.*))?$"))
+@bot.on(admin_cmd(pattern="(del)(?:ete)?$"))
+@bot.on(admin_cmd(pattern="(edit)(?:\s+(.*))?$"))
 async def delete(event):
     await event.delete()
     command = event.pattern_match.group(1)
@@ -50,3 +51,29 @@ async def delete(event):
             await borg.edit_message(chat, target, text)
         else:
             await borg.delete_messages(chat, target, revoke=True)
+
+
+@bot.on(sudo_cmd(pattern="(del)(?:ete)?$", allow_sudo=True))
+@bot.on(sudo_cmd(pattern="(edit)(?:\s+(.*))?$", allow_sudo=True))
+async def delete(event):
+    await event.delete()
+    command = event.pattern_match.group(1)
+    if command == "edit":
+        text = event.pattern_match.group(2)
+        if not text:
+            return
+    target = await get_target_message(event)
+    if target:
+        chat = await event.get_input_chat()
+        await await_read(chat, target)
+        await asyncio.sleep(0.5)
+        if command == "edit":
+            await borg.edit_message(chat, target, text)
+        else:
+            await borg.delete_messages(chat, target, revoke=True)
+
+CmdHell("ninja").add_command(
+  "del", "<reply to a msg>", "Deletes the replied msg."
+).add_command(
+  "edit", "<reply to a msg>", "Edits the replied msg"
+).add()
