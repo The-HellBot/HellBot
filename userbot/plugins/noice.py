@@ -1,7 +1,7 @@
 import random
 import re
 import time
-
+import asyncio
 import requests
 from telethon import events
 from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
@@ -139,8 +139,8 @@ async def payf(e):
     )
     await edit_or_reply(e, pay)
 
-@bot.on(admin_cmd(pattern="nopee", outgoing=True))
-@bot.on(sudo_cmd(pattern="nopee", allow_sudo=True))
+@bot.on(admin_cmd(pattern="nopee$", outgoing=True))
+@bot.on(sudo_cmd(pattern="nopee$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -163,6 +163,43 @@ async def _(event):
         await event.edit(animation_chars[i % 18])
 
 
+@bot.on(admin_cmd(pattern="^Ok$", outgoing=True))
+@bot.on(sudo_cmd(pattern="^Ok$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    animation_interval = 0.1
+    animation_ttl = range(0, 36)
+    # input_str = event.pattern_match.group(1)
+    # if input_str == "ok":
+    await event.edit("ok")
+    animation_chars = [
+        "OK",
+        "BOSS",
+        "OK MAN",
+        "OK BITCH",
+        "OK FUKCER",
+        "OK SEXY BABE",
+        "OK GAY",
+        "OK SIR",
+        "GO AND SAY OK",
+        "OK LOL",
+        "YAA OK",
+        "FCUK",
+        "OK",
+        "Boss",
+        "Yeahhhhhh",
+        "O",
+        "K",
+        "Ok Boss! 😇",
+    ]
+
+    for i in animation_ttl:
+
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 18])
+        
+
 CmdHelp("noice").add_command(
   "f", "<text>", "Gives out the text in 'F' letter"
 ).add_command(
@@ -173,4 +210,6 @@ CmdHelp("noice").add_command(
   "cri", None, "Random Crying emojies..."
 ).add_command(
   "nopee", None, "Use and see"
+).add_command(
+  "Ok", None, "Ohh Ok"
 ).add()
