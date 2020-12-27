@@ -1,9 +1,11 @@
 import asyncio
 
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
-@borg.on(admin_cmd(pattern=r"gf$", outgoing=True))
+@bot.on(admin_cmd(pattern=r"gf$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"gf$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -37,8 +39,8 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 21])
 
-
-@borg.on(admin_cmd(pattern=r"mom$", outgoing=True))
+@bot.on(admin_cmd(pattern=r"mom$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"mom$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -71,3 +73,9 @@ async def _(event):
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 21])
+
+CmdHelp("mom-gf").add_command(
+  "mom", None, "Uhhhh... Try it and see"
+).add_command(
+  "gf", None, "Same as .mom but this time its gf"
+).add()
