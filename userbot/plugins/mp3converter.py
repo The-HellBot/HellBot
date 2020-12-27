@@ -6,21 +6,22 @@ import os
 import time
 from datetime import datetime
 
-from userbot.utils import admin_cmd, progress
+from userbot.utils import admin_cmd, progress, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
-@borg.on(admin_cmd(pattern="convert (.*)"))  # pylint:disable=E0602
+@bot.on(admin_cmd(pattern="tomp3 (.*)"))
+@bot.on(sudo_cmd(pattern="tomp3 (.*)"))
 async def _(event):
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
     reply_message = await event.get_reply_message()
     if reply_message is None:
-        await event.edit(
-            "reply to a media to use the `nfc` operation.\nInspired by @FileConverterBot"
+        await edit_or_reply(event, "reply to a media to use the `nfc` operation.\nInspired by @FileConverterBot"
         )
         return
-    await event.edit("trying to download media file, to my local")
+    await edit_or_reply(event, "trying to download media file, to my local")
     try:
         start = datetime.now()
         c_time = time.time()
@@ -32,11 +33,11 @@ async def _(event):
             ),
         )
     except Exception as e:  # pylint:disable=C0103,W0703
-        await event.edit(str(e))
+        await edit_or_reply(event, str(e))
     else:
         end = datetime.now()
         ms = (end - start).seconds
-        await event.edit(
+        await edit_or_reply(event, 
             "Downloaded to `{}` in {} seconds.".format(downloaded_file_name, ms)
         )
         new_required_file_name = ""
@@ -81,7 +82,7 @@ async def _(event):
             voice_note = False
             supports_streaming = True
         else:
-            await event.edit("not supported")
+            await edit_or_reply(event, "not supported")
             os.remove(downloaded_file_name)
             return
         logger.info(command_to_run)
@@ -114,4 +115,8 @@ async def _(event):
             )
             ms_two = (end_two - end).seconds
             os.remove(new_required_file_name)
-            await event.edit(f"converted in {ms_two} seconds")
+            await edit_or_reply(event, f"converted in {ms_two} seconds")
+
+CmdHelp("mp3converter").add_command(
+  "tomp3", "<reply to a media>", "Converts the given media to mp3 format"
+).add()
