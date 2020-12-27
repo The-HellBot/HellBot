@@ -29,8 +29,6 @@ async def randomise(items):
             + "`"
         )
 
-
-@register(outgoing=True, pattern="^.sleep( [0-9]+)?$")
 @bot.on(admin_cmd(pattern="sleep([0-9]+)?$", outgoing=True))
 @bot.on(sudo_cmd(pattern="sleep([0-9]+)?$", allow_sudo=True))
 async def sleepybot(time):
