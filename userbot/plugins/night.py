@@ -9,6 +9,7 @@ from telethon.tl import functions, types
 
 from userbot import ALIVE_NAME
 from userbot.utils import admin_cmd
+from userbot.cmdhelp import CmdHelp
 
 global USER_night  # pylint:disable=E0602
 global night_time  # pylint:disable=E0602
