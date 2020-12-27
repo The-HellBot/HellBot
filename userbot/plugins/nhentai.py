@@ -3,17 +3,19 @@
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from userbot import CMD_HELP, bot
-from userbot.events import register
+from userbot import bot
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
-@register(outgoing=True, pattern="^.nhentai(?: |$)(.*)")
+@bot.on(admin_cmd(pattern="nhentai(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="nhentai(?: |$)(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     link = event.pattern_match.group()
     chat = "@nHentaiBot"
-    await event.edit("```Processing```")
+    await edit_or_reply(event, "```Processing```")
     async with bot.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -22,18 +24,15 @@ async def _(event):
             await bot.send_message(chat, link)
             response = await response
         except YouBlockedUserError:
-            await event.reply("```Please unblock @nHentaiBot and try again```")
+            await edit_or_reply(event, "```Please unblock @nHentaiBot and try again```")
             return
         if response.text.startswith("**Sorry I couldn't get manga from**"):
-            await event.edit("```I think this is not the right link```")
+            await edit_or_reply(event, "```I think this is not the right link```")
         else:
             await event.delete()
             await bot.forward_messages(event.chat_id, response.message)
 
 
-CMD_HELP.update(
-    {
-        "nhentai": ".nhentai <link / code> \
-\nUsage: view nhentai in telegra.ph D\n"
-    }
-)
+CmdHelp("nhentai").add_command(
+  "nhentai", "<link>", "Send one link like https://nhentai.net/g/234638 and this will turn it into a Telegra.ph Instant View articles!"
+).add()
