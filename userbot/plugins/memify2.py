@@ -1,17 +1,14 @@
-"""Reply to an image/sticker with .mmf` 'text on top' ; 'text on bottom
-forked by: @kraken_the_badass
-created by: @A_Dark_Princ3
-"""
 
 import os
 import textwrap
 
 from PIL import Image, ImageDraw, ImageFont
 
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 
 
-@borg.on(admin_cmd(pattern=r"mmf ?(.*)"))
+@bot.on(admin_cmd(pattern=r"mmf ?(.*)"))
+@bot.on(sudo_cmd(pattern=r"mmf ?(.*)", allow_sudo=True))
 async def handler(event):
 
     if event.fwd_from:
@@ -20,7 +17,7 @@ async def handler(event):
 
     if not event.reply_to_msg_id:
 
-        await event.reply("Usage:- `memify upper text ; lower text`")
+        await edit_or_reply(event, "Usage:- `memify upper text ; lower text`")
 
         return
 
@@ -28,19 +25,19 @@ async def handler(event):
 
     if not reply_message.media:
 
-        await event.reply("Reply to a image/sticker")
+        await edit_or_reply(event, "Reply to a image/sticker")
 
         return
 
     file = await borg.download_media(reply_message, Var.TEMP_DOWNLOAD_DIRECTORY)
 
-    a = await event.reply("Hahaha...Memifying this image....")
+    a = await edit_or_reply(event, "Hahaha...Memifying this image....")
 
     text = str(event.pattern_match.group(1)).strip()
 
     if len(text) < 1:
 
-        return await a.edit("Usage:- `memify upper text ; lower text`")
+        return await edit_or_reply(a, "Usage:- `memify upper text ; lower text`")
 
     meme = await drawText(file, text)
 
