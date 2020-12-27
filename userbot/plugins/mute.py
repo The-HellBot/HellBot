@@ -2,19 +2,19 @@
 """
 import asyncio
 
-from uniborg.util import admin_cmd
-
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
 
 
-# @command(outgoing=True, pattern=r"^.mute ?(\d+)?")
-@borg.on(admin_cmd(pattern="mute ?(\d+)?"))
+@bot.on(admin_cmd(pattern="mute ?(\d+)?", outgoing=True))
+@bot.on(sudo_cmd(pattern="mute ?(\d+)?", allow_sudo=True))
 async def startmute(event):
     private = False
     if event.fwd_from:
         return
     elif event.is_private:
-        await event.edit("Unexpected issues or ugly errors may occur!")
+        await edit_or_reply(event, "Shut The Fukk Up!!!!!")
         await asyncio.sleep(3)
         private = True
     if any(
@@ -62,8 +62,7 @@ async def startmute(event):
         elif private is True:
             userid = event.chat_id
         else:
-            return await event.edit(
-                "Please reply to a user or add their userid into the command to mute them."
+            return await edit_or_reply(event, "Please reply to a user or add their userid into the command to mute them."
             )
         chat_id = event.chat_id
         chat = await event.get_chat()
@@ -71,37 +70,34 @@ async def startmute(event):
             if chat.admin_rights.delete_messages is True:
                 pass
             else:
-                return await event.edit(
-                    "`You can't mute a person if you dont have delete messages permission. ಥ﹏ಥ`"
+                return await edit_or_reply(event, "`You can't mute a person if you dont have delete messages permission. ಥ﹏ಥ`"
                 )
         elif "creator" in vars(chat):
             pass
         elif private == True:
             pass
         else:
-            return await event.edit(
-                "`You can't mute a person without admin rights niqq.` ಥ﹏ಥ  "
+            return await edit_or_reply(event, "I'm not admin here!! Chutiya sala...😒🚶"
             )
         if is_muted(userid, chat_id):
-            return await event.edit(
-                "This user is already muted in this chat ~~lmfao sed rip~~"
+            return await edit_or_reply(event, "This user is already muted in this chat ~~lmfao sed rip~~"
             )
         try:
             mute(userid, chat_id)
         except Exception as e:
-            await event.edit("Error occured!\nError is " + str(e))
+            await edit_or_reply(event, "Error occured!\nError is " + str(e))
         else:
-            await event.edit("Chup Reh Lawde.\n**｀-´)⊃━☆ﾟ.*･｡ﾟ **")
+            await edit_or_reply(event, "Chup Reh Lawde.\n**｀-´)⊃━☆ﾟ.*･｡ﾟ **")
 
 
-# @command(outgoing=True, pattern=r"^.unmute ?(\d+)?")
-@borg.on(admin_cmd(pattern="unmute ?(\d+)?"))
+@bot.on(admin_cmd(pattern="unmute ?(\d+)?", outgoing=True))
+@bot.on(sudo_cmd(pattern="unmute ?(\d+)?", allow_sudo=True))
 async def endmute(event):
     private = False
     if event.fwd_from:
         return
     elif event.is_private:
-        await event.edit("Unexpected issues or ugly errors may occur!")
+        await edit_or_reply(event, "Unmutting!!!")
         await asyncio.sleep(3)
         private = True
     if any(
@@ -149,20 +145,20 @@ async def endmute(event):
         elif private is True:
             userid = event.chat_id
         else:
-            return await event.edit(
+            return await edit_or_reply(event, 
                 "Please reply to a user or add their userid into the command to unmute them."
             )
         chat_id = event.chat_id
         if not is_muted(userid, chat_id):
-            return await event.edit(
+            return await edit_or_reply(event, 
                 "__This user is not muted in this chat__\n（ ^_^）o自自o（^_^ ）"
             )
         try:
             unmute(userid, chat_id)
         except Exception as e:
-            await event.edit("Error occured!\nError is " + str(e))
+            await edit_or_reply(event, "Error occured!\nError is " + str(e))
         else:
-            await event.edit("Haa Abb Boll Gandu\n乁( ◔ ౪◔)「    ┑(￣Д ￣)┍")
+            await edit_or_reply(event, "Haa Abb Boll lavde\n乁( ◔ ౪◔)「    ┑(￣Д ￣)┍")
 
 
 @command(incoming=True)
