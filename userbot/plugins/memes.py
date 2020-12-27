@@ -465,7 +465,7 @@ async def who(event):
             message_id_to_reply = None
 
         try:
-            await edit_or_reply(event, caption))
+            await edit_or_reply(event, caption)
 
         except:
             await edit_or_reply(event, "`Can't slap this person, need to fetch some sticks and stones !!`"
