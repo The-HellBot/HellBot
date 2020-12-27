@@ -9,14 +9,16 @@ from datetime import datetime
 
 import aiohttp
 import requests
-from uniborg.util import admin_cmd, progress
+from userbot.utils import admin_cmd, progress, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
-@borg.on(admin_cmd(pattern="ma ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="ma ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="ma ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    mone = await event.reply("Processing ...")
+    mone = await edit_or_reply(event, ("Processing ...")
     if Config.MIRROR_ACE_API_KEY is None or Config.MIRROR_ACE_API_TOKEN is None:
         await mone.edit(
             "This module requires API key from https://ouo.io/My1jdU. Aborting!"
@@ -164,3 +166,7 @@ async def _(event):
                 )
     else:
         await mone.edit("File Not found in local server. Give me a file path :((")
+
+CmdHelp("mirrorace").add_command(
+  "ma", "<file path>", "Uploads files to MirrorAce from local file path."
+).add()
