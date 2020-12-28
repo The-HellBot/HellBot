@@ -1,6 +1,6 @@
 # Made By @Sur_vivor Keep Credits If You Are Goanna Kang This Lol
 # And Thanks To The Creator Of Autopic This Script Was Made from Snippets From That Script
-# Usage .ppr  Im Not Responsible For Any Ban caused By This
+
 import asyncio
 import os
 import random
@@ -9,7 +9,9 @@ import urllib
 
 import requests
 from telethon.tl import functions
-from uniborg.util import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
+
 
 AUTOPFP_PACK = os.environ.get("AUTOPFP_PACK", None)
 if AUTOPFP_PACK is None:
@@ -64,7 +66,7 @@ async def animepp():
     urllib.request.urlretrieve(fy, "donottouch.jpg")
 
 
-@borg.on(admin_cmd(pattern="ppr ?(.*)"))
+@bot.on(admin_cmd(pattern="ppr ?(.*)", outgoing=True))
 async def main(event):
     await event.edit(
         "**Starting Profile Pic Runner by @HellBot_Official..**"
@@ -83,3 +85,7 @@ async def main(event):
         except:
             pass
         await asyncio.sleep(120)  # Edit this to your required needs
+
+CmdHelp("picrunner").add_command(
+  "ppr", None, "Auto Profile Pic Runner. Uploads random wallpapers to your profile pic. \nWARNING:- May result in account ban. Use on your own risk"
+).add()
