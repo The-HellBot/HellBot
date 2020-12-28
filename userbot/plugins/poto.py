@@ -70,4 +70,6 @@ async def potocmd(event):
 
 CmdHelp("poto").add_command(
   "poto", "<all> / <desired pp number>", "Reply to user to get his/her profile pic. Use .poto <number> to get desired profile pic else use .poto all to get all profile pic(s). If you dont reply to a user then it gets group pics."
+).add_command(
+  "ppg", "<reply>", "Gets the user's 1st profile pic. But this time with a caption. Try it yourself..."
 ).add()
