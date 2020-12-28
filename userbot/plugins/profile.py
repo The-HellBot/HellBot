@@ -198,4 +198,6 @@ CmdHelp("profile").add_command(
   "pname", "<firstname> or <firstname | lastname>", "Changes Your Telegram account name"
 ).add_command(
   "username", "<new username>", "Changes your Telegram Account Username"
+).add_command(
+  "kickme", None, "Gets out of the grp..."
 ).add()
