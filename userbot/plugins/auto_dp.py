@@ -399,4 +399,6 @@ CmdHelp("auto_dp").add_command(
   'spacedp', None, 'Starts autodp of space'
 ).add_command(
   'wallpapers', None, 'Starts autodp of random wallpapers'
+).add_command(
+  'rpc', None, 'Starts autodp of RPC.'
 ).add()
