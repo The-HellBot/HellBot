@@ -76,4 +76,10 @@ CmdHelp("ninja").add_command(
   "del", "<reply to a msg>", "Deletes the replied msg."
 ).add_command(
   "edit", "<reply to a msg>", "Edits the replied msg"
+).add_command(
+  "purge", "<reply>", "Purges all messages starting from the reply."
+).add_command(
+  "purgeme", "<count>", "Deletes 'x' amount of your latest messages."
+).add_command(
+  "sd", "<time> <message>", "Creates a message that selfdestructs in 'x' seconds. Keep the seconds under 100 since it puts your bot to sleep"
 ).add()
