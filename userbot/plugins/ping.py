@@ -2,20 +2,22 @@ import asyncio
 from datetime import datetime
 
 from .. import ALIVE_NAME, CMD_HELP
-from ..utils import admin_cmd, edit_or_reply
+from ..utils import admin_cmd, edit_or_reply, sudo_cmd
+from ..cmdhelp import CmdHelp
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 kraken = borg.uid
 
 
 @bot.on(admin_cmd(pattern=f"hbping$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"hbping$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     start = datetime.now()
     animation_interval = 0.2
     animation_ttl = range(0, 26)
-    await event.edit("ping....")
+    await edit_or_reply(event, "ping....")
     animation_chars = [
         "⬛⬛⬛⬛⬛⬛⬛⬛⬛",
         "⬛⬛⬛⬛⬛⬛⬛⬛⬛ \n⬛‎📶‎📶‎📶‎📶‎📶‎📶‎📶⬛",
@@ -49,14 +51,15 @@ async def _(event):
         await event.edit(animation_chars[i % 26])
     end = datetime.now()
     ms = (end - start).microseconds / 1000
-    await event.edit(
+    await edit_or_reply(event, 
         "‎‎‎‎‎‎‎‎‎⬛⬛⬛⬛⬛⬛⬛⬛⬛\n⬛📶📶📶📶📶📶📶⬛\n⬛⬛⬛⬛📶⬛⬛📶⬛\n⬛⬛⬛⬛📶⬛⬛📶⬛\n⬛⬛⬛⬛📶⬛⬛📶⬛\n⬛⬛⬛⬛⬛📶📶⬛⬛\n⬛⬛⬛⬛⬛⬛⬛⬛⬛\n⬛⬛📶📶📶📶📶⬛⬛\n⬛📶⬛⬛⬛⬛⬛📶⬛\n⬛📶⬛⬛⬛⬛⬛📶⬛\n⬛📶⬛⬛⬛⬛⬛📶⬛\n⬛⬛📶📶📶📶📶⬛⬛\n⬛⬛⬛⬛⬛⬛⬛⬛⬛\n⬛📶📶📶📶📶📶📶⬛\n⬛⬛⬛⬛⬛⬛📶⬛⬛\n⬛⬛⬛⬛⬛📶⬛⬛⬛\n⬛⬛⬛⬛📶⬛⬛⬛⬛\n⬛📶📶📶📶📶📶📶⬛\n⬛⬛⬛⬛⬛⬛⬛⬛⬛\n⬛⬛📶📶📶📶📶⬛⬛\n⬛📶⬛⬛⬛⬛⬛📶⬛\n⬛📶⬛⬛⬛⬛⬛📶⬛\n⬛📶⬛📶⬛⬛⬛📶⬛\n⬛⬛📶📶⬛⬛📶⬛⬛\n⬛⬛⬛⬛⬛⬛⬛⬛⬛\n⬛📶⬛📶📶📶📶📶⬛\n⬛⬛⬛⬛⬛⬛⬛⬛⬛ \n‎‎‎‎‎‎‎‎‎ \n \n My 🇵 🇮 🇳 🇬  Is : {} ms".format(
             ms
         )
     )
 
 
-@bot.on(admin_cmd(pattern="ping$"))
+@bot.on(admin_cmd(pattern="ping$", outgoing=True))
+@bot.on(sudo_cmd(pattern="ping$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -69,12 +72,8 @@ async def _(event):
     )
 
 
-CMD_HELP.update(
-    {
-        "ping": "__**PLUGIN NAME :** Ping__\
-    \n\n📌** CMD ★** `.hping`\
-    \n**USAGE   ★  **A kind ofping with extra animation\
-    \n\n📌** CMD ★** `.ping`\
-    \n**USAGE   ★  **Shows you the ping speed of server"
-    }
-)
+CmdHelp("ping").add_command(
+  "ping", None, "Shows you the ping speed of server"
+).add_command(
+  "hbping", None, "Shows you the ping speed of server with an animation"
+).add()
