@@ -6,7 +6,8 @@ from userbot.utils import admin_cmd, sudo_cmd
 from userbot.cmdhelp import CmdHelp
 
 
-@borg.on(admin_cmd(pattern="resend"))
+@bot.on(admin_cmd(pattern="resend", outgoing=True))
+@bot.on(sudo_cmd(pattern="resend", allow_sudo=True))
 async def _(event):
     await event.delete()
     m = await event.get_reply_message()
