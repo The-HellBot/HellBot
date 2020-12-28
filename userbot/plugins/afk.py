@@ -9,6 +9,8 @@ from telethon.tl import functions, types
 
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
+
 
 global USER_AFK  # pylint:disable=E0602
 global afk_time  # pylint:disable=E0602
