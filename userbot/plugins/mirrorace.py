@@ -18,7 +18,7 @@ from userbot.cmdhelp import CmdHelp
 async def _(event):
     if event.fwd_from:
         return
-    mone = await edit_or_reply(event, ("Processing ...")
+    mone = await edit_or_reply(event, "Processing ...")
     if Config.MIRROR_ACE_API_KEY is None or Config.MIRROR_ACE_API_TOKEN is None:
         await mone.edit(
             "This module requires API key from https://ouo.io/My1jdU. Aborting!"
