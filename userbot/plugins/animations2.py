@@ -403,4 +403,6 @@ CmdHelp("animations2").add_command(
   'hnd', '<your text>', 'A handy animation with the text,'
 ).add_command(
   'owner', None, 'Use and see'
+).add_command(
+  'padmin', None, 'Prank promote a user'
 ).add()
