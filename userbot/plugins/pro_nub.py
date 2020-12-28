@@ -36,7 +36,7 @@ async def _(event):
         await asyncio.sleep(animation_interval)
 
 @bot.on(admin_cmd(pattern="menoob$", outgoing=True))
-@bot.on(sudo_cmd(pattern="menoob$", allow_sudo=True)))
+@bot.on(sudo_cmd(pattern="menoob$", allow_sudo=True))
 async def _(event):
 
     if event.fwd_from:
