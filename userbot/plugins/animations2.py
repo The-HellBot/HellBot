@@ -401,4 +401,6 @@ CmdHelp("animations2").add_command(
   'hack', None, 'Im a hacker bitch'
 ).add_command(
   'hnd', '<your text>', 'A handy animation with the text,'
+).add_command(
+  'owner', None, 'Use and see'
 ).add()
