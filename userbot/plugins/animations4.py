@@ -105,4 +105,12 @@ CmdHelp("animations4").add_command(
   "amore", None, "Animated AMORE Typing"
 ).add_command(
   "sexy", None, "Animated SEXY Typing"
+).add_command(
+  "unoob", None, "Animated text calling them noob🚶"
+).add_command(
+  "menoob", None, "Animated text claiming you noob"
+).add_command(
+  "uproo", None, "Animated text claiming you to be proooo"
+).add_command(
+  "mepro", None, "Animated text calling them proo Af!!"
 ).add()
