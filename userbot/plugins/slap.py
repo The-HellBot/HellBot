@@ -8,7 +8,8 @@ import random
 
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
-from uniborg.util import admin_cmd
+from uniborg.util import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 from userbot import ALIVE_NAME
 
@@ -73,10 +74,11 @@ HIT = [
     "bashes",
 ]
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "IndianBot"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
 
-@borg.on(admin_cmd(pattern="slap ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="slap ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="slap ?(.*)", allow_sudo=True))
 async def who(event):
     if event.fwd_from:
         return
@@ -88,10 +90,10 @@ async def who(event):
         message_id_to_reply = None
 
     try:
-        await event.edit(caption)
+        await edit_or_reply(event, caption)
 
     except:
-        await event.edit("`Can't slap this nibba !!`")
+        await edit_or_reply(event, "`Can't slap this nibba !!`")
 
 
 async def get_user(event):
@@ -120,7 +122,7 @@ async def get_user(event):
             replied_user = await event.client(GetFullUserRequest(user_object.id))
 
         except (TypeError, ValueError):
-            await event.edit("`I don't slap strangers !!`")
+            await edit_or_reply(event, "`I don't slap strangers !!`")
             return None
 
     return replied_user
@@ -145,3 +147,7 @@ async def slap(replied_user, event):
     )
 
     return caption
+
+CmdHelp("slap").add_command(
+  "slap", "<reply>", "Slaps the replied user with some quotes."
+).add()
