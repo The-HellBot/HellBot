@@ -1,12 +1,9 @@
-"""Shouts a message in MEME way
-usage: .shout message
-originaly from : @corsicanu_bot
-"""
-
-from userbot.utils import admin_cmd
+from userbot.utils import *
+from userbot.cmdhelp import CmdHelp
 
 
-@borg.on(admin_cmd(pattern=r"shout"))
+@bot.on(admin_cmd(pattern=r"shout", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"shout", allow_sudo=True))
 async def shout(args):
     if args.fwd_from:
         return
@@ -24,3 +21,7 @@ async def shout(args):
         result = "".join(result)
         msg = "\n" + result
         await args.edit("`" + msg + "`")
+
+CmdHelp("shout").add_command(
+  "shout", "<text>", "Shouts your message in meme way.", ".shout Hello"
+).add()
