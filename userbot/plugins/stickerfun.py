@@ -119,4 +119,6 @@ CmdHelp("stickerfun").add_command(
   "waifu", "<text> / <reply>", "Sends random waifu sticker with the desired text printed on it"
 ).add_command(
   "stcr", "<text> / <reply>", "Sends a sticker of the given text"
+).add_command(
+  "text", "<text>", "Same as stcr but with different fonts"
 ).add()
