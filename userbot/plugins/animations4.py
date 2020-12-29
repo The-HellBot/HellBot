@@ -99,6 +99,35 @@ async def _(event):
 
         await event.edit(animation_chars[i % 10])
         
+@bot.on(admin_cmd(pattern="istar$", outgoing=True))
+@bot.on(sudo_cmd(pattern="istar$", allow_sudo=True))
+async def ammastar(hellstar):
+  
+    if hellstar.fwd_from:
+      
+        return
+      
+    animation_interval = 2
+    
+    animation_ttl = range(0, 11)
+    
+    await edit_or_reply(hellstar, "I am A Star")
+    
+    animation_chars = [
+        "I Party like a rockstar",
+        "I Look like a movie star",
+        "I Play like an all star",
+        "I Fuck like a pornstar",
+        "Baby I'm a superstar",
+    ]
+    
+    for i in animation_ttl:
+      
+        await asyncio.sleep(animation_interval)
+        
+        await hellstar.edit(animation_chars[i % 11])
+    
+        
 @bot.on(admin_cmd(pattern=r"lmoon", outgoing=True))
 @bot.on(sudo_cmd(pattern=r"lmoon", allow_sudo=True))
 async def test(event):
@@ -189,4 +218,6 @@ CmdHelp("animations4").add_command(
   "city", None, "Use and see"
 ).add_command(
   "lmoon", None, "Use and see"
+).add_command(
+  "istar", None, "I am a Superstar⚡✨"
 ).add()
