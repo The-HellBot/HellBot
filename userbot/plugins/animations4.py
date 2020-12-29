@@ -98,6 +98,70 @@ async def _(event):
         await asyncio.sleep(animation_interval)
 
         await event.edit(animation_chars[i % 10])
+        
+@bot.on(admin_cmd(pattern=r"lmoon", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"lmoon", allow_sudo=True))
+async def test(event):
+    if event.fwd_from:
+        return
+    await edit_or_reply(event, 
+        "🌕🌕🌕🌕🌕🌕🌕🌕\n🌕🌕🌖🌔🌖🌔🌕🌕\n🌕🌕🌗🌔🌖🌓🌕🌕\n🌕🌕🌗🌔🌖🌓🌕🌕\n🌕🌕🌖🌓🌗🌔🌕🌕\n🌕🌕🌗🌑🌑🌓🌕🌕\n🌕🌕🌗👀🌑🌓🌕🌕\n🌕🌕🌘👄🌑🌓🌕🌕\n🌕🌕🌗🌑🌑🌒🌕🌕\n🌕🌖🌑🌑🌑🌑🌔🌕\n🌕🌘🌑🌑🌑🌑🌒🌕\n🌖🌑🌑🌑🌑🌑🌑🌔\n🌕🤜🏻🌑🌑🌑🌑🤛🏻🌕\n🌕🌖🌑🌑🌑🌑🌔🌕\n🌘🌑🌑🌑🌑🌑🌑🌒\n🌕🌕🌕🌕🌕🌕🌕🌕"
+    )
+
+
+@bot.on(admin_cmd(pattern=r"city", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"city", allow_sudo=True))
+async def test(event):
+    if event.fwd_from:
+        return
+    await edit_or_reply(event, 
+        """☁☁🌞      ☁           ☁
+       ☁  ✈         ☁    🚁    ☁    ☁        ☁          ☁     ☁   ☁
+
+🏬🏨🏫🏢🏤🏥🏦🏪🏫
+              🌲/     l🚍\🌳👭
+           🌳/  🚘 l  🏃 \🌴 👬                       👬  🌴/            l  🚔    \🌲
+      🌲/   🚖     l               \
+   🌳/🚶           |   🚍         \ 🌴🚴🚴
+🌴/                    |                     \🌲"""
+    )
+
+
+@bot.on(admin_cmd(pattern=r"hii", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"hii", allow_sudo=True))
+async def hi(event):
+    if event.fwd_from:
+        return
+    await edit_or_reply(event, "🌺✨✨🌺✨🌺🌺🌺\n🌺✨✨🌺✨✨🌺✨\n🌺🌺🌺🌺✨✨🌺✨\n🌺✨✨🌺✨✨🌺✨\n🌺✨✨🌺✨🌺🌺🌺\n☁☁☁☁☁☁☁☁")
+
+
+@bot.on(admin_cmd(pattern=r"cheer", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"cheer", allow_sudo=True))
+async def cheer(event):
+    if event.fwd_from:
+        return
+    await edit_or_reply(event, 
+        "💐💐😉😊💐💐\n☕ Cheer Up  🍵\n🍂 ✨ )) ✨  🍂\n🍂┃ (( * ┣┓ 🍂\n🍂┃*💗 ┣┛ 🍂 \n🍂┗━━┛  🍂🎂 For YOU  🍰\n💐💐😌😚💐💐"
+    )
+
+
+@bot.on(admin_cmd(pattern=r"getwell", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"getwell", allow_sudo=True))
+async def getwell(event):
+    if event.fwd_from:
+        return
+    await edit_or_reply(event, "🌹🌹🌹🌹🌹🌹🌹🌹 \n🌹😷😢😓😷😢💨🌹\n🌹💝💉🍵💊💐💝🌹\n🌹 GetBetter Soon! 🌹\n🌹🌹🌹🌹🌹🌹🌹🌹")
+
+
+@bot.on(admin_cmd(pattern=r"sprinkle", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"sprinkle", allow_sudo=True))
+async def sprinkle(event):
+    if event.fwd_from:
+        return
+    await edit_or_reply(event, 
+        "✨.•*¨*.¸.•*¨*.¸¸.•*¨*• ƸӜƷ\n🌸🌺🌸🌺🌸🌺🌸🌺\n Sprinkled with love❤\n🌷🌻🌷🌻🌷🌻🌷🌻\n ¨*.¸.•*¨*. ¸.•*¨*.¸¸.•*¨`*•.✨\n🌹🍀🌹🍀🌹🍀🌹🍀"
+    )
+
 
 CmdHelp("animations4").add_command(
   "phub", None, "Animated PORNHUB Typing"
@@ -113,4 +177,16 @@ CmdHelp("animations4").add_command(
   "uproo", None, "Animated text claiming you to be proooo"
 ).add_command(
   "mepro", None, "Animated text calling them proo Af!!"
+).add_command(
+  "sprinkle", None, "Use and see"
+).add_command(
+  "getwell", None, "Use and see"
+).add_command(
+  "cheer", None, "Use and see"
+).add_command(
+  "hii", None, "Use and see"
+).add_command(
+  "city", None, "Use and see"
+).add_command(
+  "lmoon", None, "Use and see"
 ).add()
