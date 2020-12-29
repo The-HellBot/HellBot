@@ -207,8 +207,7 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 7])
 
-
-).add_command(
+CmdHelp("system").add_command(
   "quickheal", None, "Different kinds of animation commands check yourself for their animation"
 ).add_command(
   "os", None, "Different kinds of animation commands check yourself for their animation"
