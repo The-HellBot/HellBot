@@ -2,7 +2,7 @@ import asyncio
 
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
-
+from userbot.cmdhelp import CmdHelp
 
 @bot.on(admin_cmd(pattern=f"quickheal$", outgoing=True))
 @bot.on(sudo_cmd(pattern=f"quickheal$", allow_sudo=True))
@@ -208,20 +208,20 @@ async def _(event):
         await event.edit(animation_chars[i % 7])
 
 
-CMD_HELP.update(
-    {
-        "system": """**Plugin : **`system`
-        
-**Commands in system are **
-  •  `.quickheal`
-  •  `.sqh`
-  •  `.vquickheal`
-  •  `.macos`
-  •  `.windows`
-  •  `.linux`
-  •  `.stock`
-  •  `.os`
-  
-**Function : **__Different kinds of animation commands check yourself for their animation .__"""
-    }
-)
+).add_command(
+  "quickheal", None, "Different kinds of animation commands check yourself for their animation"
+).add_command(
+  "os", None, "Different kinds of animation commands check yourself for their animation"
+).add_command(
+  "stock", None, "Different kinds of animation commands check yourself for their animation"
+).add_command(
+  "linux", None, "Different kinds of animation commands check yourself for their animation"
+).add_command(
+  "windows", None, "Different kinds of animation commands check yourself for their animation"
+).add_command(
+  "macos", None, "Different kinds of animation commands check yourself for their animation"
+).add_command(
+  "vquickheal", None, "Different kinds of animation commands check yourself for their animation"
+).add_command(
+  "sqh", None, "Different kinds of animation commands check yourself for their animation"
+).add()
