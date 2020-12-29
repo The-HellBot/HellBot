@@ -262,4 +262,6 @@ CmdHelp("animations4").add_command(
   "switch", None, "Click on the switch to reveal the price✨"
 ).add_command(
   "thanos", None, "A poem on Thanos... Maybe🤐"
+).add_command(
+  "tp", None, "Use and see"
 ).add()
