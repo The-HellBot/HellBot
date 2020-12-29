@@ -42,3 +42,8 @@ async def seconddp(event):
             await asyncio.sleep(10)
         except:
             return
+
+
+CmdHelp("timedp").add_command(
+  "seconddp", None, "This need DOWNLOAD_PFP_URL_CLOCK Var to work. May result in account ban. Updates profile pic every minute"
+).add()
