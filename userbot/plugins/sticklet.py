@@ -1,8 +1,3 @@
-"""
-Command - .sticklet <text>
-Make sticker of text with random colour and font.
-"""
-
 import io
 import os
 import random
