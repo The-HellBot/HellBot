@@ -13,9 +13,10 @@ from telethon.tl.types import (
     MessageMediaPhoto,
 )
 
-from userbot import CMD_HELP
+#from userbot import CMD_HELP
 from userbot.uniborgConfig import Config
 from userbot.utils import *
+from userbot.cmdhelp import CmdHelp
 
 KANGING_STR = [
     "Using Witchery to kang this sticker...",
@@ -257,8 +258,7 @@ async def kang(args):
                 await bot.send_read_acknowledge(conv.chat_id)
 
         await args.edit(
-            f"`Sticker kanged successfully!`\
-            \nPack can be found [here](t.me/addstickers/{packname})",
+            f"⚡** This Sticker iz [kanged](t.me/addstickers/{packname}) successfully to your pack **⚡",
             parse_mode="md",
         )
 
@@ -292,23 +292,23 @@ async def resize_photo(photo):
 @bot.on(sudo_cmd(pattern="stkrinfo", allow_sudo=True))
 async def get_pack_info(event):
     if not event.is_reply:
-        await eor(event, "`I can't fetch info from black hole!!!`")
+        await edit_or_reply(event, "`I can't fetch info from black hole!!!`")
         return
 
     rep_msg = await event.get_reply_message()
     if not rep_msg.document:
-        await eor(event, "`Reply to a sticker to get the pack details`")
+        await edit_or_reply(event, "`Reply to a sticker to get the pack details`")
         return
 
     try:
         stickerset_attr = rep_msg.document.attributes[1]
-        await eor(event, "`Fetching details of the sticker pack, please wait..`")
+        await edit_or_reply(event, "`Fetching details of the sticker pack, please wait..`")
     except BaseException:
-        await eor(event, "`This is not a sticker. Reply to a sticker.`")
+        await edit_or_reply(event, "`This is not a sticker. Reply to a sticker.`")
         return
 
     if not isinstance(stickerset_attr, DocumentAttributeSticker):
-        await eor(event, "`This is not a sticker. Reply to a sticker.`")
+        await edit_or_reply(event, "`This is not a sticker. Reply to a sticker.`")
         return
 
     get_stickerset = await bot(
@@ -333,7 +333,7 @@ async def get_pack_info(event):
         f"🔸 **Emojis In Pack:**\n{' '.join(pack_emojis)}"
     )
 
-    await eor(event, OUTPUT)
+    await edit_or_reply(event, OUTPUT)
 
 
 CMD_HELP.update(
@@ -348,5 +348,12 @@ CMD_HELP.update(
 \nUsage: Kang's the sticker/image to the specified pack and uses the emoji('s) you picked.\
 \n\n.stkrinfo\
 \nUsage: Gets info about the sticker pack."
-    }
-)
+CmdHelp("stickers").add_command(
+  "kang", "<emoji> (optional)", "Adds the replied sticker/image to your userbot sticker kang pack with emoji(if mentioned, else 😎)"
+).add_command(
+  "kang", "<number>", "Adds the sticker to the specified pack number. If pack number is not added previously then it will make a new pack with name Vol.{number}.\nNote that emoji will be 😎 if not mentioned"
+).add_command(
+  "kang", "<emoji> <number>", "Adds the sticker to desired pack with a custom emoji of your choice. If emoji is not mentioned then default is 😎"
+).add_command(
+  "stkrinfo", "<pack>", "Gets all the infos of the sticker pack"
+).add()
