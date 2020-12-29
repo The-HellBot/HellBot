@@ -1,101 +1,103 @@
-# This Source Code Form is subject to the terms of the Mozilla Public
-# License, v. 2.0. If a copy of the MPL was not distributed with this
-# file, You can obtain one at http://mozilla.org/MPL/2.0/.
-"""Snips
-Available Commands:
-.snips
-.snipl
-.snipd"""
-from telethon import events, utils
-from telethon.tl import types
+from telethon import events
 
-from userbot.plugins.sql_helper.snips_sql import (
-    add_snip,
-    get_all_snips,
-    get_snips,
-    remove_snip,
-)
-from userbot.utils import admin_cmd
+from userbot import BOTLOG_CHATID
+from userbot.plugins.sql_helper.snips_sql import add_snip, get_snips, get_notes, rm_note
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
-TYPE_TEXT = 0
-TYPE_PHOTO = 1
-TYPE_DOCUMENT = 2
+#======================IMPORTS======================
 
+hell_users = [bot.uid]
+if Config.SUDO_USERS:
+    for user in Config.SUDO_USERS:
+        hell_users.append(user)
 
-@borg.on(events.NewMessage(pattern=r"\#(\S+)", outgoing=True))
-async def on_snip(event):
-    name = event.pattern_match.group(1)
-    snip = get_snips(name)
-    if snip:
-        if snip.snip_type == TYPE_PHOTO:
-            media = types.InputPhoto(
-                int(snip.media_id),
-                int(snip.media_access_hash),
-                snip.media_file_reference,
+@bot.on(events.NewMessage(pattern=r"\#(\S+)", from_users=hell_users))
+async def incom_note(getnt):
+    try:
+        if not (await getnt.get_sender()).bot:
+            notename = getnt.text[1:]
+            note = get_snips(notename)
+            message_id_to_reply = getnt.message.reply_to_msg_id
+            if not message_id_to_reply:
+                message_id_to_reply = None
+            if note:
+                if note.f_mesg_id:
+                    msg_o = await bot.get_messages(
+                        entity=BOTLOG_CHATID, ids=int(note.f_mesg_id)
+                    )
+                    await getnt.delete()
+                    await bot.send_message(
+                        getnt.chat_id,
+                        msg_o,
+                        reply_to=message_id_to_reply,
+                        link_preview=False,
+                    )
+                elif note.reply:
+                    await getnt.delete()
+                    await bot.send_message(
+                        getnt.chat_id,
+                        note.reply,
+                        reply_to=message_id_to_reply,
+                        link_preview=False,
+                    )
+    except AttributeError:
+        pass
+
+#=========================CONSTANTS=========================
+
+@bot.on(admin_cmd(pattern=r"snips (\w*)"))
+@bot.on(sudo_cmd(pattern=r"snips (\w*)", allow_sudo=True))
+async def add_snip(fltr):
+    keyword = fltr.pattern_match.group(1)
+    string = fltr.text.partition(keyword)[2]
+    msg = await fltr.get_reply_message()
+    msg_id = None
+    if msg and msg.media and not string:
+        if BOTLOG_CHATID:
+            await bot.send_message(
+                BOTLOG_CHATID,
+                f"#NOTE\
+                  \nKEYWORD: `#{keyword}`\
+                  \n\nThe following message is saved as the snip in your bot , do NOT delete it !!",
             )
-        elif snip.snip_type == TYPE_DOCUMENT:
-            media = types.InputDocument(
-                int(snip.media_id),
-                int(snip.media_access_hash),
-                snip.media_file_reference,
+            msg_o = await bot.forward_messages(
+                entity=BOTLOG_CHATID, messages=msg, from_peer=fltr.chat_id, silent=True
             )
+            msg_id = msg_o.id
         else:
-            media = None
-        message_id = event.message.id
-        if event.reply_to_msg_id:
-            message_id = event.reply_to_msg_id
-        await borg.send_message(
-            event.chat_id, snip.reply, reply_to=message_id, file=media
-        )
-        await event.delete()
+            await edit_or_reply(
+                fltr,
+                "Saving media as data for the note requires the `PRIVATE_GROUP_BOT_API_ID` to be set.",
+            )
+            return
+    elif fltr.reply_to_msg_id and not string:
+        rep_msg = await fltr.get_reply_message()
+        string = rep_msg.text
+    success = "Note {} is successfully {}. Use` #{} `to get it"
+    if add_snip(keyword, string, msg_id) is False:
+        rm_note(keyword)
+        if add_snip(keyword, string, msg_id) is False:
+            return await edit_or_reply(
+                fltr, f"Error in saving the given snip {keyword}"
+            )
+        return await edit_or_reply(fltr, success.format(keyword, "updated", keyword))
+    return await edit_or_reply(fltr, success.format(keyword, "added", keyword))
 
 
-@borg.on(admin_cmd("snips (.*)"))
-async def on_snip_save(event):
-    name = event.pattern_match.group(1)
-    msg = await event.get_reply_message()
-    if msg:
-        snip = {"type": TYPE_TEXT, "text": msg.message or ""}
-        if msg.media:
-            media = None
-            if isinstance(msg.media, types.MessageMediaPhoto):
-                media = utils.get_input_photo(msg.media.photo)
-                snip["type"] = TYPE_PHOTO
-            elif isinstance(msg.media, types.MessageMediaDocument):
-                media = utils.get_input_document(msg.media.document)
-                snip["type"] = TYPE_DOCUMENT
-            if media:
-                snip["id"] = media.id
-                snip["hash"] = media.access_hash
-                snip["fr"] = media.file_reference
-        add_snip(
-            name,
-            snip["text"],
-            snip["type"],
-            snip.get("id"),
-            snip.get("hash"),
-            snip.get("fr"),
-        )
-        await event.edit(
-            "snip {name} saved successfully. Get it with #{name}".format(name=name)
-        )
-    else:
-        await event.edit("Reply to a message with `snips keyword` to save the snip")
-
-
-@borg.on(admin_cmd("snipl"))
+@bot.on(admin_cmd(pattern="snipl$"))
+@bot.on(sudo_cmd(pattern=r"snipl$", allow_sudo=True))
 async def on_snip_list(event):
-    all_snips = get_all_snips()
-    OUT_STR = "Available Snips:\n"
-    if len(all_snips) > 0:
-        for a_snip in all_snips:
-            OUT_STR += f"👉 #{a_snip.snip} \n"
-    else:
-        OUT_STR = "No Snips. Start Saving using `.snips`"
-    if len(OUT_STR) > Config.MAX_MESSAGE_SIZE_LIMIT:
-        with io.BytesIO(str.encode(OUT_STR)) as out_file:
+    message = "There are no saved notes in this chat"
+    notes = get_notes()
+    for note in notes:
+        if message == "There are no saved notes in this chat":
+            message = "Notes saved in this chat:\n"
+        message += "👉 `#{}`\n".format(note.keyword)
+    if len(message) > Config.MAX_MESSAGE_SIZE_LIMIT:
+        with io.BytesIO(str.encode(message)) as out_file:
             out_file.name = "snips.text"
-            await borg.send_file(
+            await bot.send_file(
                 event.chat_id,
                 out_file,
                 force_document=True,
@@ -105,11 +107,28 @@ async def on_snip_list(event):
             )
             await event.delete()
     else:
-        await event.edit(OUT_STR)
+        await edit_or_reply(event, message)
 
 
-@borg.on(admin_cmd("snipd (\S+)"))
+@bot.on(admin_cmd(pattern=r"snipd (\S+)"))
+@bot.on(sudo_cmd(pattern=r"snipd (\S+)", allow_sudo=True))
 async def on_snip_delete(event):
     name = event.pattern_match.group(1)
-    remove_snip(name)
-    await event.edit("snip #{} deleted successfully".format(name))
+    hellsnip = get_snips(name)
+    if hellsnip:
+        rm_note(name)
+    else:
+        return await edit_or_reply(
+            event, f"Are you sure that #{name} is saved as snip?"
+        )
+    await edit_or_reply(event, "snip #{} deleted successfully".format(name))
+
+
+
+CmdHelp("snip").add_command(
+  "snips", "<reply to a message> <notename>", "Saves the replied message as a note with the notename. Works on almost all type of messages. To get the saved snip, type #<notename>"
+).add_command(
+  "snipl", None, "Gets all saved notes in a chat"
+).add_command(
+  "snipd", "<notename>", "Deletes the specified note"
+).add()
