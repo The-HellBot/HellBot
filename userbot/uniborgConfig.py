@@ -77,9 +77,14 @@ if ENV:
         if PRIVATE_GROUP_BOT_API_ID:
             PRIVATE_GROUP_BOT_API_ID = int(PRIVATE_GROUP_BOT_API_ID)
         # send .get_id in your private channel to forward all your Private messages
+        
+        TAG_LOGGER = os.environ.get("TAG_LOGGER", None)
+        if TAG_LOGGER: TAG_LOGGER = int(TAG_LOGGER)
+        
+        #Tag LOGGER
+        
         PM_LOGGR_BOT_API_ID = os.environ.get("PM_LOGGR_BOT_API_ID", None)
-        if PM_LOGGR_BOT_API_ID:
-            PM_LOGGR_BOT_API_ID = int(PM_LOGGR_BOT_API_ID)
+        if PM_LOGGR_BOT_API_ID: PM_LOGGR_BOT_API_ID = int(PM_LOGGR_BOT_API_ID)
         # For Databases
         # can be None in which case plugins requiring
         # DataBase would not work
