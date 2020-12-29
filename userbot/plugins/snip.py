@@ -1,7 +1,7 @@
 from telethon import events
 
 from userbot import BOTLOG_CHATID
-from userbot.plugins.sql_helper.snips_sql import add_snip, get_snips, get_notes, rm_note
+from userbot.plugins.sql_helper.snips_sql import add_snip, get_snips, get_all_snips, rm_note
 from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 
@@ -89,7 +89,7 @@ async def add_snip(fltr):
 @bot.on(sudo_cmd(pattern=r"snipl$", allow_sudo=True))
 async def on_snip_list(event):
     message = "There are no saved notes in this chat"
-    notes = get_notes()
+    notes = get_all_snips()
     for note in notes:
         if message == "There are no saved notes in this chat":
             message = "Notes saved in this chat:\n"
