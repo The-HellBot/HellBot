@@ -1,1 +1,1 @@
-worker: python -m userbot
+Hellbot: bash HellBot
