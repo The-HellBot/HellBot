@@ -17,8 +17,8 @@ r = telegraph.create_account(short_name=Config.TELEGRAPH_SHORT_NAME)
 auth_url = r["auth_url"]
 
 
-@bot.on(admin_cmd(pattern="t (m|t) ?(.*)", outgoing=True))
-@bot.on(sudo_cmd(pattern="t (m|t) ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="t(m|t) ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="t(m|t) ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -61,7 +61,7 @@ async def _(event):
                 ms_two = (end - start).seconds
                 os.remove(downloaded_file_name)
                 await edit_or_reply(event, 
-                   "[ ✓ ] **File uploaded to [telegraph](https://telegra.ph{})** \n[ ✓ ] **Time Taken :-** `{}` \n[ ✓ ]** By :- [{}](tg://user?id={})**".format(
+                   "✓ **File uploaded to [telegraph](https://telegra.ph{})** \n✓ **Time Taken :-** `{}` secs \n✓ **By :- [{}](tg://user?id={})**".format(
                         media_urls[0], (ms + ms_two), HELL_NAME, kraken
                     ),
                     link_preview=True,
@@ -90,11 +90,7 @@ async def _(event):
             end = datetime.now()
             ms = (end - start).seconds
             await edit_or_reply(event, 
-                   "[ ✓ ] **Pasted to [telegraph](https://telegra.ph{})** \n[ ✓ ] **Time Taken :-** `{}` \n[ ✓ ]** By :- [{}](tg://user?id={})**".format(
-                    response["path"], ms, HELL_NAME, kraken
-                ),
-                link_preview=True,
-            )
+                   "✓ **Pasted to [telegraph](https://telegra.ph{})** \n✓ **Time Taken :-** `{}` secs\n✓** By :- [{}](tg://user?id={})**".format(response["path"], ms, HELL_NAME, kraken), link_preview=True)
     else:
         await edit_or_reply(event, 
             "Reply to a message to get a permanent telegra.ph link. (Inspired by @ControllerBot)"
@@ -107,7 +103,7 @@ def resize_image(image):
 
 
 CmdHelp("telegraph").add_command(
-  "t t", "<reply to text message>", "Uploads the replied text message to telegraph making a short telegraph link"
+  "tt", "<reply to text message>", "Uploads the replied text message to telegraph making a short telegraph link"
 ).add_command(
-  "t m", "<reply to media>", "Uploads the replied media (sticker/ gif/ video/ image) to telegraph and gives a short telegraph link"
+  "tm", "<reply to media>", "Uploads the replied media (sticker/ gif/ video/ image) to telegraph and gives a short telegraph link"
 ).add()
