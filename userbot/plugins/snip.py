@@ -1,11 +1,13 @@
 from telethon import events
 
-from userbot import BOTLOG_CHATID
+from userbot.uniborgConfig import Config
 from userbot.plugins.sql_helper.snips_sql import add_snip, get_snips, get_all_snips, remove_snip
 from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 
 #======================IMPORTS======================
+
+BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
 
 hell_users = [bot.uid]
 if Config.SUDO_USERS:
