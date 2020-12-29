@@ -260,4 +260,6 @@ CmdHelp("animations4").add_command(
   "istar", None, "I am a Superstar⚡✨"
 ).add_command(
   "switch", None, "Click on the switch to reveal the price✨"
+).add_command(
+  "thanos", None, "A poem on Thanos... Maybe🤐"
 ).add()
