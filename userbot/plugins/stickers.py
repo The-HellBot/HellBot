@@ -337,11 +337,7 @@ async def get_pack_info(event):
 
 
 CmdHelp("stickers").add_command(
-  "kang", "<emoji> (optional)", "Adds the replied sticker/image to your userbot sticker kang pack with emoji(if mentioned, else 😎)"
+  "kang", "<emoji> <number>", "Adds the sticker to desired pack with a custom emoji of your choice. If emoji is not mentioned then default is 😎. And if number is not mentioned then Pack will go on serial wise. \n  ✓(1 pack = 120 non-animated stickers)\n  ✓(1 pack = 50 animated stickers)"
 ).add_command(
-  "kang", "<number>", "Adds the sticker to the specified pack number. If pack number is not added previously then it will make a new pack with name Vol.{number}.\nNote that emoji will be 😎 if not mentioned"
-).add_command(
-  "kang", "<emoji> <number>", "Adds the sticker to desired pack with a custom emoji of your choice. If emoji is not mentioned then default is 😎"
-).add_command(
-  "stkrinfo", "<pack>", "Gets all the infos of the sticker pack"
+  "stkrinfo", "<reply to sticker>", "Gets all the infos of the sticker pack"
 ).add()
