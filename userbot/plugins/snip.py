@@ -1,7 +1,7 @@
 from telethon import events
 
 from userbot import BOTLOG_CHATID
-from userbot.plugins.sql_helper.snips_sql import add_snip, get_snips, get_all_snips, rm_note
+from userbot.plugins.sql_helper.snips_sql import add_snip, get_snips, get_all_snips, remove_snip
 from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 
@@ -76,7 +76,7 @@ async def add_snip(fltr):
         string = rep_msg.text
     success = "Note {} is successfully {}. Use` #{} `to get it"
     if add_snip(keyword, string, msg_id) is False:
-        rm_note(keyword)
+        remove_snip(keyword)
         if add_snip(keyword, string, msg_id) is False:
             return await edit_or_reply(
                 fltr, f"Error in saving the given snip {keyword}"
@@ -116,7 +116,7 @@ async def on_snip_delete(event):
     name = event.pattern_match.group(1)
     hellsnip = get_snips(name)
     if hellsnip:
-        rm_note(name)
+        remove_snip(name)
     else:
         return await edit_or_reply(
             event, f"Are you sure that #{name} is saved as snip?"
