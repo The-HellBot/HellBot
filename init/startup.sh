@@ -36,6 +36,6 @@ StartUp() {
     _CleanUp
     _UpSource
     _UpPip
-    mkdir ./pikabot/main_plugs
-    python3 -m pikabot
+    mkdir ./userbot/plugins
+    python3 -m userbot
 }
