@@ -288,4 +288,6 @@ CmdHelp("animations4").add_command(
   "tp", None, "Use and see"
 ).add_command(
   "f", "<text>", "Prints the given text in 'F' format"
+).add_command(
+  "wahack", None, "Whatsapp Hack animation"
 ).add()
