@@ -1,8 +1,3 @@
-""" @ukinti_bot
-Available Commands:
-.unbanall
-.kick option
-Available Options: d, y, m, w, o, q, r """
 import asyncio
 from time import sleep
 
@@ -17,10 +12,12 @@ from telethon.tl.types import (
     UserStatusOnline,
     UserStatusRecently,
 )
-from uniborg.util import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
-@borg.on(admin_cmd(pattern="unbanall ?(.*)"))
+@bot.on(admin_cmd(pattern=r"unbanall ?(.*)"))
+@bot.on(sudo_cmd(pattern=r"unbanall ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -30,7 +27,7 @@ async def _(event):
     else:
         if event.is_private:
             return False
-        await event.edit("Searching Participant Lists.")
+        await edit_or_reply(event, "Searching Participant Lists.")
         p = 0
         async for i in borg.iter_participants(
             event.chat_id, filter=ChannelParticipantsKicked, aggressive=True
@@ -44,13 +41,14 @@ async def _(event):
                 logger.warn("sleeping for {} seconds".format(ex.seconds))
                 sleep(ex.seconds)
             except Exception as ex:
-                await event.edit(str(ex))
+                await edit_or_reply(event, str(ex))
             else:
                 p += 1
-        await event.edit("{}: {} unbanned".format(event.chat_id, p))
+        await edit_or_reply(event, "{}: {} unbanned".format(event.chat_id, p))
 
 
-@borg.on(admin_cmd(pattern="ikuck ?(.*)"))
+@bot.on(admin_cmd(pattern="ikuck ?(.*)"))
+@bot.on(sudo_cmd(pattern="ikuck ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -60,7 +58,7 @@ async def _(event):
     if input_str:
         chat = await event.get_chat()
         if not (chat.admin_rights or chat.creator):
-            await event.edit("`You aren't an admin here!`")
+            await edit_or_reply(event, "`You aren't an admin here!`")
             return False
     p = 0
     b = 0
@@ -74,7 +72,7 @@ async def _(event):
     o = 0
     q = 0
     r = 0
-    await event.edit("Searching Participant Lists.")
+    await edit_or_reply(event, "Searching Participant Lists.")
     async for i in borg.iter_participants(event.chat_id):
         p = p + 1
         #
@@ -86,7 +84,7 @@ async def _(event):
             if "y" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await event.edit("I need admin priveleges to perform this action!")
+                    await edit_or_reply(event, "I need admin priveleges to perform this action!")
                     e.append(str(e))
                     break
                 else:
@@ -96,7 +94,7 @@ async def _(event):
             if "m" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await event.edit("I need admin priveleges to perform this action!")
+                    await edit_or_reply(event, "I need admin priveleges to perform this action!")
                     e.append(str(e))
                     break
                 else:
@@ -106,7 +104,7 @@ async def _(event):
             if "w" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await event.edit("I need admin priveleges to perform this action!")
+                    await edit_or_reply(event, "I need admin priveleges to perform this action!")
                     e.append(str(e))
                     break
                 else:
@@ -116,7 +114,7 @@ async def _(event):
             if "o" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await event.edit("I need admin priveleges to perform this action!")
+                    await edit_or_reply(event, "I need admin priveleges to perform this action!")
                     e.append(str(e))
                     break
                 else:
@@ -126,7 +124,7 @@ async def _(event):
             if "q" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await event.edit("I need admin priveleges to perform this action!")
+                    await edit_or_reply(event, "I need admin priveleges to perform this action!")
                     e.append(str(e))
                     break
                 else:
@@ -136,7 +134,7 @@ async def _(event):
             if "r" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await event.edit("I need admin priveleges to perform this action!")
+                    await edit_or_reply(event, "I need admin priveleges to perform this action!")
                     e.append(str(e))
                     break
                 else:
@@ -146,7 +144,7 @@ async def _(event):
             if "b" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await event.edit("I need admin priveleges to perform this action!")
+                    await edit_or_reply(event, "I need admin priveleges to perform this action!")
                     e.append(str(e))
                     break
                 else:
@@ -156,7 +154,7 @@ async def _(event):
             if "d" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await event.edit("I need admin priveleges to perform this action!")
+                    await edit_or_reply(event, "I need admin priveleges to perform this action!")
                     e.append(str(e))
                 else:
                     c = c + 1
@@ -173,9 +171,9 @@ UserStatusOnline: {}
 UserStatusRecently: {}
 Bots: {}
 None: {}"""
-        await event.edit(required_string.format(c, p, d, y, m, w, o, q, r, b, n))
+        await edit_or_reply(event, required_string.format(c, p, d, y, m, w, o, q, r, b, n))
         await asyncio.sleep(5)
-    await event.edit(
+    await edit_or_reply(event, 
         """Total: {} users
 Deleted Accounts: {}
 UserStatusEmpty: {}
@@ -197,3 +195,9 @@ async def ban_user(chat_id, i, rights):
         return True, None
     except Exception as exc:
         return False, str(exc)
+
+CmdHelp("ukinti").add_command(
+  "ikuck", None, "Gives the data of group. Deleted accounts, Last seen, Offline, Online, Recently, Bots, Etc."
+).add_command(
+  "unbanall", None, "Unbans all the user in the chat."
+).add()
