@@ -157,7 +157,7 @@ async def download(target_file):
         await target_file.edit("Reply to a message to download to my local server.")
 
 
-@bot.on(admin_cmd(pattern=r"uploadir (.*)", outgoing=True)
+@bot.on(admin_cmd(pattern=r"uploadir (.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern=r"uploadir (.*)", allow_sudo=True))
 async def uploadir(udir_event):
     """ For .uploadir command, allows you to upload everything from a folder in the server"""
