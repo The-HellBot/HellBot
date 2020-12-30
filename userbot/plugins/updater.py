@@ -14,7 +14,7 @@ from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
 from userbot import *
-from userbot.cmdhelp import cmdhelp
+from userbot.cmdhelp import CmdHelp
 from userbot.utils import *
 from userbot.uniborgConfig import Config
 
