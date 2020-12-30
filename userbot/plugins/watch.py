@@ -7,7 +7,8 @@
 
 from justwatch import JustWatch
 
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
 def get_stream_data(query):
@@ -75,12 +76,13 @@ def get_provider(url):
     return url
 
 
-@borg.on(admin_cmd(pattern="watch (.*)"))
+@bot.on(admin_cmd(pattern="watch (.*)"))
+@bot.on(sudo_cmd(pattern="watch (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     query = event.pattern_match.group(1)
-    await event.edit("Finding Sites...")
+    await edit_or_reply(event, "Finding Sites...")
     streams = get_stream_data(query)
     title = streams["title"]
     thumb_link = streams["movie_thumb"]
@@ -122,3 +124,7 @@ async def _(event):
         silent=True,
     )
     await event.delete()
+
+CmdHelp("watch").add_command(
+  "watch", "<movie/series name>", "Searches all the possible platform where given movie/series can be watched."
+).add()
