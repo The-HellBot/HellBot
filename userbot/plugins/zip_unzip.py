@@ -9,20 +9,23 @@ import time as t
 import zipfile
 from datetime import datetime
 
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
+
 
 extracted = Config.TMP_DOWNLOAD_DIRECTORY + "extracted/"
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
 
-@borg.on(admin_cmd("zip"))
+@bot.on(admin_cmd(pattern="zip", outgoing=True))
+@bot.on(sudo_cmd(pattern="zip", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     if not event.is_reply:
-        await event.edit("Reply to a file to compress it. Bruh.")
+        await edit_or_reply(event, "Reply to a file to compress it. Bruh.")
         return
-    mone = await event.edit("Processing ...")
+    mone = await edit_or_reply(event, "Processing ...")
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if event.reply_to_msg_id:
@@ -33,7 +36,7 @@ async def _(event):
                 Config.TMP_DOWNLOAD_DIRECTORY,
             )
             directory_name = downloaded_file_name
-            await event.edit(downloaded_file_name)
+            await edit_or_reply(event, downloaded_file_name)
         except Exception as e:  # pylint:disable=C0103,W0703
             await mone.edit(str(e))
     zipfile.ZipFile(directory_name + ".zip", "w", zipfile.ZIP_DEFLATED).write(
@@ -59,11 +62,12 @@ def zipdir(path, ziph):
             os.remove(os.path.join(root, file))
 
 
-@command(pattern="^.unzip")
+@bot.on(admin_cmd(pattern="unzip", outgoing=True))
+@bot.on(sudo_cmd(pattern="unzip", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    mone = await event.edit("Processing ...")
+    mone = await edit_or_reply(event, "Processing ...")
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if event.reply_to_msg_id:
@@ -88,7 +92,7 @@ async def _(event):
             zip_ref.extractall(extracted)
         filename = sorted(get_lst_of_files(extracted, []))
         # filename = filename + "/"
-        await event.edit("Unzipping now")
+        await edit_or_reply(event, "Unzipping now")
         # r=root, d=directories, f = files
         for single_file in filename:
             if os.path.exists(single_file):
@@ -131,3 +135,12 @@ def get_lst_of_files(input_directory, output_lst):
             return get_lst_of_files(current_file_name, output_lst)
         output_lst.append(current_file_name)
     return output_lst
+
+
+CmdHelp ("ziper").add_command(
+  "zip", "<reply to media>", "Makes a zip file of replied media"
+).add_command(
+  "unzip", "<reply to a zip file>", "Unzips the replied zip file and sends the files from that zip file"
+).add_command(
+  "compress", "<reply to media>", "Compress the replied media"
+).add()
