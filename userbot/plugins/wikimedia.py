@@ -4,7 +4,8 @@ import requests
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="wikimedia (.*)"))
+@bot.on(admin_cmd(pattern="wikimedia (.*)"))
+@bot.on(sudo_cmd(pattern="wikimedia (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -41,3 +42,7 @@ async def _(event):
             pageid, title, timestamp, user, descriptionurl, mime, mediatype
         )
     await event.edit("**Search**: {} \n\n **Results**: {}".format(input_str, result))
+
+CmdHelp("wikimedia").add_command(
+  "wikimedia", "<query>", "Searchs the query from WikiMedia"
+).add()
