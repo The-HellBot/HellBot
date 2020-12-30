@@ -5,7 +5,7 @@ import time
 from telethon.sessions import StringSession
 from telethon import TelegramClient
 from userbot.helpers import functions as simpdef
-
+from userbot.uniborgConfig import Config
 from var import Var
 
 StartTime = time.time()
@@ -27,7 +27,7 @@ CMD_HELP_BOT = {}
 BRAIN_CHECKER = []
 INT_PLUG = ""
 LOAD_PLUG = {}
-COMMAND_HAND_LER = Var.COMMAND_HAND_LER
+COMMAND_HAND_LER = Config.COMMAND_HAND_LER
 
 # PaperPlaneExtended Support Vars
 ENV = os.environ.get("ENV", False)
