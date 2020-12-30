@@ -27,7 +27,6 @@ CMD_HELP_BOT = {}
 BRAIN_CHECKER = []
 INT_PLUG = ""
 LOAD_PLUG = {}
-COMMAND_HAND_LER = Config.COMMAND_HAND_LER
 
 # PaperPlaneExtended Support Vars
 ENV = os.environ.get("ENV", False)
