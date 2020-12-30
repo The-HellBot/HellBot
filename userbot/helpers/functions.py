@@ -438,6 +438,19 @@ async def miatweet(text):
     img.save("temp.jpg", "jpeg")
     return "temp.jpg"
 
+async def dani(text):
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=tweet&text={text}&username=dani_daniels___"
+    ).json()
+    wew = r.get("message")
+    hburl = url(wew)
+    if not hburl:
+        return "check syntax once more"
+    with open("temp.png", "wb") as f:
+        f.write(requests.get(wew).content)
+    img = Image.open("temp.png").convert("RGB")
+    img.save("temp.jpg", "jpeg")
+    return "temp.jpg"
 
 async def papputweet(text):
     r = requests.get(
