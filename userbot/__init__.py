@@ -27,6 +27,7 @@ CMD_HELP_BOT = {}
 BRAIN_CHECKER = []
 INT_PLUG = ""
 LOAD_PLUG = {}
+COMMAND_HAND_LER = Var.COMMAND_HAND_LER
 
 # PaperPlaneExtended Support Vars
 ENV = os.environ.get("ENV", False)
@@ -78,7 +79,8 @@ if bool(ENV):
     BOTLOG = sb(os.environ.get("BOTLOG", "False"))
     LOGSPAMMER = sb(os.environ.get("LOGSPAMMER", "False"))
     PATTERNS = os.environ.get("PATTERNS", ".;!,")
-
+    COMMAND_HAND_LER = os.environ.get("COMMAND_HAND_LER", r"\.")
+  
     # Bleep Blop, this is a bot ;)
     PM_AUTO_BAN = sb(os.environ.get("PM_AUTO_BAN", "False"))
 
