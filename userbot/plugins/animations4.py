@@ -228,6 +228,28 @@ async def sprinkle(event):
     await edit_or_reply(event, 
         "✨.•*¨*.¸.•*¨*.¸¸.•*¨*• ƸӜƷ\n🌸🌺🌸🌺🌸🌺🌸🌺\n Sprinkled with love❤\n🌷🌻🌷🌻🌷🌻🌷🌻\n ¨*.¸.•*¨*. ¸.•*¨*.¸¸.•*¨`*•.✨\n🌹🍀🌹🍀🌹🍀🌹🍀"
     )
+    
+
+@bot.on(admin_cmd(pattern=r"f", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"f", allow_sudo=True))
+async def payf(event):
+    paytext = event.pattern_match.group(1)
+    pay = "{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}".format(
+        paytext * 8,
+        paytext * 8,
+        paytext * 2,
+        paytext * 2,
+        paytext * 2,
+        paytext * 6,
+        paytext * 6,
+        paytext * 2,
+        paytext * 2,
+        paytext * 2,
+        paytext * 2,
+        paytext * 2,
+    )
+    await edit_or_reply(event, pay)
+
 
 
 CmdHelp("animations4").add_command(
@@ -264,4 +286,6 @@ CmdHelp("animations4").add_command(
   "thanos", None, "A poem on Thanos... Maybe🤐"
 ).add_command(
   "tp", None, "Use and see"
+).add_command(
+  "f", "<text>", "Prints the given text in 'F' format"
 ).add()
