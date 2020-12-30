@@ -16,7 +16,8 @@ from pySmartDL import SmartDL
 from telethon.tl.types import DocumentAttributeVideo
 
 from userbot import CMD_HELP, LOGS, TEMP_DOWNLOAD_DIRECTORY
-from userbot.events import register
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot.cmdhelp import CmdHelp
 
 
 async def progress(current, total, event, start, type_of_ps, file_name=None):
@@ -78,7 +79,8 @@ def time_formatter(milliseconds: int) -> str:
     return tmp[:-2]
 
 
-@register(pattern=r".dl(?: |$)(.*)", outgoing=True)
+@bot.on(admin_cmd(pattern=r"download(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"diwnload(?: |$)(.*)", allow_sudo=True))
 async def download(target_file):
     """ For .dl command, download files to the userbot's server. """
     await target_file.edit("Processing using userbot server ( ◜‿◝ )♡")
@@ -155,7 +157,8 @@ async def download(target_file):
         await target_file.edit("Reply to a message to download to my local server.")
 
 
-@register(pattern=r".uploadir (.*)", outgoing=True)
+@bot.on(admin_cmd(pattern=r"uploadir (.*)", outgoing=True)
+@bot.on(sudo_cmd(pattern=r"uploadir (.*)", allow_sudo=True))
 async def uploadir(udir_event):
     """ For .uploadir command, allows you to upload everything from a folder in the server"""
     input_str = udir_event.pattern_match.group(1)
@@ -241,7 +244,8 @@ async def uploadir(udir_event):
         await udir_event.edit("404: Directory Not Found")
 
 
-@register(pattern=r".upload (.*)", outgoing=True)
+@bot.on(admin_cmd(pattern=r"upload (.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"upload (.*)", allow_sudo=True))
 async def upload(u_event):
     """ For .upload command, allows you to upload a file from the userbot's server """
     await u_event.edit("Processing ...")
@@ -317,7 +321,8 @@ def extract_w_h(file):
         return width, height
 
 
-@register(pattern=r".uploadas(stream|vn|all) (.*)", outgoing=True)
+@bot.on(admin_cmd(pattern=r"uploadas(stream|vn|all) (.*)", outgoing=True)
+@bot.on(sudo_cmd(pattern=r"uploadas (stream|vn|all) (.*)", allow_sudo=True))
 async def uploadas(uas_event):
     """ For .uploadas command, allows you to specify some arguments for upload. """
     await uas_event.edit("Processing ...")
@@ -410,11 +415,14 @@ async def uploadas(uas_event):
         await uas_event.edit("404: File Not Found")
 
 
-CMD_HELP.update(
-    {
-        "download": ".dl <link|filename> or reply to media\
-\nUsage: Downloads file to the server.\
-\n\n.upload <path in server>\
-\nUsage: Uploads a locally stored file to the chat."
-    }
-)
+CmdHelp("upld_dwl").add_command(
+  "download", "<reply to a file>", "Downloads the file to hellbot's server"
+).add_command(
+  "upload", "<path>", "Uploads a locally stored file to the chat"
+).add_command(
+  "uploadas stream", "<path>", "Uploads the locally stored file in streamable format"
+).add_command(
+  "uploadas vn", "<path>", "Uploads the locally stored file in vs format"
+).add_command(
+  "uploadir", "<path>", "Uploads all the files in directory"
+).add()
