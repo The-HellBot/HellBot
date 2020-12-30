@@ -5,7 +5,7 @@
 Syntax: .wikipedia Query"""
 
 import wikipedia
-from userbot.util import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 
 @bot.on(admin_cmd(pattern="wikipedia (.*)"))
