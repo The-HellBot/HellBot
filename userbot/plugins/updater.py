@@ -5,9 +5,6 @@
 # credits to @Kraken_The_BadAss
 #
 # made for hellbot by team hell
-"""
-This module updates the userbot based on upstream revision
-"""
 
 import asyncio
 import sys
@@ -16,45 +13,30 @@ from os import environ, execle, path, remove
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
-from userbot import CMD_HELP
+from userbot import *
+from userbot.cmdhelp import cmdhelp
+from userbot.utils import *
 from userbot.uniborgConfig import Config
-from userbot.utils import admin_cmd
-from var import Var
-from userbot.cmdhelp import CmdHelp
 
-UPSTREAM_REPO_URL = Config.UPSTREAM_REPO
-UPSTREAM_REPO_BRANCH = "master"
-HEROKU_APP_NAME = Var.HEROKU_APP_NAME
-HEROKU_API_KEY = Var.HEROKU_API_KEY
 requirements_path = path.join(
     path.dirname(path.dirname(path.dirname(__file__))), "requirements.txt"
 )
 
+HEROKU_API_KEY = Var.HEROKU_API_KEY
+HEROKU_APP_NAME = Var.HEROKU_APP_NAME
+GIT_REPO_NAME = "HellBot"
+UPSTREAM_REPO_URL = "https://github.com/HellBot-OP/HellBot"
+
 
 async def gen_chlog(repo, diff):
-    ch_log = "**ChangeLog** \n\n"
+    ch_log = ""
+    d_form = "On " + "%d/%m/%y" + " at " + "%H:%M:%S"
     for c in repo.iter_commits(diff):
-        ch_log += f"🛠️ **#{c.count()} :** [{c.summary}]({UPSTREAM_REPO_URL}/commit/{c}) 🚶 __{c.author}__\n"
+        ch_log += f"**#{c.count()}** : {c.committed_datetime.strftime(d_form)} : [{c.summary}]({UPSTREAM_REPO_URL.rstrip('/')}/commit/{c}) by **{c.author}**\n"
     return ch_log
 
 
-async def print_changelogs(event, ac_br, changelog):
-    changelog_str = f"**Updates available in {ac_br} branch!\n\n{changelog}"
-    if len(changelog_str) > 4096:
-        await event.edit("**Changelog is too big, sending as a file.**")
-        file = open("output.txt", "w+")
-        file.write(changelog_str)
-        file.close()
-        await event.client.send_file(event.chat_id, "output.txt")
-        remove("output.txt")
-    else:
-        await event.client.send_message(
-            event.chat_id, changelog_str, link_preview=False
-        )
-    return True
-
-
-async def update_requirements():
+async def updateme_requirements():
     reqs = str(requirements_path)
     try:
         process = await asyncio.create_subprocess_shell(
@@ -68,114 +50,51 @@ async def update_requirements():
         return repr(e)
 
 
-async def deploy(event, repo, ups_rem, ac_br, txt):
-    if HEROKU_API_KEY is not None:
-        import heroku3
-
-        heroku = heroku3.from_key(HEROKU_API_KEY)
-        heroku_app = None
-        heroku_applications = heroku.apps()
-        if HEROKU_APP_NAME is None:
-            await event.edit(
-                "**Please set up the** `HEROKU_APP_NAME` **variable"
-                " to be able to deploy your Hêllẞøt.**"
-            )
-            repo.__del__()
-            return
-        for app in heroku_applications:
-            if app.name == HEROKU_APP_NAME:
-                heroku_app = app
-                break
-        if heroku_app is None:
-            await event.edit(
-                f"{txt}\n"
-                "**Invalid Heroku credentials for updating Hêllẞøt.**"
-            )
-            return repo.__del__()
-        ups_rem.fetch(ac_br)
-        repo.git.reset("--hard", "FETCH_HEAD")
-        heroku_git_url = heroku_app.git_url.replace(
-            "https://", "https://api:" + HEROKU_API_KEY + "@"
-        )
-        if "heroku" in repo.remotes:
-            remote = repo.remote("heroku")
-            remote.set_url(heroku_git_url)
-        else:
-            remote = repo.create_remote("heroku", heroku_git_url)
-        try:
-            remote.push(refspec="HEAD:refs/heads/master", force=True)
-        except Exception as error:
-            await event.edit(f"{txt}\nHere is the error log:\n`{error}`")
-            return repo.__del__()
-        build = app.builds(order_by="created_at", sort="desc")[0]
-        if build.status == "failed":
-            await event.edit("**Build failed!**\nCancelled or there were some errors.`")
-            await asyncio.sleep(5)
-            return await event.delete()
-        else:
-            await event.edit(
-                "Updated your __Hêllẞø†__ successfully sur!!!\n\nNow type .ping after 5 mins to check if I'm on🚶😏"
-            )
-    else:
-        await event.edit("**Please set up** `HEROKU_API_KEY` **variable.**")
-    return
-
-
-async def update(event, repo, ups_rem, ac_br):
-    try:
-        ups_rem.pull(ac_br)
-    except GitCommandError:
-        repo.git.reset("--hard", "FETCH_HEAD")
-    await update_requirements()
-    await event.edit(
-        "Updated your __Hêllẞø†__ successfully sur!!!\n\nNow type .ping after 5 mins to check if I'm on🚶😏"
-    )
-    # Spin a new instance of bot
-    args = [sys.executable, "-m", "userbot"]
-    execle(sys.executable, *args, environ)
-    return
-
-
-@borg.on(admin_cmd(pattern=r"update( now| deploy|$)"))
-async def upstream(event):
+@bot.on(admin_cmd(pattern="update ?(.*)"))
+async def upstream(ups):
     "For .update command, check if the bot is up to date, update if specified"
-    await event.edit("`Checking for updates, please wait...`")
-    conf = event.pattern_match.group(1).strip()
+    await ups.edit("`Looking into my database for new update...`")
+    conf = ups.pattern_match.group(1)
     off_repo = UPSTREAM_REPO_URL
-    force_update = False
+    force_updateme = False
+
     try:
-        txt = "**Oops.. Updater cannot continue due to "
-        txt += "some problems**\n`LOGTRACE:`\n"
+        txt = "`Oops.. Updater cannot continue as "
+        txt += "some problems occured`\n\n**LOGTRACE:**\n"
         repo = Repo()
     except NoSuchPathError as error:
-        await event.edit(f"{txt}\n**Directory** `{error}` **was not found.**")
-        return repo.__del__()
+        await ups.edit(f"{txt}\n`directory {error} is not found`")
+        repo.__del__()
+        return
     except GitCommandError as error:
-        await event.edit(f"{txt}\n**Early failure!** `{error}`")
-        return repo.__del__()
+        await ups.edit(f"{txt}\n`Early failure! {error}`")
+        repo.__del__()
+        return
     except InvalidGitRepositoryError as error:
-        if conf is None:
-            return await event.edit(
-                f"**Unfortunately, the directory {error} "
-                "does not seem to be a git repository.\n"
-                "But we can fix that by force updating the userbot using **"
-                "`.update now.`"
+        if conf != "now":
+            await ups.edit(
+                f"Force-Syncing required for updating your HellBot. To do that type `.update now`"
             )
+            return
         repo = Repo.init()
         origin = repo.create_remote("upstream", off_repo)
         origin.fetch()
-        force_update = True
+        force_updateme = True
         repo.create_head("master", origin.refs.master)
         repo.heads.master.set_tracking_branch(origin.refs.master)
         repo.heads.master.checkout(True)
 
     ac_br = repo.active_branch.name
-    if ac_br != UPSTREAM_REPO_BRANCH:
-        await event.edit(
-            f"**Looks like you are using your own custom branch: ({ac_br}). \n"
-            "Please switch to** `master` **branch.**"
+    if ac_br != "master":
+        await ups.edit(
+            f"**[UPDATER]:**` Looks like you are using your own custom branch ({ac_br}). "
+            "in that case, Updater is unable to identify "
+            "which branch is to be merged. "
+            "Please checkout the official branch of` [HellBot](https://github.com/hellboy-op/hellbot)"
         )
-        return repo.__del__()
+        repo.__del__()
+        return
+
     try:
         repo.create_remote("upstream", off_repo)
     except BaseException:
@@ -185,42 +104,100 @@ async def upstream(event):
     ups_rem.fetch(ac_br)
 
     changelog = await gen_chlog(repo, f"HEAD..upstream/{ac_br}")
-    """ - Special case for deploy - """
-    if conf == "deploy":
-        await event.edit(
-            "Updated your Hêllẞø† successfully sur!!!\n\nNow type .ping after 30 mins to check if I'm on🚶😏\n\n**NOTE :** This is a long and powerful update process."
+
+    if not changelog and not force_updateme:
+        await ups.edit(
+            f"\n`Your BOT is`  **up-to-date**  `with`  **[[{ac_br}]]({UPSTREAM_REPO_URL}/tree/{ac_br})**\n"
         )
-        await deploy(event, repo, ups_rem, ac_br, txt)
+        repo.__del__()
         return
 
-    if changelog == "" and not force_update:
-        await event.edit(
-            f"**Your userbot is up-to-date with `{UPSTREAM_REPO_BRANCH}`!**"
+    if conf != "now" and not force_updateme:
+        changelog_str = (
+            f"**New UPDATE available for [[{ac_br}]]({UPSTREAM_REPO_URL}/tree/{ac_br}):**\n\n"
+            + "**CHANGELOG**\n\n"
+            + f"{changelog}"
         )
-        return repo.__del__()
+        if len(changelog_str) > 4096:
+            await ups.edit("`Changelog is too big, view the file to see it.`")
+            file = open("output.txt", "w+")
+            file.write(changelog_str)
+            file.close()
+            await ups.client.send_file(
+                ups.chat_id,
+                "output.txt",
+                reply_to=ups.id,
+            )
+            remove("output.txt")
+        else:
+            await ups.edit(changelog_str)
+        await ups.respond(f"Do `.update now` to update")
+        return
 
-    if conf == "" and force_update is False:
-        await print_changelogs(event, ac_br, changelog)
-        await event.delete()
-        return await event.respond(
-            "**Do** `.update now` **or** `.update deploy` **to update.**"
+    if force_updateme:
+        await ups.edit("`Force-Syncing to latest stable userbot code, please wait...`")
+    else:
+        await ups.edit("`Updating userbot, please wait....`")
+    # We're in a Heroku Dyno, handle it's memez.
+    if Var.HEROKU_API_KEY is not None:
+        import heroku3
+
+        heroku = heroku3.from_key(Var.HEROKU_API_KEY)
+        heroku_app = None
+        heroku_applications = heroku.apps()
+        if not Var.HEROKU_APP_NAME:
+            await ups.edit(
+                "`Please set up the HEROKU_APP_NAME variable to be able to update HellBot.`"
+            )
+            repo.__del__()
+            return
+        for app in heroku_applications:
+            if app.name == Var.HEROKU_APP_NAME:
+                heroku_app = app
+                break
+        if heroku_app is None:
+            await ups.edit(
+                f"{txt}\n`Invalid Heroku credentials for updating HellBot dyno.`"
+            )
+            repo.__del__()
+            return
+        await ups.edit(
+            "`HellBot dyno build in progress, please wait for it to complete.`"
         )
-
-    if force_update:
-        await event.edit(
-            "**Force-syncing to latest stable userbot code, please wait...**"
+        ups_rem.fetch(ac_br)
+        repo.git.reset("--hard", "FETCH_HEAD")
+        heroku_git_url = heroku_app.git_url.replace(
+            "https://", "https://api:" + Var.HEROKU_API_KEY + "@"
         )
-
-    if conf == "now":
-        await event.edit("**Perfoming a quick update, please wait...**")
-        await update(event, repo, ups_rem, ac_br)
-    return
-
-
-CmdHelp("update").add_command(
-  'update', None, 'Checks if the bot is up-to-date or not'
+        if "heroku" in repo.remotes:
+            remote = repo.remote("heroku")
+            remote.set_url(heroku_git_url)
+        else:
+            remote = repo.create_remote("heroku", heroku_git_url)
+        try:
+            remote.push(refspec="HEAD:refs/heads/master", force=True)
+        except GitCommandError as error:
+            await ups.edit(f"{txt}\n`Here is the error log:\n{error}`")
+            repo.__del__()
+            return
+        await ups.edit("`Successfully Updated Your Hêllẞø† sur....\n" "Restarting, please wait...`\n Type `.ping` after 5 min to check if I'm on")
+    else:
+        # Classic Updater, pretty straightforward.
+        try:
+            ups_rem.pull(ac_br)
+        except GitCommandError:
+            repo.git.reset("--hard", "FETCH_HEAD")
+        await updateme_requirements()
+        await ups.edit(
+            "`Successfully Updated!\n" "Bot is restarting... Wait for a second!`"
+        )
+        # Spin a new instance of bot
+        args = [sys.executable, "-m", "userbot"]
+        execle(sys.executable, *args, environ)
+        return
+      
+CmdHelp("updater").add_command(
+  "update", None, "Checks for the latest codes from git repo"
 ).add_command(
-  'update now', None, 'Updates your bot to new codes if any else Force updates bot.'
-).add_command(
-  'update deploy', None, 'Updates your bot to new codes if any. Note that this process may take upto 30 mins'
+  "update now", None, "Updates Your HellBot To The Latest Codes From Git Repo. Also Sync-Verifies Your HellBot For Better Functioning Of HellBot"
 ).add()
