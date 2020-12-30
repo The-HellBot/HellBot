@@ -10,10 +10,12 @@ from datetime import datetime
 from gtts import gTTS
 
 from userbot import CMD_HELP
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
-@borg.on(admin_cmd(pattern="voice (.*)"))
+@bot.on(admin_cmd(pattern="voice (.*)"))
+@bot.on(sudo_cmd(pattern="voice (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -23,8 +25,8 @@ async def _(event):
         previous_message = await event.get_reply_message()
         text = previous_message.message
         lan = input_str
-    elif "|" in input_str:
-        lan, text = input_str.split("|")
+    elif "-" in input_str:
+        lan, text = input_str.split("-")
     else:
         await event.edit("Invalid Syntax. Module stopping.")
         return
@@ -79,12 +81,6 @@ async def _(event):
         await event.edit(str(e))
 
 
-CMD_HELP.update(
-    {
-        "voice": " Google Text to Speech\
-\nAvailable Commands:\
-\n.voice LanguageCode as reply to a message\
-\n\n.voice LangaugeCode | text to speak\
-"
-    }
-)
+CmdHelp("voice").add_command(
+  "voice", "<lang code> - <reply/text>", "Google Text To Speech Module."
+).add()
