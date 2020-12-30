@@ -6,12 +6,13 @@ from datetime import datetime
 from PIL import Image, ImageDraw, ImageFont
 from pySmartDL import SmartDL
 from telethon.tl import functions
+from userbot.cmdhelp import CmdHelp
+from userbot.utils import admin_cmd
 
 FONT_FILE_TO_USE = "Fonts/digital.ttf"
 
 
-@command(pattern="^.seconddp", outgoing=True)
-# @borg.on(admin_cmd(pattern=r"seconddp"))
+@borg.on(admin_cmd(pattern=r"seconddp"))
 async def seconddp(event):
     downloaded_file_name = "userbot/original_pic.png"
     downloader = SmartDL(
