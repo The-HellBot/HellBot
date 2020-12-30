@@ -10,10 +10,12 @@ from datetime import datetime
 
 from gtts import gTTS
 
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
-@borg.on(admin_cmd("tts (.*)"))
+@bot.on(admin_cmd(pattern=r"tts (.*)"))
+@bot.on(sudo_cmd(pattern=r"tts (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -26,7 +28,7 @@ async def _(event):
     elif "|" in input_str:
         lan, text = input_str.split("|")
     else:
-        await event.edit("Invalid Syntax. Module stopping.")
+        await edit_or_reply(event, "Invalid Syntax. Module stopping.")
         return
     text = text.strip()
     lan = lan.strip()
@@ -56,7 +58,7 @@ async def _(event):
                 command_to_execute, stderr=subprocess.STDOUT
             )
         except (subprocess.CalledProcessError, NameError, FileNotFoundError) as exc:
-            await event.edit(str(exc))
+            await edit_or_reply(event, str(exc))
             # continue sending required_file_name
         else:
             os.remove(required_file_name)
@@ -72,8 +74,12 @@ async def _(event):
             voice_note=True,
         )
         os.remove(required_file_name)
-        await event.edit("Processed {} ({}) in {} seconds!".format(text[0:97], lan, ms))
+        await edit_or_reply(event, "Processed {} ({}) in {} seconds!".format(text[0:97], lan, ms))
         await asyncio.sleep(5)
         await event.delete()
     except Exception as e:
-        await event.edit(str(e))
+        await edit_or_reply(event, str(e))
+
+CmdHelp("tts").add_command(
+  "tts", "<reply to text>/<text>", "Google Text To Speech Module. Alternetive for Voice module. Use .voice if this doesn't work"
+).add()
