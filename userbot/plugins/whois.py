@@ -204,4 +204,8 @@ CmdHelp("infos").add_command(
   "info", "<reply to user>", "Same as .whois"
 ).add_command(
   "link", "<reply to user>", "Creates a permanent link to a user profile. With custom tag if mentioned"
+).add_command(
+  "urid", "<reply to user>", "Gets the replied users's id, username, full name with a link to his/her account"
+).add_command(
+  "members", None, "Gets the list of all the mwmbers in the particular group"
 ).add()
