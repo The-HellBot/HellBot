@@ -321,7 +321,7 @@ def extract_w_h(file):
         return width, height
 
 
-@bot.on(admin_cmd(pattern=r"uploadas(stream|vn|all) (.*)", outgoing=True)
+@bot.on(admin_cmd(pattern=r"uploadas(stream|vn|all) (.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern=r"uploadas (stream|vn|all) (.*)", allow_sudo=True))
 async def uploadas(uas_event):
     """ For .uploadas command, allows you to specify some arguments for upload. """
