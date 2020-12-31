@@ -1,11 +1,3 @@
-"""CC- @refundisillegal\nSyntax:-\n.get var NAME\n.del var NAME\n.set var NAME"""
-
-# Copyright (C) 2020 Adek Maulana.
-# All rights reserved.
-"""
-   Heroku manager for your userbot
-"""
-
 import asyncio
 import math
 import os
@@ -15,9 +7,10 @@ import requests
 
 from userbot import CMD_HELP
 from userbot.uniborgConfig import Config
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
-# =================
+# =====================================
 
 Heroku = heroku3.from_key(Config.HEROKU_API_KEY)
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
@@ -114,12 +107,13 @@ async def variable(var):
             return await var.edit(f"**{variable}**  `is not exists`")
 
 
-@borg.on(admin_cmd(pattern="usage(?: |$)", outgoing=True))
+@bot.on(admin_cmd(pattern="usage(?: |$)", outgoing=True))
+@bot.on(sudo_cmd(pattern="usage(?: |$)", allow_sudo=True))
 async def dyno_usage(dyno):
     """
     Get your account Dyno Usage
     """
-    await dyno.edit("`Processing...`")
+    await edit_or_reply(dyno, "`Processing...`")
     useragent = (
         "Mozilla/5.0 (Linux; Android 10; SM-G975F) "
         "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -164,13 +158,13 @@ async def dyno_usage(dyno):
     await asyncio.sleep(1.5)
 
     return await dyno.edit(
-        "**Dyno Usage**:\n\n"
-        f" -> `Dyno usage for`  **{Var.HEROKU_APP_NAME}**:\n"
-        f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
+        "⚡ **Dyno Usage** ⚡:\n\n"
+        f" ➠ `Dyno usage for` • **{Var.HEROKU_APP_NAME}** • :\n"
+        f"     ★  `{AppHours}`**h**  `{AppMinutes}`**m**  "
         f"**|**  [`{AppPercentage}`**%**]"
         "\n\n"
-        " -> `Dyno hours quota remaining this month`:\n"
-        f"     •  `{hours}`**h**  `{minutes}`**m**  "
+        " ➠ `Dyno hours quota remaining this month`:\n"
+        f"     ★  `{hours}`**h**  `{minutes}`**m**  "
         f"**|**  [`{percentage}`**%**]"
     )
 
@@ -182,7 +176,7 @@ async def _(dyno):
         app = Heroku.app(HEROKU_APP_NAME)
     except:
         return await dyno.reply(
-            " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku"
+            " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku\n\n[Visit Support Group For Help](https://t.me/hellbot_official_chat)"
         )
     await dyno.edit("Getting Logs....")
     with open("logs.txt", "w") as log:
@@ -214,8 +208,14 @@ def prettyjson(obj, indent=2, maxlinelength=80):
     return indentitems(items, indent, level=0)
 
 
-CMD_HELP.update(
-    {
-        "heroku": "Info for Module to Manage Heroku:**\n\n`.usage`\nUsage:__Check your heroku dyno hours status.__\n\n`.set var <NEW VAR> <VALUE>`\nUsage: __add new variable or update existing value variable__\n**!!! WARNING !!!, after setting a variable the bot will restart.**\n\n`.get var or .get var <VAR>`\nUsage: __get your existing varibles, use it only on your private group!__\n**This returns all of your private information, please be cautious...**\n\n`.del var <VAR>`\nUsage: __delete existing variable__\n**!!! WARNING !!!, after deleting variable the bot will restarted**\n\n`.herokulogs`\nUsage:sends you recent 100 lines of logs in heroku"
-    }
-)
+CmdHelp("heroku").add_command(
+  "usage", None, "Check your heroku dyno hours status."
+).add_command(
+  "set var", "<NEW VAR> <value>", "Add new variable or update existing value/variable\nAfter setting a variable the bot will restart. So be calm for a minute😃"
+).add_command(
+  "get var", "<VAR NAME", "Gets the variable and its value (if any) from heroku."
+).add_command(
+  "del var", "<VAR NAME", "Deletes the variable from heroku. Bot will restart after deleting the variable. so be calm for a minute 😃"
+).add_command(
+  "logs", None, "Gets the app log of 100 lines of your bot directly from heroku."
+).add()

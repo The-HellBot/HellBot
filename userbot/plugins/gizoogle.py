@@ -2,24 +2,26 @@ import re
 
 import bs4
 import requests
-from uniborg.util import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
-@borg.on(admin_cmd(pattern="giz ?(.*)"))
+@bot.on(admin_cmd(pattern="giz ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="giz ?(.*)", allow_sudo=True))
 async def gizoogle(event):
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
-    await event.edit("Processing...")
+    await edit_or_reply(event, "Processing...")
     if not input_str:
-        return await event.edit("I can't gizoogle nothing.")
+        return await edit_or_reply(event, "I can't gizoogle nothing.")
     else:
         try:
             result = text(input_str)
         except:
             result = "Failed to gizoogle the text."
         finally:
-            return await event.edit(result)
+            return await edit_or_reply(event, result)
 
 
 def text(input_text: str) -> str:
@@ -35,3 +37,6 @@ def text(input_text: str) -> str:
     giz = soup.find_all(text=True)
     giz_text = giz[37].strip("\r\n")  # Hacky, but consistent.
     return giz_text
+
+CmdHelp("gizoogle").add_command(
+  "giz", "<your sentence>", "Gives you the provided sentence in gangsters language. #Dope_AF")

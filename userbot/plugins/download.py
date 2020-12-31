@@ -11,6 +11,7 @@ from pySmartDL import SmartDL
 
 from userbot import ALIVE_NAME, CMD_HELP
 from userbot.utils import admin_cmd, humanbytes, progress, sudo_cmd
+from userbot.cmdhelp import CmdHelp
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
@@ -95,10 +96,6 @@ async def _(event):
         await mone.edit("Reply to a message to download to my local server.")
 
 
-CMD_HELP.update(
-    {
-        "download": "**Plugin : **`.download`\
-        \n\n  •  **Syntax : **`.download <link|filename> or reply to media`\
-        \n  •  **Function : **__Downloads the file to the server.__"
-    }
-)
+CmdHelp("download").add_command(
+  'download', '<link/filename> or reply to media', 'Downloads the file to the server'
+).add()

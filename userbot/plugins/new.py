@@ -9,6 +9,9 @@ from telethon import events
 from telethon.tl.tlobject import TLObject
 from telethon.tl.types import MessageEntityPre
 from telethon.utils import add_surrogate
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
+
 
 PRINTABLE_SET = set(bytes(string.printable, "ascii"))
 STR_LEN_MAX = 256
@@ -90,10 +93,15 @@ def yaml_format(obj, indent=0):
     return "".join(result)
 
 
-@borg.on(events.NewMessage(pattern=r"\.new", outgoing=True))
+@bot.on(admin_cmd(pattern=r"new", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"new", allow_sudo=True))
 async def _(event):
     if not event.message.is_reply:
         return
     msg = await event.message.get_reply_message()
     yaml_text = yaml_format(msg)
-    await event.edit(yaml_text, parse_mode=parse_pre)
+    await edit_or_reply(event, yaml_text, parse_mode=parse_pre)
+
+CmdHelp("new").add_command(
+  "new", None, "Pretty formats the given object as a YAML string which is returned.(based on TLObject.pretty_format)"
+).add()

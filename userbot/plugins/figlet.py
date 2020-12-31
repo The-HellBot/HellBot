@@ -1,10 +1,11 @@
 import pyfiglet
 
-from userbot.utils import admin_cmd
+from userbot import CMD_HELP
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot.cmdhelp import CmdHelp
 
-
-# @command(pattern="^.figlet ?(.*)", outgoing=True)
-@borg.on(admin_cmd(pattern=r"figlet ?(.*)"))
+@bot.on(admin_cmd(pattern="figlet ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="figlet ?(.*)", allow_sudo=True))
 async def figlet(event):
     if event.fwd_from:
         return
@@ -24,22 +25,27 @@ async def figlet(event):
         "digi": "digital",
     }
     input_str = event.pattern_match.group(1)
-    if "|" in input_str:
-        text, cmd = input_str.split("|", maxsplit=1)
+    if ":" in input_str:
+        text, cmd = input_str.split(":", maxsplit=1)
     elif input_str is not None:
         cmd = None
         text = input_str
     else:
-        await event.edit("Please add some text to figlet")
+        await edit_or_reply(event, "Please add some text to figlet")
         return
     if cmd is not None:
+        cmd = cmd.strip()
         try:
             font = CMD_FIG[cmd]
         except KeyError:
-            await event.edit("Invalid selected font.")
+            await edit_or_reply(event, "Invalid selected font.")
             return
         result = pyfiglet.figlet_format(text, font=font)
     else:
         result = pyfiglet.figlet_format(text)
-    await event.respond("‌‌‎`{}`".format(result))
-    await event.delete()
+    await edit_or_reply(event, "‌‌‎`{}`".format(result))
+
+
+CmdHelp("figlet").add_command(
+  'figlet', 'text or text : type', 'The types are slant, 3D, 5line, alpha, banner, doh, iso, letter, allig, dotm, bubble, bulb, digi'
+).add()

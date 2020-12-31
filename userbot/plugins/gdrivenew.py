@@ -12,6 +12,7 @@ Syntax:
 # there might be some changes made to suit the needs for this repository
 # Licensed under MIT License
 # Fixed By @StarkxD
+# Added sudo_cmd and fixed bugs by @Kraken_The_BadASS
 
 import asyncio
 import json
@@ -28,7 +29,8 @@ from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.file import Storage
 from telethon import events
 
-from userbot.utils import admin_cmd, humanbytes, progress
+from userbot.utils import admin_cmd, humanbytes, progress, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 # Path to token json file, it should be in same directory as script
 G_DRIVE_TOKEN_FILE = Config.TMP_DOWNLOAD_DIRECTORY + "/auth_token.txt"
@@ -45,19 +47,19 @@ G_DRIVE_F_PARENT_ID = None
 G_DRIVE_DIR_MIME_TYPE = "application/vnd.google-apps.folder"
 
 
-@borg.on(admin_cmd(pattern="gdrive ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="gdrive ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="gdrive ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    mone = await event.reply("Processing The File ...")
+    hellbot = await edit_or_reply(event, "Processing The File ...")
     if CLIENT_ID is None or CLIENT_SECRET is None:
-        await mone.edit(
+        await hellbot.edit(
             "This module requires credentials from https://da.gd/so63O. Aborting!"
         )
         return
     if Config.PLUGIN_CHANNEL is None:
-        await event.edit(
-            "Please set the required environment variable `PLUGIN_CHANNEL` for this plugin to work"
+        await edit_or_reply(event, "Please set the required environment variable `PLUGIN_CHANNEL` for this plugin to work"
         )
         return
     input_str = event.pattern_match.group(1)
@@ -73,17 +75,17 @@ async def _(event):
                 reply_message,
                 Config.TMP_DOWNLOAD_DIRECTORY,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, mone, c_time, "trying to download")
+                    progress(d, t, hellbot, c_time, "trying to download")
                 ),
             )
         except Exception as e:  # pylint:disable=C0103,W0703
-            await mone.edit(str(e))
+            await hellbot.edit(str(e))
             return False
         else:
             end = datetime.now()
             ms = (end - start).seconds
             required_file_name = downloaded_file_name
-            await mone.edit(
+            await hellbot.edit(
                 "Downloaded to `{}` in {} seconds.".format(downloaded_file_name, ms)
             )
     elif input_str:
@@ -92,9 +94,9 @@ async def _(event):
             end = datetime.now()
             ms = (end - start).seconds
             required_file_name = input_str
-            await mone.edit("Found `{}` in {} seconds.".format(input_str, ms))
+            await hellbot.edit("Found `{}` in {} seconds.".format(input_str, ms))
         else:
-            await mone.edit("File Not found in local server. Give me a file path :((")
+            await hellbot.edit("File Not found in local server. Give me a file path :((")
             return False
     # logger.info(required_file_name)
     if required_file_name:
@@ -118,17 +120,17 @@ async def _(event):
                 required_file_name,
                 file_name,
                 mime_type,
-                mone,
+                hellbot,
                 G_DRIVE_F_PARENT_ID,
             )
-            await mone.edit(f"Here is your Google Drive link: {g_drive_link}")
+            await hellbot.edit(f"Here is your Google Drive link: {g_drive_link}")
         except Exception as e:
-            await mone.edit(f"Exception occurred while uploading to gDrive {e}")
+            await hellbot.edit(f"Exception occurred while uploading to gDrive {e}")
     else:
-        await mone.edit("File Not found in local server. Give me a file path :((")
+        await hellbot.edit("File Not found in local server. Give me a file path :((")
 
 
-@borg.on(
+@bot.on(
     admin_cmd(
         pattern="dfolder https?://drive\.google\.com/drive/u/\d/folders/([-\w]{25,})",
         allow_sudo=True,
@@ -137,42 +139,43 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    mone = await event.reply("Processing ...")
+    hellbot = await edit_or_reply(event, "Processing ...")
     input_str = event.pattern_match.group(1)
     if input_str:
         G_DRIVE_F_PARENT_ID = input_str
-        await mone.edit(
+        await hellbot.edit(
             f"Custom Folder ID set successfully. The next uploads will upload to {G_DRIVE_F_PARENT_ID} till `.gdriveclear`"
         )
         await event.delete()
     else:
-        await mone.edit(
+        await hellbot.edit(
             "Send `.gdrivesp https://drive.google.com/drive/u/X/folders/Y` to set the folder to upload new files to"
         )
 
 
-@borg.on(admin_cmd(pattern="gclear", allow_sudo=True))
+@bot.on(admin_cmd(pattern="gclear", outgoing=True))
+@bot.on(sudo_cmd(pattern="gclear", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    mone = await event.reply("Processing ...")
-    await mone.edit("Custom Folder ID cleared successfully.")
+    hellbot = await edit_or_reply(event, "Processing ...")
+    await hellbot.edit("Custom Folder ID cleared successfully.")
     await event.delete()
 
 
-@borg.on(admin_cmd(pattern="gdir ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="gdir ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="gdir ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    mone = await event.reply("Processing ...")
+    hellbot = await edit_or_reply(event, "Processing ...")
     if CLIENT_ID is None or CLIENT_SECRET is None:
-        await mone.edit(
+        await hellbot.edit(
             "This module requires credentials from https://da.gd/so63O. Aborting!"
         )
         return
     if Config.PLUGIN_CHANNEL is None:
-        await event.edit(
-            "Please set the required environment variable `PLUGIN_CHANNEL` for this plugin to work"
+        await edit_or_reply(event, "Please set the required environment variable `PLUGIN_CHANNEL` for this plugin to work"
         )
         return
     input_str = event.pattern_match.group(1)
@@ -192,26 +195,26 @@ async def _(event):
         dir_id = await create_directory(
             http, os.path.basename(os.path.abspath(input_str)), G_DRIVE_F_PARENT_ID
         )
-        await DoTeskWithDir(http, input_str, mone, dir_id)
+        await DoTeskWithDir(http, input_str, hellbot, dir_id)
         dir_link = "https://drive.google.com/folderview?id={}".format(dir_id)
-        await mone.edit(f"[Here is your Google Drive link]({dir_link})")
+        await hellbot.edit(f"[Here is your Google Drive link]({dir_link})")
     else:
-        await mone.edit(f"directory {input_str} does not seem to exist")
+        await hellbot.edit(f"directory {input_str} does not seem to exist")
 
 
-@borg.on(admin_cmd(pattern="drive (delete|get) ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="drive (delete|get) ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="drive (delete|get) ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    mone = await event.reply("Processing ...")
+    hellbot = await edit_or_reply(event, "Processing ...")
     if CLIENT_ID is None or CLIENT_SECRET is None:
-        await mone.edit(
+        await hellbot.edit(
             "This module requires credentials from https://da.gd/so63O. Aborting!"
         )
         return
     if Config.PLUGIN_CHANNEL is None:
-        await event.edit(
-            "Please set the required environment variable `PLUGIN_CHANNEL` for this plugin to work"
+        await edit_or_reply(event, "Please set the required environment variable `PLUGIN_CHANNEL` for this plugin to work"
         )
         return
     t_reqd_comd = event.pattern_match.group(1)
@@ -232,22 +235,22 @@ async def _(event):
         response_from_svc = await gdrive_delete(drive_service, input_str)
     elif t_reqd_comd == "get":
         response_from_svc = await gdrive_list_file_md(drive_service, input_str)
-    await mone.edit(response_from_svc)
+    await hellbot.edit(response_from_svc)
 
 
-@borg.on(admin_cmd(pattern="sdrive ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="sdrive ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="sdrive ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    mone = await event.reply("Processing ...")
+    hellbot = await edit_or_reply(event, "Processing ...")
     if CLIENT_ID is None or CLIENT_SECRET is None:
-        await mone.edit(
+        await hellbot.edit(
             "This module requires credentials from https://da.gd/so63O. Aborting!"
         )
         return
     if Config.PLUGIN_CHANNEL is None:
-        await event.edit(
-            "Please set the required environment variable `PLUGIN_CHANNEL` for this plugin to work"
+        await edit_or_reply(event, "Please set the required environment variable `PLUGIN_CHANNEL` for this plugin to work"
         )
         return
     input_str = event.pattern_match.group(1).strip()
@@ -262,9 +265,9 @@ async def _(event):
         storage = await create_token_file(G_DRIVE_TOKEN_FILE, event)
     http = authorize(G_DRIVE_TOKEN_FILE, storage)
     # Authorize, get file parameters, upload file and print out result URL for download
-    await mone.edit(f"searching for {input_str} in your gDrive ...")
+    await hellbot.edit(f"searching for {input_str} in your gDrive ...")
     gsearch_results = await gdrive_search(http, input_str)
-    await mone.edit(gsearch_results, link_preview=False, parse_mode="html")
+    await hellbot.edit(gsearch_results, link_preview=False, parse_mode="html")
 
 
 # Get mime type and name of given file
@@ -465,3 +468,18 @@ async def gdrive_search(http, search_query):
             msg += str(e)
             break
     return msg
+    
+
+CmdHelp("gdrive2").add_command(
+  'gdrive', '<file path>', 'Downloads file from local server'
+).add_command(
+  'gclear', None, 'Clears The Custom Folder ID'
+).add_command(
+  'gdir', '<path>', 'get file parameters, upload file and print out result URL for download'
+).add_command(
+  'drive delete', '<path>', 'Deletes the provided directory'
+).add_command(
+  'drive get', '<path>', 'Gets you the link of file'
+).add_command(
+  'sdrive', '<name>', 'Searches for the given file in your gDrive'
+).add()

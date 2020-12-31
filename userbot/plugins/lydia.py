@@ -4,6 +4,9 @@ import coffeehouse
 from coffeehouse.lydia import LydiaAI
 from telethon import events
 
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
+
 # Non-SQL Mode
 ACC_LYDIA = {}
 SESSION_ID = {}
@@ -14,29 +17,31 @@ if Var.LYDIA_API_KEY:
     Lydia = LydiaAI(api_client)
 
 
-@command(pattern="^.repcf", outgoing=True)
+@bot.on(admin_cmd(pattern="repcf", outgoing=True))
+@bot.on(sudo_cmd(pattern="repcf", allow_sudo=True))
 async def repcf(event):
     if event.fwd_from:
         return
-    await event.edit("Processing...")
+    await edit_or_reply(event, "Processing...")
     try:
         session = Lydia.create_session()
         session_id = session.id
         reply = await event.get_reply_message()
         msg = reply.text
         text_rep = session.think_thought((session_id, msg))
-        await event.edit(" {0}".format(text_rep))
+        await edit_or_reply(event, " {0}".format(text_rep))
     except Exception as e:
-        await event.edit(str(e))
+        await edit_or_reply(event, str(e))
 
 
-@command(pattern="^.eai", outgoing=True)
+@bot.on(admin_cmd(pattern="eai", outgoing=True))
+@bot.on(sudo_cmd(pattern="eai", allow_sudo=True))
 async def addcf(event):
     if event.fwd_from:
         return
-    await event.edit("Running on Non-SQL mode for now...")
+    await edit_or_reply(event, "Running on Non-SQL mode for now...")
     await asyncio.sleep(3)
-    await event.edit("Processing...")
+    await edit_or_reply(event, "Processing...")
     reply_msg = await event.get_reply_message()
     if reply_msg:
         session = Lydia.create_session()
@@ -45,33 +50,34 @@ async def addcf(event):
         SESSION_ID.update(
             {str(event.chat_id) + " " + str(reply_msg.from_id): session_id}
         )
-        await event.edit(
+        await edit_or_reply(event, 
             "Lydia successfully enabled for user: {} in chat: {}".format(
                 str(reply_msg.from_id), str(event.chat_id)
             )
         )
     else:
-        await event.edit("Reply to a user to activate Lydia AI on them")
+        await edit_or_reply(event, "Reply to a user to activate Lydia AI on them")
 
 
-@command(pattern="^.dai", outgoing=True)
+@bot.on(admin_cmd(pattern="dai", outgoing=True))
+@bot.on(sudo_cmd(pattern="dai", allow_sudo=True))
 async def remcf(event):
     if event.fwd_from:
         return
-    await event.edit("Running on Non-SQL mode for now...")
+    await edit_or_reply(event, "Running on Non-SQL mode for now...")
     await asyncio.sleep(3)
-    await event.edit("Processing...")
+    await edit_or_reply(event, "Processing...")
     reply_msg = await event.get_reply_message()
     try:
         del ACC_LYDIA[str(event.chat_id) + " " + str(reply_msg.from_id)]
         del SESSION_ID[str(event.chat_id) + " " + str(reply_msg.from_id)]
-        await event.edit(
+        await edit_or_reply(event, 
             "Lydia successfully disabled for user: {} in chat: {}".format(
                 str(reply_msg.from_id), str(event.chat_id)
             )
         )
     except KeyError:
-        await event.edit("This person does not have Lydia activated on him/her.")
+        await edit_or_reply(event, "This person does not have Lydia activated on him/her.")
 
 
 @bot.on(events.NewMessage(incoming=True))
@@ -90,3 +96,9 @@ async def user(event):
             await event.reply(text_rep)
     except KeyError:
         return
+
+CmdHelp("lydia").add_command(
+  "eai", "<reply to user>", "Your bot will auto reply to the tagged user. Until you disables it."
+).add_command(
+  "dai", "<reply to user>", "Your bot will stop auto reply to the tagged user (if enabled)."
+).add()

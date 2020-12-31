@@ -9,6 +9,8 @@ from telethon.tl import functions, types
 
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
+
 
 global USER_AFK  # pylint:disable=E0602
 global afk_time  # pylint:disable=E0602
@@ -144,12 +146,6 @@ async def _(event):
             logger.warn(str(e))  # pylint:disable=E0602
 
 
-
-
-CMD_HELP.update(
-    {
-        "afk": "**Syntax :** \n✓ .afk <reason> \n✓ .afk <reply to media> \n✓ .afk <reason> <reply to media>\n"
-        "\n**Usage :** Marks you AFK(Away from Keyboard) with reason(if given) also shows afk time. Media also supported."
-        "\n**Note :** You will be automatically marked BTK(Back To Keyboard) when you send a msg in any grp or dm."
-    }
-)
+CmdHelp("afk").add_command(
+  'afk', '<reply to media>/<or type a reson>', 'Marks you AFK(Away from Keyboard) with reason(if given) also shows afk time. Media also supported.'
+).add()

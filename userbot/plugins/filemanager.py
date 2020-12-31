@@ -10,13 +10,48 @@ import time
 
 from telethon import events
 
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
+
 if not os.path.isdir("./SAVED"):
     os.makedirs("./SAVED")
 if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
     os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
 
 
-@borg.on(events.NewMessage(pattern=r"\.lslocal", outgoing=True))
+@bot.on(admin_cmd(pattern="ls ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="ls ?(.*)", allow_sudo=True))
+async def lst(event):
+    if event.fwd_from:
+        return
+    input_str = event.pattern_match.group(1)
+    if input_str:
+        msg = "📂 **Files in {} :**\n".format(input_str)
+        files = os.listdir(input_str)
+    else:
+        msg = "📂 **Files in Current Directory :**\n"
+        files = os.listdir(os.getcwd())
+    for file in files:
+        msg += "📑 `{}`\n".format(file)
+    if len(msg) <= Config.MAX_MESSAGE_SIZE_LIMIT:
+        await edit_or_reply(event, msg)
+    else:
+        msg = msg.replace("`", "")
+        out = "filesList.txt"
+        with open(out, "w") as f:
+            f.write(f)
+        await borg.send_file(
+            event.chat_id,
+            out,
+            force_document=True,
+            allow_cache=False,
+            caption="`Output is huge. Sending as a file...`",
+        )
+        await event.delete()
+        
+
+@bot.on(admin_cmd(pattern="ls_local$", outgoing=True))
+@bot.on(sudo_cmd(pattern="ls_local$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -33,7 +68,7 @@ async def _(event):
     process = await asyncio.create_subprocess_shell(
         cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
     )
-    OUTPUT = f"**Files in [FRIDAY](tg://leobrownlee/) DOWNLOADS Folder:**\n"
+    OUTPUT = f"**Files in [Hêllẞø†](t.me/hellbot_official) DOWNLOADS Folder:**\n"
     stdout, stderr = await process.communicate()
     if len(stdout) > Config.MAX_MESSAGE_SIZE_LIMIT:
         with io.BytesIO(str.encode(stdout)) as out_file:
@@ -48,16 +83,13 @@ async def _(event):
             )
             await event.delete()
     if stderr.decode():
-        await event.edit(f"**{stderr.decode()}**")
+        await edit_or_reply(event, f"**{stderr.decode()}**")
         return
-    await event.edit(f"{OUTPUT}`{stdout.decode()}`")
+    await edit_or_reply(event, f"{OUTPUT}`{stdout.decode()}`")
 
 
-#    else:
-#        await event.edit("Unknown Command")
-
-
-@borg.on(events.NewMessage(pattern=r"\.lsroot", outgoing=True))
+@bot.on(admin_cmd(pattern="ls_root$", outgoing=True))
+@bot.on(sudo_cmd(pattern="ls_root$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -86,12 +118,13 @@ async def _(event):
             )
             await event.delete()
     if stderr.decode():
-        await event.edit(f"**{stderr.decode()}**")
+        await edit_or_reply(event, f"**{stderr.decode()}**")
         return
-    await event.edit(f"{OUTPUT}`{stdout.decode()}`")
+    await edit_or_reply(event, f"{OUTPUT}`{stdout.decode()}`")
 
 
-@borg.on(events.NewMessage(pattern=r"\.lssaved", outgoing=True))
+@bot.on(admin_cmd(pattern="ls_saved$", outgoing=True))
+@bot.on(sudo_cmd(pattern="ls_saved$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -120,12 +153,13 @@ async def _(event):
             )
             await event.delete()
     if stderr.decode():
-        await event.edit(f"**{stderr.decode()}**")
+        await edit_or_reply(event, f"**{stderr.decode()}**")
         return
-    await event.edit(f"{OUTPUT}`{stdout.decode()}`")
+    await edit_or_reply(event, f"{OUTPUT}`{stdout.decode()}`")
 
 
-@borg.on(events.NewMessage(pattern=r"\.rnsaved ?(.*)", outgoing=True))
+@bot.on(admin_cmd(pattern="rnsaved ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="rnsaved ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -158,12 +192,13 @@ async def _(event):
             )
             await event.delete()
     if stderr.decode():
-        await event.edit(f"**{stderr.decode()}**")
+        await edit_or_reply(event, f"**{stderr.decode()}**")
         return
-    await event.edit(f"File renamed `{src}` to `{dst}`")
+    await edit_or_reply(event, f"File renamed `{src}` to `{dst}`")
 
 
-@borg.on(events.NewMessage(pattern=r"\.rnlocal ?(.*)", outgoing=True))
+@bot.on(admin_cmd(pattern="rnlocal ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="rnlocal ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -196,12 +231,13 @@ async def _(event):
             )
             await event.delete()
     if stderr.decode():
-        await event.edit(f"**{stderr.decode()}**")
+        await edit_or_reply(event, f"**{stderr.decode()}**")
         return
-    await event.edit(f"File renamed `{src}` to `{dst}`")
+    await edit_or_reply(event, f"File renamed `{src}` to `{dst}`")
 
 
-@borg.on(events.NewMessage(pattern=r"\.delsave (.*)", outgoing=True))
+@bot.on(admin_cmd(pattern="delsave (.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="delsave (.*)", allow_sudo=True))
 async def handler(event):
     if event.fwd_from:
         return
@@ -210,13 +246,14 @@ async def handler(event):
 
     if os.path.isfile(pathtofile):
         os.remove(pathtofile)
-        await event.edit("✅ File Deleted 🗑")
+        await edit_or_reply(event, "✅ File Deleted 🗑")
 
     else:
-        await event.edit("⛔️File Not Found സാധനം കയ്യിലില്ല😬")
+        await edit_or_reply(event, "⛔️File Not Found😬")
 
 
-@borg.on(events.NewMessage(pattern=r"\.delocal (.*)", outgoing=True))
+@bot.on(admin_cmd(pattern="delocal (.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="delocal (.*)", allow_sudo=True))
 async def handler(event):
     if event.fwd_from:
         return
@@ -225,7 +262,26 @@ async def handler(event):
 
     if os.path.isfile(pathtofile):
         os.remove(pathtofile)
-        await event.edit("✅ File Deleted 🗑")
+        await edit_or_reply(event, "✅ File Deleted 🗑")
 
     else:
-        await event.edit("⛔️File Not Found സാധനം കയ്യിലില്ല😬")
+        await edit_or_reply(event, "⛔️File Not Found😬")
+
+
+CmdHelp("filemanager").add_command(
+  'ls_local', None, 'Gives the list of downloaded medias in your hellbot server.'
+).add_command(
+  'ls_root', None, 'Gives the list of all files in root directory of Hellbot repo.'
+).add_command(
+  'ls_saved', None, 'Gives the list of all files in Saved directory of your hellbot server'
+).add_command(
+  'rnsaved', 'saved file name', 'Renames the file in saved directory'
+).add_command(
+  'rnlocal', 'downloaded file name', 'Renames the file in downloaded directory'
+).add_command(
+  'delsave', 'saved path', 'Deletes the file from given saved path'
+).add_command(
+  'delocal', 'downloaded path', 'Deletes the file from given downloaded path'
+).add_command(
+  'ls', '<path name>', 'Gives the list of all files in the given path'
+).add()

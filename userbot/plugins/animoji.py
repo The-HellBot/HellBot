@@ -3,6 +3,7 @@ from collections import deque
 
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot.cmdhelp import CmdHelp
 
 
 @bot.on(admin_cmd(pattern="think$", outgoing=True))
@@ -17,6 +18,23 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
+@bot.on(admin_cmd(pattern="ccry$", outgoing=True))
+@bot.on(sudo_cmd(pattern="ccry$", allow_sudo=True))
+async def cry(e):
+    if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
+        await e.edit("(;´༎ຶД༎ຶ)")
+
+@bot.on(admin_cmd(pattern="fap$", outgoing=True))
+@bot.on(sudo_cmd(pattern="fap$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    event = await edit_or_reply(event, "fapping(°_°)")
+    deq = deque(list("🍆✊🏻💦"))
+    for _ in range(32):
+        await asyncio.sleep(0.1)
+        await event.edit("".join(deq))
+        deq.rotate(1)
 
 @bot.on(admin_cmd(pattern=r"lmao$"))
 @bot.on(sudo_cmd(pattern="lmao$", allow_sudo=True))
@@ -121,6 +139,39 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
+
+import asyncio
+
+from userbot.utils import admin_cmd
+
+
+@bot.on(admin_cmd(pattern="lovestory", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"lovestory", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    animation_interval = 3
+    animation_ttl = range(0, 103)
+    await edit_or_reply(event, "Let me tel you")
+    animation_chars = [
+        "1 ❤️ love story",
+        "  😐             😕 \n/👕\         <👗\ \n 👖               /|",
+        "  😉          😳 \n/👕\       /👗\ \n  👖            /|",
+        "  😚            😒 \n/👕\         <👗> \n  👖             /|",
+        "  😍         ☺️ \n/👕\      /👗\ \n  👖          /|",
+        "  😍          😍 \n/👕\       /👗\ \n  👖           /|",
+        "  😘   😊 \n /👕\/👗\ \n   👖   /|",
+        " 😳  😁 \n /|\ /👙\ \n /     / |",
+        "😈    /😰\ \n<|\      👙 \n /🍆    / |",
+        "😅 \n/(),✊😮 \n /\         _/\\/|",
+        "😎 \n/\\_,__😫 \n  //    //       \\",
+        "😖 \n/\\_,💦_😋  \n  //         //        \\",
+        "  😭      ☺️ \n  /|\   /(👶)\ \n  /!\   / \ ",
+        "Abee aur kitna dekhoge be besharmi ki bhi hadd hoti hai..,The End 😂...",
+    ]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 103])
 
 @bot.on(admin_cmd(pattern=f"smoon$", outgoing=True))
 @bot.on(sudo_cmd(pattern="smoon$", allow_sudo=True))
@@ -230,6 +281,45 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 10])
 
+@bot.on(admin_cmd(pattern=f"fuck$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"fuck$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    animation_interval = 1
+    animation_ttl = range(0, 101)
+    await edit_or_reply(event, "fuk")
+    animation_chars = ["👉       ✊️", "👉     ✊️", "👉  ✊️", "👉✊️💦"]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 4])
+
+
+@bot.on(admin_cmd(pattern=f"sux", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"sux", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    animation_interval = 1
+    animation_ttl = range(0, 101)
+    await edit_or_reply(event, "sux")
+    animation_chars = ["🤵       👰", "🤵     👰", "🤵  👰", "🤵👼👰"]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 4])
+
+@bot.on(admin_cmd(pattern=f"kiss", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"kiss", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    animation_interval = 1
+    animation_ttl = range(0, 101)
+    await edit_or_reply(event, "kiss")
+    animation_chars = ["🤵       👰", "🤵     👰", "🤵  👰", "🤵💋👰"]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 4])
 
 @bot.on(admin_cmd(pattern=f"fnl$", outgoing=True))
 @bot.on(sudo_cmd(pattern=f"fnl$", allow_sudo=True))
@@ -347,30 +437,52 @@ async def _(event):
         await event.edit(animation_chars[i % 18])
 
 
-CMD_HELP.update(
-    {
-        "animoji": """**Plugin : **`animoji`
-        
-**Commands in animoji are **
-  •  `.think`
-  •  `.lmao`
-  •  `.nothappy`
-  •  `.clock`
-  •  `.muah`
-  •  `.heart`
-  •  `.gym`
-  •  `.earth`
-  •  `.moon`
-  •  `.smoon`
-  •  `.tmoon`
-  •  `.hart`
-  •  `.anim`
-  •  `.fnl`
-  •  `.monkey`
-  •  `.hand`
-  •  `.gsg`
-  •  `.theart`
-  
-**Function : **__Different kinds of emoji animation commands check yourself for their animation .__"""
-    }
-)
+CmdHelp("animoji").add_command(
+  'think', None, 'Use and see'
+).add_command(
+  'lmao', None, 'Use and see'
+).add_command(
+  'nothappy', None, 'Use and see'
+).add_command(
+  'clock', None, 'Use and see'
+).add_command(
+  'muah', None, 'Use and see'
+).add_command(
+  'heart', None, 'Use and see'
+).add_command(
+  'gym', None, 'Use and see'
+).add_command(
+  'earth', None, 'Use and see'
+).add_command(
+  'moon', None, 'Use and see'
+).add_command(
+  'smoon', None, 'Use and see'
+).add_command(
+  'tmoon', None, 'Use and see'
+).add_command(
+  'hart', None, 'Use and see'
+).add_command(
+  'anim', None, 'Use and see'
+).add_command(
+  'fnl', None, 'Use and see'
+).add_command(
+  'monkey', None, 'Use and see'
+).add_command(
+  'hand', None, 'Use and see'
+).add_command(
+  'gsg', None, 'Use and see'
+).add_command(
+  'theart', None, 'Use and see'
+).add_command(
+  'ccry', None, 'Crying animation🥱'
+).add_command(
+  'fap', None, 'Cool fapping animation'
+).add_command(
+  'kiss', None, 'Lets kiss😘'
+).add_command(
+  'sux', None, 'Wanna do sex wid me?'
+).add_command(
+  'fuck', None, 'Tapa tap tapa tap'
+).add_command(
+  'lovestory', None, 'A true love story😃'
+).add()

@@ -20,7 +20,7 @@ from userbot import (
     bot,
 )
 from userbot.utils import errors_handler
-
+from userbot.cmdhelp import CmdHelp
 
 @bot.on(ChatAction)
 @errors_handler
@@ -198,10 +198,5 @@ async def ANTI_SPAMBOT(welcm):
         pass
 
 
-CMD_HELP.update(
-    {
-        "anti_spambot": "If enabled in config.env or env var,\
-        \nthis module will ban(or inform the admins of the group about) the\
-        \nspammer(s) if they match the userbot's anti-spam algorithm."
-    }
-)
+CmdHelp("antispam_bot").add_command(
+  None, None, 'If enabled in config.env or env var, this will ban or report the user to admins if they match the userbot antispam algorithm')

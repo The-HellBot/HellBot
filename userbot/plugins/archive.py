@@ -20,6 +20,7 @@ from telethon.tl.types import DocumentAttributeVideo
 from userbot import CMD_HELP
 from userbot.uniborgConfig import Config
 from userbot.utils import admin_cmd, progress
+from userbot.cmdhelp import CmdHelp
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 extracted = Config.TMP_DOWNLOAD_DIRECTORY + "extracted/"
@@ -558,22 +559,20 @@ def get_lst_of_files(input_directory, output_lst):
     return output_lst
 
 
-CMD_HELP.update(
-    {
-        "archive": ".zip reply to a file/media\
-    \nUSEAGE: it will zip that file/media\
-    \n\n.rar reply to a file/media\
-    \nUSEAGE: it will rar that file/media\
-    z\n\n. reply to a file/media\
-    \nUSEAGE: it will make into .7z that hat file/media\
-    \n\n.tar reply to a file/media\
-    \nUSEAGE: it will tar that file/media\
-    \n\n.unzip reply to a .zip file\
-    \nUSEAGE: it will unzip that .zip file\
-    \n\n.unrar reply to a .rar file\
-    \nUSEAGE: it will unrar that .rar file\
-    \n\n.untar reply to a .tar\
-    \nUSEAGE: it will untar that .tar file\
-"
-    }
-)
+CmdHelp("archive").add_command(
+  'zip', 'Reply to file/media', 'It will zip the file/media'
+).add_command(
+  'rar', 'Reply to file/media', 'It will rar the file/media'
+).add_command(
+  '7z', 'Reply to file/media', 'It will 7z the file/media'
+).add_command(
+  'tar', 'Reply to file/media', 'It will tar the file/media'
+).add_command(
+  'unzip', 'Reply to zip file', 'It will unzip the zip file'
+).add_command(
+  'unrar', 'Reply to rar file', 'It will unrar the rar file'
+).add_command(
+  'untar', 'Reply to tar file', 'It will untar the tar file'
+).add_command(
+  'compress', 'Reply to file/media', 'It will compress the replied media/file'
+).add()

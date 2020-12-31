@@ -17,6 +17,7 @@ from pytz import timezone as tz
 
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, errors_handler, sudo_cmd
+from userbot.cmdhelp import CmdHelp
 
 logging.basicConfig(
     format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=logging.WARNING
@@ -214,14 +215,10 @@ async def _(event):
         pass
 
 
-CMD_HELP.update(
-    {
-        "climate": "**Plugin : **`climate`\
-        \n\n  •  **Syntax : **`.climate <city>`\
-        \n  •  **Function : **__Gets the weather of a city. By default it is Delhi, change it by setcity__👇\n\
-        \n\n  •  **Syntax : **`.setcity <city> or .setcity <city>, <country name/code>`\
-        \n  •  **Function : **__Sets your default city so you can just use .weather.__\
-        \n\n  •  **Syntax : **`.wttr <city> `\
-        \n  •  **Function : **__Shows you the climate data of 3 days from today in a image.__"
-    }
-)
+CmdHelp("climate").add_command(
+  'climate', 'Name of state/country', 'Gets the weather of a city. By default it is Delhi, change it by setcity'
+).add_command(
+  'setcity', '<city>/<country>', 'Sets your default city.'
+).add_command(
+  'wttr', '<city>', 'Shows you the climate data of 3 days from today in a image format.'
+).add()

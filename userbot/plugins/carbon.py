@@ -9,6 +9,7 @@ from selenium.webdriver.chrome.options import Options
 from userbot import ALIVE_NAME, CMD_HELP
 from userbot.helpers.functions import deEmojify
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot.cmdhelp import CmdHelp
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
@@ -567,20 +568,20 @@ async def carbon_api(e):
     await hell.delete()  # Deleting msg
 
 
-CMD_HELP.update(
-    {
-        "carbon": "**Plugin : **`carbon`\
-    \n\n**Commands are :** \
-    \n  •  `.carbon <reply to code>`\
-    \n  •  `.krb <reply to code>`\
-    \n  •  `.kar1 <reply to code>`\
-    \n  •  `.kar2 <reply to code>`\
-    \n  •  `.kar3 <reply to code>`\
-    \n  •  `.kar4 <reply to code>`\
-    \n  •  `.rgbk2 <reply to code>`\
-    \n  •  `.kargb <reply to code>`\
-    \n\n**Function : **\
-    \n__Carbon generators, each command has one style of carbon (krb ,kargb shows random carbons, remaining all are fixed)__\
-    "
-    }
-)
+CmdHelp("carbon").add_command(
+  'carbon', '<your text>', 'Carbonize your text. (Fixed style)'
+).add_command(
+  'krb', '<your text>', 'Carbonize your text.(Random Style)'
+).add_command(
+  'kar1', '<your text>', 'Carbonize your text.(Fixed style)'
+).add_command(
+  'kar2', '<your text>', 'Carbonize your text.(Fixed style)'
+).add_command(
+  'kar3', '<your text>', 'Carbonize your text.(Fixed style)'
+).add_command(
+  'kar4', '<your text>', 'Carbonize your text.(Fixed style)'
+).add_command(
+  'rgbk2', '<your text>', 'Carbonize your text.(Fixed style)'
+).add_command(
+  'kargb', '<your text>', 'Carbonize your text.(random style)'
+).add()

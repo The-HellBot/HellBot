@@ -2,11 +2,11 @@
 G-Drive File Downloader Plugin For Userbot. 
 usage: .gdl File-Link
 By: @Zero_cool7870
-
 """
 import requests
 from telethon import events
-
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 async def download_file_from_google_drive(id):
     URL = "https://docs.google.com/uc?export=download"
@@ -81,13 +81,14 @@ async def get_file_name(content):
     return file_name
 
 
-@borg.on(events.NewMessage(pattern=r"\.gdl", outgoing=True))
+@bot.on(admin_cmd(pattern=r"gdl", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"gdl", allow_sudo=True))
 async def g_download(event):
     if event.fwd_from:
         return
     drive_link = event.text[4:]
     print("Drive Link: " + drive_link)
     file_id = await get_id(drive_link)
-    await event.edit("Downloading Requested File from G-Drive...")
+    await edit_or_reply(event, "Downloading Requested File from G-Drive...")
     file_name = await download_file_from_google_drive(file_id)
-    await event.edit("File Downloaded.\nName: `" + str(file_name) + "`")
+    await edit_or_reply(event, "File Downloaded.\nName: `" + str(file_name) + "`")

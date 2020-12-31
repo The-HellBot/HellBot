@@ -8,7 +8,7 @@ from PyDictionary import PyDictionary
 
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
-
+from userbot.cmdhelp import CmdHelp
 
 @bot.on(admin_cmd(pattern="ud (.*)"))
 @bot.on(sudo_cmd(pattern="ud (.*)", allow_sudo=True))
@@ -48,13 +48,8 @@ async def _(event):
         await edit_or_reply(event, f"Couldn't fetch meaning of {word}")
 
 
-CMD_HELP.update(
-    {
-        "dictionary": "**Plugin :** `dictionary`\
-    \n\n**Syntax :** `.ud query`\
-    \n**Usage : **fetches meaning from Urban dictionary\
-    \n\n**Syntax : **`.meaning query`\
-    \n**Usage : **Fetches meaning of the given word\
-    "
-    }
-)
+CmdHelp("dictionary").add_command(
+  'ud', 'query', 'fetches meaning from Urban Dictionary'
+).add_command(
+  'meaning', 'query', 'Fetches meaning of the given word'
+).add()

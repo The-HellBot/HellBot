@@ -9,6 +9,7 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from userbot import ALIVE_NAME, CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot.cmdhelp import CmdHelp
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
@@ -95,13 +96,8 @@ async def _(event):
             caption=f"**Image Type :** LINE Art \n**Uploaded By :** {mention}",
         )
 
-
-CMD_HELP.update(
-    {
-        "ascii": "__**PLUGIN NAME :** ascii__\
-      \n\n** CMD ** `.ascii` reply to any image file:\
-      \n**USAGE : **Makes an image ascii style, try out your own.\
-      \n\n** CMD ** `.line` reply to any image file:\
-      \n**USAGE : **Makes an image line style.\ "
-    }
-)
+CmdHelp("ascii").add_command(
+  'ascii', 'reply to any image file', 'Makes an image ascii style, try out your own'
+).add_command(
+  'line', 'reply to any image file', 'Makes an image in line style'
+).add()

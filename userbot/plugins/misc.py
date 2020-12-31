@@ -10,16 +10,18 @@
 from random import randint
 from time import sleep
 
-from userbot.events import register
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
-@register(outgoing=True, pattern="^.random")
+@bot.on(admin_cmd(pattern="random", outgoing=True))
+@bot.on(sudo_cmd(pattern="random", allow_sudo=True))
 async def randomise(items):
     """ For .random command, get a random item from the list of items. """
     if not items.text[0].isalpha() and items.text[0] not in ("/", "#", "@", "!"):
         itemo = (items.text[8:]).split()
         index = randint(1, len(itemo) - 1)
-        await items.edit(
+        await edit_or_reply(items, 
             "**Query: **\n`"
             + items.text[8:]
             + "`\n**Output: **\n`"
@@ -27,8 +29,8 @@ async def randomise(items):
             + "`"
         )
 
-
-@register(outgoing=True, pattern="^.sleep( [0-9]+)?$")
+@bot.on(admin_cmd(pattern="sleep([0-9]+)?$", outgoing=True))
+@bot.on(sudo_cmd(pattern="sleep([0-9]+)?$", allow_sudo=True))
 async def sleepybot(time):
     """ For .sleep command, let the userbot snooze for a few second. """
     message = time.text
@@ -45,3 +47,9 @@ async def sleepybot(time):
                     "You put the bot to sleep for " + str(counter) + " seconds",
                 )
             sleep(counter)
+
+CmdHelp("misc").add_command(
+  "sleep", "<value>", "Lets the userbot sleep for some seconds...."
+).add_command(
+  "random", "<reply>", "Chooses a random thing from the given list of things"
+).add()

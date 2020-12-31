@@ -10,12 +10,14 @@ import re
 
 import bs4
 import requests
-from uniborg.util import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 langi = "en"
 
 # kanged from Blank-x ;---;
-@borg.on(admin_cmd("imdb (.*)", outgoing=True))
+@bot.on(admin_cmd(pattern="imdb (.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="imdb (.*)", allow_sudo=True))
 async def imdb(e):
     try:
         movie_name = e.pattern_match.group(1)
@@ -83,7 +85,7 @@ async def imdb(e):
                 mov_rating = r.strong["title"]
         else:
             mov_rating = "Not available"
-        await e.edit(
+        await edit_or_reply(e, 
             "<a href=" + poster + ">&#8203;</a>"
             "<b>Title : </b><code>"
             + mov_title
@@ -109,4 +111,8 @@ async def imdb(e):
             parse_mode="HTML",
         )
     except IndexError:
-        await e.edit("Plox enter **Valid movie name** kthx")
+        await edit_or_reply(e, "Plox enter **Valid movie name** kthx")
+
+CmdHelp("imdb").add_command(
+  "imdb", "<movie name>", "Fetches the details of given movie"
+).add()

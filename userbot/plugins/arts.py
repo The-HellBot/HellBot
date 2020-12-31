@@ -1,12 +1,12 @@
 from userbot import ALIVE_NAME, CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot.cmdhelp import CmdHelp
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
 USERID = bot.uid
 
 mention = f"[{DEFAULTUSER}](tg://user?id={USERID})"
-
 
 @bot.on(admin_cmd(pattern="carry (.*)"))
 @bot.on(sudo_cmd(pattern="carry (.*)", allow_sudo=True))
@@ -38,20 +38,6 @@ async def kraken(ded):
         "＜ 、･　　|　　＼ \n"
         "　＼＿＿／∪ _ ∪) \n"
         "　　　　　 Ｕ Ｕ\n",
-    )
-
-
-@bot.on(admin_cmd(pattern="killer (.*)"))
-@bot.on(sudo_cmd(pattern="killer (.*)", allow_sudo=True))
-async def kraken(killer):
-    name = killer.pattern_match.group(1)
-    await edit_or_reply(
-        killer,
-        f"__**Commando **__{mention}          \n\n"
-        "_/﹋\_\n"
-        "(҂`_´)\n"
-        f"<,︻╦╤─ ҉ - - - {name}\n"
-        "_/﹋\_\n",
     )
 
 
@@ -574,29 +560,50 @@ async def bluedevildislike(dislike):
     await edit_or_reply(dislike, T)
 
 
-CMD_HELP.update(
-    {
-        "arts": "__**PLUGIN NAME :** Arts__\
-      \n\n** CMD ~>** `.elove` | `.monster` | `.pig` | `.gun` | `.dog` | `.hello` | `.hmf` | `.couple` | `.sup` | `.india` | `.wc` | `.snk` | `.bye` | `.shitos` | `.dislike`\
-      \n\n**USAGE   ~>  **These are arts,use & see\
-      \n\n** CMD ~>** `.carry` <your text>\
-      \n**USAGE   ~>  **Send your text with carry's art.\
-      \n\n** CMD ~>** `.killer` <text>\
-      \n**USAGE   ~>  **Be a warrior & kill enimes.\
-      \n\n** CMD ~>** `.ded` <text>\
-      \n**USAGE   ~>  **Hang yourself.\
-      \n\n** CMD ~>** `.sthink` <your text>\
-      \n**USAGE   ~>  **Send your text which tou thinking about.\
-      \n\n** CMD ~>** `.sfrog` <your text>\
-      \n**USAGE   ~>  **Send your text with frog's art.\
-      \n\n** CMD ~>** `.sdead` <your text>\
-      \n**USAGE   ~>  **Send your text with dead forg's art.\
-      \n\n** CMD ~>** `.strump` <your text>\
-      \n**USAGE   ~>  **Send your text with trump's art.\
-      \n\n** CMD ~>** `.china` <your text>\
-      \n**USAGE   ~>  **Send your text with china's art.\
-      \n\n** CMD ~>** `.sshit` \
-      \n**USAGE   ~>  **Ahhh shit...here we go again..\
-"
-    }
-)
+CmdHelp("arts").add_command(
+  'elove', None, 'Use and see'
+).add_command(
+  'monster', None, 'Use and see'
+).add_command(
+  'pig', None, 'Use and see'
+).add_command(
+  'gun', None, 'Use and see'
+).add_command(
+  'dog', None, 'Use and see'
+).add_command(
+  'hello', None, 'Use and see'
+).add_command(
+  'hmf', None, 'Use and see'
+).add_command(
+  'couple', None, 'Use and see'
+).add_command(
+  'sup', None, 'Use and see'
+).add_command(
+  'india', None, 'Use and see'
+).add_command(
+  'wc', None, 'Use and see'
+).add_command(
+  'snk', None, 'Use and see'
+).add_command(
+  'bye', None, 'Use and see'
+).add_command(
+  'shitos', None, 'Use and see'
+).add_command(
+  'dislike', None, 'Use and see'
+).add_command(
+  'carry', '<text>', 'send your text with carry art'
+).add_command(
+  'ded', '<text>', 'Hang yourself'
+).add_command(
+  'sthink', '<text>', 'Send your text in thinking art'
+).add_command(
+  'sfrog', '<text>', 'Send your text in frog art'
+).add_command(
+  'sdead', '<text>', 'Send your text in dear frog art'
+).add_command(
+  'strump', '<text>', 'Send your text in trump art'
+).add_command(
+  'china', '<text>', 'Send your text in china art'
+).add_command(
+  'sshit', None, 'Send a art in "Ahh shit. Here we go again"'
+).add()

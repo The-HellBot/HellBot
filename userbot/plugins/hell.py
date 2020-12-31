@@ -61,7 +61,7 @@ async def amireallyalive(alive):
     reply_to_id = await reply_id(alive)
 
     if HELL_IMG:
-        hell_caption = f"**{CUSTOM_ALIVE_TEXT}**\n\n"
+        hell_caption = f"**{CUSTOM_ALIVE_TEXT}**\n"
         hell_caption += f"≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈\n"
         hell_caption += f"__**BOT STATUS**__\n\n"
         hell_caption += f"**★ Telethon version :** `1.15.0`\n"

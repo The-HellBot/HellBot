@@ -5,10 +5,11 @@
 Available Commands:
 .create (b|g) GroupName"""
 from telethon.tl import functions
+from telethon.tl.types import MessageEntityMentionName
 
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
-
+from userbot.cmdhelp import CmdHelp
 
 @bot.on(admin_cmd(pattern="create (b|g|c) (.*)"))  # pylint:disable=E0602
 @bot.on(sudo_cmd(pattern="create (b|g|c) (.*)", allow_sudo=True))
@@ -72,16 +73,77 @@ async def _(event):
     else:
         await event.edit("Read `.plinfo create` to know how to use me")
 
+@bot.on(admin_cmd(pattern="link(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="link(?: |$)(.*)", allow_sudo=True))
+async def permalink(mention):
+    """ For .link command, generates a link to the user's PM with a custom text. """
+    user, custom = await get_user_from_event(mention)
+    if not user:
+        return
+    if custom:
+        await edit_or_reply(mention, f"[{custom}](tg://user?id={user.id}) \n\n\n  ☝️ Tap To See ☝️")
+    else:
+        tag = (
+            user.first_name.replace("\u2060", "") if user.first_name else user.username
+        )
+        await edit_or_reply(mention, f"[{tag}](tg://user?id={user.id}) \n\n ☝️ Tap to See ☝️")
 
-CMD_HELP.update(
-    {
-        "create": "**SYNTAX :** `.create b`\
-    \n**USAGE : **Creates a super group and send you link\
-    \n\n**SYNTAX : **`.create g`\
-    \n**USAGE : **Creates a private group and sends you link\
-    \n\n**SYNTAX : **`.create c`\
-    \n**USAGE : **Creates a Channel and sends you link\
-    \n\nhere the bot accout is owner\
-    "
-    }
-)
+
+async def get_user_from_event(event):
+    """ Get the user from argument or replied message. """
+    args = event.pattern_match.group(1).split(":", 1)
+    extra = None
+    if event.reply_to_msg_id and not len(args) == 2:
+        previous_message = await event.get_reply_message()
+        user_obj = await event.client.get_entity(previous_message.from_id)
+        extra = event.pattern_match.group(1)
+    elif len(args[0]) > 0:
+        user = args[0]
+        if len(args) == 2:
+            extra = args[1]
+
+        if user.isnumeric():
+            user = int(user)
+
+        if not user:
+            await event.edit("`Pass the user's username, id or reply!`")
+            return
+
+        if event.message.entities:
+            probable_user_mention_entity = event.message.entities[0]
+
+            if isinstance(probable_user_mention_entity, MessageEntityMentionName):
+                user_id = probable_user_mention_entity.user_id
+                user_obj = await event.client.get_entity(user_id)
+                return user_obj
+        try:
+            user_obj = await event.client.get_entity(user)
+        except (TypeError, ValueError) as err:
+            await event.edit(str(err))
+            return None
+
+    return user_obj, extra
+
+
+async def get_user_from_id(user, event):
+    if isinstance(user, str):
+        user = int(user)
+
+    try:
+        user_obj = await event.client.get_entity(user)
+    except (TypeError, ValueError) as err:
+        await event.edit(str(err))
+        return None
+
+    return user_obj
+
+
+CmdHelp("create").add_command(
+  'create b', 'Name of your grp', 'Creates a super and send you link'
+).add_command(
+  'create g', 'Name of your grp', 'Creates a private grp and send you link'
+).add_command(
+  'create c', 'Name of your channel', 'Creates a channel and sends you link'
+).add_command(
+  'link', '<reply> <text>', 'Makes a permanent link of tagged user with a custom text'
+).add()

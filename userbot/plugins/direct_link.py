@@ -14,7 +14,7 @@ from humanize import naturalsize
 
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
-
+from userbot.cmdhelp import CmdHelp
 
 @bot.on(admin_cmd(outgoing=True, pattern=r"direct(?: |$)([\s\S]*)"))
 @bot.on(sudo_cmd(allow_sudo=True, pattern=r"direct(?: |$)([\s\S]*)"))
@@ -347,14 +347,6 @@ def useragent():
     return user_agent.text
 
 
-CMD_HELP.update(
-    {
-        "direct_links": "**Plugin : **`direct`\
-        \n\n**Syntax : **`.direct <url>`\n"
-        "**Function : **Reply to a link or paste a URL to\n"
-        "generate a direct download link\n\n"
-        "List of supported URLs:\n"
-        "`Google Drive - Cloud Mail - Yandex.Disk - AFH - "
-        "ZippyShare - MediaFire - SourceForge - OSDN - GitHub`"
-    }
-)
+CmdHelp("direct_links").add_command(
+  'direct', 'link', 'Reply to a link or paste a URL to generate a direct download link.\nList of supported URLs:-\n• Google Drive\n•Cloud mail\n• Yandex.Disk\n• AFH\n• Zippy Share\n• Media fire\n• SourceForge\n• OSDN\n• Github'
+).add()

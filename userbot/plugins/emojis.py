@@ -6,10 +6,10 @@ Available Commands:
 .emoji -_-"""
 import asyncio
 
-from uniborg.util import admin_cmd
+from userbot.utils import admin_cmd
+from userbot.cmdhelp import CmdHelp
 
-
-@borg.on(admin_cmd(pattern="emoji (.*)"))
+@bot.on(admin_cmd(pattern="emoji (.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -32,3 +32,7 @@ async def _(event):
         for i in animation_ttl:
             await asyncio.sleep(animation_interval)
             await event.edit(animation_chars[i % 2])
+
+CmdHelp("emoji").add_command(
+  'emoji', None, 'Available cmnds are:-\n• shrug\n• apple\n• :/\n• -_-\n Add .emoji in front of all cmds...'
+).add()

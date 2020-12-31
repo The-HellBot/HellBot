@@ -10,6 +10,7 @@ import re
 
 from bs4 import BeautifulSoup
 from requests import get
+from userbot.cmdhelp import CmdHelp
 
 from userbot import *
 from userbot.utils import *
@@ -231,18 +232,14 @@ async def twrp(request):
     await edit_or_reply(request, reply)
 
 
-CMD_HELP.update(
-    {
-        "android": "**Plugin : **`android`\
-\n\n  •  **Syntax : **`.magisk`\
-\n  •  **Function :** __Get latest Magisk releases__\
-\n\n  •  **Syntax : **`.device <codename>`\
-\n  •  **Function :** __Get info about android device codename or model.__\
-\n\n  •  **Syntax : **`.codename <brand> <device>`\
-\n  •  **Function :** __Search for android device codename.__\
-\n\n  •  **Syntax : **`.specs <brand> <device>`\
-\n  •  **Function :** __Get device specifications info.__\
-\n\n  •  **Syntax : **`.twrp <codename>`\
-\n  •  **Function : **__Get latest twrp download for android device.__"
-    }
-)
+CmdHelp("android").add_command(
+  'magisk', None, 'Get latest magisk release'
+).add_command(
+  'device', '<codename>', 'Get info about android device codename or model'
+).add_command(
+  'codename', '<brand> <device>', 'Search for android device codename'
+).add_command(
+  'specs', '<brand> <device>', 'Get device specifications info.'
+).add_command(
+  'twrp', '<codename>', 'Get latest twrp download for android device.'
+).add()

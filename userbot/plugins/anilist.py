@@ -11,6 +11,7 @@ import requests
 
 from userbot import *
 from userbot.utils import *
+from userbot.cmdhelp import CmdHelp
 
 
 async def callAPI(search_str):
@@ -89,9 +90,6 @@ async def anilist(event):
     await event.edit(msg, link_preview=True)
 
 
-CMD_HELP.update(
-    {
-        "anilist": ".anilist <anime name >\
-     \nUSAGE: Shows you the details of the anime."
-    }
-)
+CmdHelp("anilist").add_command(
+  'anilist', '<anime name>', 'Shows you the details of the anime'
+).add()
