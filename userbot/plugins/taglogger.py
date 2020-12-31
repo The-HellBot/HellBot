@@ -4,10 +4,10 @@ from telethon.utils import get_display_name
 
 from userbot.uniborgConfig import Config
 
-if Config.PM_LOGGR_BOT_API_ID:
-    tagger = int(Config.PM_LOGGR_BOT_API_ID)
+if Config.TAG_LOGGER:
+    tagger = int(Config.TAG_LOGGER)
 
-if Config.PM_LOGGR_BOT_API_ID:
+if Config.TAG_LOGGER:
 
     @bot.on(
         events.NewMessage(

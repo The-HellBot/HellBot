@@ -7,12 +7,15 @@ from datetime import datetime
 
 from PIL import Image, ImageDraw, ImageFont
 
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
+
 
 FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
 
 
-@borg.on(admin_cmd("time ?(.*)"))  # pylint:disable=E0602
+@bot.on(admin_cmd(pattern="time ?(.*)", outgoing=True))# pylint:disable=E0602
+@bot.on(sudo_cmd(pattern="time ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -41,7 +44,7 @@ async def _(event):
     await borg.send_file(  # pylint:disable=E0602
         event.chat_id,
         required_file_name,
-        caption="Userbot: Powered by @HellBot_Official",
+        caption="HellBot",
         # Courtesy: @ManueI15
         reply_to=reply_msg_id,
     )
@@ -59,3 +62,7 @@ async def _(event):
         return
     input_str = event.pattern_match.group(1)
     logger.info(input_str)  # pylint:disable=E0602
+
+CmdHelp("time").add_command(
+  "time", None, "Gives current time in a cool sticker format."
+).add()

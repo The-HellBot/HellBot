@@ -21,10 +21,12 @@ from datetime import datetime
 
 import requests
 
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
-@borg.on(admin_cmd("rmbg ?(.*)"))
+@borg.on(admin_cmd(pattern="rmbg ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="rmbg ?(.*)", allow_sudo=True))
 async def _(event):
     HELP_STR = (
         "`.rmbg` as reply to a media, or give a link as an argument to this command"
@@ -32,7 +34,7 @@ async def _(event):
     if event.fwd_from:
         return
     if Config.REM_BG_API_KEY is None:
-        await event.edit("You need API token from remove.bg to use this plugin.")
+        await edit_or_reply(event, "You need API token from remove.bg to use this plugin.")
         return False
     input_str = event.pattern_match.group(1)
     start = datetime.now()
@@ -41,23 +43,23 @@ async def _(event):
         message_id = event.reply_to_msg_id
         reply_message = await event.get_reply_message()
         # check if media message
-        await event.edit("Ooh Analysing this pic...")
+        await edit_or_reply(event, "Ooh Analysing this pic...")
         try:
             downloaded_file_name = await borg.download_media(
                 reply_message, Config.TMP_DOWNLOAD_DIRECTORY
             )
         except Exception as e:
-            await event.edit(str(e))
+            await edit_or_reply(event, str(e))
             return
         else:
-            await event.edit("sending to ReMove.BG")
+            await edit_or_reply(event, "sending to ReMove.BG")
             output_file_name = ReTrieveFile(downloaded_file_name)
             os.remove(downloaded_file_name)
     elif input_str:
-        await event.edit("sending to ReMove.BG")
+        await edit_or_reply(event, "sending to ReMove.BG")
         output_file_name = ReTrieveURL(input_str)
     else:
-        await event.edit(HELP_STR)
+        await edit_or_reply(event, HELP_STR)
         return
     contentType = output_file_name.headers.get("content-type")
     if "image" in contentType:
@@ -73,13 +75,13 @@ async def _(event):
             )
         end = datetime.now()
         ms = (end - start).seconds
-        await event.edit(
+        await edit_or_reply(event, 
             "Removed dat annoying Backgroup in {} seconds, powered by @HellBot_Official ©™".format(
                 ms
             )
         )
     else:
-        await event.edit(
+        await edit_or_reply(event, 
             "ReMove.BG API returned Errors. Please report to @Hellbot_Official\n`{}".format(
                 output_file_name.content.decode("UTF-8")
             )
@@ -118,3 +120,7 @@ def ReTrieveURL(input_url):
         stream=True,
     )
     return r
+
+CmdHelp("removebg").add_command(
+  "rmbg", "<reply to img>", "Removes that annoying background from the replied image. NEED TO GET A API KEY"
+).add()

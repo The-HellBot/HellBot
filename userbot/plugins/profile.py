@@ -15,6 +15,7 @@ from telethon.tl.types import Channel, Chat, InputPhoto, User
 
 from userbot import CMD_HELP, bot
 from userbot.utils import admin_cmd
+from userbot.cmdhelp import CmdHelp
 
 # ====================== CONSTANT ===============================
 INVALID_MEDIA = "```The extension of the media entity is invalid.```"
@@ -28,13 +29,13 @@ USERNAME_TAKEN = "```This username is already taken.```"
 # ===============================================================
 
 
-@borg.on(admin_cmd(pattern="pbio (.*)"))  # pylint:disable=E0602
+@bot.on(admin_cmd(pattern="pbio (.*)"))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
     bio = event.pattern_match.group(1)
     try:
-        await borg(
+        await bot(
             functions.account.UpdateProfileRequest(about=bio)  # pylint:disable=E0602
         )
         await event.edit("Succesfully changed my profile bio")
@@ -42,7 +43,7 @@ async def _(event):
         await event.edit(str(e))
 
 
-@borg.on(admin_cmd(pattern="pname ((.|\n)*)"))  # pylint:disable=E0602,W0703
+@bot.on(admin_cmd(pattern="pname ((.|\n)*)"))  # pylint:disable=E0602,W0703
 async def _(event):
     if event.fwd_from:
         return
@@ -52,7 +53,7 @@ async def _(event):
     if "|" in names:
         first_name, last_name = names.split("|", 1)
     try:
-        await borg(
+        await bot(
             functions.account.UpdateProfileRequest(  # pylint:disable=E0602
                 first_name=first_name, last_name=last_name
             )
@@ -62,7 +63,7 @@ async def _(event):
         await event.edit(str(e))
 
 
-@borg.on(admin_cmd(pattern="ppic"))  # pylint:disable=E0602
+@bot.on(admin_cmd(pattern="ppic"))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -72,7 +73,7 @@ async def _(event):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)  # pylint:disable=E0602
     photo = None
     try:
-        photo = await borg.download_media(  # pylint:disable=E0602
+        photo = await bot.download_media(  # pylint:disable=E0602
             reply_message, Config.TMP_DOWNLOAD_DIRECTORY  # pylint:disable=E0602
         )
     except Exception as e:  # pylint:disable=C0103,W0703
@@ -80,9 +81,9 @@ async def _(event):
     else:
         if photo:
             await event.edit("now, Uploading to @Telegram ...")
-            file = await borg.upload_file(photo)  # pylint:disable=E0602
+            file = await bot.upload_file(photo)  # pylint:disable=E0602
             try:
-                await borg(
+                await bot(
                     functions.photos.UploadProfilePhotoRequest(  # pylint:disable=E0602
                         file
                     )
@@ -97,7 +98,7 @@ async def _(event):
         logger.warn(str(e))  # pylint:disable=E0602
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="username (.*)"))
+@bot.on(admin_cmd(outgoing=True, pattern="username (.*)"))
 async def update_username(username):
     """ For .username command, set a new username in Telegram. """
     newusername = username.pattern_match.group(1)
@@ -108,7 +109,7 @@ async def update_username(username):
         await username.edit(USERNAME_TAKEN)
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="count$"))
+@bot.on(admin_cmd(outgoing=True, pattern="count$"))
 async def count(event):
     """ For .count command, get profile stats. """
     u = 0
@@ -145,7 +146,7 @@ async def count(event):
     await event.edit(result)
 
 
-@borg.on(admin_cmd(outgoing=True, pattern=r"delpfp"))
+@bot.on(admin_cmd(outgoing=True, pattern=r"delpfp"))
 async def remove_profilepic(delpfp):
     """ For .delpfp command, delete your current profile picture in Telegram. """
     group = delpfp.text[8:]
@@ -172,7 +173,7 @@ async def remove_profilepic(delpfp):
     await delpfp.edit(f"`Successfully deleted {len(input_photos)} profile picture(s).`")
 
 
-@borg.on(admin_cmd(pattern="myusernames$"))
+@bot.on(admin_cmd(pattern="myusernames$"))
 async def _(event):
     if event.fwd_from:
         return
@@ -183,21 +184,20 @@ async def _(event):
     await event.edit(output_str)
 
 
-CMD_HELP.update(
-    {
-        "profile": ".username <new_username>\
-\nUsage: Changes your Telegram username.\
-\n\n.pname <firstname> or .pname <firstname> <lastname>\
-\nUsage: Changes your Telegram name.(First and last name will get split by the first space)\
-\n\n.setpfp or .ppic\
-\nUsage: Reply with .setpfp or .ppic to an image to change your Telegram profie picture.\
-\n\n.pbio <new_bio>\
-\nUsage: Changes your Telegram bio.\
-\n\n.delpfp or .delpfp <number>/<all>\
-\nUsage: Deletes your Telegram profile picture(s).\
-\n\n.myusernames\
-\nUsage: Shows usernames reserved by you.that is created by you channels or groups\
-\n\n.count\
-\nUsage: Counts your groups, chats, bots etc..."
-    }
-)
+CmdHelp("profile").add_command(
+  "count", None, "Counts your groups, chats, bots etc..."
+).add_command(
+  "myusernames", None, "Shows usernames reserved by you. That is public groups or channels created by you"
+).add_command(
+  "delpfp", "<count>", "Deletes your Telegram profile picture(s)."
+).add_command(
+  "pbio", "<text>", "Changes your Telegram bio", ".pbio Hello there, This iz my bio"
+).add_command(
+  "ppic", "<reply to image>", "Changes your Telegram profie picture with the one you replied to"
+).add_command(
+  "pname", "<firstname> or <firstname | lastname>", "Changes Your Telegram account name"
+).add_command(
+  "username", "<new username>", "Changes your Telegram Account Username"
+).add_command(
+  "kickme", None, "Gets out of the grp..."
+).add()

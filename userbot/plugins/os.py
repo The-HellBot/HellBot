@@ -1,9 +1,11 @@
 import asyncio
 
-from uniborg.util import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
-@borg.on(admin_cmd(pattern=r"macos"))
+@bot.on(admin_cmd(pattern=r"macos$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"macos$", allow_sudo=True))
 async def _(event):
 
     if event.fwd_from:
@@ -14,7 +16,7 @@ async def _(event):
 
     animation_ttl = range(0, 11)
 
-    await event.edit("Mac")
+    await edit_or_reply(event, "Mac")
 
     animation_chars = [
         "`Connecting To Hackintosh...`",
@@ -37,7 +39,8 @@ async def _(event):
         await event.edit(animation_chars[i % 11])
 
 
-@borg.on(admin_cmd(pattern=r"windows"))
+@bot.on(admin_cmd(pattern=r"windows$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"windows$", allow_sudo=True))
 async def _(event):
 
     if event.fwd_from:
@@ -48,7 +51,7 @@ async def _(event):
 
     animation_ttl = range(0, 11)
 
-    await event.edit("Windows")
+    await edit_or_reply(event, "Windows")
 
     animation_chars = [
         "`Connecting To Windows 10...`",
@@ -71,7 +74,8 @@ async def _(event):
         await event.edit(animation_chars[i % 11])
 
 
-@borg.on(admin_cmd(pattern=r"linux"))
+@bot.on(admin_cmd(pattern=r"linux$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"linux$", allow_sudo=True))
 async def _(event):
 
     if event.fwd_from:
@@ -82,7 +86,7 @@ async def _(event):
 
     animation_ttl = range(0, 11)
 
-    await event.edit("Linux")
+    await edit_or_reply(event, "Linux")
 
     animation_chars = [
         "`Connecting To Linux...`",
@@ -105,7 +109,8 @@ async def _(event):
         await event.edit(animation_chars[i % 11])
 
 
-@borg.on(admin_cmd(pattern=r"stock"))
+@bot.on(admin_cmd(pattern=r"stock$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"stock$", allow_sudo=True))
 async def _(event):
 
     if event.fwd_from:
@@ -116,7 +121,7 @@ async def _(event):
 
     animation_ttl = range(0, 11)
 
-    await event.edit("Stock")
+    await edit_or_reply(event, "Stock")
 
     animation_chars = [
         "`Connecting To Symbian OS...`",
@@ -139,7 +144,8 @@ async def _(event):
         await event.edit(animation_chars[i % 11])
 
 
-@borg.on(admin_cmd(pattern=r"os"))
+@bot.on(admin_cmd(pattern=r"os$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"os$", allow_sudo=True))
 async def _(event):
 
     if event.fwd_from:
@@ -150,7 +156,7 @@ async def _(event):
 
     animation_ttl = range(0, 7)
 
-    await event.edit("OS")
+    await edit_or_reply(event, "OS")
 
     animation_chars = [
         "`Scanning OS...`",
@@ -167,3 +173,15 @@ async def _(event):
         await asyncio.sleep(animation_interval)
 
         await event.edit(animation_chars[i % 7])
+
+CmdHelp("os").add_command(
+  "os", None, "Use and see"
+).add_command(
+  "linux", None, "Use and see"
+).add_command(
+  "macos", None, "Use and see"
+).add_command(
+  "stock", None, "Use and see"
+).add_command(
+  "windows", None, "Use and see"
+).add()

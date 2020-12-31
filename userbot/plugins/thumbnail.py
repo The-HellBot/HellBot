@@ -10,7 +10,8 @@ import subprocess
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from PIL import Image
-from uniborg.util import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
@@ -41,11 +42,12 @@ def get_video_thumb(file, output=None, width=320):
         return output
 
 
-@borg.on(admin_cmd(pattern="savethumbnail"))
+@bot.on(admin_cmd(pattern="sthumb", outgoing=True))
+@bot.on(sudo_cmd(pattern="sthumb", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    await event.edit("Processing ...")
+    await edit_or_reply(event, "Processing ...")
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if event.reply_to_msg_id:
@@ -69,24 +71,25 @@ async def _(event):
         img.save(thumb_image_path, "JPEG")
         # https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#create-thumbnails
         os.remove(downloaded_file_name)
-        await event.edit(
-            "Custom video / file thumbnail saved. "
-            + "This image will be used in the upload, till `.clearthumbnail`."
+        await edit_or_reply(event, "Custom video / file thumbnail saved. "
+            + "This image will be used in the upload, till `.cthumb`."
         )
     else:
-        await event.edit("Reply to a photo to save custom thumbnail")
+        await edit_or_reply(event, "Reply to a photo to save custom thumbnail")
 
 
-@borg.on(admin_cmd(pattern="clearthumbnail"))
+@bot.on(admin_cmd(pattern="cthumb", outgoing=True))
+@bot.on(sudo_cmd(pattern="cthumb", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     if os.path.exists(thumb_image_path):
         os.remove(thumb_image_path)
-    await event.edit("✅ Custom thumbnail cleared succesfully.")
+    await edit_or_reply(event, "✅ Custom thumbnail cleared succesfully.")
 
 
-@borg.on(admin_cmd(pattern="getthumbnail"))
+@bot.on(admin_cmd(pattern="gthumb", outgoing=True))
+@bot.on(sudo_cmd(pattern="gthumb", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -97,7 +100,7 @@ async def _(event):
                 r.media.document.thumbs[0], Config.TMP_DOWNLOAD_DIRECTORY
             )
         except Exception as e:
-            await event.edit(str(e))
+            await edit_or_reply(event, str(e))
         try:
             await borg.send_file(
                 event.chat_id,
@@ -109,9 +112,9 @@ async def _(event):
             os.remove(a)
             await event.delete()
         except Exception as e:
-            await event.edit(str(e))
+            await edit_or_reply(event, str(e))
     elif os.path.exists(thumb_image_path):
-        caption_str = "Currently Saved Thumbnail. Clear with `.clearthumbnail`"
+        caption_str = "Currently Saved Thumbnail. Clear with `.cthumb`"
         await borg.send_file(
             event.chat_id,
             thumb_image_path,
@@ -120,6 +123,15 @@ async def _(event):
             allow_cache=False,
             reply_to=event.message.id,
         )
-        await event.edit(caption_str)
+        await edit_or_reply(event, caption_str)
     else:
-        await event.edit("Reply `.gethumbnail` as a reply to a media")
+        await edit_or_reply(event, "Reply `.gthumb` as a reply to a media")
+        
+
+CmdHelp("thumbnail").add_command(
+  "sthumb", "<reply to media>", "Saves the thumbnail of replied media to hellbot download directory. To get the thumbnail type .upload ./DOWNLOADS/thumb_image.jpg"
+).add_command(
+  "gthumb", None, "Gets the currently saved thumbnail from Downloads Directory"
+).add_command(
+  "cthumb", None, "Clears the currently saved thumbnail from Download directory"
+).add()

@@ -1,19 +1,11 @@
-"""Available Commands:
-
-.unoob
-.menoob
-.upro
-.mepro
-
-@arnab431"""
-
 
 import asyncio
 
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 
 
-@borg.on(admin_cmd("unoob"))
+@bot.on(admin_cmd(pattern="unoob$", outgoing=True))
+@bot.on(sudo_cmd(pattern="unoob$", allow_sudo=True))
 async def _(event):
 
     if event.fwd_from:
@@ -24,7 +16,7 @@ async def _(event):
 
     animation_ttl = range(0, 9)
 
-    await event.edit("You Noob")
+    await edit_or_reply(event, "You Noob")
 
     animation_chars = [
         "EvErYbOdY",
@@ -43,8 +35,8 @@ async def _(event):
         await event.edit(animation_chars[i % 9])
         await asyncio.sleep(animation_interval)
 
-
-@borg.on(admin_cmd("menoob"))
+@bot.on(admin_cmd(pattern="menoob$", outgoing=True))
+@bot.on(sudo_cmd(pattern="menoob$", allow_sudo=True))
 async def _(event):
 
     if event.fwd_from:
@@ -55,7 +47,7 @@ async def _(event):
 
     animation_ttl = range(0, 9)
 
-    await event.edit("Me Noob")
+    await edit_or_reply(event, "Me Noob")
 
     animation_chars = [
         "EvErYbOdY",
@@ -75,7 +67,8 @@ async def _(event):
         await asyncio.sleep(animation_interval)
 
 
-@borg.on(admin_cmd("upro"))
+@bot.on(admin_cmd(pattern="uproo$", outgoing=True))
+@bot.on(sudo_cmd(pattern="uproo$", allow_sudo=True))
 async def _(event):
 
     if event.fwd_from:
@@ -86,7 +79,7 @@ async def _(event):
 
     animation_ttl = range(0, 8)
 
-    await event.edit("You Pro")
+    await edit_or_reply(event, "You Pro")
 
     animation_chars = [
         "EvErYbOdY",
@@ -105,7 +98,8 @@ async def _(event):
         await asyncio.sleep(animation_interval)
 
 
-@borg.on(admin_cmd("mepro"))
+@bot.on(admin_cmd(pattern="mepro$", outgoing=True))
+@bot.on(sudo_cmd(pattern="mepro$", allow_sudo=True))
 async def _(event):
 
     if event.fwd_from:
@@ -116,7 +110,7 @@ async def _(event):
 
     animation_ttl = range(0, 8)
 
-    await event.edit("Me Pro")
+    await edit_or_reply(event, "Me Pro")
 
     animation_chars = [
         "EvErYbOdY",

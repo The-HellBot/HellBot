@@ -12,14 +12,16 @@ from datetime import datetime
 import aiohttp
 import magic
 import requests
-from uniborg.util import admin_cmd, progress
+from userbot.utils import admin_cmd, progress, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
-@borg.on(admin_cmd(pattern="verystream ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="verystream ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="verystream ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    mone = await event.reply("Processing ...")
+    mone = await edit_or_reply(event, "Processing ...")
     if Config.VERY_STREAM_LOGIN is None or Config.VERY_STREAM_KEY is None:
         await mone.edit(
             "This module requires API key from https://verystream.com. Aborting!"
@@ -138,3 +140,7 @@ def get_sha_one_hash(input_file, chunk_size):
                 break
             sha1.update(data)
     return sha1.hexdigest()
+
+CmdHelp("verystream").add_command(
+  "verystream", "<reply to file>", "Uploads the replied file to Verysteam."
+).add()

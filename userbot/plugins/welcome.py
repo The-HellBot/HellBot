@@ -7,6 +7,8 @@ from userbot.plugins.sql_helper.welcome_sql import (
     rm_welcome_setting,
     update_previous_welcome,
 )
+from userbot.utils import *
+from userbot.cmdhelp import CmdHelp
 
 
 @bot.on(events.ChatAction())  # pylint:disable=E0602
@@ -63,7 +65,8 @@ async def _(event):
             update_previous_welcome(event.chat_id, current_message.id)
 
 
-@command(pattern="^.savewelcome")  # pylint:disable=E0602
+@bot.on(admin_cmd(pattern="savewelcome", outgoing=True))  # pylint:disable=E0602
+@bot.on(sudo_cmd(pattern="savewelcome", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -71,34 +74,44 @@ async def _(event):
     if msg and msg.media:
         bot_api_file_id = pack_bot_file_id(msg.media)
         add_welcome_setting(event.chat_id, msg.message, True, 0, bot_api_file_id)
-        await event.edit("Welcome note saved. ")
+        await edit_or_reply(event, "Welcome note saved. ")
     else:
         input_str = event.text.split(None, 1)
         add_welcome_setting(event.chat_id, input_str[1], True, 0, None)
-        await event.edit("Welcome note saved. ")
+        await edit_or_reply(event, "Welcome note saved. ")
 
 
-@command(pattern="^.clearwelcome")  # pylint:disable=E0602
+@bot.on(admin_cmd(pattern="clearwelcome", outgoing=True)) # pylint:disable=E0602
+@bot.on(sudo_cmd(pattern="clearwelcome", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     cws = get_current_welcome_settings(event.chat_id)
     rm_welcome_setting(event.chat_id)
-    await event.edit(
+    await edit_or_reply(event, 
         "Welcome note cleared. "
         + "The previous welcome message was `{}`.".format(cws.custom_welcome_message)
     )
 
 
-@command(pattern="^.listwelcome")  # pylint:disable=E0602
+@bot.on(admin_cmd(pattern="listwelcome", outgoing=True)) # pylint:disable=E0602
+@bot.on(sudo_cmd(pattern="listwelcome", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     cws = get_current_welcome_settings(event.chat_id)
     if hasattr(cws, "custom_welcome_message"):
-        await event.edit(
+        await edit_or_reply(event, 
             "Welcome note found. "
             + "Your welcome message is\n\n`{}`.".format(cws.custom_welcome_message)
         )
     else:
-        await event.edit("No Welcome Message found")
+        await edit_or_reply(event, "No Welcome Message found")
+
+CmdHelp("welcome").add_command(
+  "listwelcome", None, "Gets the saved welcome message of HellBot"
+).add_command(
+  "clearwelcome", None, "Clears/Deletes the welcome message (if any)"
+).add_command(
+  "savewelcome", "<reply to msg>", "Saves the replied msg as welcome note from you."
+).add()

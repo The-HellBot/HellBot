@@ -1,9 +1,11 @@
 # Made by @Kraken_The_BadASS for @HellBot_Official
 
-from userbot.utils import admin_cmd
+from userbot.utils import *
+from userbot.cmdhelp import CmdHelp
 
 
-@borg.on(admin_cmd(pattern="wspr ?(.*)"))
+@bot.on(admin_cmd(pattern="wspr ?(.*)"))
+@bot.on(sudo_cmd(pattern="wspr ?(.*)", allow_sudo=True))
 async def wspr(event):
     if event.fwd_from:
         return
@@ -14,3 +16,7 @@ async def wspr(event):
     tap = await bot.inline_query(botusername, wwwspr)
     await tap[0].click(event.chat_id)
     await event.delete()
+
+CmdHelp("whisper").add_command(
+  "wspr", "<your message> <reciver username>", "Sends a whisper message to a particular person"
+).add()

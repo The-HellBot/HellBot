@@ -12,6 +12,7 @@ import userbot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
 from userbot import ALIVE_NAME, CUSTOM_PMPERMIT
 from userbot.uniborgConfig import Config
 from userbot.utils import admin_cmd
+from userbot.cmdhelp import CmdHelp
 
 PM_TRUE_FALSE = Config.PM_DATA
 
@@ -250,3 +251,15 @@ async def hehehe(event):
                 chat.id, "**My Boss iz here.... It's your lucky day nibba😏**"
             )
             await borg.send_message(chat, "**Here comes my Master! Lucky you!!😏**")
+
+CmdHelp("pmpermit").add_command(
+  "allow", "<pm use only>", "It allow the user to PM you."
+).add_command(
+  "disallow", "<pm use only>", "It disallows the user to PM. If user crosses the PM limit after disallow he/she will get blocked automatically"
+).add_command(
+  "block", "<pm use only>", "You know what it does.... Blocks the user"
+).add_command(
+  "listallowed", None, "Gives you the list of allowed PM's list"
+).add_command(
+  "set var PM_DATA", "DISABLE", "Turn off pm protection by your userbot. Your PM will not be protected."
+).add()

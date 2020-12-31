@@ -5,20 +5,18 @@
 #
 
 import asyncio
+import base64
+import os
 
-from userbot.events import register
+from telethon import functions, types
+from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
-
-@register(outgoing=True, pattern="^.tspam")
-async def tmeme(e):
-    tspam = str(e.text[7:])
-    message = tspam.replace(" ", "")
-    for letter in message:
-        await e.respond(letter)
-    await e.delete()
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
-@register(outgoing=True, pattern="^.spam")
+@bot.on(admin_cmd(pattern="spam (.*)"))
+@bot.on(sudo_cmd(pattern="spam (.*)", allow_sudo=True))
 async def spammer(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         message = e.text
@@ -32,53 +30,40 @@ async def spammer(e):
             )
 
 
-@register(outgoing=True, pattern="^.bigspam")
-async def bigspam(e):
-    if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
-        message = e.text
-        counter = int(message[9:13])
-        spam_message = str(e.text[13:])
-        for i in range(1, counter):
-            await e.respond(spam_message)
-        await e.delete()
+@bot.on(admin_cmd(pattern="bigspam"))
+@bot.on(sudo_cmd(pattern="bigspam", allow_sudo=True))
+async def bigspam(hell):
+    if not hell.text[0].isalpha() and hell.text[0] not in ("/", "#", "@", "!"):
+        hell_msg = hell.text
+        hellbot_count = int(hell_msg[9:13])
+        hell_spam = str(hell.text[13:])
+        for i in range(1, hellbot_count):
+            await hell.respond(hell_spam)
+        await hell.delete()
         if LOGGER:
-            await e.client.send_message(
+            await hell.client.send_message(
                 LOGGER_GROUP, "#BIGSPAM \n\n" "Bigspam was executed successfully"
             )
 
 
-@register(outgoing=True, pattern="^.picspam")
-async def tiny_pic_spam(e):
-    if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
-        message = e.text
-        text = message.split()
-        counter = int(text[1])
-        link = str(text[2])
-        for i in range(1, counter):
-            await e.client.send_file(e.chat_id, link)
-        await e.delete()
-        if LOGGER:
-            await e.client.send_message(
-                LOGGER_GROUP, "#PICSPAM \n\n" "PicSpam was executed successfully"
-            )
-
-
-@register(outgoing=True, pattern="^.delayspam (.*)")
+@bot.on(admin_cmd("dspam (.*)"))
+@bot.on(sudo_cmd(pattern="dspam (.*)", allow_sudo=True))
 async def spammer(e):
-    spamDelay = float(e.pattern_match.group(1).split(" ", 2)[0])
-    counter = int(e.pattern_match.group(1).split(" ", 2)[1])
-    spam_message = str(e.pattern_match.group(1).split(" ", 2)[2])
+    if e.fwd_from:
+        return
+    input_str = "".join(e.text.split(maxsplit=1)[1:])
+    spamDelay = float(input_str.split(" ", 2)[0])
+    counter = int(input_str.split(" ", 2)[1])
+    spam_message = str(input_str.split(" ", 2)[2])
     await e.delete()
-    for i in range(1, counter):
+    for _ in range(counter):
         await e.respond(spam_message)
-        await sleep(spamDelay)
-    if LOGGER:
-        await e.client.send_message(
-            LOGGER_GROUP, "#DelaySPAM\n" "DelaySpam was executed successfully"
-        )
+        await asyncio.sleep(spamDelay)
 
 
-@register(outgoing=True, pattern="^.mspam (.*)")
+#@register(outgoing=True, pattern="^.mspam (.*)")
+@bot.on(admin_cmd(pattern="mspam (.*)"))
+@bot.on(sudo_cmd(pattern="mspam (.*)", allow_sudo=True))
 async def tiny_pic_spam(e):
 
     sender = await e.get_sender()
@@ -122,3 +107,13 @@ async def tiny_pic_spam(e):
         return await e.reply(
             f"**Error**\nUsage `!mspam <count> reply to a sticker/gif/photo/video`"
         )
+
+CmdHelp("spam").add_command(
+  "spam", "<number> <text>", "Sends the text 'X' number of times.", ".spam 99 Hello"
+).add_command(
+  "mspam", "<reply to media> <number>", "Sends the replied media (gif/ video/ sticker/ pic) 'X' number of times", ".mspam 100 <reply to media>"
+).add_command(
+  "dspam", "<delay> <spam count> <text>", "Sends the text 'X' number of times in 'Y' seconds of delay", ".dspam 5 100 Hello"
+).add_command(
+  "bigspam", "<count> <text>", "Sends the text 'X' number of times. This what hellbot iz known for. The Best BigSpam Ever", ".bigspam 5000 Hello"
+).add()

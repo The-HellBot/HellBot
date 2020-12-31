@@ -2,7 +2,8 @@ import html
 
 from telethon import events, utils
 from telethon.tl import types
-
+from userbot.cmdhelp import CmdHelp
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 
 def get_who_string(who):
     who_string = html.escape(utils.get_display_name(who))
@@ -12,7 +13,8 @@ def get_who_string(who):
     return who_string
 
 
-@borg.on(events.NewMessage(pattern=r"\.urid", outgoing=True))
+@bot.on(admin_cmd(pattern="urid", outgoing=True))
+@bot.on(sudo_cmd(pattern="urid", allow_sudo=True))
 async def _(event):
     if not event.message.is_reply:
         who = await event.get_chat()
@@ -24,11 +26,12 @@ async def _(event):
         else:
             who = await msg.get_sender()
 
-    await event.edit(get_who_string(who), parse_mode="html")
+    await edit_or_reply(event, get_who_string(who), parse_mode="html")
 
 
-@borg.on(events.NewMessage(pattern=r"\.members", outgoing=True))
+@bot.on(admin_cmd(pattern=r"members", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"members", allow_sudo=True))
 async def _(event):
     members = [get_who_string(m) async for m in borg.iter_participants(event.chat_id)]
 
-    await event.edit("\n".join(members), parse_mode="html")
+    await edit_or_reply(event, "\n".join(members), parse_mode="html")

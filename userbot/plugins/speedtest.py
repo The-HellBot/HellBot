@@ -5,10 +5,12 @@ from datetime import datetime
 
 import speedtest
 
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
-@borg.on(admin_cmd("speedtest ?(.*)"))
+@bot.on(admin_cmd(pattern="speedtest ?(.*)"))
+@bot.on(sudo_cmd(pattern="speedtest ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -21,7 +23,7 @@ async def _(event):
         as_document = True
     elif input_str == "text":
         as_text = True
-    await event.edit("Calculating my internet speed. Please wait!")
+    await edit_or_reply(event, "Calculating my internet speed. Please wait!")
     start = datetime.now()
     s = speedtest.Speedtest()
     s.get_best_server()
@@ -43,7 +45,7 @@ async def _(event):
         response = s.results.share()
         speedtest_image = response
         if as_text:
-            await event.edit(
+            await edit_or_reply(event, 
                 """**SpeedTest** completed in {} seconds
 Download: {}
 Upload: {}
@@ -69,7 +71,7 @@ ISP Rating: {}""".format(
             )
             await event.delete()
     except Exception as exc:
-        await event.edit(
+        await edit_or_reply(event, 
             """**SpeedTest** completed in {} seconds
 Download: {}
 Upload: {}
@@ -93,3 +95,7 @@ def convert_from_bytes(size):
         size /= power
         n += 1
     return f"{round(size, 2)} {units[n]}"
+
+CmdHelp("speedtest").add_command(
+  "speedtest", None, "Calculates the Internet Speed of your Bot."
+).add()

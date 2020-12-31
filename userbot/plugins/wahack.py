@@ -8,10 +8,11 @@ by © Thunder God Raiden
 
 import asyncio
 
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 
 
-@borg.on(admin_cmd(pattern=f"wahack", outgoing=True))
+@bot.on(admin_cmd(pattern=f"wahack", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"wahack", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -19,7 +20,7 @@ async def _(event):
     animation_ttl = range(0, 15)
     # input_str = event.pattern_match.group(1)
     # if input_str == "wahack":
-    await event.edit("wahack..")
+    await edit_or_reply(event, "wahack..")
 
     animation_chars = [
         "Looking for WhatsApp databases in targeted person...",

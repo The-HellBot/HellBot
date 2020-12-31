@@ -12,6 +12,7 @@ from telethon import events
 from userbot import BOTLOG, BOTLOG_CHATID, bot
 from userbot.uniborgConfig import Config
 from userbot.utils import admin_cmd, register
+from userbot.cmdhelp import CmdHelp
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.WARN
@@ -23,7 +24,7 @@ BOTLOG = True
 BOTLOG_CHATID = Config.PM_LOGGR_BOT_API_ID
 
 
-@register(outgoing=True, pattern=r"^.save(?: |$)([\s\S]*)")
+@bot.on(admin_cmd(pattern=r"save(?: |$)([\s\S]*)", outgoing=True))
 async def log(log_text):
     """ For .log command, forwards a message or the command argument to the bot logs group """
     if BOTLOG:
@@ -44,15 +45,15 @@ async def log(log_text):
     await log_text.delete()
 
 
-@borg.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
+@bot.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def monito_p_m_s(event):
     sender = await event.get_sender()
     if Config.NC_LOG_P_M_S and not sender.bot:
         chat = await event.get_chat()
-        if chat.id not in NO_PM_LOG_USERS and chat.id != borg.uid:
+        if chat.id not in NO_PM_LOG_USERS and chat.id != bot.uid:
             try:
-                e = await borg.get_entity(int(Config.PM_LOGGR_BOT_API_ID))
-                fwd_message = await borg.forward_messages(e, event.message, silent=True)
+                e = await bot.get_entity(int(Config.PM_LOGGR_BOT_API_ID))
+                fwd_message = await bot.forward_messages(e, event.message, silent=True)
             except Exception as e:
                 # logger.warn(str(e))
                 exc_type, exc_obj, exc_tb = sys.exc_info()
@@ -61,7 +62,7 @@ async def monito_p_m_s(event):
                 print(e)
 
 
-@borg.on(admin_cmd(pattern="elog ?(.*)"))
+@bot.on(admin_cmd(pattern="elog ?(.*)"))
 async def set_no_log_p_m(event):
     if Config.PM_LOGGR_BOT_API_ID is not None:
         event.pattern_match.group(1)
@@ -74,7 +75,7 @@ async def set_no_log_p_m(event):
                 await event.delete()
 
 
-@borg.on(admin_cmd(pattern="nlog ?(.*)"))
+@bot.on(admin_cmd(pattern="nlog ?(.*)"))
 async def set_no_log_p_m(event):
     if Config.PM_LOGGR_BOT_API_ID is not None:
         event.pattern_match.group(1)
@@ -85,3 +86,11 @@ async def set_no_log_p_m(event):
                 await event.edit("Won't Log Messages from this chat")
                 await asyncio.sleep(3)
                 await event.delete()
+
+CmdHelp("pm_logger").add_command(
+  "save", "<reply>", "Saves the replied message to your pm logger group/channel"
+).add_command(
+  "elog", "<chat>", "Enables logging pm messages from the selected chat."
+).add_command(
+  "nlog", "<chat>", "Disables logging pm messages from the selected chat. Use .elog to enable it again."
+).add()

@@ -1,8 +1,11 @@
 """Syntax: .whatscrapp as reply to a message copied from @WhatsCRApp"""
-from uniborg.util import admin_cmd
+from userbot.utils import *
+from userbot.cmdhelp import *
+# when you are tight on schedule...
+# and also lazy af!!
 
-
-@borg.on(admin_cmd(pattern="whatscrapp"))
+@bot.on(admin_cmd(pattern="whatscrapp"))
+@bot.on(sudo_cmd(pattern="whatscrapp", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -12,8 +15,11 @@ async def _(event):
         event.reply_to_msg_id
         the_real_message = the_real_message.replace("*", "**")
         the_real_message = the_real_message.replace("_", "__")
-        await event.edit(the_real_message)
+        await edit_or_reply(event, the_real_message)
     else:
-        await event.edit(
-            "Reply to a message with `.whatscrapp` to format @WhatsCRApp messages to @Telegram"
+        await edit_or_reply(event, "Reply to a message with `.whatscrapp` to format @WhatsCRApp messages to @Telegram"
         )
+
+CmdHelp("whatscrapp").add_command(
+  "whatscrapp", "<reply to a message>", "format @WhatsCRApp messages to @Telegram"
+).add()

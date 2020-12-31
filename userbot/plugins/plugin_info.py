@@ -6,25 +6,30 @@
 """ Userbot plugin_info command """
 
 from userbot import CMD_HELP
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="plinfo(?: |$)(.*)"))
+@bot.on(admin_cmd(pattern="plinfo(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="plinfo(?: |$)(.*)", allow_sudo=True))
 async def info(event):
     """ For .plinfo command,"""
     args = event.pattern_match.group(1).lower()
     if args:
-        if args in CMD_HELP:
-            await event.edit(str(CMD_HELP[args]))
+        if args in CmdHelp:
+            await edit_or_reply(event, str(CmdHelp[args]))
         else:
-            await event.edit("Please specify a valid plugin name.")
+            await edit_or_reply(event, "Please specify a valid plugin name.")
     else:
-        await event.edit(
-            "Please specify which plugin do you want help for !!\
+        await edit_or_reply(event, "Please specify which plugin do you want help for !!\
             \nUsage: .pinfo <plugin name>"
         )
         string = ""
-        for i in CMD_HELP:
+        for i in CmdHelp:
             string += "`" + str(i)
             string += "`\n"
         await event.reply(string)
+
+CmdHelp("plugin_info").add_command(
+  "plinfo", "<plugin name>", "Gives the info triggered plugin. Every Commands with its usage and how to use.."
+).add()

@@ -3,10 +3,11 @@ import os
 import time
 import zipfile
 
-from uniborg.util import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 
 
-@borg.on(admin_cmd(pattern="compress ?(.*)"))
+@bot.on(admin_cmd(pattern="compress ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="compress ?(.*)", allow_sudo=True))
 async def _(event):
 
     if event.fwd_from:
@@ -15,7 +16,7 @@ async def _(event):
 
     input_str = event.pattern_match.group(1)
 
-    mone = await event.edit("Processing ...")
+    mone = await edit_or_reply(event, "Processing ...")
 
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
 
@@ -35,7 +36,7 @@ async def _(event):
 
             directory_name = downloaded_file_name
 
-            await event.edit("Finish downloading to my local")
+            await edit_or_reply(event, "Finish downloading to my local")
 
             zipfile.ZipFile(directory_name + ".zip", "w", zipfile.ZIP_DEFLATED).write(
                 directory_name
@@ -44,7 +45,7 @@ async def _(event):
             await borg.send_file(
                 event.chat_id,
                 directory_name + ".zip",
-                caption="Zipped By [Hêllẞø†](https://github.com/HellBoy-OP/HellBot)",
+                caption="Zipped By [Hêllẞø†](t.me/hellbot_official)",
                 force_document=True,
                 allow_cache=False,
                 reply_to=event.message.id,
@@ -60,7 +61,7 @@ async def _(event):
 
                 pass
 
-            await event.edit("task Completed")
+            await edit_or_reply(event, "task Completed")
 
             await asyncio.sleep(3)
 
@@ -78,6 +79,6 @@ async def _(event):
             directory_name
         )
 
-        await event.edit(
+        await edit_or_reply(event, 
             "Local file compressed to `{}`".format(directory_name + ".zip")
         )

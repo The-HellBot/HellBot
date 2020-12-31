@@ -15,7 +15,9 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot.cmdhelp import CmdHelp
 
+#==================HellBot==================
 
 @bot.on(admin_cmd(pattern="scan ?(.*)"))
 @bot.on(sudo_cmd(pattern="scan ?(.*)", allow_sudo=True))
@@ -378,30 +380,24 @@ Year: {}""".format(
         await hellevent.edit("xkcd n.{} not found!".format(xkcd_id))
 
 
-CMD_HELP.update(
-    {
-        "tools": "**Plugin : **`tools`\
-        \n\n**Syntax : **`.scan` reply to media or file\
-        \n**Function : **__it scans the media or file and checks either any virus is in the file or media__\
-        \n\n**Syntax : **`.makeqr` <content>\
-        \n**Function : **__Make a QR Code from the given content.__\
-        \nExample: .makeqr www.google.com\
-        \n\n**Syntax : **`.barcode `<content>\
-        \n**Function : **__Make a BarCode from the given content.__\
-        \nExample: `.barcode` www.google.com\
-        \n\n**Syntax : **`.decode` <reply to barcode/qrcode> \
-        \n**Function : **__to get decoded content of those codes.__\
-        \n\n**Syntax : **`cal year ; month`\
-        \n**Function : **__Shows you the calendar of given month and year__\
-        \n\n**Syntax : **`.currency` amount (from currency) (to currency)\
-        \n**Function : **__Currency converter for userbot __**Example :** `.currency 10 usd inr`\
-        \n\n**Syntax : **`.currencies`\
-        \n**Function : **__Shows you the some list of currencies__\
-        \n\n**Syntax : **`.ifsc` <IFSC code>\
-        \n**Function : **__to get details of the relevant bank or branch__**Example :** `.ifsc SBIN0016086`\
-        \n\n**Syntax : **`.color` <color_code> \
-        \n**Function : **__sends you a plain image of the color example :__`.color #ff0000`\
-        \n\n**Syntax : **`.xkcd` <query>\
-        \n**Function : **__Searches for the query for the relevant XKCD comic __"
-    }
-)
+CmdHelp("tools").add_command(
+  "xkcd", "<query>", "Searches for the query for the relevant XKCD comic"
+).add_command(
+  "color", "<color code>", "Sends you a plain image of the color", ".color #ff0000"
+).add_command(
+  "ifsc", "<IFSC code>", "Helps to get details of the relevant bank or branch", ".ifsc SBIN0016086"
+).add_command(
+  "currencies", None, "Shows you the some list of currencies"
+).add_command(
+  "currency", "<amount> <from> <to>", "Currency converter for HellBot", ".currency 10 usd inr"
+).add_command(
+  "cal", "<year ; month>", "Shows you the calendar of given month and year"
+).add_command(
+  "decode", "<reply to barcode/qrcode>", "To get decoded content of those codes."
+).add_command(
+  "barcode", "<content>", "Make a BarCode from the given content.", ".barcode www.google.com"
+).add_command(
+  "makeqr", "<content>", "Make a Qrcode from the given content.", ".makeqr www.google.com"
+).add_command(
+  "scan", "<reply to media or file>", "It scans the media or file and checks either any virus is in the file or media"
+).add()

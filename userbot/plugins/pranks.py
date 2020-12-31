@@ -30,7 +30,7 @@ from userbot.helpers.functions import (
     trash,
 )
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
-
+from userbot.cmdhelp import CmdHelp
 from . import *
 
 
@@ -266,18 +266,14 @@ async def hellbot(hellmemes):
     await hellmemes.client.send_file(hellmemes.chat_id, hell, reply_to=replied)
 
 
-CMD_HELP.update(
-    {
-        "pranks": "**Plugin : **`pranks`\
-      \n\n**Syntax :**`.threats` reply to image or sticker \
-      \n**USAGE:**Changes the given pic to another pic which shows that pic content is threat to society as that of nuclear bomb .\
-      \n\n**Syntax :**`.trash` reply to image or sticker\
-      \n**USAGE : **Changes the given pic to another pic which shows that pic content is as equal as to trash(waste)\
-      \n\n**Syntax :** reply to image or sticker with `.trap (name of the person to trap)-(trapper name)`\
-      \n**USAGE :**Changes the given pic to another pic which shows that pic content is trapped in trap card\
-      \n\n**Syntax :** reply to image or sticker with `.phc (username)-(text in comment)`\
-      \n**USAGE :**Changes the given pic to another pic which shows that pic content as dp and shows a comment in phub with the given username\
-      \n\n __**All cmds support sudo**__\
-      "
-    }
-)
+CmdHelp("prank").add_command(
+  "phc", "<reply to img> <name> - <comment>", "Changes the given pic to dp and shows a comment in phub with the given name", "<reply to img/stcr> .phc NAME - HELLO PHUB"
+).add_command(
+  "trap", "<reply to img/stcr> <victim name> - <trapper name>", "Changes the given pic to another pic which shows that pic content is trapped in trap card", "<reply to img/stcr> .trap Loda - Lassan"
+).add_command(
+  "trash", "<reply to image/sticker>", "Changes the given pic to another pic which shows that pic content is as equal as to trash(waste)"
+).add_command(
+  "threats", "<reply to image/sticker>", "Changes the given pic to another pic which shows that pic content is threat to society as that of nuclear bomb"
+).add_command(
+  "prank", None, "If this module doesn't work then contact admins in @HellBot_Official_Chat"
+).add()

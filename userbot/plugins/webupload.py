@@ -1,11 +1,12 @@
 # credits: SNAPDRAGON (@s_n_a_p_s)
 import asyncio
 import time
+from userbot.utils import admin_cmd
+from userbot.cmdhelp import CmdHelp
 
 
-@command(
-    pattern="^.webupload ?(.+?|) (?:--)(anonfiles|transfer|filebin|anonymousfiles|megaupload|bayfiles)"
-)
+@bot.on(admin_cmd(pattern="webup ?(.+?|) (?:--)(anonfiles|transfer|filebin|anonymousfiles|megaupload|bayfiles)"
+))
 async def _(event):
     if event.fwd_from:
         return
@@ -38,3 +39,17 @@ async def _(event):
     )
     stdout, stderr = await process.communicate()
     await event.edit(f"{stdout.decode()}")
+
+CmdHelp("webupload").add_command(
+  "webup anonfiles", "<reply to a file>", "Uploads the replied file to anonfiles.com"
+).add_command(
+  "webup transfer", "<reply to a file>", "Uploads the replied file to transfer.sh"
+).add_command(
+  "webup filebin", "<reply to a file>", "Uploads the replied file to filebin.net"
+).add_command(
+  "webup anonymousfiles", "<reply to a file>", "Uploads the replied file to anonymousfiles.io"
+).add_command(
+  "webup megaupload", "<reply to a file>", "Uploads the replied file to megauploads.is"
+).add_command(
+  "webup bayfiles", "<reply to a file>", "Uploads the replied file to bayfile.com"
+).add()

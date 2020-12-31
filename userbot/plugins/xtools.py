@@ -5,10 +5,12 @@
 from datetime import datetime
 
 import requests
-from uniborg.util import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 
-@borg.on(admin_cmd("xtools (.*)"))
+@bot.on(admin_cmd(pattern="xtools (.*)"))
+@bot.on(sudo_cmd(pattern="xtools (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -30,4 +32,4 @@ async def _(event):
     output_str = "edit count of {} ({}) in {} seconds. \n {}".format(
         username, sub_domain, str(ms), result_text
     )
-    await event.edit(output_str)
+    await edit_or_reply(event, output_str)

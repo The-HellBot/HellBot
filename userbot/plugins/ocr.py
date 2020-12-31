@@ -1,13 +1,10 @@
-"""Optical Character Recognition by OCR.Space
-Syntax: .ocr <LangCode>
-Available Languages: .ocrlanguages"""
 import json
 import os
 
 import requests
 
-from userbot.utils import admin_cmd
-
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.cmdhelp import CmdHelp
 
 def ocr_space_file(
     filename, overlay=False, api_key=Config.OCR_SPACE_API_KEY, language="eng"
@@ -74,7 +71,8 @@ def progress(current, total):
     )
 
 
-@borg.on(admin_cmd(pattern="ocrlanguages"))
+@bot.on(admin_cmd(pattern="ocrlang", outgoing=True))
+@bot.on(sudo_cmd(pattern="ocrlang", allow_sudo=True))
 async def get_ocr_languages(event):
     if event.fwd_from:
         return
@@ -104,14 +102,15 @@ async def get_ocr_languages(event):
     languages["Swedish"] = "swe"
     languages["Turkish"] = "tur"
     a = json.dumps(languages, sort_keys=True, indent=4)
-    await event.edit(str(a))
+    await edit_or_reply(event, str(a))
 
 
-@borg.on(admin_cmd(pattern="ocr (.*)"))
+@bot.on(admin_cmd(pattern="ocr (.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="ocr (.*)", allow_sudo=True))
 async def parse_ocr_space_api(event):
     if event.fwd_from:
         return
-    await event.edit("Processing weit...🤓")
+    await edit_or_reply(event, "Processing weit...🤓")
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     lang_code = event.pattern_match.group(1)
@@ -127,16 +126,20 @@ async def parse_ocr_space_api(event):
             int(test_file["ProcessingTimeInMilliseconds"]) // 1000
         )
     except Exception as e:
-        await event.edit(
-            "Errors.\n `{}`\nReport This to @HellBot_Official\n\n`{}`".format(
+        await edit_or_reply(event, "Errors.\n `{}`\nReport This to @HellBot_Official\n\n`{}`".format(
                 str(e), json.dumps(test_file, sort_keys=True, indent=4)
             )
         )
     else:
-        await event.edit(
-            "Read Document in {} seconds. \n{}".format(
+        await edit_or_reply(event, "Read Document in {} seconds. \n{}".format(
                 ProcessingTimeInMilliseconds, ParsedText
             )
         )
     os.remove(downloaded_file_name)
-    await event.edit(ParsedText)
+    await edit_or_reply(event, ParsedText)
+
+CmdHelp("ocr").add_command(
+  "ocr", "<reply to a img> <lang code>", "Reads and sends you the text written in replied image in selected language"
+).add_command(
+  "ocrlang", None, "Gives the list of supported languages of OCR."
+).add()

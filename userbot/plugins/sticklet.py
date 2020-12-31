@@ -1,8 +1,3 @@
-"""
-Command - .sticklet <text>
-Make sticker of text with random colour and font.
-"""
-
 import io
 import os
 import random
@@ -11,10 +6,11 @@ import textwrap
 from PIL import Image, ImageDraw, ImageFont
 from telethon.tl.types import InputMessagesFilterDocument
 
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 
 
-@borg.on(admin_cmd(pattern="text (.*)"))
+@bot.on(admin_cmd(pattern="text (.*)"))
+@bot.on(sudo_cmd(pattern="text (.*)", allow_sudo=True))
 async def sticklet(event):
     R = random.randint(0, 256)
     G = random.randint(0, 256)
@@ -36,7 +32,7 @@ async def sticklet(event):
     draw = ImageDraw.Draw(image)
     fontsize = 230
 
-    FONT_FILE = await get_font_file(event.client, "@FontHub")
+    FONT_FILE = await get_font_file(event.client, "@HellFonts")
 
     font = ImageFont.truetype(FONT_FILE, size=fontsize)
 
