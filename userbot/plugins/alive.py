@@ -1,5 +1,9 @@
 from userbot import *
 from userbot.utils import *
+from userbot.cmdhelp import CmdHelp
+from telethon.events import NewMessage
+from telethon.tl.custom import Dialog
+from telethon.tl.types import Channel, Chat, User
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
@@ -40,3 +44,9 @@ async def amireallyalive(alive):
     """ For .alive command, check if the bot is running.  """
     await borg.send_file(alive.chat_id, PM_IMG, caption=pm_caption)
     await alive.delete()
+
+CmdHelp("alive").add_command(
+  'alive', None, 'Check weather the bot is alive or not'
+).add_command(
+  'hell', None, 'Check weather yhe bit is alive or not. In your custom Alive Pic and Alive Msg if in Heroku Vars'
+).add()
