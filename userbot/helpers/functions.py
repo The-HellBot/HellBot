@@ -177,6 +177,11 @@ async def simpmusicvideo(simp):
     command = 'youtube-dl -f "[filesize<20M]" ' + video_link
     os.system(command)
 
+async def unzip(downloaded_file_name):
+    with zipfile.ZipFile(downloaded_file_name, "r") as zip_ref:
+        zip_ref.extractall("./temp")
+    downloaded_file_name = os.path.splitext(downloaded_file_name)[0]
+    return f"{downloaded_file_name}.gif"
 
 # convertion..
 
@@ -433,6 +438,19 @@ async def miatweet(text):
     img.save("temp.jpg", "jpeg")
     return "temp.jpg"
 
+async def dani(text):
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=tweet&text={text}&username=dani_daniels___"
+    ).json()
+    wew = r.get("message")
+    hburl = url(wew)
+    if not hburl:
+        return "check syntax once more"
+    with open("temp.png", "wb") as f:
+        f.write(requests.get(wew).content)
+    img = Image.open("temp.png").convert("RGB")
+    img.save("temp.jpg", "jpeg")
+    return "temp.jpg"
 
 async def papputweet(text):
     r = requests.get(
