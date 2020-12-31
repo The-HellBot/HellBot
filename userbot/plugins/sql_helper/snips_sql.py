@@ -50,23 +50,20 @@ def get_all_snips():
         SESSION.close()
 
 
-def add_snip(
-    keyword, reply, snip_type, media_id, media_access_hash, media_file_reference
-):
-    adder = SESSION.query(Snips).get(keyword)
-    if adder:
-        adder.reply = reply
-        adder.snip_type = snip_type
-        adder.media_id = media_id
-        adder.media_access_hash = media_access_hash
-        adder.media_file_reference = media_file_reference
-    else:
-        adder = Snips(
-            keyword, reply, snip_type, media_id, media_access_hash, media_file_reference
-        )
+def add_snip(keyword, reply, f_mesg_id):
+    to_check = get_snips(keyword)
+    if not to_check:
+        adder = Note(keyword, reply, f_mesg_id)
+        SESSION.add(adder)
+        SESSION.commit()
+        return True
+    rem = SESSION.query(Note).get(keyword)
+    SESSION.delete(rem)
+    SESSION.commit()
+    adder = Note(keyword, reply, f_mesg_id)
     SESSION.add(adder)
     SESSION.commit()
-
+    return False
 
 def remove_snip(keyword):
     note = SESSION.query(Snips).filter(Snips.snip == keyword)
