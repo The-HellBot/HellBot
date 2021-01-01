@@ -157,7 +157,7 @@ More Info: Open this <a href="{the_location}">Link</a> in {ms} seconds""".format
 CmdHelp("google").add_command(
   "google", "<query>", "Does a google search for the query provided"
 ).add_command(
-  "image", "<query>", "Does a image search for the query provided"
+  "img", "<query>", "Does a image search for the query provided"
 ).add_command(
   "reverse", "<reply to a sticker/pic>", "Does a reverse image search on google and provides the similar images"
 ).add_command(
