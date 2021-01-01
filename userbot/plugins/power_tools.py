@@ -16,11 +16,11 @@ from userbot.cmdhelp import CmdHelp
 async def _(event):
     if event.fwd_from:
         return
-    await asyncio.sleep(2)
+  # await asyncio.sleep(2)
     await event.edit("Restarting [ ██░ ] ...\nType `.ping` or `.help` to check if I am working 🙂")
-    await asyncio.sleep(2)
+  # await asyncio.sleep(2)
     await event.edit("Restarting [ ███ ]...\nType `.ping` or `.help` to check if I am working 🙂")
-    await asyncio.sleep(2)
+  # await asyncio.sleep(2)
     await event.edit("Restarted [ ✓ ]...\nType `.ping` or `.help` to check if I am working 🙂")
     await bot.disconnect()
     # https://archive.is/im3rt
