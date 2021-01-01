@@ -132,21 +132,6 @@
       "description": "Get your own APPID from https://api.openweathermap.org/data/2.5/weather",
       "required": false
     },
-    "NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD": {
-      "description": " Set The Amount Of Buttons Displayed In Help Command",
-      "value": "10",
-      "required": true
-    },
-    "NO_OF_COLUMS_DISPLAYED_IN_H_ME_CMD": {
-      "description": "Set The Amount Of Rows You Want To Displayed In Help Command default 2",
-      "value": "3",
-      "required": true
-    },
-    "EMOJI_TO_DISPLAY_IN_HELP": {
-      "description": "Set The emojies You Want to Add In Help Command!!",
-      "value": "⚜️",
-      "required": false
-    }, 
     "TZ": {
       "description": "Required for Correct Time for autopic get from http://www.timezoneconverter.com/cgi-bin/findzone.tzc",
       "value": "Asia/Kolkata",
