@@ -163,8 +163,8 @@ async def _(event):
         await event.edit(animation_chars[i % 18])
 
 
-@bot.on(admin_cmd(pattern="^Ok$", outgoing=True))
-@bot.on(sudo_cmd(pattern="^Ok$", allow_sudo=True))
+@bot.on(admin_cmd(pattern="^Okk$", outgoing=True))
+@bot.on(sudo_cmd(pattern="^Okk$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -211,5 +211,5 @@ CmdHelp("noice").add_command(
 ).add_command(
   "nopee", None, "Use and see"
 ).add_command(
-  "Ok", None, "Ohh Ok"
+  "Okk", None, "Ohh Ok"
 ).add()
