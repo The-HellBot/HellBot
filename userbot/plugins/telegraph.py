@@ -90,7 +90,7 @@ async def _(event):
             end = datetime.now()
             ms = (end - start).seconds
             await edit_or_reply(event, 
-                   "✓ **Pasted to [telegraph](https://telegra.ph{})** \n✓ **Time Taken :-** `{}` secs\n✓** By :- [{}](tg://user?id={})**".format(response["path"], ms, HELL_NAME, kraken), link_preview=True)
+                   "✓ **Pasted to** [telegraph](https://telegra.ph{}) \n✓ **Time Taken :-** `{}` secs\n✓** By :- **[{}](tg://user?id={})".format(response["path"], ms, HELL_NAME, kraken), link_preview=True)
     else:
         await edit_or_reply(event, 
             "Reply to a message to get a permanent telegra.ph link. (Inspired by @ControllerBot)"
