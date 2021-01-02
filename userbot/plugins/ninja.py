@@ -7,7 +7,7 @@ import asyncio
 import telethon.utils
 from telethon import events
 from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply, errors_handler
-from userbot.cmdhelp import CmdHelp
+from userbot import CmdHelp
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="del$"))
@@ -20,7 +20,6 @@ async def delete_it(delme):
         try:
             await msg_src.delete()
             await delme.delete()
-
 
 CmdHelp("ninja").add_command(
   "del", "<reply to a msg>", "Deletes the replied msg."
