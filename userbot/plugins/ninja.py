@@ -6,7 +6,7 @@ import asyncio
 
 import telethon.utils
 from telethon import events
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply, errors_handler
 from userbot.cmdhelp import CmdHelp
 
 
@@ -32,45 +32,19 @@ async def await_read(chat, message):
 
     await fut
 
+)
 
-@bot.on(admin_cmd(pattern="(del)(?:ete)?$"))
-@bot.on(admin_cmd(pattern="(edit)(?:\s+(.*))?$"))
-async def delete(event):
-    await event.delete()
-    command = event.pattern_match.group(1)
-    if command == "edit":
-        text = event.pattern_match.group(2)
-        if not text:
-            return
-    target = await get_target_message(event)
-    if target:
-        chat = await event.get_input_chat()
-        await await_read(chat, target)
-        await asyncio.sleep(0.5)
-        if command == "edit":
-            await borg.edit_message(chat, target, text)
-        else:
-            await borg.delete_messages(chat, target, revoke=True)
+@bot.on(admin_cmd(outgoing=True, pattern="del$"))
+@bot.on(sudo_cmd(allow_sudo=True, pattern="del$"))
+@errors_handler
+async def delete_it(delme):
+    """ For .del command, delete the replied message. """
+    msg_src = await delme.get_reply_message()
+    if delme.reply_to_msg_id:
+        try:
+            await msg_src.delete()
+            await delme.delete()
 
-
-@bot.on(sudo_cmd(pattern="(del)(?:ete)?$", allow_sudo=True))
-@bot.on(sudo_cmd(pattern="(edit)(?:\s+(.*))?$", allow_sudo=True))
-async def delete(event):
-    await event.delete()
-    command = event.pattern_match.group(1)
-    if command == "edit":
-        text = event.pattern_match.group(2)
-        if not text:
-            return
-    target = await get_target_message(event)
-    if target:
-        chat = await event.get_input_chat()
-        await await_read(chat, target)
-        await asyncio.sleep(0.5)
-        if command == "edit":
-            await borg.edit_message(chat, target, text)
-        else:
-            await borg.delete_messages(chat, target, revoke=True)
 
 CmdHelp("ninja").add_command(
   "del", "<reply to a msg>", "Deletes the replied msg."
