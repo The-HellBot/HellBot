@@ -34,21 +34,20 @@ async def await_read(chat, message):
     await fut
 
 
-@borg.on(admin_cmd(pattern="(del)(?:ete)?$"))
-@borg.on(admin_cmd(pattern="(edit)(?:\s+(.*))?$"))
+@borg.on(admin_cmd(pattern="del ?(.*)"))
 async def delete(event):
     await event.delete()
     command = event.pattern_match.group(1)
-    if command == 'del':
-        text = event.pattern_match.group(2)
-        if not text:
-            return
+ #   if command == 'del':
+       # text = event.pattern_match.group(2)
+       # if not text:
+         #   return
     target = await get_target_message(event)
     if target:
         chat = await event.get_input_chat()
         await await_read(chat, target)
         await asyncio.sleep(.5)
-        if command == 'del':
+     #   if command == 'del':
             await borg.edit_message(chat, target, text)
         else:
             await borg.delete_messages(chat, target, revoke=True)
