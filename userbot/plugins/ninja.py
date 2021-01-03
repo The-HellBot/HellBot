@@ -48,6 +48,6 @@ async def delete(event):
         await await_read(chat, target)
         await asyncio.sleep(.5)
      #   if command == 'del':
-            await borg.edit_message(chat, target, text)
+        await borg.edit_message(chat, target, text)
         else:
-            await borg.delete_messages(chat, target, revoke=True)
+          await borg.delete_messages(chat, target, revoke=True)
