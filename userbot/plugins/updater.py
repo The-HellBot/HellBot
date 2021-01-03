@@ -188,7 +188,7 @@ async def upstream(event):
     """ - Special case for deploy - """
     if conf == "deploy":
         await event.edit(
-            "Updated your Hêllẞø† successfully sur!!!\n\nNow type .ping after 30 mins to check if I'm on🚶😏\n\n**NOTE :** This is a long and powerful update process."
+            "Updated your Hêllẞø† successfully sur!!!\n\nNow type .ping after 5 mins to check if I'm on🚶😏\n\n**NOTE :** This is a powerful update process."
         )
         await deploy(event, repo, ups_rem, ac_br, txt)
         return
