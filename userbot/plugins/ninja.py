@@ -39,7 +39,7 @@ async def await_read(chat, message):
 async def delete(event):
     await event.delete()
     command = event.pattern_match.group(1)
-    if command == 'edit':
+    if command == 'del':
         text = event.pattern_match.group(2)
         if not text:
             return
@@ -48,7 +48,7 @@ async def delete(event):
         chat = await event.get_input_chat()
         await await_read(chat, target)
         await asyncio.sleep(.5)
-        if command == 'edit':
+        if command == 'del':
             await borg.edit_message(chat, target, text)
         else:
             await borg.delete_messages(chat, target, revoke=True)
