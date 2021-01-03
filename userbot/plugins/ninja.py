@@ -20,7 +20,7 @@ async def get_target_message(event):
 
 
 async def await_read(chat, message):
-    chat = telethon.utils.get_peer_id(chat)
+    chat = client.get_peer_id(chat)
 
     async def read_filter(read_event):
         return (read_event.chat_id == chat
