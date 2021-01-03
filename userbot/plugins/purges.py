@@ -49,7 +49,7 @@ async def delete(event):
         else:
             await borg.delete_messages(chat, target, revoke=True)
 
-CmdHelp("ninja").add_command(
+CmdHelp("purge").add_command(
   "del", "<reply to a msg>", "Deletes the replied msg."
 ).add_command(
   "edit", "<reply to a msg>", "Edits the replied msg"
