@@ -30,7 +30,7 @@ This is the one and only official HellBot Userbot made by [@Kraken_The_BadASS](h
 
 ## Video Tutorial
 <a href="https://youtu.be/M2FQJq_sHp4"><img src="https://img.shields.io/badge/How%20To%20Deploy-blue.svg?logo=Youtube"></a>
-<a href="https://youtu.be/M2FQJq_sHp4"><img src="https://img.shields.io/youtube/views/aPU334icQSM?style=social">
+<a href="https://youtu.be/M2FQJq_sHp4"><img src="https://img.shields.io/youtube/views/M2FQJq_sHp4?style=social">
 
 ## ⚡ Set-Up ⚡
 
