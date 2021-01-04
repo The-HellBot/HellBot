@@ -15,7 +15,7 @@ This is the one and only official HellBot Userbot made by [@Kraken_The_BadASS](h
 [![HellBot logo](https://telegra.ph/file/2165457cc7e428ff64919.jpg)](https://t.me/hellbot_official)
 
 
-# The owner would not be responsible for any kind of bans due to the bot...
+### The owner would not be responsible for any kind of bans due to the bot...
 
 
 # FORK AT YOUR OWN RISK
@@ -27,6 +27,10 @@ This is the one and only official HellBot Userbot made by [@Kraken_The_BadASS](h
 ## Official Support
 <a href="https://t.me/HellBot_Official"><img src="https://img.shields.io/badge/Join-Support%20Channel-red.svg?style=for-the-badge&logo=Telegram"></a>
 <a href="https://t.me/HellBot_Official_Chat"><img src="https://img.shields.io/badge/Join-Support%20Group-blue.svg?style=for-the-badge&logo=Telegram"></a>
+
+## Video Tutorial
+<a href="https://youtu.be/M2FQJq_sHp4"><img src="https://img.shields.io/badge/How%20To%20Deploy-blue.svg?logo=Youtube"></a>
+<a href="https://youtu.be/M2FQJq_sHp4"><img src="https://img.shields.io/youtube/views/aPU334icQSM?style=social">
 
 ## ⚡ Set-Up ⚡
 
