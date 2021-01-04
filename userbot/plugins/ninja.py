@@ -5,9 +5,11 @@
 from asyncio import sleep
 from telethon import events
 import telethon.utils
+from telethon.errors import rpcbaseerrors
 
 from userbot.utils import admin_cmd, sudo_cmd, errors_handler
 from userbot import bot as hellbot
+from userbot import BOTLOG, BOTLOG_CHATID
 
 
 @hellbot.on(admin_cmd(outgoing=True, pattern="del$"))
@@ -20,3 +22,12 @@ async def delete_it(safai):
         try:
             await msg_src.delete()
             await safai.delete()
+            if BOTLOG:
+                await delme.client.send_message(
+                    BOTLOG_CHATID, "#DEL \nDeletion of message was successful"
+                )
+        except rpcbaseerrors.BadRequestError:
+            if BOTLOG:
+                await delme.client.send_message(
+                    BOTLOG_CHATID, "Well, I can't delete a message"
+                )
