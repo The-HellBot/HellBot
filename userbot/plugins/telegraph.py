@@ -89,11 +89,12 @@ async def _(event):
             response = telegraph.create_page(title_of_page, html_content=page_content)
             end = datetime.now()
             ms = (end - start).seconds
+            hellboy = f"https://telegra.ph/{response['path']}"
             await edit_or_reply(event, 
-                   "✓ **Pasted to** [telegraph](https://telegra.ph{}) \n✓ **Time Taken :-** `{}` secs\n✓** By :- **[{}](tg://user?id={})".format(response["path"], ms, HELL_NAME, kraken), link_preview=True)
+                  f"✓ **Pasted to** [telegraph]({hellboy}) \n✓ **Time Taken :-** `{ms}` secs\n✓** By :- **[{HELL_NAME}](tg://user?id={kraken})", link_preview=True)
     else:
         await edit_or_reply(event, 
-            "Reply to a message to get a permanent telegra.ph link. (Inspired by @ControllerBot)"
+            "Reply to a message to get a permanent telegra.ph link."
         )
 
 
