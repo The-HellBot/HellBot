@@ -17,6 +17,7 @@ coffeehouse
 chromedriver_autoinstaller
 cowpy
 cryptg
+colorama>=0.4.3
 dnspython
 emoji
 glitch_this
