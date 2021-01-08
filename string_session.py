@@ -15,7 +15,7 @@ kraken = """
 """
                                                                                                             
 print("")
-print(Style.BRIGHT + Fore.GREEN + kraken)
+print(Style.BRIGHT + Fore.RED + kraken)
 print("""Welcome To HellBot String Generator By @Kraken_The_BadASS""")
 print("""Kindly Enter Your Details To Continue ! """)
 
