@@ -2,6 +2,14 @@ from telethon.sessions import StringSession
 from telethon.sync import TelegramClient
 
 print("")
+print("""
+  _    _      _ _ ____        _   
+ | |  | |    | | |  _ \      | |  
+ | |__| | ___| | | |_) | ___ | |_ 
+ |  __  |/ _ \ | |  _ < / _ \| __|
+ | |  | |  __/ | | |_) | (_) | |_ 
+ |_|  |_|\___|_|_|____/ \___/ \__|
+""")
 print("""Welcome To HellBot String Generator By @Kraken_The_BadASS""")
 print("""Kindly Enter Your Details To Continue ! """)
 
