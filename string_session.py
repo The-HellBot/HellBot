@@ -27,7 +27,7 @@ baap_bolte = """
 print("")
 print(Style.BRIGHT + Fore.MAGENTA + kraken)
 print(Style.RESET_ALL)
-print(Style.BRIGHT + Fore.RED + Back.CYAN + logo)
+print(Style.BRIGHT + Fore.BLUE + logo)
 print(Style.RESET_ALL)
 print(Style.BRIGHT + Fore.CYAN + Back.BLUE + baap_bolte)
 print(Style.RESET_ALL)
