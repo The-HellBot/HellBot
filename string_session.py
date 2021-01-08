@@ -11,11 +11,25 @@ kraken = """
 ║║─╔╣╔══╣║╔═╣╔══╣║╚╗║║║║║║╚═╝║╔╗╔╝╚╗╔╝     ║╚═╝╠══╗║     ║╔══╣║─║║║─╔╣╔╗║
 ║╚═╝║╚══╣╚╩═║╚══╣║─║║╠╝╚╝║╔═╗║║║╚╗─║║      ║╔═╗║╚═╝║     ║║──║╚═╝║╚═╝║║║╚╗
 ╚═══╩═══╩═══╩═══╩╝─╚═╩═══╩╝─╚╩╝╚═╝─╚╝      ╚╝─╚╩═══╝     ╚╝──╚═══╩═══╩╝╚═╝
+"""
+logo = """
+╭╮╱╭╮╱╱╭╮╭╮╭━━╮╱╱╱╭╮
+┃┃╱┃┃╱╱┃┃┃┃┃╭╮┃╱╱╭╯╰╮
+┃╰━╯┣━━┫┃┃┃┃╰╯╰┳━┻╮╭╯
+┃╭━╮┃┃━┫┃┃┃┃╭━╮┃╭╮┃┃
+┃┃╱┃┃┃━┫╰┫╰┫╰━╯┃╰╯┃╰╮
+╰╯╱╰┻━━┻━┻━┻━━━┻━━┻━╯
+"""
+baap_bolte = """
 #ʟɛɢɛռɖaʀʏ ᴀғ ɦɛʟʟɮօt
 """
                                                                                                             
 print("")
-print(Style.BRIGHT + Fore.MAGENTA + Back.CYAN + kraken)
+print(Style.BRIGHT + Fore.MAGENTA + kraken)
+print(Style.RESET_ALL)
+print(Style.Bright + Fore.RED + Back.GREEN + logo)
+print(Style.RESET_ALL)
+print(Style.Bright + Fore.CYAN + Back.GREEN + baap_bolte)
 print(Style.RESET_ALL)
 print("""Welcome To HellBot String Generator By @Kraken_The_BadASS""")
 print("""Kindly Enter Your Details To Continue ! """)
