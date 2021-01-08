@@ -1,6 +1,7 @@
 from telethon.sessions import StringSession
 from telethon.sync import TelegramClient
 import random
+from colorama import Fore, Style
 
 
 kraken = """                                                                                            
@@ -23,7 +24,7 @@ HHHHHHHHH     HHHHHHHHH    eeeeeeeeeeeeee llllllllllllllll      BBBBBBBBBBBBBBBB
 """
                                                                                                             
 print("")
-print(random.choice(ALL_COLORS) + kraken)
+print(Style.BRIGHT + For.GREEN + kraken)
 print("""Welcome To HellBot String Generator By @Kraken_The_BadASS""")
 print("""Kindly Enter Your Details To Continue ! """)
 
