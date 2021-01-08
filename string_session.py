@@ -24,7 +24,7 @@ HHHHHHHHH     HHHHHHHHH    eeeeeeeeeeeeee llllllllllllllll      BBBBBBBBBBBBBBBB
 """
                                                                                                             
 print("")
-print(Style.BRIGHT + For.GREEN + kraken)
+print(Style.BRIGHT + Fore.GREEN + kraken)
 print("""Welcome To HellBot String Generator By @Kraken_The_BadASS""")
 print("""Kindly Enter Your Details To Continue ! """)
 
