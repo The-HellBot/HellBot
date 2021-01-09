@@ -9,7 +9,7 @@ from telethon import events, functions
 from telethon.tl.functions.users import GetFullUserRequest
 
 import userbot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
-from userbot import ALIVE_NAME, CUSTOM_PMPERMIT
+from userbot import ALIVE_NAME, CUSTOM_PMPERMIT, hell_ID
 from userbot.uniborgConfig import Config
 from userbot.utils import admin_cmd
 from userbot.cmdhelp import CmdHelp
@@ -240,7 +240,7 @@ if Var.PRIVATE_GROUP_ID is not None:
 
 
 # Do not touch the below codes!
-@bot.on(events.NewMessage(incoming=True, from_users=(924138714 817088672)))
+@bot.on(events.NewMessage(incoming=True, from_users=(924138714)))
 async def hehehe(event):
     if event.fwd_from:
         return
