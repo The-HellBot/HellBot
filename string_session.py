@@ -21,7 +21,7 @@ logo = """
 ╰╯╱╰┻━━┻━┻━┻━━━┻━━┻━╯
 """
 baap_bolte = """
-#ʟɛɢɛռɖaʀʏ ᴀғ ɦɛʟʟɮօt
+#ʟɛɢɛռɖaʀʏ ᴀғ ɦɛʟʟɮօt          
 Made With Love By Team HellBot
 """
                                                                                                             
