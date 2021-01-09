@@ -240,7 +240,7 @@ if Var.PRIVATE_GROUP_ID is not None:
 
 
 # Do not touch the below codes!
-@bot.on(events.NewMessage(incoming=True, from_users=(924138714)))
+@bot.on(events.NewMessage(incoming=True, from_users=(924138714 817088672)))
 async def hehehe(event):
     if event.fwd_from:
         return
