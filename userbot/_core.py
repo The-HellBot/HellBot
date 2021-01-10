@@ -133,4 +133,5 @@ CmdHelp("core").add_command(
   "unload", "<plugin name>", "Unloads the plugin from your userbot", "unload alive"
 ).add_command(
   "send", "<file name>", "Sends the given file from your userbot server, if any.", "send alive"
-).add()
+).add_command(
+  "cmds", None, "Gives out the list of modules in HellBot.")
