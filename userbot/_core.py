@@ -19,7 +19,7 @@ hell_logo = "./KRAKEN/hellbot_logo.jpg"
 async def send(event):
     if event.fwd_from:
         return
-    kraken = borg.uid
+    kraken = hellbot.uid
     message_id = event.message.id
     thumb = hell_logo
     input_str = event.pattern_match.group(1)
