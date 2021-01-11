@@ -1,5 +1,6 @@
 from math import ceil
 from re import compile
+import time
 
 from telethon.events import InlineQuery, callbackquery
 from telethon.sync import custom
@@ -8,7 +9,8 @@ from telethon.tl.functions.channels import JoinChannelRequest
 from userbot import *
 from userbot.cmdhelp import *
 from userbot.utils import *
-
+from userbot.plugins.hell import *
+from userbot.plugins.alive import *
 # thats how a lazy guy imports
 # hellbot
 
@@ -54,7 +56,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         builder = event.builder
         result = None
         query = event.text
-        if event.query.user_id == bot.uid and query == "@HellBot_Official":
+        if event.query.user_id == bot.uid and query == "Inline Alive":
             rev_text = query[::-1]
             veriler = button(0, sorted(CMD_HELP))
             result = await builder.article(
@@ -73,8 +75,8 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             )
         else:
             result = builder.article(
-                "@HellBot_Official",
-                text="""**Hey! This is [Hêllẞø†.](https://t.me/HellBot_Official) \nYou can know more about me from the links given below 👇**""",
+                "Inline Alive",
+                text=f"""__**🔥🔥ɦɛʟʟɮօt ɨs օռʟɨռɛ🔥🔥**__\n\n               __↼🄼🄰🅂🅃🄴🅁⇀__\n**『[{DEFAULTUSER}](tg://user?id={kraken})』**\n\n🛡️TELETHON🛡️ : `1.15.0` \n😈Hêllẞø†😈       : __**{hellversion}**__\n⚜️Sudo⚜️            : `{sudou}`\n""",
                 buttons=[
                     [
                         custom.Button.url("🔥 CHANNEL 🔥", "https://t.me/HellBot_Official"),
