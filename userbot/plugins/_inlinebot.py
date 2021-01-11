@@ -9,6 +9,7 @@ from telethon.tl.functions.channels import JoinChannelRequest
 from userbot import *
 from userbot.cmdhelp import *
 from userbot.utils import *
+from userbot.uniborgConfig import *
 from userbot.plugins.hell import *
 from userbot.plugins.alive import *
 # thats how a lazy guy imports
