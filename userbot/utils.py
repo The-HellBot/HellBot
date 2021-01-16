@@ -88,6 +88,7 @@ def remove_plugin(shortname):
         raise ValueError
 
 
+
 def admin_cmd(pattern=None, command=None, **args):
     args["func"] = lambda e: e.via_bot_id is None
     stack = inspect.stack()
@@ -109,12 +110,12 @@ def admin_cmd(pattern=None, command=None, **args):
                 CMD_LIST.update({file_test: [cmd]})
         else:
             if len(Config.COMMAND_HAND_LER) == 2:
-                catreg = "^" + Config.COMMAND_HAND_LER
+                hellreg = "^" + Config.COMMAND_HAND_LER
                 reg = Config.COMMAND_HAND_LER[1]
             elif len(Config.COMMAND_HAND_LER) == 1:
-                catreg = "^\\" + Config.COMMAND_HAND_LER
+                hellreg = "^\\" + Config.COMMAND_HAND_LER
                 reg = Config.COMMAND_HAND_LER
-            args["pattern"] = re.compile(catreg + pattern)
+            args["pattern"] = re.compile(hellreg + pattern)
             if command is not None:
                 cmd = reg + command
             else:
@@ -141,12 +142,11 @@ def admin_cmd(pattern=None, command=None, **args):
     # add blacklist chats, UB should not respond in these chats
     args["blacklist_chats"] = True
     black_list_chats = list(Config.UB_BLACK_LIST_CHAT)
-    if len(black_list_chats) > 0:
+    if black_list_chats:
         args["chats"] = black_list_chats
 
     # add blacklist chats, UB should not respond in these chats
     if "allow_edited_updates" in args and args["allow_edited_updates"]:
-        args["allow_edited_updates"]
         del args["allow_edited_updates"]
 
     # check if the plugin should listen for outgoing 'messages'
@@ -175,12 +175,12 @@ def sudo_cmd(pattern=None, command=None, **args):
                 SUDO_LIST.update({file_test: [cmd]})
         else:
             if len(Config.SUDO_COMMAND_HAND_LER) == 2:
-                catreg = "^" + Config.SUDO_COMMAND_HAND_LER
+                hellreg = "^" + Config.SUDO_COMMAND_HAND_LER
                 reg = Config.SUDO_COMMAND_HAND_LER[1]
             elif len(Config.SUDO_COMMAND_HAND_LER) == 1:
-                catreg = "^\\" + Config.SUDO_COMMAND_HAND_LER
+                hellreg = "^\\" + Config.SUDO_COMMAND_HAND_LER
                 reg = Config.COMMAND_HAND_LER
-            args["pattern"] = re.compile(catreg + pattern)
+            args["pattern"] = re.compile(hellreg + pattern)
             if command is not None:
                 cmd = reg + command
             else:
@@ -208,11 +208,9 @@ def sudo_cmd(pattern=None, command=None, **args):
         args["chats"] = black_list_chats
     # add blacklist chats, UB should not respond in these chats
     if "allow_edited_updates" in args and args["allow_edited_updates"]:
-        args["allow_edited_updates"]
         del args["allow_edited_updates"]
     # check if the plugin should listen for outgoing 'messages'
     return events.NewMessage(**args)
-
 
 # https://t.me/c/1220993104/623253
 # https://docs.telethon.dev/en/latest/misc/changelog.html#breaking-changes
