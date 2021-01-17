@@ -14,8 +14,6 @@ from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply, progress
 from userbot.cmdhelp import CmdHelp
 from userbot.helpers.functions import deEmojify
 
-hell_logo = "./KRAKEN/hellbot_logo.jpg"
-
 @bot.on(admin_cmd(pattern="lyrics(?: |$)(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="lyrics(?: |$)(.*)", allow_sudo=True))
 async def nope(kraken):
@@ -132,7 +130,6 @@ async def download_video(v_url):
     lazy = v_url
     sender = await lazy.get_sender()
     me = await lazy.client.get_me()
-    thumb = hell_logo
 
     if not sender.id == me.id:
         rkp = await edit_or_reply(lazy, "`Wait. Processing your request....`")
@@ -215,7 +212,6 @@ async def download_video(v_url):
         )
         await v_url.client.send_file(
             v_url.chat_id,
-            thumb=thumb,
             f"{rip_data['id']}.mp3",
             supports_streaming=True,
             attributes=[
@@ -241,7 +237,6 @@ async def download_video(v_url):
             v_url.chat_id,
             f"{rip_data['id']}.mp4",
             supports_streaming=True,
-            thumb=thumb,
             caption=url,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                 progress(d, t, v_url, c_time, "Uploading..", f"{rip_data['title']}.mp4")
