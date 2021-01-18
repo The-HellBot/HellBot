@@ -56,6 +56,17 @@ if bool(ENV):
                     level=INFO)
     LOGS = getLogger(__name__)
 
+try:
+    if Config.HEROKU_API_KEY is not None or Config.HEROKU_APP_NAME is not None:
+        HEROKU_APP = heroku3.from_key(Config.HEROKU_API_KEY).apps()[
+            Config.HEROKU_APP_NAME
+        ]
+    else:
+        HEROKU_APP = None
+except:
+    HEROKU_APP = None
+
+
     # Check if the config was edited by using the already used variable.
     # Basically, its the 'virginity check' for the config file ;)
     CONFIG_CHECK = os.environ.get(
