@@ -8,33 +8,36 @@ Available Commands:
 import os
 import sys
 import asyncio
+from os import execl
+from time import sleep
+
 from userbot.utils import admin_cmd
 from userbot.cmdhelp import CmdHelp
-
+from userbot import HEROKU_APP, bot
 
 @bot.on(admin_cmd(pattern="restart"))
 async def _(event):
     if event.fwd_from:
         return
-  # await asyncio.sleep(2)
-    await event.edit("Restarting [ ██░ ] ...\nType `.ping` or `.help` to check if I am working 🙂")
-  # await asyncio.sleep(2)
-    await event.edit("Restarting [ ███ ]...\nType `.ping` or `.help` to check if I am working 🙂")
-  # await asyncio.sleep(2)
-    await event.edit("Restarted [ ✓ ]...\nType `.ping` or `.help` to check if I am working 🙂")
+    await event.edit("Restarting **[ ░░░ ]** ...\nType `.ping` or `.help` to check if I am working 🙂")
+    await event.edit("Restarting **[ █░░ ]** ...\nType `.ping` or `.help` to check if I am working 🙂")
+    await event.edit("Restarting **[ ██░ ]** ...\nType `.ping` or `.help` to check if I am working 🙂")
+    await event.edit("Restarting **[ ███ ]** ...\nType `.ping` or `.help` to check if I am working 🙂")
+    await event.edit("Restarted **[ ✓ ]** ...\nType `.ping` or `.help` to check if I am working 🙂")
     await bot.disconnect()
-    # https://archive.is/im3rt
     os.execl(sys.executable, sys.executable, *sys.argv)
-    # You probably don't need it but whatever
     quit()
 
-
-@bot.on(admin_cmd(pattern="shutdown"))
+@bot.on(admin_cmd(pattern="shutdown$"))
 async def _(event):
     if event.fwd_from:
         return
-    await event.edit("[ ! ] Turning off...\nManually turn me on later")
-    await bot.disconnect()
+    await event.edit("**[ ! ]** `Turning off bot now ... Manually turn me on later` ಠ_ಠ")
+    if HEROKU_APP is not None:
+        HEROKU_APP.process_formation()["userbot"].scale(0)
+    else:
+        sys.exit(0)
+
 
 CmdHelp("power_tools").add_command(
   "restart", None, "Restarts your userbot. Redtarting Bot may result in better functioning of bot when its laggy"
