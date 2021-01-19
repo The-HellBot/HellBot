@@ -1,6 +1,7 @@
 
 from math import ceil
 from re import compile
+import asyncio
 
 from telethon.events import InlineQuery, callbackquery
 from telethon.sync import custom
