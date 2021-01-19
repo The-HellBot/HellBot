@@ -10,12 +10,15 @@ from telethon.tl.functions.channels import JoinChannelRequest
 from userbot import *
 from userbot.cmdhelp import *
 from userbot.utils import *
+from userbot.uniborgConfig import Config
 
+hell_row = Config.BUTTONS_IN_HELP
+hell_emoji = Config.EMOJI_IN_HELP
 # thats how a lazy guy imports
 # hellbot
 
 def button(page, modules):
-    Row = 7
+    Row = hell_row
     Column = 3
 
     modules = sorted([modul for modul in modules if not modul.startswith("_")])
@@ -28,7 +31,7 @@ def button(page, modules):
     for pairs in pairs[page]:
         buttons.append(
             [
-                custom.Button.inline("🔸 " + pair, data=f"Information[{page}]({pair})")
+                custom.Button.inline(f"{hell_emoji}" + pair, data=f"Information[{page}]({pair})")
                 for pair in pairs
             ]
         )
@@ -36,13 +39,13 @@ def button(page, modules):
     buttons.append(
         [
             custom.Button.inline(
-                "◀️ ᏰᎯᏣᏦ", data=f"page({(max_pages - 1) if page == 0 else (page - 1)})"
+               f"◀️ ᏰᎯᏣᏦ {hell_emoji}", data=f"page({(max_pages - 1) if page == 0 else (page - 1)})"
             ),
             custom.Button.inline(
               "• ❌ •", data="close"
             ),
             custom.Button.inline(
-                "ᏁᏋﾒᎿ ▶️", data=f"page({0 if page == (max_pages - 1) else page + 1})"
+               f"{hell_emoji} ᏁᏋﾒᎿ ▶️", data=f"page({0 if page == (max_pages - 1) else page + 1})"
             ),
         ]
     )
@@ -141,7 +144,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         try:
             buttons = [
                 custom.Button.inline(
-                    "🔹 " + cmd[0], data=f"commands[{commands}[{page}]]({cmd[0]})"
+                    "⚡ " + cmd[0], data=f"commands[{commands}[{page}]]({cmd[0]})"
                 )
                 for cmd in CMD_HELP_BOT[commands]["commands"].items()
             ]
