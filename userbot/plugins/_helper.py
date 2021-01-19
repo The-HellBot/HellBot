@@ -19,8 +19,6 @@ async def yardim(event):
         await event.delete()
     else:
         await edit_or_reply(event, ["NO_BOT"])
-     except BaseException:
-          await event.edit(f"This bot has inline disabled. Please enable it to use `.help`.\nGet help from [HERE](https://t.me/HellBot_Official_Chat/450479)\n\n         [© Hêllẞø† ™](t.me/hellbot_official)")
 
 
 @bot.on(sudo_cmd(allow_sudo=True, pattern="help ?(.*)"))
