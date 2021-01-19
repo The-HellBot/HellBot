@@ -41,6 +41,9 @@ def button(page, modules):
               "• ❌ •", data="close"
             ),
             custom.Button.inline(
+              "• Delete •", data="delit"
+            ),
+            custom.Button.inline(
                 "ᏁᏋﾒᎿ ▶️", data=f"page({0 if page == (max_pages - 1) else page + 1})"
             ),
         ]
@@ -118,6 +121,11 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             await event.edit(
                 "⚜️Hêllẞø† Menu Provider Is now Closed⚜️\n\n      © Hêllẞø† ™"
             )
+            
+    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"delit")))
+    async def safai(event):
+        if event.query.user_id == bot.uid:
+            await event.delete()
           
     @tgbot.on(
         callbackquery.CallbackQuery(data=compile(b"Information\[(\d*)\]\((.*)\)"))
