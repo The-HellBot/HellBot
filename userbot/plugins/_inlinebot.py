@@ -31,7 +31,7 @@ def button(page, modules):
     for pairs in pairs[page]:
         buttons.append(
             [
-                custom.Button.inline(f"{hell_emoji}" + pair, data=f"Information[{page}]({pair})")
+                custom.Button.inline(f"{hell_emoji} " + pair, data=f"Information[{page}]({pair})")
                 for pair in pairs
             ]
         )
@@ -42,7 +42,7 @@ def button(page, modules):
                f"◀️ ᏰᎯᏣᏦ {hell_emoji}", data=f"page({(max_pages - 1) if page == 0 else (page - 1)})"
             ),
             custom.Button.inline(
-              "• ❌ •", data="close"
+               f"•{hell_emoji} ❌ {hell_emoji}•", data="close"
             ),
             custom.Button.inline(
                f"{hell_emoji} ᏁᏋﾒᎿ ▶️", data=f"page({0 if page == (max_pages - 1) else page + 1})"
@@ -191,9 +191,9 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
 
         command = CMD_HELP_BOT[cmd]["commands"][commands]
         if command["params"] is None:
-            result += f"**🛠 commands:** `{COMMAND_HAND_LER[:1]}{command['command']}`\n"
+            result += f"**🛠 Commands:** `{COMMAND_HAND_LER[:1]}{command['command']}`\n"
         else:
-            result += f"**🛠 commands:** `{COMMAND_HAND_LER[:1]}{command['command']} {command['params']}`\n"
+            result += f"**🛠 Commands:** `{COMMAND_HAND_LER[:1]}{command['command']} {command['params']}`\n"
 
         if command["example"] is None:
             result += f"**💬 Explanation:** `{command['usage']}`\n\n"
