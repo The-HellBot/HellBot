@@ -134,4 +134,5 @@ CmdHelp("core").add_command(
 ).add_command(
   "send", "<file name>", "Sends the given file from your userbot server, if any.", "send alive"
 ).add_command(
-  "cmds", None, "Gives out the list of modules in HellBot.")
+  "cmds", None, "Gives out the list of modules in HellBot."
+).add()
