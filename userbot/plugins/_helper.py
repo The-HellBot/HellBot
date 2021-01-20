@@ -27,7 +27,7 @@ async def yardim(event):
               string += "  " + i
               string += "\n"
           await event.edit(string)
-      else:
+        else:
           await event.edit(input_str + " is not a valid plugin!")
 
 
