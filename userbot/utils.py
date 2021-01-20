@@ -62,6 +62,9 @@ def load_module(shortname):
         mod.Config = Config
         mod.borg = bot
         mod.edit_or_reply = edit_or_reply
+        mod.delete_hell = delete_hell
+        # support for hellbot originals
+        sys.modules["hellbot.utils"] = userbot.utils
         # support for paperplaneextended
         sys.modules["userbot.events"] = userbot.utils
         spec.loader.exec_module(mod)
@@ -278,6 +281,26 @@ async def edit_or_reply(
     await event.client.send_file(event.chat_id, file_name, caption=caption)
     await event.delete()
     os.remove(file_name)
+
+async def delete_hell(event, text, time=None, parse_mode=None, link_preview=None):
+    parse_mode = parse_mode or "md"
+    link_preview = link_preview or False
+    time = time or 5
+    if event.sender_id in Config.SUDO_USERS:
+        reply_to = await event.get_reply_message()
+        hellevent = (
+            await reply_to.reply(text, link_preview=link_preview, parse_mode=parse_mode)
+            if reply_to
+            else await event.reply(
+                text, link_preview=link_preview, parse_mode=parse_mode
+            )
+        )
+    else:
+        hellevent = await event.edit(
+            text, link_preview=link_preview, parse_mode=parse_mode
+        )
+    await asyncio.sleep(time)
+    return await hellevent.delete()
 
 # from paperplaneextended
 on = bot.on
