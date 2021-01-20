@@ -11,7 +11,7 @@ from userbot.cmdhelp import CmdHelp
 
 
 @bot.on(admin_cmd(pattern=r"help (.*)"))
-@bot.on(sudo_cmd(pattern="help (.*)", allow_sudo=True))
+@bot.on(sudo_cmd(pattern=r"help (.*)", allow_sudo=True))
 async def info(event):
     """ For .plinfo command,"""
     args = event.pattern_match.group(1).lower()
