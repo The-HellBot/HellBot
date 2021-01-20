@@ -20,6 +20,7 @@ HEROKU_API_KEY = Config.HEROKU_API_KEY
 
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
+hell_logo = "./KRAKEN/hellbot_logo.jpg"
 
 
 @borg.on(
@@ -174,6 +175,7 @@ async def _(dyno):
     try:
         Heroku = heroku3.from_key(HEROKU_API_KEY)
         app = Heroku.app(HEROKU_APP_NAME)
+        thumb = hell_logo
     except:
         return await dyno.reply(
             " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku\n\n[Visit Support Group For Help](https://t.me/hellbot_official_chat)"
@@ -186,6 +188,7 @@ async def _(dyno):
         dyno.chat_id,
         "logs.txt",
         reply_to=dyno.id,
+        thumb=thumb,
         caption="HellBot logs of 100+ lines",
     )
 
