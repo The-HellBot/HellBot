@@ -9,7 +9,9 @@ from userbot import CMD_HELP
 from userbot.uniborgConfig import Config
 from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
+import urllib3
 
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # =====================================
 
 Heroku = heroku3.from_key(Config.HEROKU_API_KEY)
@@ -180,6 +182,13 @@ async def _(dyno):
         return await dyno.reply(
             " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku\n\n[Visit Support Group For Help](https://t.me/hellbot_official_chat)"
         )
+    hell_key = (
+        requests.post("https://nekobin.com/api/documents", json={"content": data})
+        .json()
+        .get("result")
+        .get("key")
+    )
+    hell_url = f"https://nekobin.com/{hell_key}"
     await dyno.edit("Getting Logs....")
     with open("logs.txt", "w") as log:
         log.write(app.get_log())
@@ -189,7 +198,7 @@ async def _(dyno):
         "logs.txt",
         reply_to=dyno.id,
         thumb=thumb,
-        caption="HellBot logs of 100+ lines",
+        caption=hell_url,
     )
 
     await asyncio.sleep(5)
