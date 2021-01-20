@@ -10,8 +10,8 @@ from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 
 
-@bot.on(admin_cmd(pattern=r"help(?: |$)(.*)"))
-@bot.on(sudo_cmd(pattern=r"help (?: |$)(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"plinfo(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern=r"plinfo(?: |$)(.*)", allow_sudo=True))
 async def info(event):
     """ For .plinfo command,"""
     args = event.pattern_match.group(1).lower()
@@ -22,7 +22,7 @@ async def info(event):
             await edit_or_reply(event, "Please specify a valid plugin name.")
     else:
         await edit_or_reply(event, "Please specify which plugin do you want help for !!\
-            \nUsage: .pinfo <plugin name>"
+            \nUsage: .plinfo <plugin name>"
         )
         string = ""
         for i in CmdHelp:
