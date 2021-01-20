@@ -10,8 +10,8 @@ from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 
 
-@bot.on(admin_cmd(pattern="plinfo(?: |$)(.*)", outgoing=True))
-@bot.on(sudo_cmd(pattern="plinfo(?: |$)(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"help (.*)"))
+@bot.on(sudo_cmd(pattern="help (.*)", allow_sudo=True))
 async def info(event):
     """ For .plinfo command,"""
     args = event.pattern_match.group(1).lower()
