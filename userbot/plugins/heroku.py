@@ -182,8 +182,9 @@ async def _(dyno):
         return await dyno.reply(
             " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku\n\n[Visit Support Group For Help](https://t.me/hellbot_official_chat)"
         )
+    hell_data = app.get_log()
     hell_key = (
-        requests.post("https://nekobin.com/api/documents", json={"content": data})
+        requests.post("https://nekobin.com/api/documents", json={"content": hell_data})
         .json()
         .get("result")
         .get("key")
