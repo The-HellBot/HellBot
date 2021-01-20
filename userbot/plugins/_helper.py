@@ -20,7 +20,7 @@ async def yardim(event):
         await event.delete()
     else:
         await edit_or_reply(event, ["NO_BOT"])
-    elif input_str:
+    
         if input_str in CMD_LIST:
           string = "Commands found in {}:\n".format(input_str)
           for i in CMD_LIST[input_str]:
