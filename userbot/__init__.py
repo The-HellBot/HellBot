@@ -9,7 +9,7 @@ from userbot.uniborgConfig import Config
 from var import Var
 
 StartTime = time.time()
-hellversion = "2.0" 
+hellversion = "2.1" 
 
 os.system("pip install --upgrade pip")
 if Var.STRING_SESSION:
