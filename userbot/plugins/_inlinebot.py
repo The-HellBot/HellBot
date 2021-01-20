@@ -142,7 +142,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             await event.delete()
         else:
             hell_alert = "Ho gya aapka? Kabse tapar tapar dabae jaa rhe h. Khudka bna lo na agr chaiye to. © Héllẞø† ™"
-            await event.answer(hell_alert, cache_time=0, alert=True)
+            await event.answer(hell_alert, cache_time=0, alert=True, link_preview=False)
           
     @tgbot.on(
         callbackquery.CallbackQuery(data=compile(b"Information\[(\d*)\]\((.*)\)"))
