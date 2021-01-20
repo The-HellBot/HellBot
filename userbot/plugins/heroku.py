@@ -189,7 +189,7 @@ async def _(dyno):
         .get("result")
         .get("key")
     )
-    hell_url = f"https://nekobin.com/{hell_key}"
+    hell_url = f"⚡ Pasted this logs.txt to [NekoBin](https://nekobin.com/{hell_key}) ⚡"
     await dyno.edit("Getting Logs....")
     with open("logs.txt", "w") as log:
         log.write(app.get_log())
