@@ -27,24 +27,20 @@ async def _(hellevent):
 async def _(event):
     if event.fwd_from:
         return 
-    input_str = event.pattern_match.group(1)
-    chat = "@Carol5_bot"
-    await edit_or_reply(event, "`Getting info of your bin... wait a sec`")
+    hell_input = event.pattern_match.group(1)
+    chat = "@carol5_bot"
+    await event.edit("Checking...")
     async with event.client.conversation(chat) as conv:
           try:     
               response = conv.wait_event(events.NewMessage(incoming=True,from_users=1247032902))
-              await event.client.send_message(chat, "/bin {}".format(input_str))
-              respond = await response 
+              await event.client.send_message(chat, f"/bin {hell_input}")
+              response = await response 
           except YouBlockedUserError: 
-              await event.reply("`You need to unblock` @Carol5_bot `to get this process done`")
+              await event.reply("Please Unblock @carol5_bot")
               return
-          if respond.text.startswith(""):
-             await edit_or_reply(event, "`ERROR!`")
           else: 
-             
-             await event.client.send_message(event.chat_id, respond.message)
-    await bot(functions.messages.DeleteHistoryRequest(peer=chat, max_id=0))
-    await event.delete()
+             await event.delete()
+             await event.client.send_message(event.chat_id, response.message)
 
 
 @hellbot.on(admin_cmd(pattern="vbv ?(.*)"))
@@ -52,25 +48,20 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return 
-    
-    input_str = event.pattern_match.group(1)
-    chat = "@Carol5_bot"
-    await edit_or_reply(event, "`Ahh! waitt checking`")
+    hell_input = event.pattern_match.group(1)
+    chat = "@carol5_bot"
+    await event.edit("Checking...")
     async with event.client.conversation(chat) as conv:
           try:     
               response = conv.wait_event(events.NewMessage(incoming=True,from_users=1247032902))
-              await event.client.send_message(chat, "/vbv {}".format(input_str))
-              respond = await response 
+              await event.client.send_message(chat, f"/vbv {hell_input}")
+              response = await response 
           except YouBlockedUserError: 
-              await event.reply("`You need to unblock` @Carol5_bot `to get this process done`")
+              await event.reply("Please Unblock @carol5_bot")
               return
-          if respond.text.startswith(""):
-             await edit_or_reply(event, "`ERROR!`")
           else: 
-              
-             await event.client.send_message(event.chat_id, respond.message)
-    await bot(functions.messages.DeleteHistoryRequest(peer=chat, max_id=0))
-    await event.delete()
+             await event.delete()
+             await event.client.send_message(event.chat_id, response.message)
     
     
 @hellbot.on(admin_cmd(pattern="key ?(.*)"))
@@ -78,24 +69,20 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return 
-    
-    input_str = event.pattern_match.group(1)
-    chat = "@Carol5_bot"
-    await edit_or_reply(event, "`Ahh wait! checking`")
+    hell_input = event.pattern_match.group(1)
+    chat = "@carol5_bot"
+    await event.edit("Checking...")
     async with event.client.conversation(chat) as conv:
           try:     
               response = conv.wait_event(events.NewMessage(incoming=True,from_users=1247032902))
-              await event.client.send_message(chat, "/key {}".format(input_str))
+              await event.client.send_message(chat, f"/key {hell_input}")
               response = await response 
           except YouBlockedUserError: 
-              await event.reply("`You need to unblock` @Carol5_bot `to get this process done`")
+              await event.reply("Please Unblock @carol5_bot")
               return
-          if response.text.startswith(""):
-             await edit_or_reply(event, "`ERROR!`")
           else: 
-             await event.client.send_message(event.chat_id, respond.message)
-    await bot(functions.messages.DeleteHistoryRequest(peer=chat, max_id=0))
-    await event.delete()
+             await event.delete()
+             await event.client.send_message(event.chat_id, response.message)
  
   
 @hellbot.on(admin_cmd(pattern="iban ?(.*)"))
@@ -103,24 +90,20 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return 
-    
-    input_str = event.pattern_match.group(1)
-    chat = "@Carol5_bot"
-    await edit_or_reply(event, "`Ahh wait! checking`")
+    hell_input = event.pattern_match.group(1)
+    chat = "@carol5_bot"
+    await event.edit("Checking...")
     async with event.client.conversation(chat) as conv:
           try:     
               response = conv.wait_event(events.NewMessage(incoming=True,from_users=1247032902))
-              await event.client.send_message(chat, "/iban {}".format(input_str))
+              await event.client.send_message(chat, f"/iban {hell_input}")
               response = await response 
           except YouBlockedUserError: 
-              await event.reply("`You need to unblock` @Carol5_bot `to get this process done`")
+              await event.reply("Please Unblock @carol5_bot")
               return
-          if response.text.startswith(""):
-             await edit_or_reply(event, "`ERROR!`")
           else: 
-             await event.client.send_message(event.chat_id, respond.message)
-    await bot(functions.messages.DeleteHistoryRequest(peer=chat, max_id=0))
-    await event.delete()
+             await event.delete()
+             await event.client.send_message(event.chat_id, response.message)
 
     
 @hellbot.on(admin_cmd(pattern="ccheck ?(.*)"))
@@ -142,8 +125,28 @@ async def _(event):
           else: 
              await event.delete()
              await event.client.send_message(event.chat_id, response.message)
+             
+             
+@hellbot.on(admin_cmd(pattern="ccbin ?(.*)"))
+@hellbot.on(sudo_cmd(pattern="ccbin ?(.*)", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return 
+    hell_input = event.pattern_match.group(1)
+    chat = "@carol5_bot"
+    await event.edit(f"Trying to generate CC from the given bin `{hell_input}`")
+    async with event.client.conversation(chat) as conv:
+          try:     
+              response = conv.wait_event(events.NewMessage(incoming=True,from_users=1247032902))
+              await event.client.send_message(chat, f"/gen {hell_input}")
+              response = await response 
+          except YouBlockedUserError: 
+              await event.reply("Please Unblock @carol5_bot")
+              return
+          else: 
+             await event.delete()
+             await event.client.send_message(event.chat_id, response.message)
 
-    
     
 CmdHelp("carder").add_command(
   "gencc", None, "Generates fake cc..."
@@ -157,4 +160,6 @@ CmdHelp("carder").add_command(
   "vbv", "<query>", "Checks the vbv status of given card"
 ).add_command(
   "bin", "<query>", "Checks that the given bin is valid or not"
+).add_command(
+  "ccbin", "<bin>", "Generates CC from the given bin."
 ).add()
