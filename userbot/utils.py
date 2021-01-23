@@ -65,6 +65,7 @@ def load_module(shortname):
         mod.delete_hell = delete_hell
         # support for hellbot originals
         sys.modules["hellbot.utils"] = userbot.utils
+        sys.modules["hellbot"] = userbot
         # support for paperplaneextended
         sys.modules["userbot.events"] = userbot.utils
         spec.loader.exec_module(mod)
