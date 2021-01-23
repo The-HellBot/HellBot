@@ -83,7 +83,7 @@ async def fetch_info(chat, event):
     )
     chat_type = "Channel" if broadcast else "Group"
     chat_title = chat_obj_info.title
-    warn_emoji = emojize(":warning:")
+    warn_emoji = "⚠️"
     try:
         msg_info = await event.client(
             GetHistoryRequest(
