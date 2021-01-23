@@ -2,7 +2,6 @@ import asyncio
 
 from telethon.tl.types import InputMediaUploadedPhoto
 
-from var import Var
 from hellbot import CmdHelp, bot as hellbot
 from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply as eor
 from hellbot.uniborgConfig import Config
@@ -13,10 +12,10 @@ from hellbot.plugins.sql_helper.fban_sql import (
     rm_channel,
 )
 
-logs_id = Var.FBAN_LOGGER_GROUP
+logs_id = Config.FBAN_LOGGER_GROUP
 
 # Keep all credits pls
-#madewith great effort by @HeisenbergTheDanger
+# madewith great effort by @HeisenbergTheDanger
 # modified by @kraken_the_badass for fbans
 
 
