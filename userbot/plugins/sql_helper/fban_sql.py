@@ -1,44 +1,41 @@
-try:
-    from userbot.plugins.sql_helper import BASE, SESSION
-except ImportError:
-    raise AttributeError
-
-from sqlalchemy import Column, String, UnicodeText
+from sqlalchemy import Column, String
+from telebot.plugins.sql_helper import SESSION, BASE
 
 
-class Fban(BASE):
-    __tablename__ = "fban"
+class ghdb(BASE):
+    __tablename__ = "channels"
     chat_id = Column(String(14), primary_key=True)
-    fed_name = Column(UnicodeText)
 
-    def __init__(self, chat_id, fed_name):
-        self.chat_id = str(chat_id)
-        self.fed_name = fed_name
+    def __init__(self, chat_id):
+        self.chat_id = chat_id
 
 
-Fban.__table__.create(checkfirst=True)
+ghdb.__table__.create(checkfirst=True)
 
 
-def get_flist():
+def in_channels(chat_id):
     try:
-        return SESSION.query(Fban).all()
+        return SESSION.query(ghdb).filter(ghdb.chat_id == str(chat_id)).one()
+    except BaseException:
+        return None
     finally:
         SESSION.close()
 
 
-def add_flist(chat_id, fed_name):
-    adder = Fban(str(chat_id), fed_name)
+def add_channel(chat_id):
+    adder = ghdb(str(chat_id))
     SESSION.add(adder)
     SESSION.commit()
 
 
-def del_flist(chat_id):
-    rem = SESSION.query(Fban).get(str(chat_id))
+def rm_channel(chat_id):
+    rem = SESSION.query(ghdb).get(str(chat_id))
     if rem:
         SESSION.delete(rem)
         SESSION.commit()
 
 
-def del_flist_all():
-    SESSION.execute("""TRUNCATE TABLE fban""")
-    SESSION.commit()
+def get_all_channels():
+    rem = SESSION.query(ghdb).all()
+    SESSION.close()
+    return rem
