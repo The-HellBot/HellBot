@@ -1,8 +1,8 @@
 from sqlalchemy import Column, String
-from telebot.plugins.sql_helper import SESSION, BASE
+from hellbot.plugins.sql_helper import SESSION, BASE
 
 
-class ghdb(BASE):
+class fban(BASE):
     __tablename__ = "channels"
     chat_id = Column(String(14), primary_key=True)
 
@@ -10,12 +10,12 @@ class ghdb(BASE):
         self.chat_id = chat_id
 
 
-ghdb.__table__.create(checkfirst=True)
+fban.__table__.create(checkfirst=True)
 
 
 def in_channels(chat_id):
     try:
-        return SESSION.query(ghdb).filter(ghdb.chat_id == str(chat_id)).one()
+        return SESSION.query(fban).filter(fban.chat_id == str(chat_id)).one()
     except BaseException:
         return None
     finally:
@@ -23,19 +23,19 @@ def in_channels(chat_id):
 
 
 def add_channel(chat_id):
-    adder = ghdb(str(chat_id))
+    adder = fban(str(chat_id))
     SESSION.add(adder)
     SESSION.commit()
 
 
 def rm_channel(chat_id):
-    rem = SESSION.query(ghdb).get(str(chat_id))
+    rem = SESSION.query(fban).get(str(chat_id))
     if rem:
         SESSION.delete(rem)
         SESSION.commit()
 
 
 def get_all_channels():
-    rem = SESSION.query(ghdb).all()
+    rem = SESSION.query(fban).all()
     SESSION.close()
     return rem
