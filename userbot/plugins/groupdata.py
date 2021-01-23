@@ -2,7 +2,7 @@ from datetime import datetime
 from math import sqrt
 from os import remove
 
-from emoji import emojize
+import emoji
 from telethon.errors import (
     ChannelInvalidError,
     ChannelPrivateError,
