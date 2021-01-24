@@ -48,5 +48,5 @@ async def amireallyalive(alive):
 CmdHelp("alive").add_command(
   'alive', None, 'Check weather the bot is alive or not'
 ).add_command(
-  'hell', None, 'Check weather yhe bit is alive or not. In your custom Alive Pic and Alive Msg if in Heroku Vars'
+  'hell', None, 'Check weather the bot is alive or not. In your custom Alive Pic and Alive Msg'
 ).add()
