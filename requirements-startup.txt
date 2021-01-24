@@ -19,7 +19,7 @@ cowpy
 cryptg
 colorama>=0.4.3
 dnspython
-emoji
+emoji==0.6.0
 faker
 glitch_this
 gTTS-token>=1.1.3
@@ -71,6 +71,7 @@ html-telegraph-poster
 urbandict>=0.5
 validators
 wikipedia>=1.4.0
-youtube-dl
-youtube-search-python
 tswift
+youtube-dl>=2021.1.8
+youtube-search-python>=1.3.2
+youtube-search>=1.1.1
