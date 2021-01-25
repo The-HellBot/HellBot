@@ -131,10 +131,121 @@ async def _(event):
                 try:
                     await borg.send_message(logs_id, f"{error_count} Errors")
                 except BaseException:
-                    await mssg.edit("Set up log channel for checking errors.")
+                    await mssg.edit("Set up heroku var `FBAN_LOGGER_GROUP` for checking errors.")# Written by @HeisenbergTheDanger
 
+@hellbot.on(admin_cmd(pattern="unfban ?(.*)"))
+@hellbot.on(sudo_cmd(pattern="unfban ?(.*)", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    mssg = await eor(event, "`...`")
+    if not event.is_reply:
+        await mssg.edit("Reply to a message to start unfban....")
+        return
+    channels = get_all_channels()
+    error_count = 0
+    sent_count = 0
+    await mssg.edit("Unfbanning....")
+    if event.reply_to_msg_id:
+        previous_message = await event.get_reply_message()
+        if previous_message.sticker or previous_message.poll:
+            await mssg.edit("**ERROR !** \nOnly Text Message is supported for unfban.")
+            return
+        if (
+            previous_message.gif
+            or previous_message.audio
+            or previous_message.voice
+            or previous_message.video
+            or previous_message.video_note
+            or previous_message.contact
+            or previous_message.game
+            or previous_message.geo
+            or previous_message.invoice
+        ):  # Written by @HeisenbergTheDanger
+            await mssg.edit("**ERROR !** \nOnly Text Message is supported for unfban.")
+            return
+        if not previous_message.web_preview and previous_message.photo:
+            file = await borg.download_file(previous_message.media)
+            uploaded_doc = await borg.upload_file(file, file_name="img.png")
+            raw_text = previous_message.text
+            for channel in channels:
+                try:
+                    if previous_message.photo:
+                        await borg.send_file(
+                            int(channel.chat_id),
+                            InputMediaUploadedPhoto(file=uploaded_doc),
+                            force_document=False,
+                            caption=raw_text,
+                            link_preview=False,
+                        )
 
-# Written by @HeisenbergTheDanger
+                    sent_count += 1
+                    await mssg.edit(
+                        f"Unfbanned : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
+                    )
+                except Exception as error:
+                    try:
+                        await borg.send_message(
+                            logs_id, f"Error in Unfbanning at {chat_id}."
+                        )
+                        await borg.send_message(logs_id, "Error! " + str(error))
+                        if (
+                            error
+                            == "The message cannot be empty unless a file is provided"
+                        ):
+                            mssg.edit(
+                                "**ERROR !** \nOnly Text Message is supported for unfban."
+                            )
+                            return
+                    except BaseException:
+                        pass
+                    error_count += 1
+                    await mssg.edit(
+                        f"Unfbanned : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
+                    )
+            await mssg.edit(f"{sent_count} unfbans with {error_count} errors.")
+            if error_count > 0:
+                try:
+                    await borg.send_message(logs_id, f"{error_count} Errors")
+                except BaseException:
+                    pass
+        else:
+            raw_text = previous_message.text
+            for channel in channels:
+                try:
+                    await borg.send_message(
+                        int(channel.chat_id), raw_text, link_preview=False
+                    )
+                    sent_count += 1
+                    await mssg.edit(
+                        f"Unfbanned : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
+                    )
+                except Exception as error:
+                    try:
+                        await borg.send_message(
+                            logs_id, f"Error in Unfbanning at {channel.chat_id}."
+                        )
+                        await borg.send_message(logs_id, "Error! " + str(error))
+                        if (
+                            error
+                            == "The message cannot be empty unless a file is provided"
+                        ):
+                            mssg.edit(
+                                "**ERROR !** \nOnly Text Message is supported for unfban."
+                            )
+                            return
+                    except BaseException:
+                        pass
+                    error_count += 1
+                    await mssg.edit(
+                        f"Unfanned : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
+                    )
+            await mssg.edit(f"{sent_count} unfbans with {error_count} errors.")
+            if error_count > 0:
+                try:
+                    await borg.send_message(logs_id, f"{error_count} Errors")
+                except BaseException:
+                    await mssg.edit("Set up heroku var `FBAN_LOGGER_GROUP` for checking errors.")
 
 
 @hellbot.on(admin_cmd(pattern="fadd ?(.*)"))
@@ -211,10 +322,11 @@ async def list(event):
     if event.fwd_from:
         return
     channels = get_all_channels()
-    msg = "Groups in fban database:\n"
+    msg = "**Groups in fban database:**\n\n"
     for channel in channels:
         msg += f"=> `{channel.chat_id}`\n"
-    msg += f"\nTotal {len(channels)} fed groups."
+    msg += f"\nTotal {len(channels)} fed groups.\n"
+    msg += f"\n**[ NOTE ] :-** Do .fsearch <grp id> to get the details of that grp if added to fban database."
     if len(msg) > Config.MAX_MESSAGE_SIZE_LIMIT:
         with io.BytesIO(str.encode(msg)) as out_file:
             out_file.name = "fedgrp.text"
@@ -247,3 +359,19 @@ async def search(event):
     if username:
         username = "@" + username
     await eor(event, f"Name : {name}\nUsername: {username}")
+
+
+
+CmdHelp("fban").add_command(
+  "fban", "<reply to a msg>", "Forwards the replied fban msg to all groups added in your Fed Database", "Click` [here](https://telegra.ph/file/ab848eb3a3b4b94dfc726.jpg) `for an example"
+).add_command(
+  "fsearch", "<grp id>", "Gives out the username and group's name of the given group id.(IF ADDED IN FBAN DATABASE)"
+).add_command(
+  "fgroups", "Gives out the list of group ids you have connected to fban database"
+).add_command(
+  "fremove", None, "Removes the group from your fban database."
+).add_command(
+  "fadd", None, "Adds the group in your fban database."
+).add_command(
+  "unfban", "<reply to msg>", "Forwards the replied` /unfban <id>/<usrname> `to all groups added in your fban database", "reply to a msg (/unfban id/username)"
+).add()
