@@ -6,9 +6,8 @@ from telethon.tl.functions.messages import DeleteHistoryRequest
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.account import UpdateNotifySettingsRequest
 
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
-from userbot import CmdHelp
-from userbot import bot as hellbot
+from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from hellbot import CmdHelp, hellbot
 
 
 @hellbot.on(admin_cmd("gencc$"))
