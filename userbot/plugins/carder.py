@@ -7,7 +7,7 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.account import UpdateNotifySettingsRequest
 
 from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply
-from hellbot import CmdHelp, hellbot
+from hellbot import CmdHelp, bot as hellbot
 
 
 @hellbot.on(admin_cmd("gencc$"))
