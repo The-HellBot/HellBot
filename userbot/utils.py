@@ -61,6 +61,7 @@ def load_module(shortname):
         sys.modules["uniborg.util"] = userbot.utils
         mod.Config = Config
         mod.borg = bot
+        mod.hellbot = bot
         mod.edit_or_reply = edit_or_reply
         mod.delete_hell = delete_hell
         # support for hellbot originals
