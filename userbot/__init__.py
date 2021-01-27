@@ -207,10 +207,6 @@ ISAFK = False
 AFKREASON = None
 SUDO_LIST = {}
 
-# helpfull
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
-kraken = bot.uid
-hell_user = f"[{DEFAULTUSER}](tg://user?id={kraken})"
 
 from userbot.helpers import *
 from userbot.helpers import functions as helldef
