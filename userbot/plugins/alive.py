@@ -4,10 +4,25 @@ from userbot.cmdhelp import CmdHelp
 from telethon.events import NewMessage
 from telethon.tl.custom import Dialog
 from telethon.tl.types import Channel, Chat, User
+#-------------------------------------------------------------------------------
+async def make_mention(user):
+          if user.username:
+            return f"@{user.username}"
+          return inline_mention(user)
+
+async def inline_mention(user):
+          full_name = user_full_name(user) or "No Name"
+          return f"[{full_name}](tg://user?id={user.id})"
+
+async def user_full_name(user):
+          names = [user.first_name, user.last_name]
+          names = [i for i in list(names) if i]
+          return " ".join(names)
+
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
-full_name = inline_mention(event.client.get_me())
+full_name = inline_mention(await event.client.get_me())
 
 ludosudo = Config.SUDO_USERS
 
@@ -47,21 +62,6 @@ async def amireallyalive(alive):
     await borg.send_file(alive.chat_id, PM_IMG, caption=pm_caption)
     await alive.delete()
 
-def make_mention(user):
-    if user.username:
-        return f"@{user.username}"
-    return inline_mention(user)
-
-
-def inline_mention(user):
-    full_name = user_full_name(user) or "No Name"
-    return f"[{full_name}](tg://user?id={user.id})"
-
-
-def user_full_name(user):
-    names = [user.first_name, user.last_name]
-    names = [i for i in list(names) if i]
-    return " ".join(names)
 
 CmdHelp("alive").add_command(
   'alive', None, 'Check weather the bot is alive or not'
