@@ -23,7 +23,7 @@ async def user_full_name(user):
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
-full_name = inline_mention(client.get_me())
+full_name = inline_mention(borg.get_me())
 
 ludosudo = Config.SUDO_USERS
 
