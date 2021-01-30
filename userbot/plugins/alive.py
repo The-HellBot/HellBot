@@ -7,7 +7,7 @@ from telethon.tl.types import Channel, Chat, User
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
-full_name = inline_mention(await event.client.get_me())
+full_name = inline_mention(event.client.get_me())
 
 ludosudo = Config.SUDO_USERS
 
