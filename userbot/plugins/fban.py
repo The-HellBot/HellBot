@@ -1,7 +1,17 @@
+import logging
+
+logging.basicConfig(
+    format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=logging.WARNING
+)
 import asyncio
+import os
 
 from telethon.tl.types import InputMediaUploadedPhoto
+from telethon.tl.functions.messages import DeleteHistoryRequest
 
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+from telethon.tl.functions.account import UpdateNotifySettingsRequest
+from telethon import functions, types, events
 from hellbot import CmdHelp, bot as hellbot
 from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply as eor
 from hellbot.uniborgConfig import Config
@@ -13,7 +23,8 @@ from hellbot.plugins.sql_helper.fban_sql import (
 )
 
 logs_id = Config.FBAN_LOGGER_GROUP
-
+bot = "@MissRose_bot"
+hell_logo = "./KRAKEN/hellbot_logo.jpg"
 # Keep all credits pls
 # madewith great effort by @HeisenbergTheDanger
 # modified by @kraken_the_badass for fbans
@@ -248,7 +259,8 @@ async def _(event):
                     await mssg.edit("Set up heroku var `FBAN_LOGGER_GROUP` for checking errors.")
 
 
-@hellbot.on(admin_cmd(pattern="fadd ?(.*)"))
+@hellbot.on(admin_cmd(pattern=r"fadd ?(.*)"))
+@hellbot.on(sudo_cmd(pattern=r"fadd ?(.*)", allow_sudo=True))
 async def add_ch(event):
     if event.fwd_from:
         return
@@ -288,7 +300,8 @@ async def add_ch(event):
         await event.delete()
 
 
-@hellbot.on(admin_cmd(pattern="fremove ?(.*)"))
+@hellbot.on(admin_cmd(pattern=r"fremove ?(.*)"))
+@hellbot.on(sudo_cmd(pattern=r"fremove ?(.*)", allow_sudo=True))
 async def remove_ch(event):
     if event.fwd_from:
         return
@@ -360,18 +373,136 @@ async def search(event):
         username = "@" + username
     await eor(event, f"Name : {name}\nUsername: {username}")
 
+#----------------------------------------------------------------------------------------------------------------------------------------------
+
+@hellbot.on(admin_cmd(pattern="newfed ?(.*)", outgoing=True))
+@hellbot.on(sudo_cmd(pattern="newfed ?(.*)", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    hell_input = event.pattern_match.group(1)
+    chat = "@MissRose_Bot"
+    await eor(event, "`Making new fed...`")
+    async with borg.conversation(chat) as conv:
+        try:
+            response = conv.wait_event(
+                events.NewMessage(incoming=True, from_users=609517172)
+            )
+            await event.client.send_message(chat, f"/newfed {hell_input}")
+            response = await response
+        except YouBlockedUserError:
+            await eor(event, "`Please unblock` @MissRose_Bot `and try again`")
+            return
+        if response.text.startswith("You already have a federation"):
+            await event.edit(
+                "You already have a federation. Do .renamefed to rename your current fed."
+            )
+        else:
+            await eor(event, f"{response.message.message}")
 
 
-CmdHelp("fban").add_command(
+@hellbot.on(admin_cmd(pattern="renamefed ?(.*)"))
+@hellbot.on(sudo_cmd(pattern="renamefed ?(.*)", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return 
+    hell_input = event.pattern_match.group(1)
+    chat = "@MissRose_Bot"
+    await event.edit("`Trying to rename your fed...`")
+    async with event.client.conversation(chat) as conv:
+          try:     
+              response = conv.wait_event(events.NewMessage(incoming=True,from_users=609517172))
+              await event.client.send_message(chat, f"/renamefed {hell_input}")
+              response = await response 
+          except YouBlockedUserError: 
+              await event.reply("Please Unblock @MissRose_Bot")
+              return
+          else: 
+             await event.delete()
+             await event.client.send_message(event.chat_id, response.message)
+
+
+@hellbot.on(admin_cmd(pattern="fstat ?(.*)"))
+@hellbot.on(sudo_cmd(pattern="fstat ?(.*)", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    hell = await event.edit("`Collecting fstat....`")
+    thumb = hell_logo
+    if event.reply_to_msg_id:
+        previous_message = await event.get_reply_message()
+        lavde = str(previous_message.sender_id)
+        user = f"[user](tg://user?id={lavde})"
+    else:
+        lavde = event.pattern_match.group(1)
+        user = lavde
+    if lavde == "":
+        await hell.edit(
+            "`Need username/id to check fstat`"
+        )
+        return
+    else:
+        async with borg.conversation(bot) as conv:
+            try:
+                await conv.send_message("/start")
+                await conv.get_response()
+                await conv.send_message("/fedstat " + lavde)
+                massive = await conv.get_response()
+                if "Looks like" in massive.text:
+                    await massive.click(0)
+                    await asyncio.sleep(2)
+                    massive = await conv.get_response()
+                    await hellbot.send_file(
+                        event.chat_id,
+                        massive,
+                        thumb=thumb,
+                        caption=f"List of feds {user} has been banned in.\n\n**⚡ [Collected using Hêllẞø†](t.me/hellbot_official) ⚡**",
+                    )
+                else:
+                    await borg.send_message(event.chat_id, massive.text)
+                await event.delete()
+            except YouBlockedUserError:
+                await hell.edit("`Please Unblock` @MissRose_Bot")
+
+
+@hellbot.on(admin_cmd(pattern="fedinfo ?(.*)"))
+@hellbot.on(sudo_cmd(pattern="fedinfo ?(.*)", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    hell = await eor(event, "`Fetching fed info.... please wait`")
+    lavde = event.pattern_match.group(1)
+    async with borg.conversation(bot) as conv:
+        try:
+            await conv.send_message("/start")
+            await conv.get_response()
+            await conv.send_message("/fedinfo " + lavde)
+            massive = await conv.get_response()
+            await hell.edit(massive.text + "\n\n**ʟɛɢɛռɖaʀʏ_ᴀғ_ɦɛʟʟɮօt**")
+        except YouBlockedUserError:
+            await hell.edit("`Please Unblock` @MissRose_Bot")
+            
+
+CmdHelp("fed_bot").add_command(
   "fban", "<reply to a msg>", "Forwards the replied fban msg to all groups added in your Fed Database", "Click` [here](https://telegra.ph/file/ab848eb3a3b4b94dfc726.jpg) `for an example"
 ).add_command(
   "fsearch", "<grp id>", "Gives out the username and group's name of the given group id.(IF ADDED IN FBAN DATABASE)"
 ).add_command(
   "fgroups", "Gives out the list of group ids you have connected to fban database"
 ).add_command(
-  "fremove", None, "Removes the group from your fban database."
+  "fremove", "<group id> or in a group", "Removes the group from your fban database."
+).add_command(
+  "fremove all", None, "Removes the group from your fban database."
 ).add_command(
   "fadd", None, "Adds the group in your fban database."
 ).add_command(
   "unfban", "<reply to msg>", "Forwards the replied` /unfban <id>/<usrname> `to all groups added in your fban database", "reply to a msg (/unfban id/username)"
+).add_command(
+  "newfed", "<newfed name>", "Makes a federation of Rose bot"
+).add_command(
+  "renamefed", "<new name>", "Renames the fed of Rose Bot"
+).add_command(
+  "fstat", "<username/id>", "Gets the fban stats of the user from rose bot federation"
+).add_command(
+  "fedinfo", "<fed id>", "Gives details of the given fed id"
 ).add()
