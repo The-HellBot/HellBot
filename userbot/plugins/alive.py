@@ -7,6 +7,8 @@ from telethon.tl.types import Channel, Chat, User
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
+full_name = inline_mention(await event.client.get_me())
+
 ludosudo = Config.SUDO_USERS
 
 if ludosudo:
@@ -20,7 +22,7 @@ PM_IMG = "https://telegra.ph/file/80e5200c615cf0cb57aa9.mp4"
 pm_caption = "__**🔥🔥ɦɛʟʟɮօt ɨs օռʟɨռɛ🔥🔥**__\n\n"
 
 pm_caption += (
-    f"               __↼🄼🄰🅂🅃🄴🅁⇀__\n**『[{DEFAULTUSER}](tg://user?id={kraken})』**\n\n"
+    f"               __↼🄼🄰🅂🅃🄴🅁⇀__\n**『 {full_name} 』**\n\n"
 )
 
 pm_caption += "🛡️TELETHON🛡️ : `1.15.0` \n"
@@ -44,6 +46,22 @@ async def amireallyalive(alive):
     """ For .alive command, check if the bot is running.  """
     await borg.send_file(alive.chat_id, PM_IMG, caption=pm_caption)
     await alive.delete()
+
+def make_mention(user):
+    if user.username:
+        return f"@{user.username}"
+    return inline_mention(user)
+
+
+def inline_mention(user):
+    full_name = user_full_name(user) or "No Name"
+    return f"[{full_name}](tg://user?id={user.id})"
+
+
+def user_full_name(user):
+    names = [user.first_name, user.last_name]
+    names = [i for i in list(names) if i]
+    return " ".join(names)
 
 CmdHelp("alive").add_command(
   'alive', None, 'Check weather the bot is alive or not'
