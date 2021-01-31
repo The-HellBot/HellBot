@@ -1,7 +1,7 @@
 from userbot import *
 from userbot.utils import *
 from userbot.cmdhelp import CmdHelp
-from telethon import events
+from telethon import events, version
 from telethon.events import NewMessage
 from telethon.tl.custom import Dialog
 from telethon.tl.types import Channel, Chat, User
@@ -26,7 +26,7 @@ pm_caption += (
     f"               __↼🄼🄰🅂🅃🄴🅁⇀__\n**『 [{DEFAULTUSER}](tg://user?id={kraken}) 』**\n\n"
 )
 
-pm_caption += "🛡️TELETHON🛡️ : `1.15.0` \n"
+pm_caption += "🛡️TELETHON🛡️ : `{version.__version__}` \n"
 
 pm_caption += f"😈Hêllẞø†😈       : __**{hellversion}**__\n"
 
