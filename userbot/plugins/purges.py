@@ -8,7 +8,7 @@ from uniborg.util import re
 
 
 async def get_target_message(event):
-    if event.is_reply and (await event.get_reply_message()).from_id == borg.uid:
+    if event.is_reply and (await event.get_reply_message()).sender_id == borg.uid:
         return await event.get_reply_message()
     async for message in borg.iter_messages(await event.get_input_chat(), limit=20):
         if message.out:

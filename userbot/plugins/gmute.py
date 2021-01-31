@@ -12,7 +12,7 @@ async def blowjob(event):
     if event.fwd_from:
         return
     reply = await event.get_reply_message()
-    user_id = reply.from_id
+    user_id = reply.sender_id
     if user_id == (await borg.get_me()).id:	
         await edit_or_reply(event, "I guess you need some rest. You are trying to gmute yourself😌")	
         	

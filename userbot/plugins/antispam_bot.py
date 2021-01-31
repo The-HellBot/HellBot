@@ -38,7 +38,7 @@ async def ANTI_SPAMBOT(welcm):
             if welcm.user_added:
                 ignore = False
                 try:
-                    adder = welcm.action_message.from_id
+                    adder = welcm.action_message.sender_id
                 except AttributeError:
                     return
 
@@ -57,7 +57,7 @@ async def ANTI_SPAMBOT(welcm):
                 if users_list:
                     users = welcm.action_message.action.users
                 else:
-                    users = [welcm.action_message.from_id]
+                    users = [welcm.action_message.sender_id]
 
             await sleep(5)
             spambot = False

@@ -295,7 +295,7 @@ async def pin(msg):
         await edit_or_reply(msg, NO_PERM)
         return
     hmm = await edit_or_reply(msg, "`Pinned Successfully!`")
-    user = await get_user_from_id(msg.sender_id, msg)
+    user = await get_user_sender_id(msg.sender_id, msg)
     if BOTLOG:
         await msg.client.send_message(
             BOTLOG_CHATID,
@@ -403,7 +403,7 @@ async def get_user_from_event(event):
     return user_obj, extra
 
 
-async def get_user_from_id(user, event):
+async def get_user_sender_id(user, event):
     if isinstance(user, str):
         user = int(user)
     try:

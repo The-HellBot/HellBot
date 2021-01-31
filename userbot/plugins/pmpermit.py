@@ -158,7 +158,7 @@ if Var.PRIVATE_GROUP_ID is not None:
 
     @bot.on(events.NewMessage(incoming=True))
     async def on_new_private_message(event):
-        if event.from_id == bot.uid:
+        if event.sender_id == bot.uid:
             return
 
         if Var.PRIVATE_GROUP_ID is None:
@@ -168,7 +168,7 @@ if Var.PRIVATE_GROUP_ID is not None:
             return
 
         message_text = event.message.message
-        chat_id = event.from_id
+        chat_id = event.sender_id
 
         message_text.lower()
         if USER_BOT_NO_WARN == message_text:
