@@ -125,7 +125,7 @@ async def get_user_from_event(event):
     return user_obj, extra
 
 
-async def get_user_sender_id(user, event):
+async def get_user_from_id(user, event):
     if isinstance(user, str):
         user = int(user)
 
