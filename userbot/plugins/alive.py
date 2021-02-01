@@ -42,6 +42,8 @@ pm_caption += "    [✨REPO✨](https://github.com/hellboy-op/hellbot) 🔹 [�
 @bot.on(admin_cmd(outgoing=True, pattern="alive$"))
 @bot.on(sudo_cmd(pattern="alive$", allow_sudo=True))
 async def amireallyalive(alive):
+    if event.fwd_from:
+        return
     await alive.get_chat()
     await alive.delete()
     """ For .alive command, check if the bot is running.  """
