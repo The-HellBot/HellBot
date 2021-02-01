@@ -21,6 +21,8 @@ async def _(event):
 @bot.on(admin_cmd(pattern="ccry$", outgoing=True))
 @bot.on(sudo_cmd(pattern="ccry$", allow_sudo=True))
 async def cry(e):
+    if e.fwd_from:
+        return
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("(;´༎ຶД༎ຶ)")
 
@@ -145,7 +147,7 @@ import asyncio
 from userbot.utils import admin_cmd
 
 
-@bot.on(admin_cmd(pattern="lovestory", outgoing=True))
+@bot.on(admin_cmd(pattern=f"lovestory", outgoing=True))
 @bot.on(sudo_cmd(pattern=f"lovestory", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
