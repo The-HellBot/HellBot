@@ -43,6 +43,7 @@ async def send(event):
     else:
         await edit_or_reply(event, "File not found..... Kek")
 
+"""
 @hellbot.on(admin_cmd(pattern=r"install"))
 @hellbot.on(sudo_cmd(pattern=r"install", allow_sudo=True))
 async def install(event):
@@ -75,6 +76,7 @@ async def install(event):
             os.remove(downloaded_file_name)
     await asyncio.sleep(DELETE_TIMEOUT)
     await event.delete()
+"""
     
 @hellbot.on(admin_cmd(pattern=r"uninstall (?P<shortname>\w+)", outgoing=True))
 @hellbot.on(sudo_cmd(pattern=r"uninstall (?P<shortname>\w+)", allow_sudo=True))
@@ -124,7 +126,7 @@ async def load(event):
         )
 
 CmdHelp("core").add_command(
-  "install", "<reply to a .py file>", "Installs the replied python file if suitable to userbot codes"
+  "install", "<reply to a .py file>", "Installs the replied python file if suitable to userbot codes. (TEMPORARILY DISABLED AS HACKERS MAKE YOU INSTALL SOME PLUGINS AND GET YOUR DATA)"
 ).add_command(
   "uninstall", "<plugin name>", "Uninstalls the given plugin from userbot. To get that again do .restart", "uninstall alive"
 ).add_command(
