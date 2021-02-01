@@ -16,6 +16,8 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
 @bot.on(admin_cmd(pattern="autoname"))  # pylint:disable=E0602
 async def _(event):
+    if event.fwd_from:
+        return
     hell = await edit_or_reply(event, "`Starting AutoName Please Wait`")
     if event.fwd_from:
         return
@@ -91,6 +93,8 @@ async def _(event):
 @bot.on(admin_cmd(pattern="reserved", outgoing=True))
 @bot.on(sudo_cmd(pattern="reserved", allow_sudo=True))
 async def mine(event):
+    if event.fwd_from:
+        return
     """ For .reserved command, get a list of your reserved usernames. """
     result = await bot(GetAdminedPublicChannelsRequest())
     output_str = ""
@@ -104,5 +108,5 @@ CmdHelp("auto_profile").add_command(
 ).add_command(
   'autoname', None, 'Changes your name with time according to your ALIVE_NAME in heroku var'
 ).add_command(
-  'reserved', None, 'Gives the list of usernames reserved by you. In short gives the list of public groups or channels that ouu are owner in.'
+  'reserved', None, 'Gives the list of usernames reserved by you. In short gives the list of public groups or channels that you are owner in.'
 ).add()
