@@ -19,6 +19,8 @@ from userbot.cmdhelp import CmdHelp
 
 @bot.on(events.NewMessage(incoming=True))
 async def on_new_message(event):
+    if event.fwd_from:
+        return
     # TODO: exempt admins from locks
     name = event.raw_text
     snips = sql.get_chat_blacklist(event.chat_id)
@@ -36,6 +38,8 @@ async def on_new_message(event):
 @bot.on(admin_cmd(pattern="addblacklist ((.|\n)*)"))
 @bot.on(sudo_cmd(pattern="addblacklist ((.|\n)*)", allow_sudo=True))
 async def on_add_black_list(event):
+    if event.fwd_from:
+        return
     text = event.pattern_match.group(1)
     to_blacklist = list(
         {trigger.strip() for trigger in text.split("\n") if trigger.strip()}
@@ -54,6 +58,8 @@ async def on_add_black_list(event):
 @bot.on(admin_cmd(pattern="rmblacklist ((.|\n)*)"))
 @bot.on(sudo_cmd(pattern="rmblacklist ((.|\n)*)", allow_sudo=True))
 async def on_delete_blacklist(event):
+    if event.fwd_from:
+        return
     text = event.pattern_match.group(1)
     to_unblacklist = list(
         {trigger.strip() for trigger in text.split("\n") if trigger.strip()}
@@ -73,6 +79,8 @@ async def on_delete_blacklist(event):
 @bot.on(admin_cmd(pattern="listblacklist$"))
 @bot.on(sudo_cmd(pattern="listblacklist$", allow_sudo=True))
 async def on_view_blacklist(event):
+    if event.fwd_from:
+        return
     all_blacklisted = sql.get_chat_blacklist(event.chat_id)
     OUT_STR = "Blacklists in the Current Chat:\n"
     if len(all_blacklisted) > 0:
