@@ -25,9 +25,11 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 18])
 
-@bot.on(admin_cmd(pattern="yo$"))
-@bot.on(sudo_cmd(pattern="yo$", allow_sudo=True))
+@bot.on(admin_cmd(pattern="^Yo"))
+@bot.on(sudo_cmd(pattern="^Yo", allow_sudo=True))
 async def Ooo(e):
+    if e.fwd_from:
+        return
     t = "yo"
     for j in range(15):
         t = t[:-1] + "oo"
@@ -64,6 +66,8 @@ async def _(event):
 @bot.on(admin_cmd(pattern=f"evil$", outgoing=True))
 @bot.on(sudo_cmd(pattern=f"evil$", allow_sudo=True))
 async def _(event):
+    if event.fwd_from:
+        return
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         await event.edit("😒You Know I'm a good **PERSON**😏")
         await asyncio.sleep(1.9)
@@ -82,6 +86,8 @@ async def _(event):
 @bot.on(admin_cmd(pattern="gnt$", outgoing=True))
 @bot.on(sudo_cmd(pattern="gnt$", allow_sudo=True))
 async def gn(event):
+    if event.fwd_from:
+        return
     await edit_or_reply(event, "｡♥｡･ﾟ♡ﾟ･｡♥｡･｡･｡･｡♥｡･\n╱╱╱╱╱╱╱╭╮╱╱╱╭╮╱╭╮╭╮\n╭━┳━┳━┳╯┃╭━┳╋╋━┫╰┫╰╮\n┃╋┃╋┃╋┃╋┃┃┃┃┃┃╋┃┃┃╭┫\n┣╮┣━┻━┻━╯╰┻━┻╋╮┣┻┻━╯\n╰━╯╱╱╱╱╱╱╱╱╱╱╰━╯\n｡♥｡･ﾟ♡ﾟ･｡♥° ♥｡･ﾟ♡ﾟ･"
     )
 
@@ -89,6 +95,8 @@ async def gn(event):
 @bot.on(admin_cmd(pattern="gmg$", outgoing=True))
 @bot.on(sudo_cmd(pattern="gmg$", allow_sudo=True))
 async def gm(event):
+    if event.fwd_from:
+        return
     await edit_or_reply(event, "｡♥｡･ﾟ♡ﾟ･｡♥｡･｡･｡･｡♥｡･｡♥｡･ﾟ♡ﾟ･\n╱╱╱╱╱╱╱╭╮╱╱╱╱╱╱╱╱╱╱╭╮\n╭━┳━┳━┳╯┃╭━━┳━┳┳┳━┳╋╋━┳┳━╮\n┃╋┃╋┃╋┃╋┃┃┃┃┃╋┃╭┫┃┃┃┃┃┃┃╋┃\n┣╮┣━┻━┻━╯╰┻┻┻━┻╯╰┻━┻┻┻━╋╮┃\n╰━╯╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╰━╯\n｡♥｡･ﾟ♡ﾟ･｡♥｡･｡･｡･｡♥｡･｡♥｡･ﾟ♡ﾟ･"
     )
 
