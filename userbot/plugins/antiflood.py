@@ -16,6 +16,8 @@ ANTI_FLOOD_WARN_MODE = ChatBannedRights(
 
 @bot.on(admin_cmd(incoming=True))
 async def _(event):
+    if event.fwd_from:
+        return
     if not CHAT_FLOOD:
         return
     if str(event.chat_id) not in CHAT_FLOOD:
