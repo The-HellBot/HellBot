@@ -233,6 +233,8 @@ async def sprinkle(event):
 @bot.on(admin_cmd(pattern=r"f", outgoing=True))
 @bot.on(sudo_cmd(pattern=r"f", allow_sudo=True))
 async def payf(event):
+    if event.fwd_from:
+        return
     paytext = event.pattern_match.group(1)
     pay = "{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}".format(
         paytext * 8,
