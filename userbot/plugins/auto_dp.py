@@ -239,6 +239,8 @@ async def animeppwall():
 
 @bot.on(admin_cmd(pattern="batmandp$"))
 async def main(event):
+    if event.fwd_from:
+        return
     await event.edit("Actibated Batman Dp\nEnjoy 💜")
     while True:
         await animeppbat()
@@ -255,6 +257,8 @@ async def main(event):
 
 @bot.on(admin_cmd(pattern="thordp$"))
 async def main(event):
+    if event.fwd_from:
+        return
     await event.edit("Activated Thor Dp\nEnjoy 💜")
     while True:
         await animeppthor()
@@ -271,6 +275,8 @@ async def main(event):
 
 @bot.on(admin_cmd(pattern="actressdp$"))
 async def main(event):
+    if event.fwd_from:
+        return
     await event.edit("Activated Actress Dp\nEnjoy 💜")
     while True:
         await animeppactress()
@@ -287,6 +293,8 @@ async def main(event):
 
 @bot.on(admin_cmd(pattern="animedp$"))
 async def main(event):
+    if event.fwd_from:
+        return
     await event.edit("Activated Anime Dp\nEnjoy 💜")
     while True:
         await animepppoke()
@@ -303,6 +311,8 @@ async def main(event):
 
 @bot.on(admin_cmd(pattern="avengersdp$"))
 async def main(event):
+    if event.fwd_from:
+        return
     await event.edit("Activated Avengers Dp\nEnjoy 💜")
     while True:
         await animeppaven()
@@ -319,6 +329,8 @@ async def main(event):
 
 @bot.on(admin_cmd(pattern="gamerdp$"))
 async def main(event):
+    if event.fwd_from:
+        return
     await event.edit("Activated Gamers Dp\nEnjoy 💜")
     while True:
         await animeppgame()
@@ -335,6 +347,8 @@ async def main(event):
 
 @bot.on(admin_cmd(pattern="hackerdp$"))
 async def main(event):
+    if event.fwd_from:
+        return
     await event.edit("Activated Hackers Dp\nEnjoy 💜")
     while True:
         await animepphack()
@@ -351,6 +365,8 @@ async def main(event):
 
 @bot.on(admin_cmd(pattern="spacedp$"))
 async def main(event):
+    if event.fwd_from:
+        return
     await event.edit("Activated Space Dp\nEnjoy 💜")
     while True:
         await animeppspace()
@@ -367,6 +383,8 @@ async def main(event):
 
 @bot.on(admin_cmd(pattern="wallpapers$"))
 async def main(event):
+    if event.fwd_from:
+        return
     await event.edit("Activated Wallappers on your DP\nEnjoy 💜")
     while True:
         await animeppwall()
