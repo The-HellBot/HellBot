@@ -76,6 +76,8 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 @bot.on(sudo_cmd(pattern="setgpic$", allow_sudo=True))
 @errors_handler
 async def set_group_photo(gpic):
+    if event.fwd_from:
+        return
     if not gpic.is_group:
         await edit_or_reply(gpic, "`I don't think this is a group.`")
         return
@@ -121,6 +123,8 @@ async def set_group_photo(gpic):
 @bot.on(sudo_cmd(pattern="promote(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def promote(promt):
+    if event.fwd_from:
+        return
     chat = await promt.get_chat()
     admin = chat.admin_rights
     creator = chat.creator
@@ -160,6 +164,8 @@ async def promote(promt):
 @bot.on(sudo_cmd(pattern="demote(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def demote(dmod):
+    if event.fwd_from:
+        return
     chat = await dmod.get_chat()
     admin = chat.admin_rights
     creator = chat.creator
@@ -199,6 +205,8 @@ async def demote(dmod):
 @bot.on(sudo_cmd(pattern="ban(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def ban(bon):
+    if event.fwd_from:
+        return
     chat = await bon.get_chat()
     admin = chat.admin_rights
     creator = chat.creator
@@ -238,6 +246,8 @@ async def ban(bon):
 @bot.on(sudo_cmd(pattern="unban(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def nothanos(unbon):
+    if event.fwd_from:
+        return
     chat = await unbon.get_chat()
     admin = chat.admin_rights
     creator = chat.creator
@@ -265,6 +275,8 @@ async def nothanos(unbon):
 
 @command(incoming=True)
 async def watcher(event):
+    if event.fwd_from:
+        return
     if is_muted(event.sender_id, event.chat_id):
         try:
             await event.delete()
@@ -275,6 +287,8 @@ async def watcher(event):
 @bot.on(sudo_cmd(pattern="pin($| (.*))", allow_sudo=True))
 @errors_handler
 async def pin(msg):
+    if event.fwd_from:
+        return
     chat = await msg.get_chat()
     admin = chat.admin_rights
     creator = chat.creator
@@ -315,6 +329,8 @@ async def pin(msg):
 @bot.on(sudo_cmd(pattern="kick(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def kick(usr):
+    if event.fwd_from:
+        return
     chat = await usr.get_chat()
     admin = chat.admin_rights
     creator = chat.creator
@@ -352,6 +368,8 @@ async def kick(usr):
 async def _(event):
     if event.fwd_from:
         return
+    if event.fwd_from:
+        return
     c = await event.get_chat()
     if c.admin_rights or c.creator:
         a = await event.client.get_admin_log(
@@ -373,6 +391,8 @@ async def _(event):
 
 
 async def get_user_from_event(event):
+    if event.fwd_from:
+        return
     args = event.pattern_match.group(1).split(" ", 1)
     extra = None
     if event.reply_to_msg_id:
@@ -404,6 +424,8 @@ async def get_user_from_event(event):
 
 
 async def get_user_from_id(user, event):
+    if event.fwd_from:
+        return
     if isinstance(user, str):
         user = int(user)
     try:
