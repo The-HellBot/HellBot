@@ -45,6 +45,8 @@ async def get_tz(con):
 @bot.on(sudo_cmd(pattern="climate( (.*)|$)", allow_sudo=True))
 @errors_handler
 async def get_weather(weather):
+    if weather.fwd_from:
+        return
     """ For .weather command, gets the current weather of a city. """
     if not OWM_API:
         await edit_or_reply(
@@ -144,6 +146,8 @@ async def get_weather(weather):
 @bot.on(sudo_cmd(pattern="setcity(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def set_default_city(city):
+    if city.fwd_from:
+        return
     """ For .ctime command, change the default userbot country for date and time commands. """
     if not OWM_API:
         await edit_or_reply(
