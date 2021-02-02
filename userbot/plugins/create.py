@@ -76,6 +76,8 @@ async def _(event):
 @bot.on(admin_cmd(pattern="link(?: |$)(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="link(?: |$)(.*)", allow_sudo=True))
 async def permalink(mention):
+    if mention.fwd_from:
+        return
     """ For .link command, generates a link to the user's PM with a custom text. """
     user, custom = await get_user_from_event(mention)
     if not user:
