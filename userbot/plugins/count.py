@@ -13,6 +13,8 @@ from userbot.cmdhelp import CmdHelp
 async def stats(
     event: NewMessage.Event,
 ) -> None:  # pylint: disable = R0912, R0914, R0915
+    if event.fwd_from:
+        return
     """Command to get stats about the account"""
     hell = await edit_or_reply(event, "`Collecting stats...`")
     start_time = time.time()
@@ -103,5 +105,5 @@ def user_full_name(user):
 
 
 CmdHelp("count").add_command(
-  'stat', None, 'Shows you the count of your groups, channels, private chats, etc.'
+  'stats', None, 'Shows you the count of your groups, channels, private chats, etc.'
 ).add()
