@@ -89,7 +89,8 @@ Fortunately there are no Mandatory vars for the UniBorg Support Config.
 
 # • LICENSE •
 
-![github.com/hellboy-op/hellbot](https://www.gnu.org/graphics/gplv3-or-later.png)
+![](https://www.gnu.org/graphics/gplv3-or-later.png)
+
 
     Copyright (C) 2021 HellBoy-OP
 
