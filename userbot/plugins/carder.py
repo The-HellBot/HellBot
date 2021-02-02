@@ -13,6 +13,8 @@ from hellbot import CmdHelp, bot as hellbot
 @hellbot.on(admin_cmd("gencc$"))
 @hellbot.on(sudo_cmd("gencc$", allow_sudo=True))
 async def _(hellevent):
+    if hellevent.fwd_from:
+        return
     hellcc = Faker()
     hellname = hellcc.name()
     helladre = hellcc.address()
