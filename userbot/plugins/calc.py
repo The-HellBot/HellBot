@@ -11,6 +11,8 @@ from userbot.cmdhelp import CmdHelp
 @bot.on(admin_cmd(pattern="calc (.*)"))
 @bot.on(sudo_cmd(pattern="calc (.*)", allow_sudo=True))
 async def _(car):
+    if car.fwd_from:
+        return
     cmd = car.text.split(" ", maxsplit=1)[1]
     event = await edit_or_reply(car, "Calculating ...")
     old_stderr = sys.stderr
