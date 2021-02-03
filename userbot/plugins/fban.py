@@ -359,6 +359,8 @@ async def list(event):
 @hellbot.on(admin_cmd(pattern="fsearch ?(.*)"))
 @hellbot.on(sudo_cmd(pattern="fsearch ?(.*)", allow_sudo=True))
 async def search(event):
+    if event.fwd_from:
+        return
     channel_id = event.pattern_match.group(1)
     try:
         channel = await borg.get_entity(int(channel_id))
