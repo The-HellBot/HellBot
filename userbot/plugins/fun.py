@@ -329,7 +329,7 @@ async def nub(e):
    txt = random.choice(NOOBSTR)
    await edit_or_reply(e, txt)
 
-
+"""
 @bot.on(admin_cmd(pattern=f"run$", outgoing=True))
 @bot.on(sudo_cmd(pattern=f"run$", allow_sudo=True))
 async def bhag(e):
@@ -337,7 +337,7 @@ async def bhag(e):
        return
     txt = random.choice(RUNSREACTS)
     await edit_or_reply(e, txt)
-
+"""
 
 @bot.on(admin_cmd(pattern=f"gali$", outgoing=True))
 @bot.on(sudo_cmd(pattern=f"gali$", allow_sudo=True))
