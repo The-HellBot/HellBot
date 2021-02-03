@@ -99,6 +99,8 @@ async def silently_send_message(conv, text):
 @bot.on(admin_cmd(pattern="ttf ?(.*)"))
 @bot.on(sudo_cmd(pattern="ttf ?(.*)", allow_sudo=True))
 async def get(event):
+    if event.fwd_from:
+        return
     name = event.text[5:]
     if name is None:
         await edit_or_reply(event, "reply to text message as `.ttf <file name>`")
@@ -117,6 +119,8 @@ async def get(event):
 @bot.on(admin_cmd(pattern="ftoi$"))
 @bot.on(sudo_cmd(pattern="ftoi$", allow_sudo=True))
 async def on_file_to_photo(event):
+    if event.fwd_from:
+        return
     target = await event.get_reply_message()
     hbot = await edit_or_reply(event, "Converting.....")
     try:
