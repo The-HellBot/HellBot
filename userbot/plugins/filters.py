@@ -66,6 +66,8 @@ async def on_snip(event):
 @bot.on(admin_cmd(pattern="savefilter (.*)"))
 @bot.on(sudo_cmd(pattern="savefilter (.*)", allow_sudo=True))
 async def on_snip_save(event):
+    if event.fwd_from:
+        return
     name = event.pattern_match.group(1)
     msg = await event.get_reply_message()
     if msg:
@@ -91,6 +93,8 @@ async def on_snip_save(event):
 @bot.on(admin_cmd(pattern="listfilter$"))
 @bot.on(sudo_cmd(pattern="listfilter$", allow_sudo=True))
 async def on_snip_list(event):
+    if event.fwd_from:
+        return
     all_snips = get_all_filters(event.chat_id)
     OUT_STR = "Available Filters in the Current Chat:\n"
     if len(all_snips) > 0:
@@ -117,6 +121,8 @@ async def on_snip_list(event):
 @bot.on(admin_cmd(pattern="stop (.*)"))
 @bot.on(sudo_cmd(pattern="stop (.*)", allow_sudo=True))
 async def on_snip_delete(event):
+    if event.fwd_from:
+        return
     name = event.pattern_match.group(1)
     remove_filter(event.chat_id, name)
     await edit_or_reply(event, f"Filter `{name}` deleted successfully")
@@ -125,6 +131,8 @@ async def on_snip_delete(event):
 @bot.on(admin_cmd(pattern="clearallfilters$"))
 @bot.on(sudo_cmd(pattern="clearallfilters$", allow_sudo=True))
 async def on_all_snip_delete(event):
+    if event.fwd_from:
+        return
     remove_all_filters(event.chat_id)
     await edit_or_reply(event, f"All the Filters **in current chat** deleted successfully")
     
