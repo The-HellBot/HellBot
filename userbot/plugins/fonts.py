@@ -176,7 +176,8 @@ bubbletextfont = [
 @bot.on(admin_cmd(pattern="weeb(?: |$)(.*)", command="weeb"))
 @bot.on(sudo_cmd(pattern="weeb(?: |$)(.*)", command="weeb", allow_sudo=True))
 async def weebify(event):
-
+    if event.fwd_from:
+        return
     args = event.pattern_match.group(1)
     if not args:
         get = await event.get_reply_message()
@@ -195,7 +196,8 @@ async def weebify(event):
 @bot.on(admin_cmd(pattern="tanify(?: |$)(.*)", command="tanify"))
 @bot.on(sudo_cmd(pattern="tanify(?: |$)(.*)", command="tanify", allow_sudo=True))
 async def tantxt(event):
-
+    if event.fwd_from:
+        return
     args = event.pattern_match.group(1)
     if not args:
         get = await event.get_reply_message()
@@ -214,7 +216,8 @@ async def tantxt(event):
 @bot.on(admin_cmd(pattern="lintxt(?: |$)(.*)", command="lintxt"))
 @bot.on(sudo_cmd(pattern="lintxt(?: |$)(.*)", command="lintxt", allow_sudo=True))
 async def linetxt(event):
-
+    if event.fwd_from:
+        return
     args = event.pattern_match.group(1)
     if not args:
         get = await event.get_reply_message()
@@ -233,7 +236,8 @@ async def linetxt(event):
 @bot.on(admin_cmd(pattern="boxify(?: |$)(.*)", command="boxify"))
 @bot.on(sudo_cmd(pattern="boxify(?: |$)(.*)", command="boxify", allow_sudo=True))
 async def boxtxt(event):
-
+    if event.fwd_from:
+        return
     args = event.pattern_match.group(1)
     if not args:
         get = await event.get_reply_message()
@@ -252,7 +256,8 @@ async def boxtxt(event):
 @bot.on(admin_cmd(pattern="bubble(?: |$)(.*)", command="bubble"))
 @bot.on(sudo_cmd(pattern="bubble(?: |$)(.*)", command="bubble", allow_sudo=True))
 async def bubbletxt(event):
-
+    if event.fwd_from:
+        return
     args = event.pattern_match.group(1)
     if not args:
         get = await event.get_reply_message()
