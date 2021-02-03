@@ -1,13 +1,9 @@
-import os
 from faker import Faker
-import datetime
-from telethon import functions, types, events
-from telethon.tl.functions.messages import DeleteHistoryRequest
+from hellbot import CmdHelp
+from hellbot import bot as hellbot
+from hellbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.functions.account import UpdateNotifySettingsRequest
-
-from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply
-from hellbot import CmdHelp, bot as hellbot
 
 
 @hellbot.on(admin_cmd("gencc$"))

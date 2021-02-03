@@ -2,26 +2,19 @@ from datetime import datetime
 from math import sqrt
 from os import remove
 
-import emoji
-from telethon.errors import (
-    ChannelInvalidError,
-    ChannelPrivateError,
-    ChannelPublicGroupNaError,
-    ChatAdminRequiredError,
-)
+from telethon.errors import (ChannelInvalidError, ChannelPrivateError,
+                             ChannelPublicGroupNaError, ChatAdminRequiredError)
 from telethon.errors.rpcerrorlist import MessageTooLongError
-from telethon.tl.functions.channels import (
-    GetFullChannelRequest,
-    GetParticipantsRequest,
-    LeaveChannelRequest,
-)
-from telethon.tl.functions.messages import GetFullChatRequest, GetHistoryRequest
-from telethon.tl.types import ChannelParticipantsAdmins, MessageActionChannelMigrateFrom
+from telethon.tl.functions.channels import (GetFullChannelRequest,
+                                            GetParticipantsRequest)
+from telethon.tl.functions.messages import (GetFullChatRequest,
+                                            GetHistoryRequest)
+from telethon.tl.types import (ChannelParticipantsAdmins,
+                               MessageActionChannelMigrateFrom)
 from telethon.utils import get_input_location
 
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd, errors_handler, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
+from userbot.utils import admin_cmd, edit_or_reply, errors_handler, sudo_cmd
 
 
 @bot.on(admin_cmd(pattern="chatinfo(?: |$)(.*)", outgoing=True))

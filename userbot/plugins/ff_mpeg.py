@@ -5,9 +5,8 @@ import os
 import time
 from datetime import datetime
 
-from userbot.utils import admin_cmd, sudo_cmd, progress
-from userbot import CMD_HELP
 from userbot.cmdhelp import CmdHelp
+from userbot.utils import admin_cmd, progress, sudo_cmd
 
 FF_MPEG_DOWN_LOAD_MEDIA_PATH = "./downloads/hellbot.media.ffmpeg"
 

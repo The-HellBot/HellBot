@@ -5,12 +5,15 @@ Available Commands:
 .clearfilter"""
 import asyncio
 import re
-from telethon import events, utils
-from telethon.tl import types
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
-from userbot.cmdhelp import CmdHelp
-from userbot.plugins.sql_helper.filter_sql import get_filter, add_filter, remove_filter, get_all_filters, remove_all_filters
 
+from telethon import utils
+from telethon.tl import types
+
+from userbot.cmdhelp import CmdHelp
+from userbot.plugins.sql_helper.filter_sql import (add_filter, get_all_filters,
+                                                   remove_all_filters,
+                                                   remove_filter)
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 DELETE_TIMEOUT = 0
 TYPE_TEXT = 0
@@ -49,9 +52,9 @@ async def on_snip(event):
                     )
                 else:
                     media = None
-                message_id = event.message.id
+                event.message.id
                 if event.reply_to_msg_id:
-                    message_id = event.reply_to_msg_id
+                    event.reply_to_msg_id
                 await event.reply(
                     snip.reply,
                     file=media

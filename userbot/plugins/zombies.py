@@ -1,40 +1,11 @@
-import asyncio
-import io
 from asyncio import sleep
-from datetime import datetime
-from math import sqrt
-from telethon.errors import (
-    ChannelInvalidError,
-    ChannelPrivateError,
-    ChannelPublicGroupNaError,
-    ChatAdminRequiredError,
-    UserAdminInvalidError,
-)
-from telethon.tl import functions
-from telethon.tl.functions.channels import GetFullChannelRequest, GetParticipantsRequest
-from telethon.tl.functions.messages import GetFullChatRequest, GetHistoryRequest
-from telethon.tl.types import (
-    ChannelParticipantAdmin,
-    ChannelParticipantCreator,
-    ChannelParticipantsAdmins,
-    ChannelParticipantsBots,
-    ChannelParticipantsKicked,
-    ChatBannedRights,
-    MessageActionChannelMigrateFrom,
-    UserStatusEmpty,
-    UserStatusLastMonth,
-    UserStatusLastWeek,
-    UserStatusOffline,
-    UserStatusOnline,
-    UserStatusRecently,
-)
-from telethon.utils import get_input_location
+
+from telethon.errors import ChatAdminRequiredError, UserAdminInvalidError
+from telethon.tl.types import ChatBannedRights
 
 from userbot import BOTLOG, BOTLOG_CHATID
-
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
-from userbot.uniborgConfig import Config
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 # =================== CONSTANT ===================
 

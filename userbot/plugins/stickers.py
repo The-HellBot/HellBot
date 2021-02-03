@@ -6,17 +6,14 @@ from os import remove
 
 from PIL import Image
 from telethon.tl.functions.messages import GetStickerSetRequest
-from telethon.tl.types import (
-    DocumentAttributeFilename,
-    DocumentAttributeSticker,
-    InputStickerSetID,
-    MessageMediaPhoto,
-)
+from telethon.tl.types import (DocumentAttributeFilename,
+                               DocumentAttributeSticker, InputStickerSetID,
+                               MessageMediaPhoto)
 
+from userbot.cmdhelp import CmdHelp
 #from userbot import CMD_HELP
 from userbot.uniborgConfig import Config
 from userbot.utils import *
-from userbot.cmdhelp import CmdHelp
 
 KANGING_STR = [
     "Using Witchery to kang this sticker...",

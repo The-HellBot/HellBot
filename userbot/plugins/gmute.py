@@ -1,8 +1,7 @@
-from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
 import asyncio
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
-from userbot.cmdhelp import CmdHelp
-from telethon import events
+
+from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 @bot.on(admin_cmd(pattern=r"gmute ?(\d+)?"))
@@ -30,8 +29,8 @@ async def blowjob(event):
         userid = event.chat_id
     else:
         return await edit_or_reply(event, "I need a user to gmute. Please reply or get his uid")
-    chat_id = event.chat_id
-    chat = await event.get_chat()
+    event.chat_id
+    await event.get_chat()
     if is_muted(userid, "gmute"):
         return await edit_or_reply(event, "This retard cant speak. Was already gmutted earlier")
     try:
@@ -61,7 +60,7 @@ async def cumshot(event):
         userid = event.chat_id
     else:
         return await edit_or_reply(event, "Please reply to a user or add them into the command to ungmute them.")
-    chat_id = event.chat_id
+    event.chat_id
     if not is_muted(userid, "gmute"):
         return await edit_or_reply(event, "This user can already speak freely✌️😃")
     try:

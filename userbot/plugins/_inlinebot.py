@@ -17,16 +17,14 @@
 
 from math import ceil
 from re import compile
-import asyncio
 
 from telethon.events import InlineQuery, callbackquery
 from telethon.sync import custom
-from telethon.tl.functions.channels import JoinChannelRequest
 
 from userbot import *
 from userbot.cmdhelp import *
-from userbot.utils import *
 from userbot.uniborgConfig import Config
+from userbot.utils import *
 
 hell_row = Config.BUTTONS_IN_HELP
 hell_emoji = Config.EMOJI_IN_HELP
@@ -35,7 +33,6 @@ hell_emoji = Config.EMOJI_IN_HELP
 
 def button(page, modules):
     Row = hell_row
-    Column = 3
 
     modules = sorted([modul for modul in modules if not modul.startswith("_")])
     pairs = list(map(list, zip(modules[::2], modules[1::2])))

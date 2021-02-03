@@ -1,13 +1,12 @@
-from telethon.tl.types import (
-    ChannelParticipantAdmin,
-    ChannelParticipantCreator,
-    ChannelParticipantsAdmins,
-    ChannelParticipantsBots,
-)
+from telethon.tl.types import (ChannelParticipantAdmin,
+                               ChannelParticipantCreator,
+                               ChannelParticipantsAdmins,
+                               ChannelParticipantsBots)
 from telethon.utils import pack_bot_file_id
 
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+
 
 @bot.on(admin_cmd(pattern="get_admins ?(.*)"))
 @bot.on(sudo_cmd(pattern="get_admins ?(.*)", allow_sudo=True))

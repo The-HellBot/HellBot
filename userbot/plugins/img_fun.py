@@ -1,23 +1,18 @@
 import asyncio
 import os
-import random
 import shlex
-from typing import Optional, Tuple
-from PIL import Image, ImageDraw, ImageFont
-import PIL.ImageOps
+from typing import Tuple
 
+import PIL.ImageOps
+from PIL import Image
+
+from userbot import LOGS, CmdHelp
+from userbot import bot as hellbot
+from userbot.helpers.functions import (convert_toimage, flip_image, grayscale,
+                                       invert_colors, mirror_file, solarize,
+                                       take_screen_shot)
 from userbot.utils import admin_cmd, sudo_cmd
-from userbot import CmdHelp, CMD_HELP, LOGS, bot as hellbot
-from userbot.helpers.functions import (
-    convert_toimage,
-    convert_tosticker,
-    flip_image,
-    grayscale,
-    invert_colors,
-    mirror_file,
-    solarize,
-    take_screen_shot,
-)
+
 
 async def runcmd(cmd: str) -> Tuple[str, str, int, int]:
     args = shlex.split(cmd)

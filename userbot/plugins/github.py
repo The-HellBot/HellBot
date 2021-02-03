@@ -2,8 +2,7 @@
 Syntax: .github USERNAME"""
 import requests
 
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
-
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 @bot.on(admin_cmd(pattern="github (.*)", outgoing=True))

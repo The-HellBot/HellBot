@@ -4,23 +4,18 @@ logging.basicConfig(
     format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=logging.WARNING
 )
 import asyncio
-import os
 
-from telethon.tl.types import InputMediaUploadedPhoto
-from telethon.tl.functions.messages import DeleteHistoryRequest
-
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.functions.account import UpdateNotifySettingsRequest
-from telethon import functions, types, events
-from hellbot import CmdHelp, bot as hellbot
-from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply as eor
+from hellbot import CmdHelp
+from hellbot import bot as hellbot
+from hellbot.plugins.sql_helper.fban_sql import (add_channel, get_all_channels,
+                                                 in_channels, rm_channel)
 from hellbot.uniborgConfig import Config
-from hellbot.plugins.sql_helper.fban_sql import (
-    add_channel,
-    get_all_channels,
-    in_channels,
-    rm_channel,
-)
+from hellbot.utils import admin_cmd
+from hellbot.utils import edit_or_reply as eor
+from hellbot.utils import sudo_cmd
+from telethon import events
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+from telethon.tl.types import InputMediaUploadedPhoto
 
 logs_id = Config.FBAN_LOGGER_GROUP
 bot = "@MissRose_bot"

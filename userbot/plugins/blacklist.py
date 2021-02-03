@@ -11,10 +11,9 @@ import re
 
 from telethon import events
 
-from userbot.plugins.sql_helper import blacklist_sql as sql
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 from userbot.cmdhelp import CmdHelp
+from userbot.plugins.sql_helper import blacklist_sql as sql
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 @bot.on(events.NewMessage(incoming=True))

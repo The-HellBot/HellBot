@@ -10,16 +10,10 @@ from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
-from userbot import CMD_HELP
-from userbot.helpers.functions import (
-    awooify,
-    baguette,
-    convert_toimage,
-    iphonex,
-    lolice,
-)
-from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 from userbot.cmdhelp import CmdHelp
+from userbot.helpers.functions import (awooify, baguette, convert_toimage,
+                                       iphonex, lolice)
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 @bot.on(admin_cmd(pattern="mask$", outgoing=True))

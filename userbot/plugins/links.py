@@ -1,8 +1,7 @@
 import requests
 
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 @bot.on(admin_cmd(pattern="dns (.*)", outgoing=True))

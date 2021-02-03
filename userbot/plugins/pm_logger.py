@@ -10,9 +10,9 @@ from asyncio import sleep
 from telethon import events
 
 from userbot import BOTLOG, BOTLOG_CHATID, bot
-from userbot.uniborgConfig import Config
-from userbot.utils import admin_cmd, register
 from userbot.cmdhelp import CmdHelp
+from userbot.uniborgConfig import Config
+from userbot.utils import admin_cmd
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.WARN

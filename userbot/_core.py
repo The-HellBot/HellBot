@@ -1,13 +1,11 @@
 import asyncio
 import os
 from datetime import datetime
-from pathlib import Path
-from telethon import events
-from telethon import functions, types
-from telethon.tl.types import InputMessagesFilterDocument
-from userbot.utils import admin_cmd, load_module, remove_plugin, edit_or_reply, sudo_cmd
+
 from userbot import ALIVE_NAME, CmdHelp
 from userbot import bot as hellbot
+from userbot.utils import (admin_cmd, edit_or_reply, load_module,
+                           remove_plugin, sudo_cmd)
 
 DELETE_TIMEOUT = 5
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"

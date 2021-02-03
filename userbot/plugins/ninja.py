@@ -2,14 +2,11 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-from asyncio import sleep
-from telethon import events
-import telethon.utils
 from telethon.errors import rpcbaseerrors
 
-from userbot.utils import admin_cmd, sudo_cmd, errors_handler
-from userbot import bot as hellbot
 from userbot import BOTLOG, BOTLOG_CHATID
+from userbot import bot as hellbot
+from userbot.utils import admin_cmd, errors_handler, sudo_cmd
 
 
 @hellbot.on(admin_cmd(outgoing=True, pattern="del$"))

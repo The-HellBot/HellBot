@@ -1,15 +1,13 @@
-from userbot import bot
-from sys import argv
-import sys
-from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
-import os
-from telethon import TelegramClient
-from var import Var
-from userbot.utils import load_module
-from userbot import LOAD_PLUG, BOTLOG_CHATID, LOGS
 from pathlib import Path
-import asyncio
+from sys import argv
+
 import telethon.utils
+from telethon import TelegramClient
+
+from userbot import bot
+from userbot.utils import load_module
+from var import Var
+
 
 async def add_bot(bot_token):
     await bot.start(bot_token)
@@ -39,6 +37,7 @@ else:
     
 
 import glob
+
 path = 'userbot/plugins/*.py'
 files = glob.glob(path)
 for name in files:
@@ -47,7 +46,6 @@ for name in files:
         shortname = path1.stem
         load_module(shortname.replace(".py", ""))
 
-import userbot._core
 
 print("Aree On Ho Gaya Bhenchod!! Abb jake .alive likh ke dekho!! Abb Jaao aur sabki maroo.... Join @HellBot_Official for any help..")
 

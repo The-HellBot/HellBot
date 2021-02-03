@@ -6,22 +6,12 @@
 # modi, rahul, trump, gandhiji
 # no offence. Made for fun purpose only
 
-from userbot import CMD_HELP
-from userbot.helpers.functions import (
-    changemymind,
-    deEmojify,
-    kannagen,
-    miatweet,
-    moditweet,
-    papputweet,
-    sinstweet,
-    sunnytweet,
-    taklatweet,
-    trumptweet,
-    dani,
-)
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
+from userbot.helpers.functions import (changemymind, dani, deEmojify, kannagen,
+                                       miatweet, moditweet, papputweet,
+                                       sinstweet, sunnytweet, taklatweet,
+                                       trumptweet)
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 @bot.on(admin_cmd(pattern=r"tweet(?: |$)(.*)"))

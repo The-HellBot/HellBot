@@ -5,13 +5,12 @@
 import datetime
 import string
 
-from telethon import events
 from telethon.tl.tlobject import TLObject
 from telethon.tl.types import MessageEntityPre
 from telethon.utils import add_surrogate
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
-from userbot.cmdhelp import CmdHelp
 
+from userbot.cmdhelp import CmdHelp
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 PRINTABLE_SET = set(bytes(string.printable, "ascii"))
 STR_LEN_MAX = 256

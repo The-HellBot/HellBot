@@ -1,11 +1,8 @@
-import random
-import re
-import time
 import asyncio
-import requests
-from telethon import events
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+import random
+
 from userbot.cmdhelp import CmdHelp
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 # ================= CONSTANT =================
 

@@ -5,12 +5,13 @@ Note: Number of results are currently limited to 15
 By:-@Zero_cool7870
 """
 from datetime import datetime
+
+import cfscrape  # https://github.com/Anorov/cloudflare-scrape
 import requests
 from bs4 import BeautifulSoup as bs
-import cfscrape  # https://github.com/Anorov/cloudflare-scrape
 
 from userbot.cmdhelp import CmdHelp
-from userbot.utils import humanbytes, admin_cmd
+from userbot.utils import admin_cmd, humanbytes
 
 
 def dogbin(magnets):

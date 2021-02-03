@@ -1,8 +1,6 @@
+from colorama import Back, Fore, Style
 from telethon.sessions import StringSession
 from telethon.sync import TelegramClient
-import random
-from colorama import Fore, Style, Back
-
 
 kraken = """
 ╔╗──╔═══╦═══╦═══╦═╗─╔╦═══╦═══╦═══╦╗──╔╗   ╔═══╦═══╗    ╔═══╦╗─╔╦═══╦╗╔═╗

@@ -3,8 +3,8 @@
 # file, You can obtain one at http://mozilla.org/MPL/2
 from telethon.tl.types import ChannelParticipantsAdmins
 
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
+from userbot.utils import admin_cmd, sudo_cmd
 
 
 @bot.on(admin_cmd(pattern=r"tagall (.*)", outgoing=True))

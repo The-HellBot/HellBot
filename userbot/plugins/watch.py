@@ -7,8 +7,8 @@
 
 from justwatch import JustWatch
 
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 def get_stream_data(query):

@@ -1,9 +1,10 @@
 import html
 
-from telethon import events, utils
+from telethon import utils
 from telethon.tl import types
-from userbot.cmdhelp import CmdHelp
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+
 
 def get_who_string(who):
     who_string = html.escape(utils.get_display_name(who))

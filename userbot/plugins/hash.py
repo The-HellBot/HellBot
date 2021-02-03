@@ -10,9 +10,10 @@ from subprocess import run as runapp
 
 import pybase64
 
-#from userbot import CMD_HELP
-from userbot.utils import errors_handler, admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
+#from userbot import CMD_HELP
+from userbot.utils import admin_cmd, errors_handler, sudo_cmd
+
 
 @bot.on(admin_cmd(pattern="hash (.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="hash (.*)", allow_sudo=True))

@@ -5,14 +5,9 @@
 #
 
 import asyncio
-import base64
-import os
 
-from telethon import functions, types
-from telethon.tl.functions.messages import ImportChatInviteRequest as Get
-
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
+from userbot.utils import admin_cmd, sudo_cmd
 
 
 @bot.on(admin_cmd(pattern="spam (.*)"))

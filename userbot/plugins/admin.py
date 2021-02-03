@@ -8,31 +8,20 @@ Userbot module to help you manage a group
 
 from asyncio import sleep
 
-from telethon import functions
-from telethon.errors import (
-    BadRequestError,
-    ImageProcessFailedError,
-    PhotoCropSizeSmallError,
-)
-from telethon.errors.rpcerrorlist import UserAdminInvalidError, UserIdInvalidError
-from telethon.tl.functions.channels import (
-    EditAdminRequest,
-    EditBannedRequest,
-    EditPhotoRequest,
-)
+from telethon.errors import (BadRequestError, ImageProcessFailedError,
+                             PhotoCropSizeSmallError)
+from telethon.errors.rpcerrorlist import UserIdInvalidError
+from telethon.tl.functions.channels import (EditAdminRequest,
+                                            EditBannedRequest,
+                                            EditPhotoRequest)
 from telethon.tl.functions.messages import UpdatePinnedMessageRequest
-from telethon.tl.functions.users import GetFullUserRequest
-from telethon.tl.types import (
-    ChatAdminRights,
-    ChatBannedRights,
-    MessageEntityMentionName,
-    MessageMediaPhoto,
-)
+from telethon.tl.types import (ChatAdminRights, ChatBannedRights,
+                               MessageEntityMentionName, MessageMediaPhoto)
 
 from userbot import *
-from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
-from userbot.utils import *
 from userbot.cmdhelp import CmdHelp
+from userbot.plugins.sql_helper.mute_sql import is_muted
+from userbot.utils import *
 
 # =================== CONSTANT ===================
 

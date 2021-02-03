@@ -8,10 +8,8 @@ import io
 import os
 import time
 
-from telethon import events
-
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 if not os.path.isdir("./SAVED"):
     os.makedirs("./SAVED")

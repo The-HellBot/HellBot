@@ -6,13 +6,14 @@
 
 
 import asyncio
-import re
+
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from userbot import bot
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply, progress
 from userbot.cmdhelp import CmdHelp
 from userbot.helpers.functions import deEmojify
+from userbot.utils import admin_cmd, edit_or_reply, progress, sudo_cmd
+
 
 @bot.on(admin_cmd(pattern="lyrics(?: |$)(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="lyrics(?: |$)(.*)", allow_sudo=True))
@@ -103,16 +104,10 @@ import time
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.types import DocumentAttributeAudio
 from youtube_dl import YoutubeDL
-from youtube_dl.utils import (
-    ContentTooShortError,
-    DownloadError,
-    ExtractorError,
-    GeoRestrictedError,
-    MaxDownloadsReached,
-    PostProcessingError,
-    UnavailableVideoError,
-    XAttrMetadataError,
-)
+from youtube_dl.utils import (ContentTooShortError, DownloadError,
+                              ExtractorError, GeoRestrictedError,
+                              MaxDownloadsReached, PostProcessingError,
+                              UnavailableVideoError, XAttrMetadataError)
 
 try:
 
@@ -364,6 +359,7 @@ async def download_video(v_url):
 
 # -------------------------------------------------------------------------------
 import os
+
 from telethon.tl.functions.channels import JoinChannelRequest
 
 try:
@@ -465,10 +461,8 @@ async def DeezLoader(Deezlod):
 # -------------------------------------------------------------------------------
 
 
-from telethon.errors.rpcerrorlist import (
-    UserAlreadyParticipantError,
-    YouBlockedUserError,
-)
+from telethon.errors.rpcerrorlist import (UserAlreadyParticipantError,
+                                          YouBlockedUserError)
 from telethon.tl.functions.messages import ImportChatInviteRequest
 
 

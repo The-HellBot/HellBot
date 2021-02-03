@@ -2,18 +2,13 @@ import asyncio
 from time import sleep
 
 from telethon.tl import functions
-from telethon.tl.types import (
-    ChannelParticipantsKicked,
-    ChatBannedRights,
-    UserStatusEmpty,
-    UserStatusLastMonth,
-    UserStatusLastWeek,
-    UserStatusOffline,
-    UserStatusOnline,
-    UserStatusRecently,
-)
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from telethon.tl.types import (ChannelParticipantsKicked, ChatBannedRights,
+                               UserStatusEmpty, UserStatusLastMonth,
+                               UserStatusLastWeek, UserStatusOffline,
+                               UserStatusOnline, UserStatusRecently)
+
 from userbot.cmdhelp import CmdHelp
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 @bot.on(admin_cmd(pattern=r"unbanall ?(.*)"))

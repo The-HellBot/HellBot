@@ -8,8 +8,9 @@ from datetime import datetime
 
 from selenium import webdriver
 
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+
 
 @bot.on(admin_cmd(pattern="screenshot (.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="screenshot (.*)", allow_sudo=True))

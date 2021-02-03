@@ -7,13 +7,11 @@ Available Commands:
 # file, You can obtain one at https://www.gnu.org/licenses/gpl-3.0.en.html
 import os
 import sys
-import asyncio
-from os import execl
-from time import sleep
 
-from userbot.utils import admin_cmd
-from userbot.cmdhelp import CmdHelp
 from userbot import HEROKU_APP, bot
+from userbot.cmdhelp import CmdHelp
+from userbot.utils import admin_cmd
+
 
 @bot.on(admin_cmd(pattern="restart"))
 async def _(event):
