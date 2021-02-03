@@ -177,6 +177,8 @@ async def _(event):
 @bot.on(admin_cmd(pattern="bf$", outgoing=True))
 @bot.on(sudo_cmd(pattern="bf$", allow_sudo=True))
 async def pressf(f):
+    if f.fwd_from:
+        return
     """Pays respects"""
     args = f.text.split()
     arg = (f.text.split(" ", 1))[1] if len(args) > 1 else None
