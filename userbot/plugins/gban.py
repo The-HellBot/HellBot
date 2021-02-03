@@ -58,6 +58,8 @@ async def get_user_from_id(user, event):
 @bot.on(admin_cmd(pattern="gban ?(.*)"))
 @bot.on(sudo_cmd(pattern="gban ?(.*)", allow_sudo=True))
 async def gban(userbot):
+    if userbot.fwd_from:
+        return
     ids = userbot
     sender = await ids.get_sender()
     hum = await ids.client.get_me()
@@ -124,6 +126,8 @@ async def gban(userbot):
 @bot.on(admin_cmd(pattern="ungban ?(.*)"))
 @bot.on(sudo_cmd(pattern="ungban ?(.*)", allow_sudo=True))
 async def gunban(userbot):
+    if userbot.fwd_from:
+        return
     ids = userbot
     sender = await ids.get_sender()
     hum = await ids.client.get_me()
