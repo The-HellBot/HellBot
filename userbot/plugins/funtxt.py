@@ -8,6 +8,8 @@ from userbot.cmdhelp import CmdHelp
 @bot.on(admin_cmd(pattern="ftext ?(.*)"))
 @bot.on(sudo_cmd(pattern="ftext ?(.*)", allow_sudo=True))
 async def payf(event):
+    if event.fwd_from:
+        return
     input_str = event.pattern_match.group(1)
     if input_str:
         paytext = input_str
