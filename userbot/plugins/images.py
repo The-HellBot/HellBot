@@ -4,10 +4,10 @@
 #
 import os
 import shutil
-from re import findall
 
 from userbot.google_imgs import googleimagesdownload
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+
 
 @bot.on(admin_cmd(pattern=r"img(?: |$)(\d*)? ?(.*)"))
 @bot.on(sudo_cmd(pattern=r"img(?: |$)(\d*)? ?(.*)", allow_sudo=True))
