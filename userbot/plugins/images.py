@@ -41,7 +41,7 @@ async def img_sampler(event):
         if lim <= 0:
             lim = int(1)
     else:
-        lim = int(3)
+        lim = int(5)
     response = googleimagesdownload()
     # creating list of arguments
     arguments = {
