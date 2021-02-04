@@ -6,7 +6,16 @@ import os
 import shutil
 
 from userbot.google_imgs import googleimagesdownload
-from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from hellbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot.uniborgConfig import Config
+
+async def reply_id(event):
+    reply_to_id = None
+    if event.sender_id in Config.SUDO_USERS:
+        reply_to_id = event.id
+    if event.reply_to_msg_id:
+        reply_to_id = event.reply_to_msg_id
+    return reply_to_id
 
 
 @bot.on(admin_cmd(pattern=r"img(?: |$)(\d*)? ?(.*)"))
