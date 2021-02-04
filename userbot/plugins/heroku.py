@@ -29,6 +29,8 @@ hell_logo = "./KRAKEN/hellbot_logo.jpg"
     admin_cmd(pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)", outgoing=True)
 )
 async def variable(var):
+    if var.fwd_from:
+        return
     """
     Manage most of ConfigVars setting, set new var, get current var,
     or delete var...
@@ -113,6 +115,8 @@ async def variable(var):
 @bot.on(admin_cmd(pattern="usage(?: |$)", outgoing=True))
 @bot.on(sudo_cmd(pattern="usage(?: |$)", allow_sudo=True))
 async def dyno_usage(dyno):
+    if dyno.fwd_from:
+        return
     """
     Get your account Dyno Usage
     """
@@ -174,6 +178,8 @@ async def dyno_usage(dyno):
 
 @borg.on(admin_cmd(pattern="logs$", outgoing=True))
 async def _(dyno):
+    if dyno.fwd_from:
+        return
     try:
         Heroku = heroku3.from_key(HEROKU_API_KEY)
         app = Heroku.app(HEROKU_APP_NAME)
@@ -189,7 +195,7 @@ async def _(dyno):
         .get("result")
         .get("key")
     )
-    hell_url = f"⚡ Pasted this logs.txt to [NekoBin](https://nekobin.com/{hell_key}) ⚡"
+    hell_url = f"⚡ Pasted this logs.txt to [NekoBin](https://nekobin.com/{hell_key}) && [RAW PAGE](https://nekobin.com/raw/{hell_key}) ⚡"
     await dyno.edit("Getting Logs....")
     with open("logs.txt", "w") as log:
         log.write(app.get_log())
