@@ -27,6 +27,8 @@ from userbot.cmdhelp import CmdHelp
 @bot.on(admin_cmd(pattern="chatinfo(?: |$)(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="chatinfo(?: |$)(.*)", allow_sudo=True))
 async def info(event):
+    if event.fwd_from:
+        return
     await edit_or_reply(event, "`Analysing the chat...`")
     chat = await get_chatinfo(event)
     caption = await fetch_info(chat, event)
@@ -298,6 +300,8 @@ async def fetch_info(chat, event):
 @bot.on(sudo_cmd(pattern="adminlist", allow_sudo=True))
 @errors_handler
 async def get_admin(show):
+    if show.fwd_from:
+        return
     """ For .admins command, list all of the admins of the chat. """
     info = await show.client.get_entity(show.chat_id)
     title = info.title if info.title else "this chat"
@@ -320,6 +324,8 @@ async def get_admin(show):
 @bot.on(admin_cmd(pattern=r"users ?(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern=r"users ?(.*)", allow_sudo=True))
 async def get_users(show):
+    if show.fwd_from:
+        return
     if not show.is_group:
         await edit_or_reply(show, "Are you sure this is a group?")
         return
