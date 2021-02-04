@@ -1,5 +1,6 @@
 import time
 
+from telethon import version
 from userbot import ALIVE_NAME, StartTime, hellversion
 from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
@@ -63,8 +64,8 @@ async def amireallyalive(alive):
     if HELL_IMG:
         hell_caption = f"**{CUSTOM_ALIVE_TEXT}**\n"
         hell_caption += f"≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈\n"
-        hell_caption += f"__**BOT STATUS**__\n\n"
-        hell_caption += f"**★ Telethon version :** `1.15.0`\n"
+        hell_caption += f"     __**BOT STATUS**__\n\n"
+        hell_caption += f"**★ Telethon version :** `{version.__version__}`\n"
         hell_caption += f"**★ HêllBø† :**`{hellversion}`\n"
         hell_caption += f"**★ Uptime :** `{uptime}\n`"
         hell_caption += f"**★ Master:** {mention}\n"
@@ -77,8 +78,8 @@ async def amireallyalive(alive):
             alive,
             f"**{CUSTOM_ALIVE_TEXT}**\n\n"
             f"≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈ \n"
-            f"__**BOT STATUS**__\n\n"
-            f"**★ Telethon Version :** `1.15.0`\n"
+            f"      __**BOT STATUS**__\n\n"
+            f"**★ Telethon Version :** `{version.__version__}`\n"
             f"**★ HêllBø†:** `{hellversion}`\n"
             f"**★ Uptime :** `{uptime}\n`"
             f"**★ Master:** {mention}\n",
