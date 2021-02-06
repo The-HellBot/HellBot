@@ -171,11 +171,6 @@ async def dyno_usage(dyno):
     disk = psutil.disk_usage('/').percent
     recv = (psutil.net_io_counters().bytes_recv)
 
-       TOTAL = (total//(2**30))    
-       USED = (used//(2**30))    
-       FREE = (free//(2**30))
-       DOWN = (down//(2**30))
-       UP = (recv//(2**30))
     await asyncio.sleep(1.5)
 
     return await dyno.edit(
@@ -187,7 +182,7 @@ async def dyno_usage(dyno):
         " ➠ `Dyno hours quota remaining this month`:\n"
         f"     ★  `{hours}`**h**  `{minutes}`**m**  "
         f"**|**  [`{percentage}`**%**]"
-        f"** ➠ Total Space: {TOTAL}GB**"
+        f"** ➠ Total Space: __GB**"
     )
 
 
