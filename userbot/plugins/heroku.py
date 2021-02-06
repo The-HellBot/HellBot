@@ -1,6 +1,8 @@
 import asyncio
 import math
 import os
+import shutil 
+import psutil
 
 import heroku3
 import requests
@@ -162,6 +164,18 @@ async def dyno_usage(dyno):
     AppHours = math.floor(AppQuotaUsed / 60)
     AppMinutes = math.floor(AppQuotaUsed % 60)
 
+    total,used,free =  shutil.disk_usage('.') 
+    down = (psutil.net_io_counters().bytes_sent)
+    cpuUsage = psutil.cpu_percent(interval=0.5)
+    memory = psutil.virtual_memory().percent
+    disk = psutil.disk_usage('/').percent
+    recv = (psutil.net_io_counters().bytes_recv)
+
+         TOTAL = (total//(2**30))    
+         USED = (used//(2**30))    
+         FREE = (free//(2**30))
+         DOWN = (down//(2**30))
+         UP = (recv//(2**30))
     await asyncio.sleep(1.5)
 
     return await dyno.edit(
@@ -173,6 +187,7 @@ async def dyno_usage(dyno):
         " ➠ `Dyno hours quota remaining this month`:\n"
         f"     ★  `{hours}`**h**  `{minutes}`**m**  "
         f"**|**  [`{percentage}`**%**]"
+        f"** ➠ Total Space: {TOTAL}GB**"
     )
 
 
