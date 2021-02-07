@@ -50,11 +50,12 @@ for name in files:
 import userbot._core
 
 print("""
-╭╮╱╭╮╱╱╭╮╭╮╭━━╮╱╱╱╭╮\n┃┃╱┃┃╱╱┃┃┃┃┃╭╮┃╱╱╭╯╰╮\n┃╰━╯┣━━┫┃┃┃┃╰╯╰┳━┻╮╭╯\n┃╭━╮┃┃━┫┃┃┃┃╭━╮┃╭╮┃┃\n┃┃╱┃┃┃━┫╰┫╰┫╰━╯┃╰╯┃╰╮\n╰╯╱╰┻━━┻━┻━┻━━━┻━━┻━╯
-
-╭━━╮╱╱╱  ╭━━━┳━╮╱╭╮╭╮\n╰┫┣╯╱╱╱  ┃╭━╮┃┃╰╮┃┃┃┃\n╱┃┃╭━━╮  ┃┃╱┃┃╭╮╰╯┃┃┃\n╱┃┃┃━━┫  ┃┃╱┃┃┃╰╮┃┃╰╯\n╭┫┣╋━━┃  ┃╰━╯┃┃╱┃┃┃╭╮\n╰━━┻━━╯  ╰━━━┻╯╱╰━╯╰╯
-JOIN OFFICIAL GROUP :- @HELLBOT_OFFICIAL_CHAT
+HELLBOT IS ON !!
+HELLBOT VERSION :- {hellversion}
+JOIN OFFICIAL CHAT GROUP AND UPDATES CHANNEL
+OFFICIAL GROUP :- @HELLBOT_OFFICIAL_CHAT
 OFFICIAL CHANNEL :- @HELLBOT_OFFICIAL
+IF YOU FACE ANY ISSUE THEN ASK AT CHAT GROUP.
 """)
 
 if len(argv) not in (1, 3, 4):
