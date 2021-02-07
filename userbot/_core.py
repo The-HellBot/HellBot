@@ -43,7 +43,6 @@ async def send(event):
     else:
         await edit_or_reply(event, "File not found..... Kek")
 
-"""
 @hellbot.on(admin_cmd(pattern=r"install"))
 @hellbot.on(sudo_cmd(pattern=r"install", allow_sudo=True))
 async def install(event):
@@ -76,7 +75,6 @@ async def install(event):
             os.remove(downloaded_file_name)
     await asyncio.sleep(DELETE_TIMEOUT)
     await event.delete()
-"""
     
 @hellbot.on(admin_cmd(pattern=r"uninstall (?P<shortname>\w+)", outgoing=True))
 @hellbot.on(sudo_cmd(pattern=r"uninstall (?P<shortname>\w+)", allow_sudo=True))
