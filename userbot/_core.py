@@ -22,7 +22,7 @@ async def send(event):
         return
     message_id = event.message.id
     thumb = hell_logo
-    caption = f"**⍟ Plugin name ≈** `{input_str}`\n**⍟ Uploaded in ≈** `{time_taken_in_ms} secs`\n**⍟ Uploaded by ≈** {hell}\n"
+    omk = f"**⍟ Plugin name ≈** `{input_str}`\n**⍟ Uploaded in ≈** `{time_taken_in_ms} secs`\n**⍟ Uploaded by ≈** {hell}\n"
     input_str = event.pattern_match.group(1)
     the_plugin_file = "./userbot/plugins/{}.py".format(input_str)
     if os.path.exists(the_plugin_file):
@@ -30,15 +30,14 @@ async def send(event):
         lauda = await event.client.send_file(
             event.chat_id,
             the_plugin_file,
+            thumb=thumb,
+            caption=omk,
             force_document=True,
             allow_cache=False,
-            thumb=thumb,
-            caption=caption
             reply_to=message_id,
         )
         end = datetime.now()
         time_taken_in_ms = (end - start).seconds
-        await asyncio.sleep(DELETE_TIMEOUT)
         await event.delete()
     else:
         await edit_or_reply(event, "File not found..... Kek")
