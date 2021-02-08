@@ -29,6 +29,8 @@ from userbot.cmdhelp import CmdHelp
 @bot.on(admin_cmd(pattern="whois(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="whois(?: |$)(.*)", allow_sudo=True))
 async def who(event):
+    if event.fwd_from:
+        return
     hell = await edit_or_reply(
         event, "`Sit tight while I steal some data from This guuyyy...`"
     )
