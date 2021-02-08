@@ -70,6 +70,8 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 @bot.on(admin_cmd(pattern=f"zombies ?(.*)"))
 @bot.on(sudo_cmd(pattern="zombies ?(.*)", allow_sudo=True))
 async def rm_deletedacc(show):
+    if show.fwd_from:
+        return
     con = show.pattern_match.group(1).lower()
     del_u = 0
     del_status = "`No zombies or deleted accounts found in this group, Group is clean`"
