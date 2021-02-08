@@ -23,10 +23,7 @@ async def send(event):
     message_id = event.message.id
     thumb = hell_logo
     input_str = event.pattern_match.group(1)
-    end = datetime.now()
-    start = datetime.now()
-    time_taken_in_ms = (end - start).seconds
-    omk = f"**⍟ Plugin name ≈** `{input_str}`\n**⍟ Uploaded in ≈** `{time_taken_in_ms} secs`\n**⍟ Uploaded by ≈** {hell}\n"
+    omk = f"**⍟ Plugin name ≈** `{input_str}`\n**⍟ Uploaded by ≈** {hell}\n\n⚡ **[ʟɛɢɛռɖaʀʏ ᴀғ ɦɛʟʟɮօt](t.me/hellbot_official)** ⚡"
     the_plugin_file = "./userbot/plugins/{}.py".format(input_str)
     if os.path.exists(the_plugin_file):
         lauda = await event.client.send_file(
