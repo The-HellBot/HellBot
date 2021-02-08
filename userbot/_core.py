@@ -5,23 +5,24 @@ from pathlib import Path
 from telethon import events
 from telethon import functions, types
 from telethon.tl.types import InputMessagesFilterDocument
-from userbot.utils import admin_cmd, load_module, remove_plugin, edit_or_reply, sudo_cmd
-from userbot import ALIVE_NAME, CmdHelp
+from userbot.utils import *
+from userbot import *
 from userbot import bot as hellbot
 
 DELETE_TIMEOUT = 5
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 hell_logo = "./KRAKEN/hellbot_logo.jpg"
-
+kraken = hellbot.uid
+hell = f"[{DEFAULTUSER}](tg://user?id={kraken})"
 
 @hellbot.on(admin_cmd(pattern=r"send (?P<shortname>\w+)", outgoing=True))
 @hellbot.on(sudo_cmd(pattern=r"send (?P<shortname>\w+)", allow_sudo=True))
 async def send(event):
     if event.fwd_from:
         return
-    kraken = hellbot.uid
     message_id = event.message.id
     thumb = hell_logo
+    caption = f"**⍟ Plugin name ≈** `{input_str}`\n**⍟ Uploaded in ≈** `{time_taken_in_ms} secs`\n**⍟ Uploaded by ≈** {hell}\n"
     input_str = event.pattern_match.group(1)
     the_plugin_file = "./userbot/plugins/{}.py".format(input_str)
     if os.path.exists(the_plugin_file):
@@ -32,53 +33,60 @@ async def send(event):
             force_document=True,
             allow_cache=False,
             thumb=thumb,
+            caption=caption
             reply_to=message_id,
         )
         end = datetime.now()
         time_taken_in_ms = (end - start).seconds
-        await edit_or_reply(lauda, f"**⍟ Plugin name ≈** `{input_str}`\n**⍟ Uploaded in ≈** `{time_taken_in_ms} secs`\n**⍟ Uploaded by ≈** [{DEFAULTUSER}](tg://user?id={kraken})\n"
-        )
         await asyncio.sleep(DELETE_TIMEOUT)
         await event.delete()
     else:
         await edit_or_reply(event, "File not found..... Kek")
 
-@hellbot.on(admin_cmd(pattern=r"install"))
-@hellbot.on(sudo_cmd(pattern=r"install", allow_sudo=True))
+@hellbot.on(admin_cmd(pattern="install$", outgoing=True))
+@hellbot.on(sudo_cmd(pattern="install$", allow_sudo=True))
 async def install(event):
+    if event.fwd_from:
+        return
+    a = "__Installing.__"
+    b = 1
+    await event.edit(a)
     if event.fwd_from:
         return
     if event.reply_to_msg_id:
         try:
-            downloaded_file_name = (
-                await event.client.download_media(  # pylint:disable=E0602
-                    await event.get_reply_message(),
-                    "userbot/plugins/",  # pylint:disable=E0602
-                )
+            downloaded_file_name = await event.client.download_media(  # pylint:disable=E0602
+                await event.get_reply_message(),
+                "./userbot/plugins/"  # pylint:disable=E0602
             )
             if "(" not in downloaded_file_name:
                 path1 = Path(downloaded_file_name)
                 shortname = path1.stem
                 load_module(shortname.replace(".py", ""))
-                await edit_or_reply(event, 
-                    "Plugin `{}` is installed successfully".format(
-                        os.path.basename(downloaded_file_name)
-                    )
-                )
+                if shortname in CMD_LIST:
+                    string = "**Commands found in** `{}` (sudo included)\n".format((os.path.basename(downloaded_file_name)))
+                    for i in CMD_LIST[shortname]:
+                        string += "  •  `" + i 
+                        string += "`\n"
+                        if b == 1:
+                            a = "__Installing..__"
+                            b = 2
+                        else:
+                            a = "__Installing...__"
+                            b = 1
+                        await event.edit(a)
+                    return await event.edit(f"✅ **Installed module** :- `{shortname}` \n✨ BY :- {hell}\n\n{string}\n\n        ⚡ **[ʟɛɢɛռɖaʀʏ ᴀғ ɦɛʟʟɮօt](t.me/hellbot_official)** ⚡", link_preview=False)
+                return await event.edit(f"Installed module `{os.path.basename(downloaded_file_name)}`")
             else:
                 os.remove(downloaded_file_name)
-                await edit_or_reply(event, 
-                    "**Error!**\nPlugin cannot be installed!\n Or may have been pre-installed."
-                )
-        except Exception as e:  # pylint:disable=C0103,W0703
-            await edit_or_reply(event, str(e))
-            os.remove(downloaded_file_name)
-    await asyncio.sleep(DELETE_TIMEOUT)
-    await event.delete()
+                return await event.edit(f"**Failed to Install** \n`Error`\nModule already installed or unknown format")
+        except Exception as e: 
+            await event.edit(f"**Failed to Install** \n`Error`\n{str(e)}")
+            return os.remove(downloaded_file_name)
     
 @hellbot.on(admin_cmd(pattern=r"uninstall (?P<shortname>\w+)", outgoing=True))
 @hellbot.on(sudo_cmd(pattern=r"uninstall (?P<shortname>\w+)", allow_sudo=True))
-async def unload(kraken):
+async def uninstall(kraken):
     if kraken.fwd_from:
         return
     shortname = kraken.pattern_match["shortname"]
@@ -91,6 +99,7 @@ async def unload(kraken):
         await kraken.edit("Error: %s : %s" % (dir_path, e.strerror))
 
 @hellbot.on(admin_cmd(pattern=r"unload (?P<shortname>\w+)$"))
+@hellbot.on(sudo_cmd(pattern=r"upload (?P<shortname>\w+)$", allow_sudo=True))
 async def unload(event):
     if event.fwd_from:
         return
@@ -107,6 +116,7 @@ async def unload(event):
 
 
 @hellbot.on(admin_cmd(pattern=r"load (?P<shortname>\w+)$"))
+@hellbot.on(sudo_cmd(pattern=r"load (?P<shortname>\w+)$", allow_sudo=True))
 async def load(event):
     if event.fwd_from:
         return
