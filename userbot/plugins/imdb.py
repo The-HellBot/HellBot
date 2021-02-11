@@ -19,6 +19,8 @@ langi = "en"
 @bot.on(admin_cmd(pattern="imdb (.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="imdb (.*)", allow_sudo=True))
 async def imdb(e):
+    if e.fwd_from:
+        return
     try:
         movie_name = e.pattern_match.group(1)
         remove_space = movie_name.split(" ")
