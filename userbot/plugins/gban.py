@@ -120,7 +120,7 @@ async def gban(userbot):
     except:
         pass
     return await hellbot.edit(
-        f"[{user.first_name}](tg://user?id={user.id}) Beta majdur ko khodna aur [{HELLBOY}](tg://user?id={papa}) ko chodna kabhi sikhana nhi.\n\nGban Successful 🔥\nAffected Chats😏 : {a} **"
+        f"[{user.first_name}](tg://user?id={user.id}) Beta majdur ko khodna aur [{HELLBOY}](tg://user?id={papa}) ko chodna kabhi sikhana nhi.\n\n**Gban Successful 🔥\nAffected Chats😏 : {a} **"
     )
 
 @bot.on(admin_cmd(pattern="ungban ?(.*)"))
@@ -186,7 +186,7 @@ async def gunban(userbot):
     except:
         pass
     return await hellbot.edit(
-        f"[{user.first_name}](tg://user?id={user.id}) Aur bhai.... Aagya swaad.\n\nUngban Successful 🔥\nChats :- `{a}`"
+        f"**[{user.first_name}](tg://user?id={user.id}) Aur bhai.... Aagya swaad.**\n\nUngban Successful 🔥\nChats :- `{a}`"
     )
 
 
