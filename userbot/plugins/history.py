@@ -27,7 +27,7 @@ async def _(hellevent):
               await conv.send_message("/search_id {}".format(victim))
               response1 = await response1 
               response2 = await response2 
-              response3= await response3 
+              response3 = await response3 
           except YouBlockedUserError: 
               await hellevent.reply("Please unblock ( @Sangmatainfo_bot ) ")
               return
@@ -60,7 +60,7 @@ async def _(hellevent):
               await conv.send_message("/search_id {}".format(victim))
               response1 = await response1 
               response2 = await response2 
-              response3= await response3 
+              response3 = await response3 
           except YouBlockedUserError: 
               await hellevent.reply("Please unblock ( @Sangmatainfo_bot ) ")
               return
