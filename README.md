@@ -22,18 +22,35 @@ This is the one and only official HellBot Userbot made by [@Kraken_The_BadASS](h
 
 # FORK AT YOUR OWN RISK
 
-# Credits
-### • [JaaduBot](https://github.com/Amberyt/JaaduBot)
-## One and only. Others with some misfuntioning brain stay out from this SUPER POWERFULL BOT😏
+<details>
+  <summary> Credits 🏅 </summary>
 
-## Official Support
+• [JaaduBot](https://github.com/Amberyt/JaaduBot)
+• [Uniborg](https://github.com/spechide/uniborg)
+
+</details>
+<details>
+  <summary> Official Supports ✅ </summary>
+
+```
+Get help regarding setting up your Hêllẞø† in our official support Group
+```
+
 <a href="https://t.me/HellBot_Official"><img src="https://img.shields.io/badge/Join-Support%20Channel-red.svg?style=for-the-badge&logo=Telegram"></a>
 <a href="https://t.me/HellBot_Official_Chat"><img src="https://img.shields.io/badge/Join-Support%20Group-blue.svg?style=for-the-badge&logo=Telegram"></a>
 
-## Video Tutorial
+</details>
+<details>
+  <summary> Video Tutorial 📺 </summary>
+```
+Official YouTube Channel Of Hêllẞø†.
+Click on the link below to get tutorial on How To Deploy Hêllẞø†.
+```
+
 <a href="https://youtu.be/M2FQJq_sHp4"><img src="https://img.shields.io/badge/How%20To%20Deploy-blue.svg?logo=Youtube"></a>
 <a href="https://youtu.be/M2FQJq_sHp4"><img src="https://img.shields.io/youtube/views/M2FQJq_sHp4?style=social">
 
+</details>
 ## ⚡ Set-Up ⚡
 
 ### ✨ The Easy Way ✨
