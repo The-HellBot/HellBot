@@ -196,7 +196,7 @@ async def gunban(userbot):
 async def handler(kraken): 
    if kraken.user_joined or kraken.user_added:      
        try:       	
-         from userbot.modules.sql_helper.gmute_sql import is_gmuted
+         from userbot.plugins.sql_helper.gmute_sql import is_gmuted
          guser = await kraken.get_user()      
          gmuted = is_gmuted(guser.id)             
        except:      
