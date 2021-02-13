@@ -26,6 +26,7 @@ This is the one and only official HellBot Userbot made by [@Kraken_The_BadASS](h
   <summary> Credits 🏅 </summary>
 
 • [JaaduBot](https://github.com/Amberyt/JaaduBot)
+
 • [Uniborg](https://github.com/spechide/uniborg)
 
 </details>
@@ -33,7 +34,10 @@ This is the one and only official HellBot Userbot made by [@Kraken_The_BadASS](h
   <summary> Official Supports ✅ </summary>
 
 ```
-Get help regarding setting up your Hêllẞø† in our official support Group
+Get help regarding setting up 
+your Hêllẞø† in our official 
+support Group and get updates
+notifications in Update Channel.
 ```
 
 <a href="https://t.me/HellBot_Official"><img src="https://img.shields.io/badge/Join-Support%20Channel-red.svg?style=for-the-badge&logo=Telegram"></a>
@@ -42,11 +46,12 @@ Get help regarding setting up your Hêllẞø† in our official support Group
 </details>
 <details>
   <summary> Video Tutorial 📺 </summary>
+
 ```
 Official YouTube Channel Of Hêllẞø†.
-Click on the link below to get tutorial on How To Deploy Hêllẞø†.
+Click on the link below to get tutorial on 
+How To Deploy Hêllẞø†.
 ```
-
 <a href="https://youtu.be/M2FQJq_sHp4"><img src="https://img.shields.io/badge/How%20To%20Deploy-blue.svg?logo=Youtube"></a>
 <a href="https://youtu.be/M2FQJq_sHp4"><img src="https://img.shields.io/youtube/views/M2FQJq_sHp4?style=social">
 
@@ -104,7 +109,8 @@ Fortunately there are no Mandatory vars for the UniBorg Support Config.
     - `API_HASH`:   You can get this value from https://my.telegram.org
 - The userbot will not work without setting the mandatory vars.
 
-# • LICENSE •
+<details>
+  <summary> • LICENSE • </summary>
 
 ![](https://www.gnu.org/graphics/gplv3-or-later.png)
 
@@ -122,3 +128,5 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+</details>
