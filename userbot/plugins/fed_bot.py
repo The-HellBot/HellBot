@@ -490,7 +490,7 @@ CmdHelp("fed_bot").add_command(
 ).add_command(
   "fsearch", "<grp id>", "Gives out the username and group's name of the given group id.(IF ADDED IN FBAN DATABASE)"
 ).add_command(
-  "fgroups", "Gives out the list of group ids you have connected to fban database"
+  "fgroups", None, "Gives out the list of group ids you have connected to fban database"
 ).add_command(
   "fremove", "<group id> or in a group", "Removes the group from your fban database."
 ).add_command(
