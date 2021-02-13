@@ -1,5 +1,5 @@
 try:
-    from userbot.plugins.sql_helper import BASE, SESSION
+    from userbot.plugins.sql_helper import SESSION, BASE
 except ImportError:
     raise Exception("Hello!")
 
@@ -20,7 +20,7 @@ GMute.__table__.create(checkfirst=True)
 def is_gmuted(sender_id):
     try:
         return SESSION.query(GMute).all()
-    except:
+    except BaseException:
         return None
     finally:
         SESSION.close()
@@ -37,3 +37,9 @@ def ungmute(sender):
     if rem:
         SESSION.delete(rem)
         SESSION.commit()
+
+
+def all_gmuted():
+    rem = SESSION.query(GMute).all()
+    SESSION.close()
+    return rem
