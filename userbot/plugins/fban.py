@@ -14,7 +14,7 @@ from telethon.tl.functions.account import UpdateNotifySettingsRequest
 from telethon import functions, types, events
 from hellbot import CmdHelp, bot as hellbot
 from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply as eor
-from hellbot.uniborgConfig import Config
+from hellbot.Config import Config
 from hellbot.plugins.sql_helper.fban_sql import (
     add_channel,
     get_all_channels,
