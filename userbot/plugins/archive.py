@@ -18,7 +18,7 @@ from hachoir.parser import createParser
 from telethon.tl.types import DocumentAttributeVideo
 
 from userbot import CMD_HELP
-from userbot.uniborgConfig import Config
+from userbot.Config import Config
 from userbot.utils import admin_cmd, progress
 from userbot.cmdhelp import CmdHelp
 

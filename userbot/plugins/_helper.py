@@ -1,4 +1,4 @@
-from userbot.uniborgConfig import Config
+from userbot.Config import Config
 import asyncio
 
 import requests

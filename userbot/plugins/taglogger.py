@@ -2,7 +2,7 @@ from telethon import custom, events
 from telethon.tl.types import Channel
 from telethon.utils import get_display_name
 
-from userbot.uniborgConfig import Config
+from userbot.Config import Config
 
 if Config.TAG_LOGGER:
     tagger = int(Config.TAG_LOGGER)

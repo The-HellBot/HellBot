@@ -34,7 +34,7 @@ from userbot import BOTLOG, BOTLOG_CHATID
 
 from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
-from userbot.uniborgConfig import Config
+from userbot.Config import Config
 
 # =================== CONSTANT ===================
 

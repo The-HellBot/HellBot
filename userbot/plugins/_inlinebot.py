@@ -26,7 +26,7 @@ from telethon.tl.functions.channels import JoinChannelRequest
 from userbot import *
 from userbot.cmdhelp import *
 from userbot.utils import *
-from userbot.uniborgConfig import Config
+from userbot.Config import Config
 
 hell_row = Config.BUTTONS_IN_HELP
 hell_emoji = Config.EMOJI_IN_HELP

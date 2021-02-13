@@ -7,7 +7,7 @@ import shutil
 
 from userbot.google_imgs import googleimagesdownload
 from hellbot.utils import admin_cmd, edit_or_reply, sudo_cmd
-from userbot.uniborgConfig import Config
+from userbot.Config import Config
 
 async def reply_id(event):
     reply_to_id = None

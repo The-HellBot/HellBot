@@ -4,7 +4,7 @@ import PIL.ImageOps
 from PIL import Image, ImageDraw, ImageFont
 
 from hellbot import CmdHelp
-from userbot.uniborgConfig import Config
+from userbot.Config import Config
 from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 
 TEMP_DIR = os.environ.get("TEMP_DIR", "./temp/")

@@ -6,7 +6,7 @@ import heroku3
 import requests
 
 from userbot import CMD_HELP
-from userbot.uniborgConfig import Config
+from userbot.Config import Config
 from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 import urllib3

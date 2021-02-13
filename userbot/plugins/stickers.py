@@ -14,7 +14,7 @@ from telethon.tl.types import (
 )
 
 #from userbot import CMD_HELP
-from userbot.uniborgConfig import Config
+from userbot.Config import Config
 from userbot.utils import *
 from userbot.cmdhelp import CmdHelp
 
