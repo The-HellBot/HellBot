@@ -33,7 +33,7 @@ pm_caption += f"🛡️TELETHON🛡️ : `{version.__version__}` \n"
 
 pm_caption += f"😈Hêllẞø†😈       : __**{hellversion}**__\n"
 
-pm_caption += f"⚡ ẞø† ⚡              :- __**{botversion}**__\n"
+pm_caption += f"⚡ ẞø† ⚡            : __**{botversion}**__\n"
 
 pm_caption += f"⚜️Sudo⚜️            : `{sudou}`\n"
 
