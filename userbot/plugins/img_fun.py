@@ -6,7 +6,7 @@ from typing import Optional, Tuple
 from PIL import Image, ImageDraw, ImageFont
 import PIL.ImageOps
 
-from userbot.utils import admin_cmd, sudo_cmd
+from hellbot.utils import admin_cmd, sudo_cmd
 from userbot import CmdHelp, CMD_HELP, LOGS, bot as hellbot
 from userbot.helpers.functions import (
     convert_toimage,

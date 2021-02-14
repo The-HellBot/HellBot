@@ -5,7 +5,7 @@ import os
 import time
 from datetime import datetime
 
-from userbot.utils import admin_cmd, sudo_cmd, progress
+from hellbot.utils import admin_cmd, sudo_cmd, progress
 from userbot import CMD_HELP
 from userbot.cmdhelp import CmdHelp
 

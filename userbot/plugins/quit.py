@@ -5,7 +5,7 @@ import time
 
 from telethon.tl.functions.channels import LeaveChannelRequest
 
-from userbot.utils import admin_cmd
+from hellbot.utils import admin_cmd
 
 
 @borg.on(admin_cmd("kickme", outgoing=True))

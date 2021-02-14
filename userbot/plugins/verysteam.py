@@ -12,7 +12,7 @@ from datetime import datetime
 import aiohttp
 import magic
 import requests
-from userbot.utils import admin_cmd, progress, sudo_cmd, edit_or_reply
+from hellbot.utils import admin_cmd, progress, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 
 

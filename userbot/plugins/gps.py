@@ -5,7 +5,7 @@
 from geopy.geocoders import Nominatim
 from telethon.tl import types
 
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from hellbot import CmdHelp
 
 @bot.on(admin_cmd(pattern="gps ?(.*)"))

@@ -14,7 +14,7 @@ from telethon.tl.functions.photos import DeletePhotosRequest, GetUserPhotosReque
 from telethon.tl.types import Channel, Chat, InputPhoto, User
 
 from userbot import CMD_HELP, bot
-from userbot.utils import admin_cmd
+from hellbot.utils import admin_cmd
 from userbot.cmdhelp import CmdHelp
 
 # ====================== CONSTANT ===============================

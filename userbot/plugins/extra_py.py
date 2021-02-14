@@ -3,7 +3,7 @@ from pathlib import Path
 
 from telethon.tl.types import InputMessagesFilterDocument
 
-from userbot.utils import admin_cmd, load_module
+from hellbot.utils import admin_cmd, load_module
 from var import Var
 from userbot.cmdhelp import CmdHelp
 

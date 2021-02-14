@@ -1,5 +1,5 @@
 """Syntax: .whatscrapp as reply to a message copied from @WhatsCRApp"""
-from userbot.utils import *
+from hellbot.utils import *
 from userbot.cmdhelp import *
 # when you are tight on schedule...
 # and also lazy af!!

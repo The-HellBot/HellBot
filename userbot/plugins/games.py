@@ -2,7 +2,7 @@
 
 import asyncio
 from telethon import events
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 
 @borg.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))

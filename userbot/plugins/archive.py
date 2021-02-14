@@ -19,7 +19,7 @@ from telethon.tl.types import DocumentAttributeVideo
 
 from userbot import CMD_HELP
 from userbot.Config import Config
-from userbot.utils import admin_cmd, progress
+from hellbot.utils import admin_cmd, progress
 from userbot.cmdhelp import CmdHelp
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"

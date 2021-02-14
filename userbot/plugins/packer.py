@@ -3,7 +3,7 @@ import os
 import asyncio
 
 from userbot import CmdHelp
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot import bot as hellbot
 
 

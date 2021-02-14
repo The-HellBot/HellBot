@@ -19,7 +19,7 @@ from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.file import Storage
 from telethon import events
 
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 
 # Path to token json file, it should be in same directory as script

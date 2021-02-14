@@ -16,7 +16,7 @@ from pytz import timezone as tz
 from userbot import CMD_HELP
 from userbot import OPEN_WEATHER_MAP_APPID as OWM_API
 from userbot.events import errors_handler
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 
 

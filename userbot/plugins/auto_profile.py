@@ -6,7 +6,7 @@ from telethon.tl import functions
 from telethon.tl.functions.channels import GetAdminedPublicChannelsRequest
 
 from userbot import ALIVE_NAME, BIO_MSG, CMD_HELP
-from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from hellbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 from userbot.cmdhelp import CmdHelp
 
 DEFAULTUSERBIO = str(BIO_MSG) if BIO_MSG else "ʟɛɢɛռɖaʀʏ ᴀғ ɦɛʟʟɮօt"

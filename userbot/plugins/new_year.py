@@ -10,7 +10,7 @@ import asyncio
 # credits to kraken, john snow
 from userbot import CMD_HELP, ALIVE_NAME
 # credits to kraken, john snow
-from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from hellbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 # credits to kraken, john snow
 from userbot.cmdhelp import CmdHelp
 # credits to kraken, john snow

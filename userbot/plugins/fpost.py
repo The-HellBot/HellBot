@@ -2,7 +2,7 @@ import string
 
 from telethon.tl.types import Channel
 
-from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from hellbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 from userbot import CMD_HELP
 from userbot.cmdhelp import CmdHelp
 from userbot.Config import Config

@@ -1,6 +1,6 @@
 from userbot import bot, CMD_HELP, ALIVE_NAME
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 import html
 from telethon import events

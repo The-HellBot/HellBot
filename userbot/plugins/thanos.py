@@ -1,7 +1,7 @@
 import asyncio
 
 from telethon import events
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 
 @bot.on(admin_cmd(pattern="thanos$", outgoing=True))
 @bot.on(sudo_cmd(pattern="thanos$", allow_sudo=True))

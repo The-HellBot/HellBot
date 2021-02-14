@@ -9,7 +9,7 @@ import urllib
 import requests
 
 from userbot import *
-from userbot.utils import *
+from hellbot.utils import *
 from userbot.cmdhelp import CmdHelp
 
 @bot.on(admin_cmd("boobs$"))

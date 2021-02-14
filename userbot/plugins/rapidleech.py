@@ -17,7 +17,7 @@ import aiohttp
 from bs4 import BeautifulSoup
 from telethon.utils import get_inner_text
 
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 
 logger.info(Config.OPEN_LOAD_LOGIN)

@@ -5,7 +5,7 @@ By: @Zero_cool7870
 """
 import requests
 from telethon import events
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 
 async def download_file_from_google_drive(id):

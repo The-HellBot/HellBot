@@ -6,7 +6,7 @@
 """ Userbot plugin_info command """
 
 from userbot import CMD_HELP
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 
 

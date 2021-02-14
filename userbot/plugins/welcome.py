@@ -7,7 +7,7 @@ from userbot.plugins.sql_helper.welcome_sql import (
     rm_welcome_setting,
     update_previous_welcome,
 )
-from userbot.utils import *
+from hellbot.utils import *
 from userbot.cmdhelp import CmdHelp
 
 

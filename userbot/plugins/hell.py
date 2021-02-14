@@ -2,7 +2,7 @@ import time
 
 from telethon import version
 from userbot import ALIVE_NAME, StartTime, hellversion
-from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from hellbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 async def reply_id(event):

@@ -7,7 +7,7 @@ from telethon import events
 import telethon.utils
 from telethon.errors import rpcbaseerrors
 
-from userbot.utils import admin_cmd, sudo_cmd, errors_handler
+from hellbot.utils import admin_cmd, sudo_cmd, errors_handler
 from userbot import bot as hellbot
 from userbot import BOTLOG, BOTLOG_CHATID
 

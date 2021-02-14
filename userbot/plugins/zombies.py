@@ -32,7 +32,7 @@ from telethon.utils import get_input_location
 
 from userbot import BOTLOG, BOTLOG_CHATID
 
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 from userbot.Config import Config
 

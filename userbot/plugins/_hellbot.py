@@ -2,7 +2,7 @@
 
 from userbot import *
 from userbot import CMD_HELP
-from userbot.utils import *
+from hellbot.utils import *
 
 
 @bot.on(admin_cmd(pattern="plinfo(?: |$)(.*)", outgoing=True))

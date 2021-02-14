@@ -1,5 +1,5 @@
 from userbot import *
-from userbot.utils import *
+from hellbot.utils import *
 from userbot.cmdhelp import CmdHelp
 from telethon import events, version
 from telethon.events import NewMessage

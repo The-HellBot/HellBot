@@ -8,7 +8,7 @@ from telethon import events
 from telethon.tl import functions, types
 
 from userbot import CMD_HELP
-from userbot.utils import admin_cmd, edit_or_reply
+from hellbot.utils import admin_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 
 
