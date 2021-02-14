@@ -1,6 +1,6 @@
 from userbot import *
 from userbot.utils import *
-from userbot.uniborgConfig import Config
+from userbot.Config import Config
 from telethon.events import NewMessage
 from telethon.tl.custom import Dialog
 from telethon.tl.types import Channel, Chat, User
