@@ -53,7 +53,7 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 
 
 @hellbot_cmd("ban", is_args=True)
-@groups_only
+@group_cmd
 @admin_bot
 @is_admin
 async def ban(event):
@@ -84,7 +84,7 @@ async def ban(event):
 #____________________HELLBOT__________________
 
 @hellbot_cmd("unban", is_args=True)
-@groups_only
+@group_cmd
 @admin_bot
 @is_admin
 async def nothanos(event):
@@ -107,7 +107,7 @@ async def nothanos(event):
 #____________________HELLBOT__________________
 
 @hellbot_cmd("promote", is_args=True)
-@groups_only
+@group_cmd
 @admin_bot
 @is_admin
 async def promote(event):
@@ -145,7 +145,7 @@ async def promote(event):
 #____________________HELLBOT__________________
 
 @hellbot_cmd("demote", is_args=True)
-@groups_only
+@group_cmd
 @admin_bot
 @is_admin
 async def demote(event):
@@ -180,7 +180,7 @@ async def demote(event):
 #____________________HELLBOT__________________
 
 @hellbot_cmd("pin", is_args=True)
-@groups_only
+@group_cmd
 @admin_bot
 @is_admin
 async def pin(event):
@@ -206,7 +206,7 @@ async def pin(event):
 #____________________HELLBOT__________________
 
 @hellbot_cmd("kick", is_args=True)
-@groups_only
+@group_cmd
 @admin_bot
 @is_admin
 async def kick(event):
@@ -238,7 +238,7 @@ async def kick(event):
 #____________________HELLBOT__________________
 
 @hellbot_cmd("mute", is_args=True)
-@groups_only
+@group_cmd
 @admin_bot
 @is_admin
 async def mute(event):
@@ -270,7 +270,7 @@ async def mute(event):
 #____________________HELLBOT__________________
 
 @hellbot_cmd("unmute", is_args=True)
-@groups_only
+@group_cmd
 @admin_bot
 @is_admin
 async def mute(event):
