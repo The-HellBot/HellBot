@@ -22,6 +22,7 @@ from var import Var
 
 from userbot import CMD_LIST, LOAD_PLUG, LOGS, SUDO_LIST, bot
 from userbot.helpers.exceptions import CancelProcess
+from userbot.helpers.tools import *
 from userbot.Config import Config
 
 ENV = bool(os.environ.get("ENV", False))
@@ -622,3 +623,170 @@ def hellbot_cmd(add_cmd, is_args=False):
 
     return cmd
 
+def is_admin():
+    def decorator(func):
+        @functools.wraps(func)
+        async def wrapper(event):
+            op_hellbot = bot.tgbot
+            myperm = await op_hellbot.get_permissions(event.chat_id, event.sender_id)
+            user = event.sender_id
+            hellid = bot.uid
+            if myperm.is_admin:
+                await func(event)
+            if event.sender_id == hellid:
+                pass
+            elif not user:
+                pass
+            if not myperm.is_admin:
+                await event.reply("Only admins can use this. Keep your ass out of it...")
+
+        return wrapper
+
+    return decorator
+
+
+def admin_bot():
+    def decorator(func):
+        @functools.wraps(func)
+        async def wrapper(event):
+            op_hellbot = bot.tgbot
+            myid = await op_hellbot.get_me()
+            myperm = await op_hellbot.get_permissions(event.chat_id, myid)
+            if myperm.is_admin:
+                await func(event)
+            else:
+                await event.reply("I'm not admin. Chutíya sala...")
+
+        return wrapper
+
+    return decorator
+
+
+def superior():
+    def decorator(func):
+        @functools.wraps(func)
+        async def wrapper(event):
+            ludo = list(Config.SUDO_USERS)
+            ludo.append(bot.uid)
+            if event.sender_id in ludo:
+                await func(event)
+            else:
+                await event.reply("This Command Is Meant To Be Used By Owners & Sudo Users Only...")
+
+        return wrapper
+
+    return decorator
+
+
+def inevitable():
+    def decorator(func):
+        @functools.wraps(func)
+        async def wrapper(event):
+            baap = bot.uid
+            if event.sender_id == baap:
+                await func(event)
+            else:
+                pass
+
+        return wrapper
+
+    return decorator
+
+
+def group_cmd():
+    def decorator(func):
+        @functools.wraps(func)
+        async def wrapper(event):
+            if event.is_group:
+                await func(event)
+            else:
+                await event.reply("This Command Only Works In Groups. Please try again in a Group")
+
+        return wrapper
+
+    return decorator
+
+
+def grouponly():
+    def decorator(func):
+        @functools.wraps(func)
+        async def wrapper(event):
+            if event.is_group:
+                await func(event)
+            else:
+                pass
+
+        return wrapper
+
+    return decorator
+
+
+def pitaji():
+    def decorator(func):
+        @functools.wraps(func)
+        async def wrapper(event):
+            ludo = list(Config.SUDO_USERS)
+            ludo.append(bot.uid)
+            if event.sender_id in ludo:
+                await func(event)
+            else:
+                pass
+
+        return wrapper
+
+    return decorator
+
+
+def private_cmd():
+    def decorator(func):
+        @functools.wraps(func)
+        async def wrapper(event):
+            if event.is_group:
+                pass
+            else:
+                await func(event)
+
+        return wrapper
+
+    return decorator
+
+
+def botmode(shortname):
+    if shortname.startswith("__"):
+        pass
+    elif shortname.endswith("_"):
+        import importlib
+        import sys
+        from pathlib import Path
+
+        path = Path(f"userbot/plugin/bot/{shortname}.py")
+        name = "userbot.plugin.bot.{}".format(shortname)
+        spec = importlib.util.spec_from_file_location(name, path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        LOGS.info("!!! Initiating BOT MODE !!!")
+        LOGS.info("Bot Mode Sucessfully imported " + shortname)
+    else:
+        import importlib
+        import sys
+        from pathlib import Path
+
+        path = Path(f"userbot/plugin/bot/{shortname}.py")
+        name = "userbot.plugin.bot.{}".format(shortname)
+        spec = importlib.util.spec_from_file_location(name, path)
+        mod = importlib.util.module_from_spec(spec)
+        mod.tgbot = bot.tgbot
+        mod.op_hellbot = bot.tgbot
+        mod.hellbot_cmd = hellbot_cmd
+        mod.inevitable = inevitable()
+        mod.group_cmd = group_cmd()
+        mod.superior = superior()
+        mod.pro_only = superior()
+        mod.grouponly = grouponly()
+        mod.admin_bot = admin_bot()
+        mod.is_admin = is_admin()
+        mod.pitaji = pitaji()
+        mod.private_cmd = private_cmd()
+        spec.loader.exec_module(mod)
+        sys.modules["userbot.plugin.bot" + shortname] = mod
+        LOGS.info("Bot Mode Has imported " + shortname)
