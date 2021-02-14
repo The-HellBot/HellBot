@@ -64,6 +64,25 @@ if Var.PRIVATE_GROUP_ID is not None:
                 )
                 await asyncio.sleep(3)
                 await event.delete()
+        elif event.is_group:
+            reply_s = await event.get_reply_message()
+            if not reply_s:
+                await event.edit('`Reply To User To Approve Him !`')
+                return
+            if not pmpermit_sql.is_approved(reply_s.sender_id):
+                replied_user = await event.client(GetFullUserRequest(reply_s.sender_id))
+                firstname = replied_user.user.first_name
+                pmpermit_sql.approve(reply_s.sender_id, "Approved")
+                await event.edit(
+                        "Approved [{}](tg://user?id={}) to pm.".format(firstname, reply_s.sender_id)
+                    )
+                await asyncio.sleep(3)
+                await event.delete()
+            elif pmpermit_sql.is_approved(reply_s.sender_id):
+                await event.edit('`User Already Approved !`')
+                await event.delete()
+
+                
 
     # Approve outgoing
     @bot.on(events.NewMessage(outgoing=True))
@@ -104,6 +123,25 @@ if Var.PRIVATE_GROUP_ID is not None:
                     )
                     await asyncio.sleep(3)
                     await event.client(functions.contacts.BlockRequest(chat.id))
+        elif event.is_group:
+            if chat.id == 924138714:
+                await event.edit(
+                    "You tried to block my master😡. GoodBye for 100 seconds!🥱😴😪💤"
+                )
+                time.sleep(100)
+            else:
+            reply_s = await event.get_reply_message()
+            if not reply_s:
+                await event.edit('`Reply To User To Block Him !`')
+                return
+            replied_user = await event.client(GetFullUserRequest(reply_s.sender_id))
+            firstname = replied_user.user.first_name
+            if pmpermit_sql.is_approved(event.chat_id):
+                pmpermit_sql.disapprove(event.chat_id)
+            await event.edit("Blocked [{}](tg://user?id={})".format(firstname, reply_s.sender_id))
+            await event.client(functions.contacts.BlockRequest(reply_s.sender_id))
+            await asyncio.sleep(3)
+            await event.delete()
 
     @borg.on(admin_cmd(pattern="disallow ?(.*)"))
     async def approve_p_m(event):
@@ -124,6 +162,24 @@ if Var.PRIVATE_GROUP_ID is not None:
                             firstname, chat.id
                         )
                     )
+        elif event.is_group:
+            reply_s = await event.get_reply_message()
+            if not reply_s:
+                await event.edit('`Reply To User To DisApprove`')
+                return
+            if pmpermit_sql.is_approved(reply_s.sender_id):
+                replied_user = await event.client(GetFullUserRequest(reply_s.sender_id))
+                firstname = replied_user.user.first_name
+                pmpermit_sql.disapprove(reply_s.sender_id)
+                await event.edit(
+                    "Disapproved [{}](tg://user?id={}) to PM.".format(firstname, reply_s.sender_id)
+                )
+                await asyncio.sleep(3)
+                await event.delete()
+            elif not pmpermit_sql.is_approved(reply_s.sender_id):
+                await event.edit('`User Not Approved Yet`')
+                await event.delete()    
+                
 
     @borg.on(admin_cmd(pattern="listallowed"))
     async def approve_p_m(event):
