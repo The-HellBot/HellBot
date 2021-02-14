@@ -16,8 +16,8 @@ hell = f"[{DEFAULTUSER}](tg://user?id={kraken})"
 async def love(event):
     if event.fwd_from:
         return
-    input_str = "Valentine's Day"
-    await event.edit(f"❤️🧡💛💚💙💜🤎🖤🤍\n    {input_str}\n🤍🖤🤎💜💙💚💛🧡❤️")
+    input_str = "♥ Valentine's Day ♥"
+    await event.edit(f"❤️🧡💛💚💙💜🤎🖤🤍\n    {input_str}    \n🤍🖤🤎💜💙💚💛🧡❤️")
     await sleep(1)
     await event.edit(f"🧡💛💚💙💜🤎🖤🤍❤️\n    {input_str}    \n❤️🤍🖤🤎💜💙💚💛🧡")
     await sleep(1)
@@ -35,7 +35,7 @@ async def love(event):
     await sleep(1)
     await event.edit(f"🤍❤️🧡💛💚💙💜🤎🖤\n    {input_str}    \n🖤🤎💜💙💚💛🧡❤️🤍")
     await sleep(2)
-    await event.edit("""__**HAPPY VALENTINE'S DAY**__ [❤️](https://telegra.ph/file/4d51f6a5d98ba94ae2af7.jpg)""")
+    await event.edit("__**HAPPY VALENTINE'S DAY**__ [❤️](https://telegra.ph/file/4d51f6a5d98ba94ae2af7.jpg)", link_preview=True)
     
     
 @hellbot.on(admin_cmd(pattern="vday$"))
@@ -44,7 +44,7 @@ async def gif(event):
     if event.fwd_from:
         return
     event = await eor(event, "❤️❤️")
-    await sleep(2)
+    await sleep(1)
     x = random.randrange(1, 21)
     if x == 1:
         await event.edit(f"My love for you \nSets my heart on fire \nand makes each day of my life \nSo special \n\n [✍️](https://telegra.ph/file/688abc98761f031128b9b.jpg) {hell}", link_preview=True)
