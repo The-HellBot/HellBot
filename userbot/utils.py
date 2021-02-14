@@ -30,7 +30,7 @@ if ENV:
 else:
     if os.path.exists("config.py"):
         from config import Development as Config
-
+bothandler = Config.BOT_TRIGGER
 
 
 def load_module(shortname):
@@ -602,3 +602,23 @@ def command(**args):
         return func
 
     return decorator
+
+def hellbot_cmd(add_cmd, is_args=False):
+    def cmd(func):
+        op_hellbot = bot.tgbot
+        if is_args:
+            pattern = bothandler + add_cmd + "(?: |$)(.*)"
+        elif is_args == "hellboy":
+            pattern = bothandler + add_cmd + " (.*)"
+        elif is_args == "supp":
+            pattern = bothandler + add_cmd
+        elif is_args == "flys":
+            pattern = bothandler + add_cmd + " (\S+)"
+        else:
+            pattern = bothandler + add_cmd + "$"
+        op_hellbot.add_event_handler(
+            func, events.NewMessage(incoming=True, pattern=pattern)
+        )
+
+    return cmd
+
