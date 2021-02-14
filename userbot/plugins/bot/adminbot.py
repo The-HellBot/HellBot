@@ -116,7 +116,7 @@ async def promote(event):
     chat.creator
     new_rights = ChatAdminRights(
         add_admins=False,
-        invite_users=False,
+        invite_users=True,
         change_info=False,
         ban_users=True,
         delete_messages=True,
