@@ -5,7 +5,7 @@ from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
 import os
 from telethon import TelegramClient
 from var import Var
-from userbot.utils import load_module
+from userbot.utils import load_module, start_bot
 from userbot import LOAD_PLUG, BOTLOG_CHATID, LOGS, hellversion
 from userbot.Config import Config
 from pathlib import Path
@@ -49,7 +49,7 @@ for name in files:
         load_module(shortname.replace(".py", ""))
 
 if Config.BOT_MODE == "ON":
-    path = "userbot/plugin/bot/*.py"
+    path = "userbot/plugins/bot/*.py"
     files = glob.glob(path)
     for name in files:
         with open(name) as f:
