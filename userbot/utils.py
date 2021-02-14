@@ -61,6 +61,11 @@ def load_module(shortname):
         # support for uniborg
         sys.modules["uniborg.util"] = userbot.utils
         mod.Config = Config
+        mod.no_grp = no_grp()
+        mod.pm_limit = pm_limit()
+        mod.if_bot = if_bot()
+        mod.iadmin = iadmin()
+        mod.forwards = forwards()
         mod.borg = bot
         mod.hellbot = bot
         mod.edit_or_reply = edit_or_reply
@@ -751,7 +756,7 @@ def private_cmd():
     return decorator
 
 
-def botmode(shortname):
+def start_bot(shortname):
     if shortname.startswith("__"):
         pass
     elif shortname.endswith("_"):
@@ -759,8 +764,8 @@ def botmode(shortname):
         import sys
         from pathlib import Path
 
-        path = Path(f"userbot/plugin/bot/{shortname}.py")
-        name = "userbot.plugin.bot.{}".format(shortname)
+        path = Path(f"userbot/plugins/bot/{shortname}.py")
+        name = "userbot.plugins.bot.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
@@ -771,8 +776,8 @@ def botmode(shortname):
         import sys
         from pathlib import Path
 
-        path = Path(f"userbot/plugin/bot/{shortname}.py")
-        name = "userbot.plugin.bot.{}".format(shortname)
+        path = Path(f"userbot/plugins/bot/{shortname}.py")
+        name = "userbot.plugins.bot.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         mod.tgbot = bot.tgbot
@@ -788,5 +793,5 @@ def botmode(shortname):
         mod.pitaji = pitaji()
         mod.private_cmd = private_cmd()
         spec.loader.exec_module(mod)
-        sys.modules["userbot.plugin.bot" + shortname] = mod
+        sys.modules["userbot.plugins.bot" + shortname] = mod
         LOGS.info("Bot Mode Has imported " + shortname)
