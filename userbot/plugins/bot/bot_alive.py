@@ -46,5 +46,5 @@ pm_caption += "    [✨REPO✨](https://github.com/hellboy-op/hellbot) 🔹 [�
 
 @hellbot_cmd("alive", is_args=False)
 @pitaji
-async def friday(event):
+async def hellboy(event):
     await tgbot.send_file(event.chat_id, PM_IMG, caption=pm_caption)
