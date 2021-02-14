@@ -1,7 +1,6 @@
-from userbot import *
-from userbot.utils import *
+from userbot import ALIVE_NAME, bot, hellversion
 from userbot.Config import Config
-from telethon import events, version
+from telethon import version
 from telethon.events import NewMessage
 from telethon.tl.custom import Dialog
 from telethon.tl.types import Channel, Chat, User
