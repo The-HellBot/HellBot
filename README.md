@@ -9,7 +9,8 @@
 [![Contact Me](https://img.shields.io/badge/Telegram-Contact%20Me-informational)](https://t.me/kraken_the_badass)
 
 
-# †hê Hêllẞø†
+<h1 align="center">⚡ †hê Hêllẞø† ⚡</h1>
+<h4 align="center">Legendary AF HellBot</h4>
 
 This is a userbot made for telegram. I made this userbot with help of all other userbots available in telegram. All credits goes to its Respective Owners....
 
