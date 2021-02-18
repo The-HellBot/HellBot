@@ -1,6 +1,6 @@
-from userbot import *
-from userbot.utils import *
-from userbot.uniborgConfig import Config
+from userbot import ALIVE_NAME, bot, hellversion
+from userbot.Config import Config
+from telethon import version
 from telethon.events import NewMessage
 from telethon.tl.custom import Dialog
 from telethon.tl.types import Channel, Chat, User
@@ -33,7 +33,7 @@ pm_caption += f"🛡️TELETHON🛡️ : `{version.__version__}` \n"
 
 pm_caption += f"😈Hêllẞø†😈       : __**{hellversion}**__\n"
 
-pm_caption += f"⚡ ẞø† ⚡              :- __**{botversion}**__\n"
+pm_caption += f"⚡ ẞø† ⚡            : __**{botversion}**__\n"
 
 pm_caption += f"⚜️Sudo⚜️            : `{sudou}`\n"
 
@@ -46,5 +46,5 @@ pm_caption += "    [✨REPO✨](https://github.com/hellboy-op/hellbot) 🔹 [�
 
 @hellbot_cmd("alive", is_args=False)
 @pitaji
-async def friday(event):
+async def hellboy(event):
     await tgbot.send_file(event.chat_id, PM_IMG, caption=pm_caption)
