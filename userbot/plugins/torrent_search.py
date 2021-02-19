@@ -3,7 +3,7 @@ Torrent Search Plugin for Userbot. //torrentdownloads.me
 cmd: .search search_string
 Note: Number of results are currently limited to 15
 By:-@Zero_cool7870
-"""
+
 from datetime import datetime
 import requests
 from bs4 import BeautifulSoup as bs
@@ -219,3 +219,4 @@ CmdHelp("torrent_search").add_command(
 ).add_command(
   "movie torrentz2.eu", "<query>", "Fetches torrent links of given query alternative way"
 ).add()
+"""
