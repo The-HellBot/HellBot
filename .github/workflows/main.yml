@@ -8,8 +8,8 @@ jobs:
       - name: Find and Replace
         uses: jacobtomlinson/gha-find-replace@master
         with:
-          find: "master"
-          replace: "test"
+          find: "test"
+          replace: "master"
       - name: Pull All Updates
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
