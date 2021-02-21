@@ -33,7 +33,7 @@ async def kakashi(magisk):
         "⦁ **Beta**": magisk_repo + "master/beta.json",
         "⦁ **Canary**": magisk_repo + "canary/canary.json",
     }
-    releases = "**Latest Magisk Releases**\n\n"
+    releases = "**Lamaster Magisk Releases**\n\n"
     for name, release_url in magisk_dict.items():
         data = get(release_url).json()
         if "canary" in release_url:
