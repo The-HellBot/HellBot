@@ -94,7 +94,7 @@ async def FindMusicPleaseBot(gaana):
 
 
 # -------------------------------------------------------------------------------
-
+"""
 
 import json
 import os
@@ -361,7 +361,7 @@ async def download_video(v_url):
         os.remove(f"{rip_data['id']}.mp4")
         await rkp.delete()
 
-
+"""
 # -------------------------------------------------------------------------------
 import os
 from telethon.tl.functions.channels import JoinChannelRequest
@@ -507,9 +507,9 @@ async def _(event):
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 CmdHelp("songs").add_command(
-  "song", "<song name>", "Searches the song from youtube and upload in current chat in audio(.mp3) format. •Highest Quality"
+  "song", "<song name>", "[ DISABLED ]Searches the song from youtube and upload in current chat in audio(.mp3) format. •Highest Quality"
 ).add_command(
-  "vsong", "<song name>", "Searches the song from youtube and upload in current chat in video(.mp4) format. •Highest Quality"
+  "vsong", "<song name>", "[ DISABLED ]Searches the song from youtube and upload in current chat in video(.mp4) format. •Highest Quality"
 ).add_command(
   "getsong", "<song name>", "Searches song from a local tg bot @Songsforyoubot and sends the music in current chat"
 ).add_command(
