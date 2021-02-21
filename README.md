@@ -86,7 +86,7 @@ An example `local_config.py` file could be:
 __The Userbot should work by setting only the first two variables__
 
 ```python3
-from heroku_config import Var
+from sample_config import Var
 
 class Development(Var):
   APP_ID = 6
