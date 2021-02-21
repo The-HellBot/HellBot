@@ -10,9 +10,12 @@
 <h1 align="center">⚡ †hê Hêllẞø† ⚡</h1>
 <h4 align="center">Legendary AF HellBot</h4>
 
-This is a userbot made for telegram. I made this userbot with help of all other userbots available in telegram. All credits goes to its Respective Owners....
+<h5>This is a userbot made for telegram. I made this userbot with help of all other userbots available in telegram. All credits goes to its Respective Owners.</h5>
 
-This is the one and only official HellBot Userbot made by [@Kraken_The_BadASS](https://t.me/kraken_the_badass) Also join support channel and group :- https://t.me/HellBot_Official Enjoy Your Bot!!💝
+This is the one and only official HellBot Userbot made by #Team_HellBoy.
+Don't forget to star this repo if you liked it.
+Enjoy Your Bot!!💝
+
 [![HellBot logo](https://telegra.ph/file/2165457cc7e428ff64919.jpg)](https://t.me/hellbot_official)
 
 
