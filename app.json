@@ -38,8 +38,8 @@
       "value": "",
       "required": false
     },
-    "BIO_MSG": {
-      "description": "Put Your Telegram Bio Here Required For Auto Bio.",
+    "BOT_MODE": {
+      "description": "Fill ON if you want Bot Mode activated. Else Leave It Blank.",
       "value": "",
       "required": false
     },
@@ -69,11 +69,6 @@
     },
     "OCR_SPACE_API_KEY": {
       "description": "Register an account on ocr.space to get this value(API key)....",
-      "value": "",
-      "required": false
-    },
-    "LYDIA_API_KEY": {
-      "description": "Needed for Lydia AI. Follow https://telegra.ph/Lydia-09-05 to get your API.",
       "value": "",
       "required": false
     },
@@ -128,10 +123,6 @@
     "TG_BOT_USER_NAME_BF_HER": {
       "description": "Needed for inline buttons maker. Make a bot at @BotFather and get the username of your bot",
       "value": ""
-    },
-    "OPEN_WEATHER_MAP_APPID": {
-      "description": "Get your own APPID from https://api.openweathermap.org/data/2.5/weather",
-      "required": false
     },
     "TZ": {
       "description": "Required for Correct Time for autopic get from http://www.timezoneconverter.com/cgi-bin/findzone.tzc",
