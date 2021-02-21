@@ -80,7 +80,7 @@ def time_formatter(milliseconds: int) -> str:
 
 
 @bot.on(admin_cmd(pattern=r"download(?: |$)(.*)", outgoing=True))
-@bot.on(sudo_cmd(pattern=r"diwnload(?: |$)(.*)", allow_sudo=True))
+@bot.on(sudo_cmd(pattern=r"download(?: |$)(.*)", allow_sudo=True))
 async def download(target_file):
     """ For .dl command, download files to the userbot's server. """
     await target_file.edit("Processing using userbot server ( ◜‿◝ )♡")
