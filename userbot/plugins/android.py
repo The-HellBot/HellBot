@@ -18,7 +18,7 @@ from hellbot.utils import *
 GITHUB = "https://github.com"
 DEVICES_DATA = (
     "https://raw.githubusercontent.com/androidtrackers/"
-    "certified-android-devices/master/devices.json"
+    "certified-android-devices/test/devices.json"
 )
 
 
@@ -29,8 +29,8 @@ async def kakashi(magisk):
         return
     magisk_repo = "https://raw.githubusercontent.com/topjohnwu/magisk_files/"
     magisk_dict = {
-        "⦁ **Stable**": magisk_repo + "master/stable.json",
-        "⦁ **Beta**": magisk_repo + "master/beta.json",
+        "⦁ **Stable**": magisk_repo + "test/stable.json",
+        "⦁ **Beta**": magisk_repo + "test/beta.json",
         "⦁ **Canary**": magisk_repo + "canary/canary.json",
     }
     releases = "**Latest Magisk Releases**\n\n"
@@ -69,7 +69,7 @@ async def device_info(request):
     data = json.loads(
         get(
             "https://raw.githubusercontent.com/androidtrackers/"
-            "certified-android-devices/master/by_device.json"
+            "certified-android-devices/test/by_device.json"
         ).text
     )
     results = data.get(codename)
@@ -108,7 +108,7 @@ async def codename_info(request):
     data = json.loads(
         get(
             "https://raw.githubusercontent.com/androidtrackers/"
-            "certified-android-devices/master/by_brand.json"
+            "certified-android-devices/test/by_brand.json"
         ).text
     )
     devices_lower = {k.lower(): v for k, v in data.items()}  # Lower brand names in JSON

@@ -108,7 +108,7 @@ async def _(event):
         )
     if x == 22:
         await event.edit(
-            "🎶 This hit, that ice cold \n Michelle Pfeiffer, that white gold \n This one for them hood girls \n Them good girls straight masterpieces \n Stylin', wilin', livin' it up in the city \n Got Chucks on with Saint Laurent \n Gotta kiss myself, I'm so pretty \n \n I'm too hot (hot damn) \n Called a police and a fireman \n I'm too hot (hot damn) \n Make a dragon wanna retire man \n I'm too hot (hot damn) \n Say my name you know who I am \n I'm too hot (hot damn) \n And my band 'bout that money, break it down 🎶 \n **-Uptown Funk**"
+            "🎶 This hit, that ice cold \n Michelle Pfeiffer, that white gold \n This one for them hood girls \n Them good girls straight testpieces \n Stylin', wilin', livin' it up in the city \n Got Chucks on with Saint Laurent \n Gotta kiss myself, I'm so pretty \n \n I'm too hot (hot damn) \n Called a police and a fireman \n I'm too hot (hot damn) \n Make a dragon wanna retire man \n I'm too hot (hot damn) \n Say my name you know who I am \n I'm too hot (hot damn) \n And my band 'bout that money, break it down 🎶 \n **-Uptown Funk**"
         )
     if x == 23:
         await event.edit(
@@ -1246,7 +1246,7 @@ async def _(event):
         )
     if x == 74:
         await event.edit(
-            '`"Everybody is genious of its own. But if you judge a fish by its ability to climb a tree rather than swimming, she will felt whole life like dumb. So master your field and recognise it very well rather than going after the blind suspections."`'
+            '`"Everybody is genious of its own. But if you judge a fish by its ability to climb a tree rather than swimming, she will felt whole life like dumb. So test your field and recognise it very well rather than going after the blind suspections."`'
         )
     if x == 75:
         await event.edit(
@@ -1326,7 +1326,7 @@ async def _(event):
         await event.edit('`"What scene from a TV show will you never forget?"`')
     if x == 5:
         await event.edit(
-            '`"If you could become a master in one skill, what skill would you choose?"`'
+            '`"If you could become a test in one skill, what skill would you choose?"`'
         )
     if x == 6:
         await event.edit('`"What three words can describe you?"`')

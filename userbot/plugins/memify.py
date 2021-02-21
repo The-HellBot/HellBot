@@ -37,7 +37,7 @@ async def handler(event):
     os.remove(meme)
 
 
-# Taken from https://github.com/UsergeTeam/Userge-Plugins/blob/master/plugins/memify.py#L64
+# Taken from https://github.com/UsergeTeam/Userge-Plugins/blob/test/plugins/memify.py#L64
 # Maybe edited to suit the needs of this module
 
 
