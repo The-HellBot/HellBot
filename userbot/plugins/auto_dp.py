@@ -37,7 +37,7 @@ COLLECTION_STRING2 = [
 ]
 COLLECTION_STRING3 = [
     "indian-actress-wallpapers",
-    "latest-bollywood-actress-wallpapers-2018-hd",
+    "lamaster-bollywood-actress-wallpapers-2018-hd",
     "bollywood-actress-wallpaper",
     "hd-wallpapers-of-bollywood-actress",
     "new-bollywood-actress-wallpaper-2018",
@@ -111,7 +111,7 @@ async def animeppbat():
     fy = "http://getwallpapers.com" + random.choice(f)
     if not os.path.exists("f.ttf"):
         urllib.request.urlretrieve(
-            "https://github.com/rebel6969/mym/raw/test/Rebel-robot-Regular.ttf",
+            "https://github.com/rebel6969/mym/raw/master/Rebel-robot-Regular.ttf",
             "f.ttf",
         )
     urllib.request.urlretrieve(fy, "donottouch.jpg")
@@ -126,7 +126,7 @@ async def animeppthor():
     fy = "http://getwallpapers.com" + random.choice(f)
     if not os.path.exists("f.ttf"):
         urllib.request.urlretrieve(
-            "https://github.com/rebel6969/mym/raw/test/Rebel-robot-Regular.ttf",
+            "https://github.com/rebel6969/mym/raw/master/Rebel-robot-Regular.ttf",
             "f.ttf",
         )
     urllib.request.urlretrieve(fy, "donottouch.jpg")
@@ -141,7 +141,7 @@ async def animeppactress():
     fy = "http://getwallpapers.com" + random.choice(f)
     if not os.path.exists("f.ttf"):
         urllib.request.urlretrieve(
-            "https://github.com/rebel6969/mym/raw/test/Rebel-robot-Regular.ttf",
+            "https://github.com/rebel6969/mym/raw/master/Rebel-robot-Regular.ttf",
             "f.ttf",
         )
     urllib.request.urlretrieve(fy, "donottouch.jpg")
@@ -156,7 +156,7 @@ async def animepppoke():
     fy = "http://getwallpapers.com" + random.choice(f)
     if not os.path.exists("f.ttf"):
         urllib.request.urlretrieve(
-            "https://github.com/rebel6969/mym/raw/test/Rebel-robot-Regular.ttf",
+            "https://github.com/rebel6969/mym/raw/master/Rebel-robot-Regular.ttf",
             "f.ttf",
         )
     urllib.request.urlretrieve(fy, "donottouch.jpg")
@@ -171,7 +171,7 @@ async def animeppaven():
     fy = "http://getwallpapers.com" + random.choice(f)
     if not os.path.exists("f.ttf"):
         urllib.request.urlretrieve(
-            "https://github.com/rebel6969/mym/raw/test/Rebel-robot-Regular.ttf",
+            "https://github.com/rebel6969/mym/raw/master/Rebel-robot-Regular.ttf",
             "f.ttf",
         )
     urllib.request.urlretrieve(fy, "donottouch.jpg")
@@ -186,7 +186,7 @@ async def animeppgame():
     fy = "http://getwallpapers.com" + random.choice(f)
     if not os.path.exists("f.ttf"):
         urllib.request.urlretrieve(
-            "https://github.com/rebel6969/mym/raw/test/Rebel-robot-Regular.ttf",
+            "https://github.com/rebel6969/mym/raw/master/Rebel-robot-Regular.ttf",
             "f.ttf",
         )
     urllib.request.urlretrieve(fy, "donottouch.jpg")
@@ -201,7 +201,7 @@ async def animepphack():
     fy = "http://getwallpapers.com" + random.choice(f)
     if not os.path.exists("f.ttf"):
         urllib.request.urlretrieve(
-            "https://github.com/rebel6969/mym/raw/test/Rebel-robot-Regular.ttf",
+            "https://github.com/rebel6969/mym/raw/master/Rebel-robot-Regular.ttf",
             "f.ttf",
         )
     urllib.request.urlretrieve(fy, "donottouch.jpg")
@@ -216,7 +216,7 @@ async def animeppspace():
     fy = "http://getwallpapers.com" + random.choice(f)
     if not os.path.exists("f.ttf"):
         urllib.request.urlretrieve(
-            "https://github.com/rebel6969/mym/raw/test/Rebel-robot-Regular.ttf",
+            "https://github.com/rebel6969/mym/raw/master/Rebel-robot-Regular.ttf",
             "f.ttf",
         )
     urllib.request.urlretrieve(fy, "donottouch.jpg")
@@ -231,7 +231,7 @@ async def animeppwall():
     fy = "http://getwallpapers.com" + random.choice(f)
     if not os.path.exists("f.ttf"):
         urllib.request.urlretrieve(
-            "https://github.com/rebel6969/mym/raw/test/Rebel-robot-Regular.ttf",
+            "https://github.com/rebel6969/mym/raw/master/Rebel-robot-Regular.ttf",
             "f.ttf",
         )
     urllib.request.urlretrieve(fy, "donottouch.jpg")

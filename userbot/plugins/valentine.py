@@ -83,7 +83,7 @@ async def gif(event):
     if x == 18:
         await event.edit(f"I cherish every minute that I spend with you! And I am so blessed that I can. \n\n [✍️](https://telegra.ph/file/6d68acc1bd43a8690a228.jpg) {hell}", link_preview=True)
     if x == 19:
-        await event.edit(f"Happy Valentine’s Day to the sweetest valentine I could want. You are my sweetheart, and I am glad you’re mine.\n\n [✍️](https://telegra.ph/file/26b052f976a7b5d3ca554.jpg) {hell}", link_preview=True)
+        await event.edit(f"Happy Valentine’s Day to the sweemaster valentine I could want. You are my sweetheart, and I am glad you’re mine.\n\n [✍️](https://telegra.ph/file/26b052f976a7b5d3ca554.jpg) {hell}", link_preview=True)
     if x == 20:
         await event.edit(f"God has created you only for me, because he knows no one can love you more than me! Happy Valentine’s Day!\n\n [✍️](https://telegra.ph/file/b34e2679ff3cbb6225917.jpg) {hell}", link_preview=True)
     if x == 21:

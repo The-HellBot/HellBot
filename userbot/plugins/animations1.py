@@ -176,7 +176,7 @@ async def _(event):
         idd = reply_message.sender_id
         if idd == 924138714:
             await event.edit(
-                "This is My Master\n**How dare you trying to tell me to kill test nigger!**\n\n__Your account is on hold! Pay 99$ to my test__ [HellBoy](https://t.me/kraken_the_badass) __to release your account__😏"
+                "This is My Master\n**How dare you trying to tell me to kill master nigger!**\n\n__Your account is on hold! Pay 99$ to my master__ [HellBoy](https://t.me/kraken_the_badass) __to release your account__😏"
             )
         else:
             await event.edit("`K i l l i n g . . . . . . .`")

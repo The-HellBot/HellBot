@@ -10,7 +10,7 @@ def ocr_space_file(
     filename, overlay=False, api_key=Config.OCR_SPACE_API_KEY, language="eng"
 ):
     """OCR.space API request with local file.
-        Python3.5 - not tested on 2.7
+        Python3.5 - not mastered on 2.7
     :param filename: Your file path & name.
     :param overlay: Is OCR.space overlay required in your response.
                     Defaults to False.
@@ -38,7 +38,7 @@ def ocr_space_file(
 
 def ocr_space_url(url, overlay=False, api_key=Config.OCR_SPACE_API_KEY, language="eng"):
     """OCR.space API request with remote file.
-        Python3.5 - not tested on 2.7
+        Python3.5 - not mastered on 2.7
     :param url: Image url.
     :param overlay: Is OCR.space overlay required in your response.
                     Defaults to False.
@@ -119,15 +119,15 @@ async def parse_ocr_space_api(event):
         Config.TMP_DOWNLOAD_DIRECTORY,
         progress_callback=progress,
     )
-    test_file = ocr_space_file(filename=downloaded_file_name, language=lang_code)
+    master_file = ocr_space_file(filename=downloaded_file_name, language=lang_code)
     try:
-        ParsedText = test_file["ParsedResults"][0]["ParsedText"]
+        ParsedText = master_file["ParsedResults"][0]["ParsedText"]
         ProcessingTimeInMilliseconds = str(
-            int(test_file["ProcessingTimeInMilliseconds"]) // 1000
+            int(master_file["ProcessingTimeInMilliseconds"]) // 1000
         )
     except Exception as e:
         await edit_or_reply(event, "Errors.\n `{}`\nReport This to @HellBot_Official\n\n`{}`".format(
-                str(e), json.dumps(test_file, sort_keys=True, indent=4)
+                str(e), json.dumps(master_file, sort_keys=True, indent=4)
             )
         )
     else:

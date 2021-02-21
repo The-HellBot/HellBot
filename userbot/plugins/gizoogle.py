@@ -25,7 +25,7 @@ async def gizoogle(event):
 
 
 def text(input_text: str) -> str:
-    """Taken from https://github.com/chafla/gizoogle-py/blob/test/gizoogle.py"""
+    """Taken from https://github.com/chafla/gizoogle-py/blob/master/gizoogle.py"""
     params = {"translatetext": input_text}
     target_url = "http://www.gizoogle.net/textilizer.php"
     resp = requests.post(target_url, data=params)

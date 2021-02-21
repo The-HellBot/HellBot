@@ -1,16 +1,16 @@
-"""Check your internet speed powered by speedtest.net
-Syntax: .speedtest
+"""Check your internet speed powered by speedmaster.net
+Syntax: .speedmaster
 Available Options: image, file, text"""
 from datetime import datetime
 
-import speedtest
+import speedmaster
 
 from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 
 
-@bot.on(admin_cmd(pattern="speedtest ?(.*)"))
-@bot.on(sudo_cmd(pattern="speedtest ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="speedmaster ?(.*)"))
+@bot.on(sudo_cmd(pattern="speedmaster ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -25,7 +25,7 @@ async def _(event):
         as_text = True
     await edit_or_reply(event, "Calculating my internet speed. Please wait!")
     start = datetime.now()
-    s = speedtest.Speedtest()
+    s = speedmaster.Speedmaster()
     s.get_best_server()
     s.download()
     s.upload()
@@ -43,7 +43,7 @@ async def _(event):
         reply_msg_id = event.reply_to_msg_id
     try:
         response = s.results.share()
-        speedtest_image = response
+        speedmaster_image = response
         if as_text:
             await edit_or_reply(event, 
                 """**SpeedTest** completed in {} seconds
@@ -63,7 +63,7 @@ ISP Rating: {}""".format(
         else:
             await borg.send_file(
                 event.chat_id,
-                speedtest_image,
+                speedmaster_image,
                 caption="**SpeedTest** completed in {} seconds".format(ms),
                 force_document=as_document,
                 reply_to=reply_msg_id,
@@ -96,6 +96,6 @@ def convert_from_bytes(size):
         n += 1
     return f"{round(size, 2)} {units[n]}"
 
-CmdHelp("speedtest").add_command(
-  "speedtest", None, "Calculates the Internet Speed of your Bot."
+CmdHelp("speedmaster").add_command(
+  "speedmaster", None, "Calculates the Internet Speed of your Bot."
 ).add()

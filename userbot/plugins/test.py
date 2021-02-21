@@ -7,8 +7,8 @@ from hellbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 
 
-@bot.on(admin_cmd(pattern="test ?(.*)"))
-@bot.on(sudo_cmd(pattern="test ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="master ?(.*)"))
+@bot.on(sudo_cmd(pattern="master ?(.*)", allow_sudo=True))
 async def _(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
 
@@ -36,6 +36,6 @@ async def _(event):
             "Your[Hêllẞø†](https:/t.me/hellbot_official) is working Fine...\n       Join @HellBot_Official_Chat For Any Help......"
         )
 
-CmdHelp("test").add_command(
-  "test", None, "Test wether your bot is running or not."
+CmdHelp("master").add_command(
+  "master", None, "Test wether your bot is running or not."
 ).add()

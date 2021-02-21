@@ -100,12 +100,12 @@ async def gban(userbot):
             await userbot.client(BlockRequest(user))
         except:
             pass
-        testuserbot = [
+        masteruserbot = [
             d.entity.id
             for d in await userbot.client.get_dialogs()
             if (d.is_group or d.is_channel)
         ]
-        for i in testuserbot:
+        for i in masteruserbot:
             try:
                 await userbot.client.edit_permissions(i, user, view_messages=False)
                 a += 1
@@ -166,12 +166,12 @@ async def gunban(userbot):
             await userbot.client(UnblockRequest(user))
         except:
             pass
-        testuserbot = [
+        masteruserbot = [
             d.entity.id
             for d in await userbot.client.get_dialogs()
             if (d.is_group or d.is_channel)
         ]
-        for i in testuserbot:
+        for i in masteruserbot:
             try:
                 await userbot.client.edit_permissions(i, user, send_messages=True)
                 a += 1

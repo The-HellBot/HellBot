@@ -18,7 +18,7 @@ from hellbot.utils import *
 GITHUB = "https://github.com"
 DEVICES_DATA = (
     "https://raw.githubusercontent.com/androidtrackers/"
-    "certified-android-devices/test/devices.json"
+    "certified-android-devices/master/devices.json"
 )
 
 
@@ -29,11 +29,11 @@ async def kakashi(magisk):
         return
     magisk_repo = "https://raw.githubusercontent.com/topjohnwu/magisk_files/"
     magisk_dict = {
-        "⦁ **Stable**": magisk_repo + "test/stable.json",
-        "⦁ **Beta**": magisk_repo + "test/beta.json",
+        "⦁ **Stable**": magisk_repo + "master/stable.json",
+        "⦁ **Beta**": magisk_repo + "master/beta.json",
         "⦁ **Canary**": magisk_repo + "canary/canary.json",
     }
-    releases = "**Latest Magisk Releases**\n\n"
+    releases = "**Lamaster Magisk Releases**\n\n"
     for name, release_url in magisk_dict.items():
         data = get(release_url).json()
         if "canary" in release_url:
@@ -69,7 +69,7 @@ async def device_info(request):
     data = json.loads(
         get(
             "https://raw.githubusercontent.com/androidtrackers/"
-            "certified-android-devices/test/by_device.json"
+            "certified-android-devices/master/by_device.json"
         ).text
     )
     results = data.get(codename)
@@ -108,7 +108,7 @@ async def codename_info(request):
     data = json.loads(
         get(
             "https://raw.githubusercontent.com/androidtrackers/"
-            "certified-android-devices/test/by_brand.json"
+            "certified-android-devices/master/by_brand.json"
         ).text
     )
     devices_lower = {k.lower(): v for k, v in data.items()}  # Lower brand names in JSON
@@ -225,7 +225,7 @@ async def twrp(request):
     size = page.find("span", {"class": "filesize"}).text
     date = page.find("em").text.strip()
     reply = (
-        f"**Latest TWRP for {device}:**\n"
+        f"**Lamaster TWRP for {device}:**\n"
         f"[{dl_file}]({dl_link}) - __{size}__\n"
         f"**Updated:** __{date}__\n"
     )
@@ -233,7 +233,7 @@ async def twrp(request):
 
 
 CmdHelp("android").add_command(
-  'magisk', None, 'Get latest magisk release'
+  'magisk', None, 'Get lamaster magisk release'
 ).add_command(
   'device', '<codename>', 'Get info about android device codename or model'
 ).add_command(
@@ -241,5 +241,5 @@ CmdHelp("android").add_command(
 ).add_command(
   'specs', '<brand> <device>', 'Get device specifications info.'
 ).add_command(
-  'twrp', '<codename>', 'Get latest twrp download for android device.'
+  'twrp', '<codename>', 'Get lamaster twrp download for android device.'
 ).add()

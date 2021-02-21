@@ -130,7 +130,7 @@ async def ammastar(hellstar):
         
 @bot.on(admin_cmd(pattern=r"lmoon", outgoing=True))
 @bot.on(sudo_cmd(pattern=r"lmoon", allow_sudo=True))
-async def test(event):
+async def master(event):
     if event.fwd_from:
         return
     await edit_or_reply(event, 
@@ -140,7 +140,7 @@ async def test(event):
 
 @bot.on(admin_cmd(pattern=r"city", outgoing=True))
 @bot.on(sudo_cmd(pattern=r"city", allow_sudo=True))
-async def test(event):
+async def master(event):
     if event.fwd_from:
         return
     await edit_or_reply(event, 

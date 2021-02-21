@@ -24,7 +24,7 @@ async def _(event):
     try:
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--ignore-certificate-errors")
-        chrome_options.add_argument("--test-type")
+        chrome_options.add_argument("--master-type")
         chrome_options.add_argument("--headless")
         # https://stackoverflow.com/a/53073789/4723940
         chrome_options.add_argument("--no-sandbox")

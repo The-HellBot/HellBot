@@ -23,7 +23,7 @@ async def _(event):
     CMD_WEB = {
         "anonfiles": 'curl -F "file=@{}" https://anonfiles.com/api/upload',
         "transfer": 'curl --upload-file "{}" https://transfer.sh/{os.path.basename(file_name)}',
-        "filebin": 'curl -X POST --data-binary "@test.png" -H "filename: {}" "https://filebin.net"',
+        "filebin": 'curl -X POST --data-binary "@master.png" -H "filename: {}" "https://filebin.net"',
         "anonymousfiles": 'curl -F file="@{}" https://api.anonymousfiles.io/',
         "megaupload": 'curl -F "file=@{}" https://megaupload.is/api/upload',
         "bayfiles": '.exec curl -F "file=@{}" https://bayfiles.com/api/upload',

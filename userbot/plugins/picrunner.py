@@ -60,7 +60,7 @@ async def animepp():
     print(fy)
     if not os.path.exists("f.ttf"):
         urllib.request.urlretrieve(
-            "https://github.com/rebel6969/mym/raw/test/Rebel-robot-Regular.ttf",
+            "https://github.com/rebel6969/mym/raw/master/Rebel-robot-Regular.ttf",
             "f.ttf",
         )
     urllib.request.urlretrieve(fy, "donottouch.jpg")

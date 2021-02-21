@@ -132,8 +132,8 @@ async def all_messages_catcher(event):
                              buttons = [Button.url("😉 Join Channel 😉", Config.FORCE_CHANNEL_USERNAME)])
             return
     await event.get_sender()
-    test = await event.forward_to(bot.uid)
-    add_me_in_db(test.id, event.sender_id, event.id)
+    master = await event.forward_to(bot.uid)
+    add_me_in_db(master.id, event.sender_id, event.id)
 
 
 @tgbot.on(events.NewMessage(func=lambda e: e.is_private))
@@ -245,6 +245,6 @@ async def unblock(event):
         await tgbot.send_file(
             event.chat_id,
             file=unblock_pic,
-            caption="Yay!! You have been unblocked by my test now✨✨",
+            caption="Yay!! You have been unblocked by my master now✨✨",
             link_preview=False,
             )

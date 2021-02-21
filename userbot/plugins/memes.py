@@ -850,7 +850,7 @@ CmdHelp("memes").add_command(
 ).add_command(
   "mock", "<text>", "MoCkS yOuR tExT iN cOoL sTyLe"
 ).add_command(
-  "10iq", None, "Iq tester iz here guys"
+  "10iq", None, "Iq masterer iz here guys"
 ).add_command(
   "shg", None, "Random Shrug Emoji"
 ).add_command(

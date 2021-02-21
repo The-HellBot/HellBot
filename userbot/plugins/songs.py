@@ -139,8 +139,8 @@ async def download_video(v_url):
     if not url:
         return await rkp.edit("**Error** \n__Usage:__ `song <song name>`")
     search = SearchVideos(url, offset=1, mode="json", max_results=1)
-    test = search.result()
-    p = json.loads(test)
+    master = search.result()
+    p = json.loads(master)
     q = p.get("search_result")
     try:
         url = q[0]["link"]
@@ -260,8 +260,8 @@ async def download_video(v_url):
     if not url:
         return await rkp.edit("**Error** \n__Usage:__ `vsong <song name>`")
     search = SearchVideos(url, offset=1, mode="json", max_results=1)
-    test = search.result()
-    p = json.loads(test)
+    master = search.result()
+    p = json.loads(master)
     q = p.get("search_result")
     try:
         url = q[0]["link"]

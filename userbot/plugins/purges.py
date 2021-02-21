@@ -56,7 +56,7 @@ CmdHelp("purge").add_command(
 ).add_command(
   "purge", "<reply>", "Purges all messages starting from the reply."
 ).add_command(
-  "purgeme", "<count>", "Deletes 'x' amount of your latest messages."
+  "purgeme", "<count>", "Deletes 'x' amount of your lamaster messages."
 ).add_command(
   "sd", "<time> <message>", "Creates a message that selfdestructs in 'x' seconds. Keep the seconds under 100 since it puts your bot to sleep"
 ).add()

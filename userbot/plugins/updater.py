@@ -23,7 +23,7 @@ from var import Var
 from userbot.cmdhelp import CmdHelp
 
 UPSTREAM_REPO_URL = Config.UPSTREAM_REPO
-UPSTREAM_REPO_BRANCH = "test"
+UPSTREAM_REPO_BRANCH = "master"
 HEROKU_APP_NAME = Var.HEROKU_APP_NAME
 HEROKU_API_KEY = Var.HEROKU_API_KEY
 requirements_path = path.join(
@@ -103,7 +103,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         else:
             remote = repo.create_remote("heroku", heroku_git_url)
         try:
-            remote.push(refspec="HEAD:refs/heads/test", force=True)
+            remote.push(refspec="HEAD:refs/heads/master", force=True)
         except Exception as error:
             await event.edit(f"{txt}\nHere is the error log:\n`{error}`")
             return repo.__del__()
@@ -165,15 +165,15 @@ async def upstream(event):
         origin = repo.create_remote("upstream", off_repo)
         origin.fetch()
         force_update = True
-        repo.create_head("test", origin.refs.test)
-        repo.heads.test.set_tracking_branch(origin.refs.test)
-        repo.heads.test.checkout(True)
+        repo.create_head("master", origin.refs.master)
+        repo.heads.master.set_tracking_branch(origin.refs.master)
+        repo.heads.master.checkout(True)
 
     ac_br = repo.active_branch.name
     if ac_br != UPSTREAM_REPO_BRANCH:
         await event.edit(
             f"**Looks like you are using your own custom branch: ({ac_br}). \n"
-            "Please switch to** `test` **branch.**"
+            "Please switch to** `master` **branch.**"
         )
         return repo.__del__()
     try:
@@ -208,7 +208,7 @@ async def upstream(event):
 
     if force_update:
         await event.edit(
-            "**Force-syncing to latest stable userbot code, please wait...**"
+            "**Force-syncing to lamaster stable userbot code, please wait...**"
         )
 
     if conf == "now":

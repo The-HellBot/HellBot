@@ -26,7 +26,7 @@ async def seconddp(event):
     while True:
         shutil.copy(downloaded_file_name, photo)
         im = Image.open(photo)
-        file_test = im.rotate(counter, expand=False).save(photo, "PNG")
+        file_master = im.rotate(counter, expand=False).save(photo, "PNG")
         current_time = datetime.now().strftime("%H:%M:%s")
         img = Image.open(photo)
         drawn_text = ImageDraw.Draw(img)

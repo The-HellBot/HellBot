@@ -50,16 +50,16 @@ async def _(event):
 
 
 async def get_direct_ip_specific_link(link: str):
-    # https://github.com/ytdl-org/youtube-dl/blob/test/youtube_dl/extractor/openload.py#L246-L255
+    # https://github.com/ytdl-org/youtube-dl/blob/master/youtube_dl/extractor/openload.py#L246-L255
     OPEN_LOAD_DOMAINS = r"(?:openload\.(?:co|io|link|pw)|oload\.(?:tv|biz|stream|site|xyz|win|download|cloud|cc|icu|fun|club|info|press|pw|life|live|space|services|website)|oladblock\.(?:services|xyz|me)|openloed\.co)"
     OPEN_LOAD_VALID_URL = (
         r"(?x)https?://(?P<host>(?:www\.)?%s)/(?:f|embed)/(?P<id>[a-zA-Z0-9-_]+)"
         % OPEN_LOAD_DOMAINS
     )
-    # https://github.com/ytdl-org/youtube-dl/blob/test/youtube_dl/extractor/openload.py#L246-L255
-    # https://github.com/ytdl-org/youtube-dl/blob/test/youtube_dl/extractor/googledrive.py#L16-L27
+    # https://github.com/ytdl-org/youtube-dl/blob/master/youtube_dl/extractor/openload.py#L246-L255
+    # https://github.com/ytdl-org/youtube-dl/blob/master/youtube_dl/extractor/googledrive.py#L16-L27
     GOOGLE_DRIVE_VALID_URLS = r"(?x)https?://(?:(?:docs|drive)\.google\.com/(?:(?:uc|open)\?.*?id=|file/d/)|video\.google\.com/get_player\?.*?docid=)(?P<id>[a-zA-Z0-9_-]{28,})"
-    # https://github.com/ytdl-org/youtube-dl/blob/test/youtube_dl/extractor/googledrive.py#L16-L27
+    # https://github.com/ytdl-org/youtube-dl/blob/master/youtube_dl/extractor/googledrive.py#L16-L27
     dl_url = None
     if "zippyshare.com" in link:
         async with aiohttp.ClientSession() as session:
@@ -68,7 +68,7 @@ async def get_direct_ip_specific_link(link: str):
             response_b_soup = BeautifulSoup(http_response_text, "html.parser")
             scripts = response_b_soup.find_all("script", {"type": "text/javascript"})
             # calculations
-            # check https://github.com/LameLemon/ziggy/blob/test/ziggy.py
+            # check https://github.com/LameLemon/ziggy/blob/master/ziggy.py
             for script in scripts:
                 if "getElementById('dlbutton')" in script.text:
                     regex_search_exp = re.search(

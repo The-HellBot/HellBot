@@ -1,5 +1,5 @@
 # Made By @Kraken_The_BadASS. Keep Credit if you are gonna copy paste it. LOL NOOBS....
-# Exclusive plugins from my channel @testpy12
+# Exclusive plugins from my channel @masterpy12
 # Also some from my bro's channel @pyforub......(sawan me lagg gai aag🔥🔥🔥🔥🔥🔥🔥🔥)
 # Now in hellbot....
 
@@ -108,7 +108,7 @@ async def _(event):
         )
     if x == 22:
         await event.edit(
-            "🎶 This hit, that ice cold \n Michelle Pfeiffer, that white gold \n This one for them hood girls \n Them good girls straight testpieces \n Stylin', wilin', livin' it up in the city \n Got Chucks on with Saint Laurent \n Gotta kiss myself, I'm so pretty \n \n I'm too hot (hot damn) \n Called a police and a fireman \n I'm too hot (hot damn) \n Make a dragon wanna retire man \n I'm too hot (hot damn) \n Say my name you know who I am \n I'm too hot (hot damn) \n And my band 'bout that money, break it down 🎶 \n **-Uptown Funk**"
+            "🎶 This hit, that ice cold \n Michelle Pfeiffer, that white gold \n This one for them hood girls \n Them good girls straight masterpieces \n Stylin', wilin', livin' it up in the city \n Got Chucks on with Saint Laurent \n Gotta kiss myself, I'm so pretty \n \n I'm too hot (hot damn) \n Called a police and a fireman \n I'm too hot (hot damn) \n Make a dragon wanna retire man \n I'm too hot (hot damn) \n Say my name you know who I am \n I'm too hot (hot damn) \n And my band 'bout that money, break it down 🎶 \n **-Uptown Funk**"
         )
     if x == 23:
         await event.edit(
@@ -678,7 +678,7 @@ async def _(event):
         )
     if x == 31:
         await event.edit(
-            '`"After honey was first discovered, there was likely a period where people were taste testing any available slime from insects."`'
+            '`"After honey was first discovered, there was likely a period where people were taste mastering any available slime from insects."`'
         )
     if x == 32:
         await event.edit(
@@ -838,7 +838,7 @@ async def _(event):
         )
     if x == 74:
         await event.edit(
-            '`"Since we test drugs on animals first, rat medicine must be years ahead of human medicine."`'
+            '`"Since we master drugs on animals first, rat medicine must be years ahead of human medicine."`'
         )
     if x == 75:
         await event.edit(
@@ -1146,7 +1146,7 @@ async def _(event):
         )
     if x == 50:
         await event.edit(
-            '`"When asked online to confirm "I am not a robot", if you long press on the tick box and release, you will not be asked to complete the "click all store front" etc tests."`'
+            '`"When asked online to confirm "I am not a robot", if you long press on the tick box and release, you will not be asked to complete the "click all store front" etc masters."`'
         )
     if x == 51:
         await event.edit(
@@ -1246,7 +1246,7 @@ async def _(event):
         )
     if x == 74:
         await event.edit(
-            '`"Everybody is genious of its own. But if you judge a fish by its ability to climb a tree rather than swimming, she will felt whole life like dumb. So test your field and recognise it very well rather than going after the blind suspections."`'
+            '`"Everybody is genious of its own. But if you judge a fish by its ability to climb a tree rather than swimming, she will felt whole life like dumb. So master your field and recognise it very well rather than going after the blind suspections."`'
         )
     if x == 75:
         await event.edit(
@@ -1326,7 +1326,7 @@ async def _(event):
         await event.edit('`"What scene from a TV show will you never forget?"`')
     if x == 5:
         await event.edit(
-            '`"If you could become a test in one skill, what skill would you choose?"`'
+            '`"If you could become a master in one skill, what skill would you choose?"`'
         )
     if x == 6:
         await event.edit('`"What three words can describe you?"`')
@@ -1466,7 +1466,7 @@ async def _(event):
         await event.edit('`"What are you tired of hearing about?"`')
     if x == 52:
         await event.edit(
-            '`"If you died today, what would your greatest achievement be?"`'
+            '`"If you died today, what would your greamaster achievement be?"`'
         )
     if x == 53:
         await event.edit('`"What method will you choose to kill yourself?"`')
@@ -1615,7 +1615,7 @@ async def _(event):
         )
     if x == 31:
         await event.edit(
-            '`"After honey was first discovered, there was likely a period where people were taste testing any available slime from insects."`'
+            '`"After honey was first discovered, there was likely a period where people were taste mastering any available slime from insects."`'
         )
     if x == 32:
         await event.edit(
@@ -1775,7 +1775,7 @@ async def _(event):
         )
     if x == 74:
         await event.edit(
-            '`"Since we test drugs on animals first, rat medicine must be years ahead of human medicine."`'
+            '`"Since we master drugs on animals first, rat medicine must be years ahead of human medicine."`'
         )
     if x == 75:
         await event.edit(

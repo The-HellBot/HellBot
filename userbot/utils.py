@@ -104,8 +104,8 @@ def admin_cmd(pattern=None, command=None, **args):
     args["func"] = lambda e: e.via_bot_id is None
     stack = inspect.stack()
     previous_stack_frame = stack[1]
-    file_test = Path(previous_stack_frame.filename)
-    file_test = file_test.stem.replace(".py", "")
+    file_master = Path(previous_stack_frame.filename)
+    file_master = file_master.stem.replace(".py", "")
     allow_sudo = args.get("allow_sudo", False)
     # get the pattern from the decorator
     if pattern is not None:
@@ -116,9 +116,9 @@ def admin_cmd(pattern=None, command=None, **args):
             args["pattern"] = re.compile(pattern)
             cmd = pattern.replace("$", "").replace("^", "").replace("\\", "")
             try:
-                CMD_LIST[file_test].append(cmd)
+                CMD_LIST[file_master].append(cmd)
             except BaseException:
-                CMD_LIST.update({file_test: [cmd]})
+                CMD_LIST.update({file_master: [cmd]})
         else:
             if len(Config.COMMAND_HAND_LER) == 2:
                 hellreg = "^" + Config.COMMAND_HAND_LER
@@ -134,9 +134,9 @@ def admin_cmd(pattern=None, command=None, **args):
                     (reg + pattern).replace("$", "").replace("\\", "").replace("^", "")
                 )
             try:
-                CMD_LIST[file_test].append(cmd)
+                CMD_LIST[file_master].append(cmd)
             except BaseException:
-                CMD_LIST.update({file_test: [cmd]})
+                CMD_LIST.update({file_master: [cmd]})
 
     args["outgoing"] = True
     # should this command be available for other users?
@@ -169,8 +169,8 @@ def sudo_cmd(pattern=None, command=None, **args):
     args["func"] = lambda e: e.via_bot_id is None
     stack = inspect.stack()
     previous_stack_frame = stack[1]
-    file_test = Path(previous_stack_frame.filename)
-    file_test = file_test.stem.replace(".py", "")
+    file_master = Path(previous_stack_frame.filename)
+    file_master = file_master.stem.replace(".py", "")
     allow_sudo = args.get("allow_sudo", False)
     # get the pattern from the decorator
     if pattern is not None:
@@ -181,9 +181,9 @@ def sudo_cmd(pattern=None, command=None, **args):
             args["pattern"] = re.compile(pattern)
             cmd = pattern.replace("$", "").replace("^", "").replace("\\", "")
             try:
-                SUDO_LIST[file_test].append(cmd)
+                SUDO_LIST[file_master].append(cmd)
             except BaseException:
-                SUDO_LIST.update({file_test: [cmd]})
+                SUDO_LIST.update({file_master: [cmd]})
         else:
             if len(Config.SUDO_COMMAND_HAND_LER) == 2:
                 hellreg = "^" + Config.SUDO_COMMAND_HAND_LER
@@ -199,9 +199,9 @@ def sudo_cmd(pattern=None, command=None, **args):
                     (reg + pattern).replace("$", "").replace("\\", "").replace("^", "")
                 )
             try:
-                SUDO_LIST[file_test].append(cmd)
+                SUDO_LIST[file_master].append(cmd)
             except BaseException:
-                SUDO_LIST.update({file_test: [cmd]})
+                SUDO_LIST.update({file_master: [cmd]})
     args["outgoing"] = True
     # should this command be available for other users?
     if allow_sudo:
@@ -224,7 +224,7 @@ def sudo_cmd(pattern=None, command=None, **args):
     return events.NewMessage(**args)
 
 # https://t.me/c/1220993104/623253
-# https://docs.telethon.dev/en/latest/misc/changelog.html#breaking-changes
+# https://docs.telethon.dev/en/lamaster/misc/changelog.html#breaking-changes
 async def edit_or_reply(
     event,
     text,
@@ -486,8 +486,8 @@ def register(**args):
     args["func"] = lambda e: e.via_bot_id is None
     stack = inspect.stack()
     previous_stack_frame = stack[1]
-    file_test = Path(previous_stack_frame.filename)
-    file_test = file_test.stem.replace(".py", "")
+    file_master = Path(previous_stack_frame.filename)
+    file_master = file_master.stem.replace(".py", "")
     pattern = args.get("pattern", None)
     disable_edited = args.get("disable_edited", True)
     allow_sudo = args.get("allow_sudo", False)
@@ -508,9 +508,9 @@ def register(**args):
                 pass
 
             try:
-                CMD_LIST[file_test].append(cmd)
+                CMD_LIST[file_master].append(cmd)
             except BaseException:
-                CMD_LIST.update({file_test: [cmd]})
+                CMD_LIST.update({file_master: [cmd]})
         except BaseException:
             pass
 
@@ -535,9 +535,9 @@ def register(**args):
             bot.add_event_handler(func, events.MessageEdited(**args))
         bot.add_event_handler(func, events.NewMessage(**args))
         try:
-            LOAD_PLUG[file_test].append(func)
+            LOAD_PLUG[file_master].append(func)
         except Exception:
-            LOAD_PLUG.update({file_test: [func]})
+            LOAD_PLUG.update({file_master: [func]})
         return func
 
     return decorator
@@ -548,8 +548,8 @@ def command(**args):
 
     stack = inspect.stack()
     previous_stack_frame = stack[1]
-    file_test = Path(previous_stack_frame.filename)
-    file_test = file_test.stem.replace(".py", "")
+    file_master = Path(previous_stack_frame.filename)
+    file_master = file_master.stem.replace(".py", "")
 
     pattern = args.get("pattern", None)
     allow_sudo = args.get("allow_sudo", None)
@@ -574,9 +574,9 @@ def command(**args):
             except BaseException:
                 pass
             try:
-                CMD_LIST[file_test].append(cmd)
+                CMD_LIST[file_master].append(cmd)
             except BaseException:
-                CMD_LIST.update({file_test: [cmd]})
+                CMD_LIST.update({file_master: [cmd]})
         except BaseException:
             pass
     if allow_sudo:
@@ -602,9 +602,9 @@ def command(**args):
             bot.add_event_handler(func, events.MessageEdited(**args))
         bot.add_event_handler(func, events.NewMessage(**args))
         try:
-            LOAD_PLUG[file_test].append(func)
+            LOAD_PLUG[file_master].append(func)
         except BaseException:
-            LOAD_PLUG.update({file_test: [func]})
+            LOAD_PLUG.update({file_master: [func]})
         return func
 
     return decorator
