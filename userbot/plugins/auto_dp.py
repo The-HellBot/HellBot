@@ -37,7 +37,7 @@ COLLECTION_STRING2 = [
 ]
 COLLECTION_STRING3 = [
     "indian-actress-wallpapers",
-    "lamaster-bollywood-actress-wallpapers-2018-hd",
+    "latest-bollywood-actress-wallpapers-2018-hd",
     "bollywood-actress-wallpaper",
     "hd-wallpapers-of-bollywood-actress",
     "new-bollywood-actress-wallpaper-2018",

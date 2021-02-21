@@ -224,7 +224,7 @@ def sudo_cmd(pattern=None, command=None, **args):
     return events.NewMessage(**args)
 
 # https://t.me/c/1220993104/623253
-# https://docs.telethon.dev/en/lamaster/misc/changelog.html#breaking-changes
+# https://docs.telethon.dev/en/latest/misc/changelog.html#breaking-changes
 async def edit_or_reply(
     event,
     text,

@@ -52,7 +52,7 @@ async def fastpurger(purg):
 @bot.on(sudo_cmd(pattern=r"purgeme", allow_sudo=True))
 @errors_handler
 async def purgeme(delme):
-    """ For .purgeme, delete x count of your lamaster message."""
+    """ For .purgeme, delete x count of your latest message."""
     message = delme.text
     count = int(message[9:])
     i = 1

@@ -241,7 +241,7 @@ async def _(event):
             number = float(input_sgra[0])
             currency_from = input_sgra[1].upper()
             currency_to = input_sgra[2].upper()
-            request_url = "https://api.exchangeratesapi.io/lamaster?base={}".format(
+            request_url = "https://api.exchangeratesapi.io/latest?base={}".format(
                 currency_from
             )
             current_response = requests.get(request_url).json()
@@ -271,7 +271,7 @@ async def _(event):
 async def currencylist(ups):
     if ups.fwd_from:
         return
-    request_url = "https://api.exchangeratesapi.io/lamaster?base=USD"
+    request_url = "https://api.exchangeratesapi.io/latest?base=USD"
     current_response = requests.get(request_url).json()
     dil_wale_puch_de_na_chaaa = current_response["rates"]
     hmm = ""

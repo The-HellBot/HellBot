@@ -208,7 +208,7 @@ async def upstream(event):
 
     if force_update:
         await event.edit(
-            "**Force-syncing to lamaster stable userbot code, please wait...**"
+            "**Force-syncing to latest stable userbot code, please wait...**"
         )
 
     if conf == "now":

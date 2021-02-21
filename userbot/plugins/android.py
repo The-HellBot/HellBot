@@ -233,7 +233,7 @@ async def twrp(request):
 
 
 CmdHelp("android").add_command(
-  'magisk', None, 'Get lamaster magisk release'
+  'magisk', None, 'Get latest magisk release'
 ).add_command(
   'device', '<codename>', 'Get info about android device codename or model'
 ).add_command(
@@ -241,5 +241,5 @@ CmdHelp("android").add_command(
 ).add_command(
   'specs', '<brand> <device>', 'Get device specifications info.'
 ).add_command(
-  'twrp', '<codename>', 'Get lamaster twrp download for android device.'
+  'twrp', '<codename>', 'Get latest twrp download for android device.'
 ).add()
