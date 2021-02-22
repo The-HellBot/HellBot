@@ -28,6 +28,7 @@ class Config(object):
     FBAN_LOGGER_GROUP = os.environ.get("FBAN_LOGGER_GROUP", None)
     if FBAN_LOGGER_GROUP:
         FBAN_LOGGER_GROUP = int(FBAN_LOGGER_GROUP)
+
     STRING_SESSION = os.environ.get("STRING_SESSION", None)
     GOOGLE_SEARCH_COUNT_LIMIT = int(os.environ.get("GOOGLE_SEARCH_COUNT_LIMIT", 9))
     TG_GLOBAL_ALBUM_LIMIT = int(os.environ.get("TG_GLOBAL_ALBUM_LIMIT", 9))
