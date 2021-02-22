@@ -12,12 +12,12 @@ StartTime = time.time()
 hellversion = "2.2"
 
 os.system("pip install --upgrade pip")
-if Config.STRING_SESSION:
-    session_name = str(Config.STRING_SESSION)
-    bot = TelegramClient(StringSession(session_name), Config.APP_ID, Config.API_HASH)
+if Var.STRING_SESSION:
+    session_name = str(Var.STRING_SESSION)
+    bot = TelegramClient(StringSession(session_name), Var.APP_ID, Var.API_HASH)
 else:
     session_name = "startup"
-    bot = TelegramClient(session_name, Config.APP_ID, Config.API_HASH)
+    bot = TelegramClient(session_name, Var.APP_ID, Var.API_HASH)
 
 
 CMD_LIST = {}
