@@ -1,4 +1,5 @@
-from userbot import CMD_HELP, CMD_HELP_BOT, PATTERNS, COMMAND_HAND_LER
+from userbot import CMD_HELP, CMD_HELP_BOT
+from userbot.Config import COMMAND_HAND_LER
 
 
 class CmdHelp:
