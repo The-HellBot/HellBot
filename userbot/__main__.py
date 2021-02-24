@@ -7,13 +7,11 @@ from telethon import TelegramClient
 from var import Var
 from userbot.Config import Config
 from userbot.utils import load_module
-from userbot import LOAD_PLUG, BOTLOG_CHATID, LOGS, hellversion
+from userbot import LOAD_PLUG, BOTLOG_CHATID, LOGS, hellversion, COMMAND_HAND_LER as handler
 from pathlib import Path
 import asyncio
 import telethon.utils
 
-
-handler = Config.COMMAND_HAND_LER
 
 async def add_bot(bot_token):
     await bot.start(bot_token)
