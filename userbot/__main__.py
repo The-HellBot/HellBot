@@ -5,11 +5,15 @@ from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
 import os
 from telethon import TelegramClient
 from var import Var
+from userbot.Config import Config
 from userbot.utils import load_module
 from userbot import LOAD_PLUG, BOTLOG_CHATID, LOGS, hellversion
 from pathlib import Path
 import asyncio
 import telethon.utils
+
+
+handler = Config.COMMAND_HAND_LER
 
 async def add_bot(bot_token):
     await bot.start(bot_token)
@@ -53,6 +57,7 @@ print(f"""HELLBOT IS ON!!! HELLBOT VERSION :- {hellversion}
 JOIN OFFICIAL CHAT GROUP AND UPDATES CHANNEL
 OFFICIAL GROUP :- @HELLBOT_OFFICIAL_CHAT
 OFFICIAL CHANNEL :- @HELLBOT_OFFICIAL
+DO {handler}alive OR {handler}ping CHECK IF I'M ON!
 IF YOU FACE ANY ISSUE THEN ASK AT CHAT GROUP.""")
 
 if len(argv) not in (1, 3, 4):
