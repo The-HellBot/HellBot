@@ -11,11 +11,11 @@ from telethon.utils import pack_bot_file_id
 from hellbot import bot
 from hellbot.Config import Config
 from hellbot.plugins.sql_helper.bl_bot import (
-    add_nibba_in_db,
-    is_he_added,
-    removenibba,
+    add_in_db,
+    is_id_added,
+    removeid,
 )
-from hellbot.plugins.sql_helper.botusers_sql import add_me_in_db, got_uid
+from hellbot.plugins.sql_helper.botusers import add_id_in_db, its_userid
 from hellbot.plugins.sql_helper.idadder_sql import (
     add_usersid_in_db,
     already_added,
