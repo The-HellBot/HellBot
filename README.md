@@ -55,7 +55,7 @@ Click on the link below to get tutorial on
 How To Deploy Hêllẞø†.
 ```
 <a href="https://youtu.be/M2FQJq_sHp4"><img src="https://img.shields.io/badge/How%20To%20Deploy-blue.svg?logo=Youtube"></a>
-<a href="https://youtu.be/M2FQJq_sHp4"><img src="https://img.shields.io/youtube/views/M2FQJq_sHp4?style=social">
+<a href="https://youtu.be/M2FQJq_sHp4"><img src="https://img.shields.io/youtube/views/M2FQJq_sHp4?style=social"></a>
 
 </details>
 
@@ -67,8 +67,9 @@ How To Deploy Hêllẞø†.
 
 </a>  <a href="https://github.com/hellboy-op"><img src="https://raw.githubusercontent.com/acervenky/animated-github-badges/master/assets/pro.gif" width="40" height="40"></a>
 
-<h4 align="center">⚔️ The Normal Way ⚔️</h4>
-### Soon........
+<h3 align="center">⚔️ The Normal Way ⚔️</h3>
+
+<h5 align="center">To host Héllẞø† locally or on any other VPS, Go to <a href="https://github.com/TheVaders/Vader><VΛDΣЯ Repo></a>
 
 ## Mandatory Vars
 
