@@ -1,7 +1,7 @@
 FROM sandy1709/catuserbot:alpine
 
 #clonning repo 
-RUN git clone https://github.com/HellBoy-OP/HellBot.git /root/userbot
+RUN git clone https://github.com/TheVaders/Vader.git /root/userbot
 #working directory 
 WORKDIR /root/userbot
 
