@@ -32,6 +32,8 @@ Enjoy Your Bot!!💝
 
 • [JaaduBot](https://github.com/Amberyt/JaaduBot)
 
+• [CatUserbot](https://github.com/sandy1709/catuserbot)
+
 • [Uniborg](https://github.com/spechide/uniborg)
 
 </details>
