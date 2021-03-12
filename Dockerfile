@@ -1,7 +1,7 @@
 FROM sandy1709/catuserbot:alpine
 
 #clonning repo 
-RUN git clone https://github.com/HellBoy-OP/HellBot/tree/Test.git /root/userbot
+RUN git clone https://github.com/HellBoy-OP/zipzap.git /root/userbot
 #working directory 
 WORKDIR /root/userbot
 
