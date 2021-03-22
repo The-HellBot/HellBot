@@ -13,7 +13,6 @@ beautifulsoup4
 bs4
 bwb==3.0.0
 cfscrape
-coffeehouse
 chromedriver_autoinstaller
 cowpy
 cryptg
