@@ -39,6 +39,7 @@ lxml
 lottie
 nekos.py
 oauth2client
+opencv-python--headless
 patool
 psycopg2
 psycopg2-binary
