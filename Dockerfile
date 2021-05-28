@@ -1,7 +1,8 @@
-FROM sandy1709/catuserbot:alpine
+FROM teamvaders/hellbot:latest
 
 #clonning repo 
 RUN git clone https://github.com/TheVaders/InVade.git /root/hellbot
+
 #working directory 
 WORKDIR /root/hellbot
 
