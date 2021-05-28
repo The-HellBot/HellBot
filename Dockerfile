@@ -1,13 +1,13 @@
 FROM sandy1709/catuserbot:alpine
 
 #clonning repo 
-RUN git clone https://github.com/TheVaders/Vader.git /root/userbot
+RUN git clone https://github.com/TheVaders/InVade.git /root/hellbot
 #working directory 
-WORKDIR /root/userbot
+WORKDIR /root/hellbot
 
 # Install requirements
 RUN pip3 install -U -r requirements.txt
 
 ENV PATH="/home/userbot/bin:$PATH"
 
-CMD ["python3","-m","userbot"]
+CMD ["python3","-m","hellbot"]
