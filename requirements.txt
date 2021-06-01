@@ -1,5 +1,6 @@
 aiofiles
 aiohttp
+asyncurban
 beautifulsoup4
 cairosvg
 cfscrape
