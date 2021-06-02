@@ -34,6 +34,7 @@ lottie
 lxml
 lyricsgenius
 nekos.py
+opencv-python--headless
 patool
 Pillow
 prettytable
@@ -66,6 +67,7 @@ telethon
 telethon-tgcrypto
 tswift
 validators
+vcam
 vcsi
 wand
 wheel
