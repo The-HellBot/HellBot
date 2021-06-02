@@ -1,2 +1,2 @@
 
-# Get Beta Access From [@ForGo10_God](https://t.me/ForGo10_God) to access deploy.
+# Get Beta Access From [@ForGo10God](https://t.me/ForGo10God) to access deploy.
