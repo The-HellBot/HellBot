@@ -49,6 +49,7 @@
       "description": "Fill your private Channel ID if you want to Log PM messages.",
       "value": "",
       "required": false
+    },
     "HANDLER": {
       "description": "Your command handler. Default is ' . ' (dot).",
       "value": "."
