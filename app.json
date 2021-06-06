@@ -35,11 +35,20 @@
       "value": "",
       "required": false
     },
+    "ABUSE": {
+      "description": "Leave it blank if you dont want Profanity in HellBot. Else Fill ON.",
+      "value": "ON",
+      "required": false
+    },
     "PMPERMIT_PIC": {
       "description": "Paste the Telegraph link to show in pm permit message.",
       "value": "",
       "required": false
     },
+    "PM_LOG_ID": {
+      "description": "Fill your private Channel ID if you want to Log PM messages.",
+      "value": "",
+      "required": false
     "HANDLER": {
       "description": "Your command handler. Default is ' . ' (dot).",
       "value": "."
