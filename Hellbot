@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-_get_repolink () {
+_repolink () {
     local regex
     regex='(https?)://github.com/.+/.+'
     if [[ $HELL_REPO == "HellBot" ]]
@@ -24,31 +24,22 @@ _get_repolink () {
 }
 
 
-_set_bot () {
+start_bot () {
     local zippath
     zippath="myhellbot.zip"
     echo "  Downloading source code ..."
-    wget -q $(_get_repolink) -O "$zippath"
+    wget -q $(_repolink) -O "$zippath"
     echo "  Unpacking Data ..."
     HELLPATH=$(zipinfo -1 "$zippath" | grep -v "/.");
     unzip -qq "$zippath"
-    echo "Done"
-    echo "  Cleaning ..."
+    echo "  Processing Codes..."
     rm -rf "$zippath"
     sleep 5
     cd $HELLPATH
-    echo "    Starting HellBot    "
-    echo "
-                              ╔╗─╔╗──╔╗╔╗╔╗────╔╗
-                              ║║─║║──║║║║║║───╔╝╚╗
-                              ║╚═╝╠══╣║║║║╚═╦═╩╗╔╝
-                              ║╔═╗║║═╣║║║║╔╗║╔╗║║
-                              ║║─║║║═╣╚╣╚╣╚╝║╚╝║╚╗
-                              ╚╝─╚╩══╩═╩═╩══╩══╩═╝
-    "
+    echo "  • Starting HellBot •  "
 
     python3 ../setup/updater.py ../requirements.txt requirements.txt
     python3 -m hellbot
 }
 
-_set_bot
+start_bot
