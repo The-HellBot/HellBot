@@ -1,4 +1,3 @@
-
 {
   "name": "Hêllẞø†",
   "description": "Hêllẞø† is one of the Best UserBot for Telegram. Known for its Smoothness, Design, Support.",
@@ -98,11 +97,22 @@
     },
     "TAG_LOGGER": {
       "description": "Make a group and add rose. Do /id and paste the chat id here.",
-      "value": ""
+      "value": "",
+      "required": false
     },
     "BOT_USERNAME": {
       "description": "Make a bot from @BotFather and paste the username here.",
       "value": ""
+    },
+    "YOUR_CHANNEL": {
+      "description": "Fill your channel username(without @) to get this displayed on your Hell Alive.",
+      "value": "",
+      "required": false
+    },
+    "YOUR_GROUP": {
+      "description": "Fill your group username(without @) to get this displayed on your Hell Alive.",
+      "value": "",
+      "required": false
     },
     "SUDO_USERS": {
       "description": "Userid of user to grant sudo access. Add multiple sudo users by giving a space between userids",
