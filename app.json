@@ -21,7 +21,7 @@
     },
     "YOUR_NAME": {
       "description": "Fill Your Telegram Name. Default Value is Hêll",
-      "value": "Hêll",
+      "value": "『ℌєℓℓ』",
       "required": false
     },
     "ALIVE_MSG": {
@@ -31,8 +31,7 @@
     },
     "ALIVE_PIC": {
       "description": "Paste the telegraph link of a video/gif/pic to show on Alive.",
-      "value": "",
-      "required": false
+      "value": ""
     },
     "ABUSE": {
       "description": "Leave it blank if you dont want Profanity in HellBot. Else Fill ON.",
