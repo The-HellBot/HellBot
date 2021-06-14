@@ -122,7 +122,7 @@
 
 Copyright (C) 2021 [The-HellBot](https://github.com/The-HellBot)
 
-Poject [HellBot](https://github.com/The-HellBot/HellBot) is free software: you can redistribute it and/or modify
+Project [HellBot](https://github.com/The-HellBot/HellBot) is free software: you can redistribute it and/or modify
 
 it under the terms of the GNU General Public License as published by
 
