@@ -106,6 +106,16 @@
 - Your HellBot Session Will be saved in your Telegram Saved Message.
 
 ------
+## Disclaimer
+- We won't be responsible for any kind of ban due to this bot.
+- HellBot was made for fun purpose and to make group management easier.
+- It's your concern if you spam and gets your account banned.
+- Also, Forks won't be entertained.
+- If you fork this repo and edit plugins, it's your concern for further updates.
+- Forking Repo is fine. But if you edit something we will not provide any help.
+- In short, Fork At Your Own Risk.
+
+------
 # License
 
 ![](https://www.gnu.org/graphics/gplv3-or-later.png)
