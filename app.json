@@ -31,7 +31,8 @@
     },
     "ALIVE_PIC": {
       "description": "Paste the telegraph link of a video/gif/pic to show on Alive.",
-      "value": ""
+      "value": "",
+      "required": false
     },
     "ABUSE": {
       "description": "Leave it blank if you dont want Profanity in HellBot. Else Fill ON.",
