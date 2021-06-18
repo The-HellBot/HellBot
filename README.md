@@ -38,7 +38,7 @@
 ------
 ## YouTube 📺
 - [![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UC7Jr0FnRApx5nJASUfOjqJQ?style=social)](https://youtube.com/channel/UC7Jr0FnRApx5nJASUfOjqJQ)
-- Tutorial - Soon...
+- [![YouTube Video Views](https://img.shields.io/youtube/views/pw2jCeM2sN4?label=Tutorial&style=social)](https://youtu.be/pw2jCeM2sN4)
 
 ------
 ## Deploy To Heroku
