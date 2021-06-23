@@ -6,10 +6,10 @@ _repolink () {
     regex='(https?)://github.com/.+/.+'
     if [[ $HELL_REPO == "HellBot" ]]
     then
-        echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZVZhZGVycy9JblZhZGUvYXJjaGl2ZS9tYXN0ZXIuemlw" | base64 -d
+        echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZVZhZGVycy9JblZhZGUvYXJjaGl2ZS9yZWZzL2hlYWRzL2JldGEuemlw" | base64 -d
     elif [[ $HELL_REPO == "Hellbot" ]]
     then
-        echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZVZhZGVycy9JblZhZGUvYXJjaGl2ZS9tYXN0ZXIuemlw" | base64 -d
+        echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZVZhZGVycy9JblZhZGUvYXJjaGl2ZS9yZWZzL2hlYWRzL2JldGEuemlw" | base64 -d
     elif [[ $HELL_REPO =~ $regex ]]
     then
         if [[ $HELL_REPO_BRANCH ]]
@@ -19,7 +19,7 @@ _repolink () {
             echo "${HELL_REPO}/archive/master.zip"
         fi
     else
-        echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZVZhZGVycy9JblZhZGUvYXJjaGl2ZS9tYXN0ZXIuemlw" | base64 -d
+        echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZVZhZGVycy9JblZhZGUvYXJjaGl2ZS9yZWZzL2hlYWRzL2JldGEuemlw" | base64 -d
     fi
 }
 
