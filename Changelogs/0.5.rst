@@ -19,7 +19,7 @@ Changelog 📃 :
 * Did some improvements for future updates.
 * Bug fixes.
 
-Report Bugs and Suggestions in comments of `this post <https://t.me/its_hellbot/34>`_
+Report Bugs and Suggestions in comments of `this post <https://t.me/its_hellbot/35>`_
 =====================================================================================
 
 📌 To update your Hêllẞø† do ``.update build``
