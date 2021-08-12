@@ -24,6 +24,11 @@
       "value": "『ℌєℓℓ』",
       "required": false
     },
+     "MONGO_DB_URL ": {
+      "description": "Mongo Db Url Get it from www.mongodb.com",
+      "value": "",
+      "required": true
+    },
     "ALIVE_MSG": {
       "description": "Your Custom Alive Message to show on Alive.",
       "value": "",
