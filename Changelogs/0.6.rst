@@ -8,6 +8,7 @@ HellBot Version Update
 
 Changelog 📃 :
 ~~~~~~~~~~~~~~
+* Fixed Pmpermit. Now pmpermit is working for all users. Previously there was a problem with guys having weird names.
 * Added new command in ``anime.py`` to search filler, manga canon, mixed canon episodes. Do ``.plinfo anime`` to get more details.
 * Also updated all commands in ``anime.py``. Check out all commands by ``.plinfo anime``.
 * Added new command ``.aniquote``. This command gives random anime quotes with anime name and character.
