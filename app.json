@@ -45,7 +45,7 @@
       "required": false
     },
     "PM_LOG_ID": {
-      "description": "Fill your private Channel ID if you want to Log PM messages.",
+      "description": "Fill your private Channel ID if you want to Log PM messages. Get channel id from @HELL_ID_BOT",
       "value": "",
       "required": false
     },
@@ -74,7 +74,7 @@
       "value": ""
     },
     "LOGGER_ID": {
-      "description": "Create a private channel. And get it's id from @showjsonbot and paste here. Value should start with -100",
+      "description": "Create a private channel. And get it's id from @HELL_ID_BOT and paste here. Value should start with -100",
       "value": ""
     },
     "HELLBOT_SESSION": {

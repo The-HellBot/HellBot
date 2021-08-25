@@ -38,13 +38,13 @@
 ------
 ## YouTube 📺
 - [![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UC7Jr0FnRApx5nJASUfOjqJQ?style=social)](https://youtube.com/channel/UC7Jr0FnRApx5nJASUfOjqJQ)
-- Tutorial - Soon...
+- [![YouTube Video Views](https://img.shields.io/youtube/views/pw2jCeM2sN4?label=Tutorial&style=social)](https://youtu.be/pw2jCeM2sN4)
 
 ------
 ## Deploy To Heroku
 - Get All The Necessary Variables And Deploy To Heroku.
 - Some Mandatory Variables Are listed [Here](#Variables)
-- [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+- [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/the-hellbot/hellbot)
 
 ------
 ## Deploy Locally
@@ -120,7 +120,8 @@
 
 ![](https://www.gnu.org/graphics/gplv3-or-later.png)
 
-Copyright (C) 2021 [The-HellBot](https://github.com/The-HellBot)
+<h4 align="center">Copyright (C) 2021 <a href="https://github.com/The-HellBot">The-HellBot</a></h4>
+
 Project [HellBot](https://github.com/The-HellBot/HellBot) is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
