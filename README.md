@@ -52,7 +52,7 @@
 ## Deploy on Railway
 - Get all the necessary variables and deploy on railway.
 - Every mandatory variables are listed [Here](#Variables).
-- [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https%3A%2F%2Fgithub.com%2FHellBoy-OP%2FInVade&plugins=postgresql&envs=APP_ID%2CAPI_HASH%2CBOT_TOKEN%2CBOT_USERNAME%2CENV%2CABUSE%2CHANDLER%2CHELLBOT_SESSION%2CSUDO_USERS%2CLOGGER_ID&optionalEnvs=ENV%2CABUSE%2CHANDLER&APP_IDDesc=Your+APP+ID+from+my.telegram.org&API_HASHDesc=Api+hash+from+my.telegram.org&BOT_TOKENDesc=Bot+token+from+%40Botfather&BOT_USERNAMEDesc=Bot+username+with+%40+from+%40Botfather&ENVDesc=Leave+it+as+it+is&ABUSEDesc=Weather+to+turn+on+extra+profanity&HANDLERDesc=Command+handler&HELLBOT_SESSIONDesc=String+session&SUDO_USERSDesc=Userid+of+users+you+want+to+give+sudo+access.+Separate+with+space+to+add+multiple+users.&LOGGER_IDDesc=Make+a+channel+and+fill+it%27s+id.)
+- [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https%3A%2F%2Fgithub.com%2FTheVaders%2FInVade&plugins=postgresql&envs=ABUSE%2CAPI_HASH%2CAPP_ID%2CHELLBOT_SESSION%2CBOT_TOKEN%2CBOT_USERNAME%2CLOGGER_ID%2CHANDLER%2CENV&optionalEnvs=ABUSE%2CHANDLER%2CENV&ABUSEDesc=Fill+%22ON%22+for+abuses+and+some+adult+plugins&API_HASHDesc=Get+it+from+my.telegram.org%2Fapi&APP_IDDesc=Get+it+from+my.telegram.org%2Fapi&HELLBOT_SESSIONDesc=Fill+your+String+session&BOT_TOKENDesc=Bot+token+from+%40Botfather&BOT_USERNAMEDesc=Bot+username+from+%40Botfather&LOGGER_IDDesc=Create+a+channel+and+get+it%27s+id+from+%40Hell_Id_Bot&HANDLERDesc=Your+command+handler.+Default+value+is+%22.%22&ENVDesc=Leave+it+as+it+is&referralCode=n738VA)
 
 ------
 ## Deploy Locally
