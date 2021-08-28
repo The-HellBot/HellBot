@@ -31,7 +31,9 @@
 
 ------
 ## Deploy 🚀
-- [![Deploy](https://telegra.ph/file/dc77788223d79180ec812.jpg)](#Deploy-To-Heroku)
+- [![Heroku](https://telegra.ph/file/dc77788223d79180ec812.jpg)](#Deploy-To-Heroku)
+
+- [![Railway](https://telegra.ph/file/35716b59cc180e4f282a4.jpg)](#Deploy-on-Railway)
 
 - [![Locally](https://telegra.ph/file/15027ba18429789a77255.jpg)](#Deploy-Locally)
 
@@ -43,8 +45,14 @@
 ------
 ## Deploy To Heroku
 - Get All The Necessary Variables And Deploy To Heroku.
-- Some Mandatory Variables Are listed [Here](#Variables)
+- Some Mandatory Variables Are listed [Here](#Variables).
 - [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/the-hellbot/hellbot)
+
+------
+## Deploy on Railway
+- Get all the necessary variables and deploy on railway.
+- Every mandatory variables are listed [Here](#Variables).
+- [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https%3A%2F%2Fgithub.com%2FHellBoy-OP%2FInVade&plugins=postgresql&envs=APP_ID%2CAPI_HASH%2CBOT_TOKEN%2CBOT_USERNAME%2CENV%2CABUSE%2CHANDLER%2CHELLBOT_SESSION%2CSUDO_USERS%2CLOGGER_ID&optionalEnvs=ENV%2CABUSE%2CHANDLER&APP_IDDesc=Your+APP+ID+from+my.telegram.org&API_HASHDesc=Api+hash+from+my.telegram.org&BOT_TOKENDesc=Bot+token+from+%40Botfather&BOT_USERNAMEDesc=Bot+username+with+%40+from+%40Botfather&ENVDesc=Leave+it+as+it+is&ABUSEDesc=Weather+to+turn+on+extra+profanity&HANDLERDesc=Command+handler&HELLBOT_SESSIONDesc=String+session&SUDO_USERSDesc=Userid+of+users+you+want+to+give+sudo+access.+Separate+with+space+to+add+multiple+users.&LOGGER_IDDesc=Make+a+channel+and+fill+it%27s+id.)
 
 ------
 ## Deploy Locally
