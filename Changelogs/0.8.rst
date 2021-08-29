@@ -28,7 +28,7 @@ Changelog 📃 :
 * Improvement in base codes.
 * Added railway support.
 
-Report Bugs and Suggestions in comments of `this post <https://t.me/its_hellbot/42>`_
+Report Bugs and Suggestions in comments of `this post <https://t.me/its_hellbot/44>`_
 =====================================================================================
 
 **📌 To update your Hêllẞø† do** ``.update build``
