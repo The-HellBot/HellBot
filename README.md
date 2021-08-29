@@ -41,7 +41,7 @@
 ## YouTube 📺
 - [![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UC7Jr0FnRApx5nJASUfOjqJQ?style=social)](https://youtube.com/channel/UC7Jr0FnRApx5nJASUfOjqJQ)
 - [![YouTube Video Views](https://img.shields.io/youtube/views/pw2jCeM2sN4?label=Tutorial+•+Heroku+•&style=social)](https://youtu.be/pw2jCeM2sN4)
-- [![YouTube Video Views](https://img.shields.io/youtube/views/pw2jCeM2sN4?label=Tutorial+•+Railway+•&style=social)](https://youtu.be/8RRFObBQSMU)
+- [![YouTube Video Views](https://img.shields.io/youtube/views/8RRFObBQSMU?label=Tutorial+•+Railway+•&style=social)](https://youtu.be/8RRFObBQSMU)
 
 ------
 ## Deploy To Heroku
