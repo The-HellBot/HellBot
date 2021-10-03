@@ -33,8 +33,6 @@
 ## Deploy 🚀
 - [![Heroku](https://telegra.ph/file/dc77788223d79180ec812.jpg)](#Deploy-To-Heroku)
 
-- [![Railway](https://telegra.ph/file/35716b59cc180e4f282a4.jpg)](#Deploy-on-Railway)
-
 - [![Locally](https://telegra.ph/file/15027ba18429789a77255.jpg)](#Deploy-Locally)
 
 ------
@@ -50,6 +48,7 @@
 - [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/the-hellbot/hellbot)
 
 ------
+<!--
 ## Deploy on Railway
 - Get all the necessary variables and deploy on railway.
 - Every mandatory variables are listed [Here](#Variables).
@@ -57,6 +56,7 @@
 - [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https%3A%2F%2Fgithub.com%2FHellBoy-OP%2FHellBot&plugins=postgresql&envs=APP_ID%2CAPI_HASH%2CHELLBOT_SESSION%2CBOT_TOKEN%2CBOT_USERNAME%2CLOGGER_ID&APP_IDDesc=Get+it+from+my.telegram.org%2Fapi&API_HASHDesc=Get+it+from+my.telegram.org%2Fapi&HELLBOT_SESSIONDesc=Make+a+string+session+and+paste+it+here.+See+repo+for+more+details.&BOT_TOKENDesc=Make+a+bot+from+%40botfather+and+paste+the+token+here&BOT_USERNAMEDesc=Paste+the+username+of+bot+created+by+%40Botfather&LOGGER_IDDesc=Make+a+private+channel+and+get+it%27s+id+from+%40Hell_id_bot+and+paste+that+id+here&referralCode=HELLBOT_IS_LIT)
 
 ------
+-->
 ## Deploy Locally
 
 - Clone the repo. 
