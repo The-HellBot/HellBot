@@ -1,27 +1,27 @@
 {
-  "name": "Hêllẞø†",
-  "description": "Hêllẞø† is one of the Best UserBot for Telegram. Known for its Smoothness, Design, Support.",
+  "name": "RISHABH",
+  "description": "RISHABH is one of the Best UserBot for Telegram. Known for its Smoothness, Design, Support.",
   "logo": "https://telegra.ph/file/7decf235312af8536e9aa.jpg ",
     "keywords": [
     "telegram",
     "userbot",
     "plugin",
     "telethon",
-    "hellbot",
+    "Rishabhbot",
     "modular",
     "productivity"
   ],
   "repository": "https://github.com/The-HellBot/HellBot/",
-  "website": "https://github.com/The-HellBot/",
-  "success_url": "https://t.me/The_HellBot",
+  "website": "https://github.com/The-RishabhBot/",
+  "success_url": "https://t.me/The_RishabhBot",
   "env": {
     "ENV": {
       "description": "Setting this to ANYTHING will enable heroku.",
       "value": "ANYTHING"
     },
     "YOUR_NAME": {
-      "description": "Fill Your Telegram Name. Default Value is Hêll",
-      "value": "『ℌєℓℓ』",
+      "description": "Fill Your Telegram Name. Default Value is Rishabh",
+      "value": "Rishabh",
       "required": false
     },
     "ALIVE_MSG": {
@@ -45,7 +45,7 @@
       "required": false
     },
     "PM_LOG_ID": {
-      "description": "Fill your private Channel ID if you want to Log PM messages. Get channel id from @HELL_ID_BOT",
+      "description": "Fill your private Channel ID if you want to Log PM messages. Get channel id from @Hell_ID_BOT",
       "value": "",
       "required": false
     },
