@@ -2,4 +2,4 @@ build:
   docker:
     worker: Dockerfile
 run:
-  worker: bash Hellbot
+  worker: python3 -m hellbot
