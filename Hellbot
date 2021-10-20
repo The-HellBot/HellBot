@@ -1,45 +1,66 @@
 #!/bin/bash
 
-
-_repolink () {
+_repo_zip () {
     local regex
     regex='(https?)://github.com/.+/.+'
-    if [[ $HELL_REPO == "HellBot" ]]
-    then
-        echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZVZhZGVycy9JblZhZGUvYXJjaGl2ZS9tYXN0ZXIuemlw" | base64 -d
-    elif [[ $HELL_REPO == "Hellbot" ]]
-    then
-        echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZVZhZGVycy9JblZhZGUvYXJjaGl2ZS9tYXN0ZXIuemlw" | base64 -d
-    elif [[ $HELL_REPO =~ $regex ]]
-    then
-        if [[ $HELL_REPO_BRANCH ]]
-        then
-            echo "${HELL_REPO}/archive/${HELL_REPO_BRANCH}.zip"
-        else
-            echo "${HELL_REPO}/archive/master.zip"
-        fi
-    else
-        echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZVZhZGVycy9JblZhZGUvYXJjaGl2ZS9tYXN0ZXIuemlw" | base64 -d
-    fi
+    echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1IZWxsQm90L0hlbGxCb3QvYXJjaGl2ZS9tYXN0ZXIuemlw" | base64 -d
+}
+
+_repo_link () {
+    local regex
+    local rlink
+    regex='(https?)://github.com/.+/.+'
+    rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1IZWxsQm90L0hlbGxCb3Q=" | base64 -d`
+    echo "$rlink"
 }
 
 
-start_bot () {
+_run_py() {
+    python3${pVer%.*} -c "$1"
+}
+
+_run_deploy() {
+    $(_run_py 'from git import Repo
+import sys
+UP_REPO = "https://github.com/The-HellBot/HellBot"
+BRANCH_NAME = "master"
+repo = Repo.init()
+origin = repo.create_remote("temponame", UP_REPO)
+origin.fetch()
+repo.create_head(BRANCH_NAME, origin.refs[BRANCH_NAME])
+repo.heads[BRANCH_NAME].checkout(True) ')
+}
+
+_deploy_repo() {
+    local repolink=$(_repo_link)
+    $(_run_py 'from git import Repo
+import sys
+UP_REPO="'$repolink'"
+BRANCH_NAME = "master"
+repo = Repo.init()
+origin = repo.create_remote("temponame", UP_REPO)
+origin.fetch()
+repo.create_head(BRANCH_NAME, origin.refs[BRANCH_NAME])
+repo.heads[BRANCH_NAME].checkout(True) ')
+}
+
+_start () {
     local zippath
     zippath="myhellbot.zip"
-    echo "  Downloading source code ..."
-    wget -q $(_repolink) -O "$zippath"
-    echo "  Unpacking Data ..."
-    HELLPATH=$(zipinfo -1 "$zippath" | grep -v "/.");
+    echo "••• DOWNLOADING HELLBOT •••"
+    wget -q $(_repo_zip) -O "$zippath"
+    ZIP_PATH=$(zipinfo -1 "$zippath" | grep -v "/.");
     unzip -qq "$zippath"
-    echo "  Processing Codes..."
     rm -rf "$zippath"
-    sleep 5
-    cd $HELLPATH
-    echo "  • Starting HellBot •  "
-
+    _run_deploy
+    cd $ZIP_PATH
+    _deploy_repo
     python3 ../setup/updater.py ../requirements.txt requirements.txt
+    chmod -R 755 bin
+
+    echo "••• DOWNLOAD COMPLETE •••"
+
     python3 -m hellbot
 }
 
-start_bot
+_start
