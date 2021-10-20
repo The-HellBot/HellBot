@@ -1,5 +1,5 @@
 build:
   docker:
-      worker: Dockerfile
+    worker: Dockerfile
 run:
-   worker: python3 -m hellbot
+  worker: python3 -m hellbot

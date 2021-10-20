@@ -26,7 +26,6 @@ justwatch
 lottie
 lyricsgenius
 nekos.py
-opencv-python--headless
 patool
 Pillow
 prettytable

@@ -1,10 +1,11 @@
 import asyncio
 import difflib
 import shlex
-from typing import Tuple
 import sys
 
-# if any requirements are cahnged then install that requirement
+from typing import Tuple
+
+
 async def lines_differnce(file1, file2):
     with open(file1) as f1:
         lines1 = f1.readlines()
