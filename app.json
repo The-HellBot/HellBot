@@ -12,36 +12,21 @@
     "productivity"
   ],
   "repository": "https://github.com/The-HellBot/HellBot/",
-  "website": "https://github.com/The-HellBot/",
-  "success_url": "https://t.me/The_HellBot",
+  "website": "https://itshellboy.tk",
+  "success_url": "https://t.me/Its_HellBot",
   "env": {
     "ENV": {
       "description": "Setting this to ANYTHING will enable heroku.",
       "value": "ANYTHING"
     },
     "YOUR_NAME": {
-      "description": "Fill Your Telegram Name. Default Value is Hêll",
+      "description": "Fill Your Telegram Name. Default Value is Hêll. Required for reverting after clone.",
       "value": "『ℌєℓℓ』",
       "required": false
     },
-    "ALIVE_MSG": {
-      "description": "Your Custom Alive Message to show on Alive.",
-      "value": "",
-      "required": false
-    },
-    "ALIVE_PIC": {
-      "description": "Paste the telegraph link of a video/gif/pic to show on Alive.",
-      "value": "",
-      "required": false
-    },
-    "ABUSE": {
+    "PROFANITY": {
       "description": "Leave it blank if you dont want Profanity in HellBot. Else Fill ON.",
       "value": "ON",
-      "required": false
-    },
-    "PMPERMIT_PIC": {
-      "description": "Paste the Telegraph link to show in pm permit message.",
-      "value": "",
       "required": false
     },
     "PM_LOG_ID": {
@@ -55,15 +40,11 @@
     },
     "EMOJI_IN_HELP": {
       "description": "A emoji to display in help command",
-      "value": "🔸"
+      "value": "✧"
     },
     "BUTTONS_IN_HELP": {
       "description": "No.of buttons to display in help menu.",
       "value": "7"
-    },
-    "PM_PERMIT": {
-      "description": "Fill DISABLE to turn off pm permit.",
-      "value": "ENABLE"
     },
     "APP_ID": {
       "description": "Get this value from my.telegram.org",
@@ -83,36 +64,19 @@
     },
     "HEROKU_API_KEY": {
       "description": "Go to https://dashboard.heroku.com/account, scroll down and press Reveal API. Required for updater to work.",
-      "value": "",
-      "required": true
+      "value": ""
     },
     "HEROKU_APP_NAME": {
       "description": "The Value of App Name you filled in right on top. Required for updater to work.",
-      "value": "",
-      "required": true
+      "value": ""
     },
     "BOT_TOKEN": {
       "description": "Make a bot from @BotFather and paste the bot token here.",
       "value": ""
     },
-    "TAG_LOGGER": {
-      "description": "Make a group and add rose. Do /id and paste the chat id here.",
-      "value": "",
-      "required": false
-    },
     "BOT_USERNAME": {
       "description": "Make a bot from @BotFather and paste the username here.",
       "value": ""
-    },
-    "YOUR_CHANNEL": {
-      "description": "Fill your channel username(without @) to get this displayed on your Hell Alive.",
-      "value": "",
-      "required": false
-    },
-    "YOUR_GROUP": {
-      "description": "Fill your group username(without @) to get this displayed on your Hell Alive.",
-      "value": "",
-      "required": false
     },
     "SUDO_USERS": {
       "description": "Userid of user to grant sudo access. Add multiple sudo users by giving a space between userids",
