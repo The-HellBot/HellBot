@@ -12,8 +12,6 @@
     "productivity"
   ],
   "repository": "https://github.com/The-HellBot/HellBot/",
-  "website": "https://itshellboy.tk",
-  "success_url": "https://t.me/Its_HellBot",
   "env": {
     "ENV": {
       "description": "Setting this to ANYTHING will enable heroku.",
