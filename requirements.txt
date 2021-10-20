@@ -61,6 +61,6 @@ wand
 wget
 wheel
 wikipedia
+youtube_dl
 youtube-search
 youtube-search-python
-youtube_dl
