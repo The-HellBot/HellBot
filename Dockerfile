@@ -1,9 +1,11 @@
 FROM teamvaders/hellbot:latest
 
-RUN git clone https://github.com/TheVaders/InVade.git ./TheVaders
-RUN pip install --upgrade pip
-RUN pip3 install -r ./TheVaders/requirements.txt
+RUN git clone https://github.com/TheVaders/InVade.git /root/hellbot
 
-WORKDIR ./TheVaders
+WORKDIR /root/hellbot
+
+RUN pip3 install -U -r requirements.txt
+
+ENV PATH="/home/hellbot/bin:$PATH"
 
 CMD ["python3", "-m", "hellbot"]
