@@ -62,10 +62,10 @@
 
 - Clone the repo. 
 
-`git clone https://github.com/TheVaders/InVade.git`
+`git clone https://github.com/The-HellBot/Plugins.git`
 - Open Cloned Folder.
 
-`cd InVade`
+`cd Plugins`
 - Create VirtualEnv.
 
 `virtualenv -p /usr/bin/python3 venv`
@@ -109,7 +109,7 @@
 - Open the terminal.
 - Paste this code.
 
-`pkg install python wget -y && pip install telethon && wget https://raw.githubusercontent.com/TheVaders/InVade/master/hell_string.py && python3 hell_string.py`
+`pkg install python wget -y && pip install telethon && wget https://raw.githubusercontent.com/The-HellBot/Plugins/master/hell_string.py && python3 hell_string.py`
 - Fill API ID, API HASH, Phone number (with country code).
 - Paste the OTP received on Telegram.
 - If You have Enabled 2-Step Verification then fill your password.
