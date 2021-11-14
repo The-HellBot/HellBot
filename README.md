@@ -91,6 +91,8 @@
 - `LOGGER_ID`  =  Make A Channel And Get it's ID.
 - `BOT_TOKEN`  =  Make A Bot From [@BotFather](https://t.me/botfather) and paste it's token.
 - `BOT_USERNAME`  =  Get the username of that Bot made from [@Botfather](https://t.me/botfather)
+- `HANDLER`  =  Your command handler.
+- `DATABASE_URL`  =  A Postgresql database url.
 
 ------
 ## HellBot Session
