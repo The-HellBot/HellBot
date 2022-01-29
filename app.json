@@ -19,7 +19,7 @@
     },
     "YOUR_NAME": {
       "description": "Fill Your Telegram Name. Default Value is Hêll. Required for reverting after clone.",
-      "value": "『ℌєℓℓ』",
+      "value": "DAKUALONE",
       "required": false
     },
     "PROFANITY": {
