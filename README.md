@@ -47,16 +47,18 @@
 ## Deploy To Heroku
 - Get All The Necessary Variables And Deploy To Heroku.
 - Some Mandatory Variables Are listed [Here](#Variables).
-- Fork this repo and click on below button to get access of deploy page.
+- Fork & Star this repo.
+- Click on below button to access deploy page.
+- NOTE: Click on deploy button from your fork only.
 - [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ------
 ## Deploy on Railway
 - Get all the necessary variables and deploy on railway.
 - Every mandatory variables are listed [Here](#Variables).
-- Please note that YoutubeDL won't work on railway deploys.
-- You won't be able to update your bot. To update you'll have to deploy again. I'll find a method to update through railway soon.
-- Due to railway's privacy policy I removed railway button from repo. But you can get deploy link in our [@HellBot_Chat](https://t.me/hellbot_chat). Type `#railway` to get deploy link.
+- Fork & Star this repo.
+- Some commands might not work properly on railway.
+- Due to railway's privacy policy I removed railway button from repo. But you can get deploy guide in our [@HellBot_Chat](https://t.me/hellbot_chat). Type `#railway` to get deploy guide.
 
 ------
 ## Deploy Locally
@@ -91,7 +93,6 @@
 - `HELLBOT_SESSION`  =  Get this by using [Repl.it](#Repl) or from [terminal](#Terminal)
 - `LOGGER_ID`  =  Make A Channel And Get it's ID.
 - `BOT_TOKEN`  =  Make A Bot From [@BotFather](https://t.me/botfather) and paste it's token.
-- `BOT_USERNAME`  =  Get the username of that Bot made from [@Botfather](https://t.me/botfather)
 - `HANDLER`  =  Your command handler.
 - `DATABASE_URL`  =  A Postgresql database url.
 
@@ -113,7 +114,7 @@
 - Open the terminal.
 - Paste this code.
 
-`pkg install python wget -y && pip install telethon && wget https://raw.githubusercontent.com/The-HellBot/Plugins/master/hell_string.py && python3 hell_string.py`
+`pkg install python wget -y && pip install telethon && wget https://raw.githubusercontent.com/The-HellBot/HellBot/master/hell_string.py && python3 hell_string.py`
 - Fill API ID, API HASH, Phone number (with country code).
 - Paste the OTP received on Telegram.
 - If You have Enabled 2-Step Verification then fill your password.
@@ -135,7 +136,7 @@
 
 ![](https://www.gnu.org/graphics/gplv3-or-later.png)
 
-<h4 align="center">Copyright (C) 2021 <a href="https://github.com/The-HellBot">The-HellBot</a></h4>
+<h4 align="center">Copyright (C) 2022 <a href="https://github.com/The-HellBot">The-HellBot</a></h4>
 
 Project [HellBot](https://github.com/The-HellBot/HellBot) is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -152,6 +153,6 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 ## Credits
 
 - 💖 [Lonami](https://github.com/Lonami) for [Telethon](https://github.com/LonamiWebs/Telethon)
-- 💖 My Team Members For Supporting Me.
+- 💖 Team HellBot
 
 ------

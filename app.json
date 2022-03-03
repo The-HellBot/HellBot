@@ -1,6 +1,6 @@
 {
   "name": "Hêllẞø†",
-  "description": "Hêllẞø† is one of the Best UserBot for Telegram. Known for its Smoothness, Design, Support.",
+  "description": "One of the best Userbot for Telegram. Known for its Smoothness, Design, Support.",
   "logo": "https://telegra.ph/file/7decf235312af8536e9aa.jpg ",
   "keywords": [
     "telegram",
@@ -22,7 +22,7 @@
       "value": "『ℌєℓℓ』",
       "required": false
     },
-    "PROFANITY": {
+    "ABUSE": {
       "description": "Leave it blank if you dont want Profanity in HellBot. Else Fill ON.",
       "value": "ON",
       "required": false
@@ -71,15 +71,6 @@
     "BOT_TOKEN": {
       "description": "Make a bot from @BotFather and paste the bot token here.",
       "value": ""
-    },
-    "BOT_USERNAME": {
-      "description": "Make a bot from @BotFather and paste the username here.",
-      "value": ""
-    },
-    "SUDO_USERS": {
-      "description": "Userid of user to grant sudo access. Add multiple sudo users by giving a space between userids",
-      "value": "",
-      "required": false
     }
   },
   "addons": [{
