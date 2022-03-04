@@ -50,11 +50,10 @@ _starter () {
     HELLPATH=$(zipinfo -1 "$hellpath" | grep -v "/.");
     unzip -qq "$hellpath"
     rm -rf "$hellpath"
-    _HELLBOT_MAIN
+    # _HELLBOT_MAIN
     cd $HELLPATH
-    _HELLBOT_PLUG
+    # _HELLBOT_PLUG
     python3 ../setup/updater.py ../requirements.txt requirements.txt
-    chmod -R 755 bin
     echo "••• STARTING HELLBOT •••"
     python3 -m hellbot
 }
