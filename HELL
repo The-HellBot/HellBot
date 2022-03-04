@@ -9,7 +9,7 @@ _HELLBOT_MAIN() {
     $(_python_ 'from git import Repo
 import sys
 
-_UPSTREAM_ = "https://github.com/The-Hellbot/Hellbot"
+_UPSTREAM_ = "https://github.com/The-Hellbot/HellBot"
 _BRANCH_ = "master"
 
 repo = Repo.init()
@@ -44,10 +44,10 @@ repo.heads[_BRANCH_].checkout(True) ')
 
 _starter () {
     local hellpath
-    hellpath = "TheHellBot.zip"
+    hellpath="Plugins.zip"
     echo "••• DOWNLOADING HELLBOT •••"
     wget -q $(_hell_zip) -O "$hellpath"
-    HELLPATH = $(zipinfo -1 "$hellpath" | grep -v "/.");
+    HELLPATH=$(zipinfo -1 "$hellpath" | grep -v "/.");
     unzip -qq "$hellpath"
     rm -rf "$hellpath"
     _HELLBOT_MAIN
