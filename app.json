@@ -68,6 +68,10 @@
       "description": "The Value of App Name you filled in right on top. Required for updater to work.",
       "value": ""
     },
+    "BOT_USERNAME": {
+      "description": "Make a bot from @BotFather and paste the bot username here.",
+      "value": ""
+    },
     "BOT_TOKEN": {
       "description": "Make a bot from @BotFather and paste the bot token here.",
       "value": ""
