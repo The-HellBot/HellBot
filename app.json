@@ -17,32 +17,14 @@
       "description": "Setting this to ANYTHING will enable heroku.",
       "value": "ANYTHING"
     },
-    "YOUR_NAME": {
-      "description": "Fill Your Telegram Name. Default Value is Hêll. Required for reverting after clone.",
-      "value": "『ℌєℓℓ』",
-      "required": false
-    },
     "ABUSE": {
       "description": "Leave it blank if you dont want Profanity in HellBot. Else Fill ON.",
       "value": "ON",
       "required": false
     },
-    "PM_LOG_ID": {
-      "description": "Fill your private Channel ID if you want to Log PM messages. Get channel id from @HELL_ID_BOT",
-      "value": "",
-      "required": false
-    },
     "HANDLER": {
       "description": "Your command handler. Default is ' . ' (dot).",
       "value": "."
-    },
-    "EMOJI_IN_HELP": {
-      "description": "A emoji to display in help command",
-      "value": "✧"
-    },
-    "BUTTONS_IN_HELP": {
-      "description": "No.of buttons to display in help menu.",
-      "value": "7"
     },
     "APP_ID": {
       "description": "Get this value from my.telegram.org",
