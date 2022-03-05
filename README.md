@@ -91,7 +91,6 @@
 - `APP_ID`  =  Get this value from my.telegram.org
 - `API_HASH`  =  Get this value from my.telegram.org
 - `HELLBOT_SESSION`  =  Get this by using [Repl.it](#Repl) or from [terminal](#Terminal)
-- `LOGGER_ID`  =  Make A Channel And Get it's ID.
 - `BOT_TOKEN`  =  Make A Bot From [@BotFather](https://t.me/botfather) and paste it's token.
 - `BOT_USERNAME`  =  Bot username from [@BotFather](https://t.me/botfather)
 - `HANDLER`  =  Your command handler.
