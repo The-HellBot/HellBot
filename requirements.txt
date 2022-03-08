@@ -24,7 +24,6 @@ jikanpy
 justwatch
 lottie
 lyricsgenius
-markdown-it-py~=1.1.0
 nekos.py
 opencv-python-headless
 patool
@@ -51,6 +50,7 @@ spamwatch
 speedtest-cli
 sqlalchemy==1.3.23
 telegraph
+telethon
 tgcrypto
 validators
 vcam
@@ -60,7 +60,6 @@ wget
 wheel
 
 git+https://github.com/HellBoy-OP/py-googletrans
-git+https://github.com/HellBoy-OP/Telethon
 git+https://github.com/HellBoy-OP/Wikipedia
 git+https://github.com/HellBoy-OP/yt-fork
 git+https://github.com/HellBoy-OP/yt-search-python
