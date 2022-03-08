@@ -24,7 +24,7 @@ jikanpy
 justwatch
 lottie
 lyricsgenius
-markdown_it
+markdown-it-py~=1.1.0
 nekos.py
 opencv-python-headless
 patool
