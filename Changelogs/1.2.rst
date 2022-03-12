@@ -38,6 +38,8 @@ Changelog 📃 :
 * **Unwanted Plugins:** Added option to uninstall some unwanted plugins. To uninstall plugins permanently fill ``UNLOAD`` with the names of unwanted plugins separated by space. Get all plugins name by ``.cmds``
   
   **Example:** ``.set var UNLOAD banall adultzone ascii``
+* **Ping Pic:** Added option to set picture/video/gif in ping message. You can set multiple pic/vid/gif by separating each link with a space. Do ``.svar ping_pic <links>``
+* **Config List:** Added a command to display all config variables. Do ``.vars`` to get normal variables and ``.vars -db`` to get Database based variables name.
 
 * **Updated  HellBot Startup & Core.**
 
