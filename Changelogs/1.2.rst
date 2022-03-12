@@ -1,0 +1,46 @@
+========================
+HellBot Version Update
+========================
+
++-------------------------+
+|      Version - 1.2      |
++-------------------------+
+
+Changelog 📃 :
+~~~~~~~~~~~~~~
+* **Heroku Fix:** Fixed heroku deploy problem. Now you can deploy on heroku without any account ban issue.
+* **Clone:** Fixed clone plugin not working as it should be. Also updated revert command. Now you don't have to setup any variable to revert back.
+* **Stickers:** Fixed stickers not creating new pack after completing 120 stickers.
+* **Video Stickers:** Added video stickers in ``.kang``. Note that after completing 50 stickers you won't be able to kang video/gif automatically to another pack. You'll have to give pack number manually. For more details see hell chats.
+* **Limits:** Added a new plugin to check limitations on your account.
+* **Gmute:** Fixed gmute in private chats.
+* **Ban pics:** Added and improved gban/gkick pics. Set your own ban pic by ``.svar Ban_pic <link>``
+* **Mute:** Fixed admins mute command.
+* **Alive:** Improved and fixed alive plugin.
+* **Autoprofile:** Fixed autobio, autoname, etc
+* **Pmpermit:** Fixed and improved pmpermit for main client. Also added custom pmpermit pic and pmpermit message.
+* **Help:** Did some changes in Help Menu.
+* **Sticker Packname:** Added option to change packname without restarting bot.
+* **Evaluator:** Did some changes in eval and exec command.
+* **Tag Logger:** Fixed tag logger. Need to setup ``TAG_LOGGER`` with value as channel/grp id.
+* **Welcome:** Fixed welcome plugin.
+* **Sudo:** Highly improved sudo. Add sudo users by ``.addsudo`` and remove them by ``.rmsudo``
+* **Memify:** Fixed memify.
+* **Instagram:** Fixed Instagram video/pic downloadplugin.
+* **AutoHusbando:** Added AutoHusbando plugin. Do ``.plinfo protecc`` to know more.
+* **Font Changer:** Added font changer plugin using latest python 10 features. Do ``.plinfo fonts`` to know more.
+* **Filter:** Fixed filters and snips.
+* **Updated  HellBot Startup & Core.**
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+| Now HellBot supports multi clients at it's fullest. Will add more database based command in multi clients soon with updates. Stay tuned! |
++------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+Report Bugs and Suggestions in comments of `this post <https://t.me/its_hellbot/56>`_
+=====================================================================================
+
+:Regards: * `@ForGo10God <https://t.me/forgo10god>`_
+
+By ~ `Hêllẞø† Network { 🇮🇳 } <https://t.me/hellbot_network>`_
+=================================================
