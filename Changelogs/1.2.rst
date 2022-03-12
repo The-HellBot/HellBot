@@ -32,9 +32,13 @@ Changelog 📃 :
 * **Filter:** Fixed filters and snips.
 * **Spam:** Fixed and improved spamming. Also break spam works smoothly now.
 * **Purge:** Fixed purgeme command.
+* **Command Info:** Added command to check other command's infos.
+
+  **Example:** ``.cmdinfo alive``
 * **Unwanted Plugins:** Added option to uninstall some unwanted plugins. To uninstall plugins permanently fill ``UNLOAD`` with the names of unwanted plugins separated by space. Get all plugins name by ``.cmds``
   
   **Example:** ``.set var UNLOAD banall adultzone ascii``
+
 * **Updated  HellBot Startup & Core.**
 
 +------------------------------------------------------------------------------------------------------------------------------------------+
