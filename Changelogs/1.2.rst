@@ -28,7 +28,7 @@ Changelog 📃 :
 * **Memify:** Fixed memify.
 * **Instagram:** Fixed Instagram video/pic downloadplugin.
 * **AutoHusbando:** Added AutoHusbando plugin. Do ``.plinfo protecc`` to know more.
-* **Font Changer:** Added font changer plugin using latest python 10 features. Do ``.plinfo fonts`` to know more.
+* **Font Changer:** Added font changer plugin using latest ``python 3.10.2`` features. Do ``.plinfo fonts`` to know more.
 * **Filter:** Fixed filters and snips.
 * **Spam:** Fixed and improved spamming. Also break spam works smoothly now.
 * **Purge:** Fixed purgeme command.
