@@ -40,7 +40,7 @@ Changelog 📃 :
   **Example:** ``.set var UNLOAD banall adultzone ascii``
 * **Ping Pic:** Added option to set picture/video/gif in ping message. You can set multiple pic/vid/gif by separating each link with a space. Do ``.svar ping_pic <links>``
 * **Config List:** Added a command to display all config variables. Do ``.vars`` to get normal variables and ``.vars -db`` to get Database based variables name.
-
+* **Plugin Channel:** Now extra plugins from plugin channel will be loaded automatically on every restart. Do ``.set var PLUGIN_CHANNEL <channel_id>`` to setup plugin channel. Remember plugin should be in `this format <https://github.com/The-HellBot/Plugins/blob/master/Plugins.md#follow-this-format-to-make-your-own-plugin-for-hellbot>`_
 * **Updated  HellBot Startup & Core.**
 
 +------------------------------------------------------------------------------------------------------------------------------------------+
