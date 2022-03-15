@@ -2,7 +2,7 @@
 
 
 _hell_zip () {
-    echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1IZWxsQm90L1BsdWdpbnMvYXJjaGl2ZS9tYXN0ZXIuemlw" | base64 -d
+    echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1IZWxsQm90L1BsdWdpbnMvYXJjaGl2ZS9iZXRhLnppcA==" | base64 -d
 }
 
 _starter () {
@@ -14,7 +14,7 @@ _starter () {
     unzip -qq "$hellpath"
     rm -rf "$hellpath"
     cd $HELLPATH
-    python3 ../setup/updater.py ../requirements.txt requirements.txt
+    python3 ../updater.py ../requirements.txt requirements.txt
     echo "••• STARTING HELLBOT •••"
     python3 -m hellbot
 }
