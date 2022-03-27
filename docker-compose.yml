@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  worker:
+    build: .
+    environment:
+      HELLBOT_SESSION: $HELLBOT_SESSIOM
+      APP_ID: $APP_ID
+      API_HASH: $API_HASH
+      BOT_TOKEN: $BOT_TOKEN
