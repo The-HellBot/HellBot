@@ -46,6 +46,10 @@
       "description": "The Value of App Name you filled in right on top. Required for updater to work.",
       "value": ""
     },
+    "BOT_LIBRARY": {
+      "description": "Fillup 'pyrogram' for Pyrogram or leave it blank for Telethon.",
+      "value": ""
+    },
     "BOT_TOKEN": {
       "description": "Make a bot from @BotFather and paste the bot token here.",
       "value": ""
