@@ -11,7 +11,7 @@ _library () {
     python3 -m PyrogramHell
         
     else
-    python3 -m Telethonhell
+    python3 -m TelethonHell
  
     fi
 }
