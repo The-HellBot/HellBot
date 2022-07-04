@@ -5,6 +5,17 @@ _hell_zip () {
     echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1IZWxsQm90L1BsdWdpbnMvYXJjaGl2ZS9iZXRhLnppcA==" | base64 -d
 }
 
+_library () {
+    if [[ $BOT_LIBRARY == "pyrogram" ]]
+    then 
+    python3 -m PyrogramHell
+        
+    else
+    python3 -m Telethonhell
+ 
+    fi
+}
+
 _starter () {
     local hellpath
     hellpath="Plugins.zip"
@@ -16,7 +27,7 @@ _starter () {
     cd $HELLPATH
     python3 ../updater.py ../requirements.txt requirements.txt
     echo "••• STARTING HELLBOT •••"
-    python3 -m hellbot
+    _library
 }
 
 _starter
