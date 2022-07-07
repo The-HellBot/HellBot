@@ -2,17 +2,20 @@
 
 
 _hell_zip () {
-    echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1IZWxsQm90L1BsdWdpbnMvYXJjaGl2ZS9iZXRhLnppcA==" | base64 -d
+    if [[ $GIT_REPO ]]
+    then
+        echo "https://github.com/${GIT_REPO}/archive/master.zip"
+    else
+        echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1IZWxsQm90L1BsdWdpbnMvYXJjaGl2ZS9iZXRhLnppcA==" | base64 -d
+    fi
 }
 
 _library () {
     if [[ $BOT_LIBRARY == "pyrogram" ]]
     then 
-    python3 -m PyrogramHell
-        
+        python3 -m PyrogramHell
     else
-    python3 -m TelethonHell
- 
+        python3 -m TelethonHell
     fi
 }
 
