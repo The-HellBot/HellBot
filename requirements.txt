@@ -20,6 +20,7 @@ heroku3
 html-telegraph-poster
 humanize
 IMDbPY
+instagrapi
 jikanpy
 justwatch
 lottie
