@@ -2,6 +2,7 @@ aiohttp
 DateTime
 emoji
 geopy
+gitpython
 glitch_this
 google-api-python-client
 google-auth-httplib2
