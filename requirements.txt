@@ -20,6 +20,7 @@ moviepy
 nekos.py
 opencv-python-headless
 Pillow
+psycopg2
 pyfiglet
 PyGithub
 pymediainfo
