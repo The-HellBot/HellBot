@@ -18,6 +18,7 @@ IMDbPY
 instagrapi
 justwatch
 lottie
+lyricsgenius
 moviepy
 nekos.py
 opencv-python-headless
