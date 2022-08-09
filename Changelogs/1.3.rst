@@ -52,7 +52,7 @@ Changelog 📃 :
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-Report Bugs and Suggestions in comments of `this post <https://t.me/its_hellbot/60>`_
+Report Bugs and Suggestions in comments of `this post <https://t.me/its_hellbot/62>`_
 =====================================================================================
 
 :Regards: * `@ForGo10God <https://t.me/forgo10god>`_
