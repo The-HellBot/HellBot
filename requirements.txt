@@ -17,7 +17,7 @@ humanize
 IMDbPY
 instagrapi
 justwatch
-lottie
+lottie[all]
 lyricsgenius
 moviepy
 nekos.py
