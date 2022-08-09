@@ -65,7 +65,7 @@
 
 - Clone the repo. 
 
-`git clone https://github.com/The-HellBot/Plugins.git`
+`git clone https://github.com/The-HellBot/Plugins-T.git`
 - Open Cloned Folder.
 
 `cd Plugins`
@@ -151,7 +151,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 ------
 ## Credits
 
-- 💖 [Lonami](https://github.com/Lonami) for [Telethon](https://github.com/LonamiWebs/Telethon)
-- 💖 Team HellBot
+- 💖 [Telethon](https://github.com/LonamiWebs/Telethon)
+- 💖 [Team HellBot](https://github.com/The-HellBot)
 
 ------
