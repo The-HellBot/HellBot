@@ -1,45 +1,22 @@
 #!/bin/bash
 
 
-_python_() {
-    python3${pVer%.*} -c "$1"
-}
-
-_HELLBOT_MAIN() {
-    $(_python_ 'from git import Repo
-import sys
-
-_UPSTREAM_ = "https://github.com/The-Hellbot/HellBot"
-_BRANCH_ = "master"
-
-repo = Repo.init()
-origin = repo.create_remote("temponame", _UPSTREAM_)
-origin.fetch()
-repo.create_head(_BRANCH_, origin.refs[_BRANCH_])
-repo.heads[_BRANCH_].checkout(True) ')
-}
-
-_hell_repo () {
-    local hrepo
-    hrepo=`echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1IZWxsQm90L1BsdWdpbnM=" | base64 -d`
-    echo "$rlink"
-}
-
 _hell_zip () {
-    echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1IZWxsQm90L1BsdWdpbnMvYXJjaGl2ZS9tYXN0ZXIuemlw" | base64 -d
+    if [[ $GIT_REPO ]]
+    then
+        echo "https://github.com/${GIT_REPO}/archive/master.zip"
+    else
+        echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1IZWxsQm90L1BsdWdpbnMtVC9hcmNoaXZlL21hc3Rlci56aXA=" | base64 -d
+    fi
 }
 
-_HELLBOT_PLUG() {
-    local hrepo=$(_hell_repo)
-    $(_python_ 'from git import Repo
-import sys
-_UPSTREAM_ = "'$hrepo'"
-_BRANCH_ = "master"
-repo = Repo.init()
-origin = repo.create_remote("temponame", _UPSTREAM_)
-origin.fetch()
-repo.create_head(_BRANCH_, origin.refs[_BRANCH_])
-repo.heads[_BRANCH_].checkout(True) ')
+_library () {
+    if [[ $BOT_LIBRARY == "pyrogram" ]]
+    then 
+        python3 -m PyrogramHell
+    else
+        python3 -m TelethonHell
+    fi
 }
 
 _starter () {
@@ -50,12 +27,10 @@ _starter () {
     HELLPATH=$(zipinfo -1 "$hellpath" | grep -v "/.");
     unzip -qq "$hellpath"
     rm -rf "$hellpath"
-    # _HELLBOT_MAIN
     cd $HELLPATH
-    # _HELLBOT_PLUG
-    python3 ../setup/updater.py ../requirements.txt requirements.txt
+    python3 ../updater.py ../requirements.txt requirements.txt
     echo "••• STARTING HELLBOT •••"
-    python3 -m hellbot
+    _library
 }
 
 _starter
