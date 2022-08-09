@@ -1,4 +1,5 @@
 aiohttp
+cairosvg
 DateTime
 emoji
 geopy
@@ -17,7 +18,7 @@ humanize
 IMDbPY
 instagrapi
 justwatch
-lottie[all]
+lottie
 lyricsgenius
 moviepy
 nekos.py
