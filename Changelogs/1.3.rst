@@ -52,6 +52,31 @@ Changelog 📃 :
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
+========================
+HellBot Bug Fixes
+========================
+
++---------------------------+
+|      Version - 1.3.5      |
++---------------------------+
+
+Changelog 📃 :
+~~~~~~~~~~~~~~
+* **Bugs Fixes:**
+    - **Remove BG:** ``.rmbg`` command was not uploading output image.
+     Now it is fixed and improved for better use.
+    - **Sangmata:** Due to some problems in sangmata official bot, hellbot was also affected by it.
+     This is just a temporary fix until the developers of sangmata updates the bot.
+    - **App search:** ``.app`` command was not returning application information.
+     Fixed and moved this in ``android`` section in help menu.
+    - **Tag logger:** The tag logger was bugged.
+     Fixed and also improved for multi clients.
+    - **Memes and tweets:** Memes and tweets plugins were not receiving input from replies.
+     It was not a bug, I just didnt added this back then.
+    - **Gcast:** Gcast for some users was not working and failing everytime.
+     Fixed for all flags: ``-all`` ``-pvt`` ``-grp``
+    
+
 Report Bugs and Suggestions in comments of `this post <https://t.me/its_hellbot/62>`_
 =====================================================================================
 
