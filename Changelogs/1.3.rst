@@ -75,7 +75,23 @@ Changelog 📃 :
      It was not a bug, I just didnt added this back then.
     - **Gcast:** Gcast for some users was not working and failing everytime.
      Fixed for all flags: ``-all`` ``-pvt`` ``-grp``
-    
+
+
+====
+
++---------------------------+
+|      Version - 1.3.6      |
++---------------------------+
+
+Changelog 📃 :
+~~~~~~~~~~~~~~
+* **Bugs Fixes:**
+    - **Help Menu:** Fixed help menu not working problem.
+    - **Clone:** Fixed ``.clone`` command.
+    - **Local Host:** Fixed problems in local hosting.
+* **New:**
+    - **Block All:** Added a new command in ``banall`` section to block all/contacts/non-contacts in a group.
+
 
 Report Bugs and Suggestions in comments of `this post <https://t.me/its_hellbot/62>`_
 =====================================================================================
