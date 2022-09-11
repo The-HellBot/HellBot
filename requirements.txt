@@ -39,7 +39,7 @@ selenium
 spotdl
 sqlalchemy==1.3.23
 telegraph
-telethon==1.23.0
+telethon==1.24.0
 tgcrypto
 validators
 vcam
