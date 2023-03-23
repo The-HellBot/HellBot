@@ -1,0 +1,58 @@
+========================
+HellBot Version Update
+========================
+
++-------------------------+
+|      Version - 1.4      |
++-------------------------+
+
+Changelog 📃 :
+~~~~~~~~~~~~~~
+
+* **Stability:** HellBot is now more stable than ever. Less crash, zero downtime, smoother performance, etc.
+* **Build:** 
+    - *Python - 3.11.0*
+    - *Updated Dependencies*
+    - *Secured session generator*
+    - *New asyncio updater*
+    - *Custom repo support*
+* **Major Updates:**
+    - **Core:** Changed HellBot's core once again for future updates.
+     *In future:* Assistant, Voice Chat Player, and many more.
+    - **Custom Plugins Repo:** You can now choose your own plugins repo. Add an environment variable ``GIT_REPO`` with your repo name as value.
+     *For Example:* ``GIT_REPO`` = ``HellBoy-OP/Plugins``
+* **Bugs Fixes:**
+    - **Remove BG:** ``.rmbg`` command was not uploading output image.
+     Now it is fixed and improved for better use.
+    - **Sangmata:** Due to some problems in sangmata official bot, hellbot was also affected by it.
+     This is just a temporary fix until the developers of sangmata updates the bot.
+    - **App search:** ``.app`` command was not returning application information.
+     Fixed and moved this in ``android`` section in help menu.
+    - **Tag logger:** The tag logger was bugged.
+     Fixed and also improved for multi clients.
+    - **Memes and tweets:** Memes and tweets plugins were not receiving input from replies.
+     It was not a bug, I just didnt added this back then.
+    - **Gcast:** Gcast for some users was not working and failing everytime.
+     Fixed for all flags: ``-all`` ``-pvt`` ``-grp``
+    - **Help Menu:** Fixed help menu not working problem.
+    - **Clone:** Fixed ``.clone`` command.
+    - **Local Host:** Fixed problems in local hosting.
+    - **Markdowns:** Fixed all markdown problems.
+    - **Songs:** Fixed song and video songs download plugin.
+    - **YTDL:** Fixed youtube download plugin.
+    - **Logo:** Fixed logo making plugin.
+    - **Image:** Fixed google image download plugin.
+    - **Reverse:** Fixed google reverse image search plugin.
+    - Other vulnerable bugs fix.
+* **New:**
+    - **Block All:** Added a new command in ``banall`` section to block all/contacts/non-contacts in a group.
+    - **waifu:** This plugin contains both NSFW & SFW content.
+
+
+Report Bugs and Suggestions in comments of `this post <https://t.me/its_hellbot/66>`_
+=====================================================================================
+
+:Regards: * `@ForGo10God <https://t.me/forgo10god>`_
+
+By ~ `Hêllẞø† Network { 🇮🇳 } <https://t.me/hellbot_network>`_
+=================================================
