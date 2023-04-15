@@ -11,7 +11,7 @@
 </h6>
 
 <h3 align="center">
-  <b>A Smooth & Fast Telegram Userbot Based On Telethon Bot Library.</b>
+  <b>A Smooth & Fast Telegram Userbot Based On Telethon  Library.</b>
 </h3>
 
 ------
