@@ -30,6 +30,8 @@
 [![Telegram Group](https://img.shields.io/badge/Telegram-Group-white?&style=social&logo=telegram)](https://t.me/hellbot_chat)
 [![Telegram Channel](https://img.shields.io/badge/Telegram-Channel-white?&style=social&logo=telegram)](https://t.me/its_hellbot)
 
+[![Documentation](https://img.shields.io/badge/Documentations-docs.hellbot.tech-white?&style=social&logo=gitbook)](https://hellbot.tech)
+
 ------
 ## Deploy 🚀
 - [![Heroku](https://img.shields.io/badge/HellBot-Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku)](#Deploy-To-Heroku)
@@ -41,8 +43,7 @@
 ------
 ## YouTube 📺
 - [![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UC7Jr0FnRApx5nJASUfOjqJQ?style=social)](https://youtube.com/channel/UC7Jr0FnRApx5nJASUfOjqJQ)
-- [![YouTube Video Views](https://img.shields.io/youtube/views/pw2jCeM2sN4?label=Tutorial+•+Heroku+•&style=social)](https://youtu.be/pw2jCeM2sN4)
-- [![YouTube Video Views](https://img.shields.io/youtube/views/8RRFObBQSMU?label=Tutorial+•+Railway+•&style=social)](https://youtu.be/8RRFObBQSMU)
+- [![YouTube Video Views](https://img.shields.io/youtube/views/leMyoT-qDH4?label=Tutorial+•+Heroku+•&style=social)](https://youtu.be/leMyoT-qDH4)
 
 ------
 ## Deploy To Heroku
@@ -63,29 +64,7 @@
 
 ------
 ## Deploy Locally
-
-- Clone the repo. 
-`git clone https://github.com/The-HellBot/Plugins-T.git`
-
-- Open Cloned Folder.
-`cd Plugins-T`
-
-- Create VirtualEnv.
-`virtualenv -p /usr/bin/python3 venv`
-
-- Activate virtualenv
-`. ./venv/bin/activate`
-
-- Install Requirements.
-`pip install -r requirements.txt`
-
-- Generate HELLBOT SESSION.
-`python hell_string.py`
-
-- Create config.py or rename ex_config.py to config.py. Fill All The Required Variables.
-
-- Finally Start Hêllẞø† By
-`bash start.sh`
+- Get detailed guide at [docs.hellbot.tech](https://docs.hellbot.tech/hellbot-userbot/deploy-locally)
 
 ------
 ## Variables
@@ -97,6 +76,8 @@
 - `HANDLER`  =  Your command handler.
 - `DATABASE_URL`  =  A Postgresql database url.
 
+`For all config variables and their detailed explanation go to` [docs.hellbot.tech](https://docs.hellbot.tech/hellbot-userbot/config-variables)
+
 ------
 ## HellBot Session
 
@@ -106,6 +87,11 @@
 - Wait for requirements to finish.
 - Do human verification.
 - Select the type of session.
+    - HellBot Session
+        - Fill API ID, API HASH, Phone number (with country code).
+        - Paste the OTP received on Telegram.
+        - If You have Enabled 2-Step Verification then fill your password.
+        - Your HellBot Session Will be saved in your Telegram Saved Message.
     - Telethon
         - Fill API ID, API HASH, Phone number (with country code).
         - Paste the OTP received on Telegram.
@@ -132,6 +118,11 @@
 `pkg install python wget -y && pip install telethon && pip install pyrogram && pip install instagrapi && wget https://raw.githubusercontent.com/The-HellBot/HellBot/master/hell_string.py && python3 hell_string.py`
 
 - Select the type of session.
+    - HellBot Session
+        - Fill API ID, API HASH, Phone number (with country code).
+        - Paste the OTP received on Telegram.
+        - If You have Enabled 2-Step Verification then fill your password.
+        - Your Telethon Session Will be saved in your Telegram Saved Message.
     - Telethon
         - Fill API ID, API HASH, Phone number (with country code).
         - Paste the OTP received on Telegram.
@@ -168,7 +159,7 @@
 </p>
 
 <h4 align="center">
-    Copyright (C) 2022 <a href="https://github.com/The-HellBot">The-HellBot</a>
+    Copyright (C) 2023 <a href="https://github.com/The-HellBot">The-HellBot</a>
 </h4>
 
 Project [HellBot](https://github.com/The-HellBot/HellBot) is free software: you can redistribute it and/or modify
