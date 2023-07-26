@@ -1,7 +1,7 @@
 {
   "name": "Hêllẞø†",
   "description": "One of the best Userbot for Telegram. Known for its Smoothness, Design, Support.",
-  "logo": "https://telegra.ph/file/7decf235312af8536e9aa.jpg ",
+  "logo": "https://telegra.ph//file/91bf4f41fc22f208d7476.jpg ",
   "keywords": [
     "telegram",
     "userbot",
@@ -11,7 +11,7 @@
     "modular",
     "productivity"
   ],
-  "repository": "https://github.com/The-HellBot/HellBot/",
+  "repository": "https://github.com/AnitXD/SARA-PRIYA",
   "env": {
     "ENV": {
       "description": "Setting this to ANYTHING will enable heroku.",
