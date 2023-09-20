@@ -11,7 +11,7 @@
     "modular",
     "productivity"
   ],
-  "repository": "https://github.com/The-HellBot/HellBot/",
+  "repository": https://github.com/telehacker/CountdownTimer-TeLeTiPs/",
   "env": {
     "ENV": {
       "description": "Setting this to ANYTHING will enable heroku.",
