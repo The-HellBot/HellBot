@@ -6,14 +6,6 @@ import struct
 from random import randint
 
 try:
-    from instagrapi import Client as IClient
-    from instagrapi.exceptions import ChallengeRequired, TwoFactorRequired
-except:
-    os.system("pip install instagrapi")
-    from instagrapi import Client as IClient
-    from instagrapi.exceptions import ChallengeRequired, TwoFactorRequired
-
-try:
     from pyrogram import Client as PClient
 except:
     os.system("pip install pyrogram")
@@ -37,10 +29,10 @@ def main():
     print("Hello!! Welcome to HellBot Session Generator\n")
     print("Human Verification Required !!")
     while True:
-        verify = int(randint(1, 50))
+        verify = int(randint(1, 100))
         okvai = int(input(f"Enter {verify} to continue: "))
         if okvai == verify:
-            print("\nChoose the string session type: \n1. HellBot \n2. Telethon \n3. Pyrogram \n4. Instagram")
+            print("\nChoose the string session type: \n1. HellBot \n2. Telethon \n3. Pyrogram")
             while True:
                 library = input("\nYour Choice: ")
                 if library == "1":
@@ -52,11 +44,8 @@ def main():
                 elif library == "3":
                     generate_pyro_session()
                     break
-                elif library == "4":
-                    generate_insta_session()
-                    break
                 else:
-                    print("Please enter integer values (1/2/3/4 only).")
+                    print("Please enter integer values (1/2/3 only).")
             break
         else:
             print("Verification Failed! Try Again:")
@@ -78,7 +67,7 @@ def generate_hellbot_session():
 
 
 def generate_pyro_session():
-    print("Pyrogram Session for Music Bot!")
+    print("Pyrogram Session!")
     APP_ID = int(input("\nEnter APP ID here: "))
     API_HASH = input("\nEnter API HASH here: ")
     with PClient(name="helluser", api_id=APP_ID, api_hash=API_HASH, in_memory=True) as hellbot:
@@ -90,7 +79,7 @@ def generate_pyro_session():
 
 
 def generate_telethon_session():
-    print("\nTelethon Session For HellBot!")
+    print("\nTelethon Session!")
     APP_ID = int(input("\nEnter APP ID here: "))
     API_HASH = input("\nEnter API HASH here: ")
     with TelegramClient(StringSession(), APP_ID, API_HASH) as hellbot:
@@ -99,31 +88,6 @@ def generate_telethon_session():
             "me",
             f"#HELLBOT #TELETHON \n\n`{hellbot.session.save()}`",
         )
-
-
-def generate_insta_session():
-    print("Instagram Session For HellBot!")
-    cl = IClient()
-    username = input("Enter your Instagram Username: ")
-    password = input("Enter your Instagram Password: ")
-    try:
-        cl.login(username, password)
-        xyz =  cl.get_settings()
-        sessionid = xyz['authorization_data']['sessionid']
-        print(f"Your Instagram Session is: \n>>> {sessionid}")
-        print("\nCopy it from here and remember not to share it with anyone!")
-    except (ChallengeRequired, TwoFactorRequired, Exception) as e:
-        print(e)
-
-
-def challenge_code(username, choice):
-    while True:
-        otp = input("Enter the OTP sent to your Email: ")
-        if otp.isdigit():
-            break
-        else:
-            print("Enter digits only!")
-    return otp
 
 
 def hellbot(text):
