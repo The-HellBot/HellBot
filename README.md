@@ -1,157 +1,72 @@
-<h1 align="center">
-  <b>†hê Hêllẞø† 🇮🇳</b>
-</h1>
+<h1 align="center"><b>тнє нєℓℓвσт</b></h1>
 
-<p align="center">
-  <img src="https://telegra.ph/file/078df46ef8b32f89aef40.jpg" alt="The-HellBot">
-</p>
+<p align="center"><img src="https://te.legra.ph/file/d64669dd01c40923f1da4.jpg" alt="The HellBot"></p>
 
-<h6 align="center">
-  <b>⚡ ʟɛɢɛռɖaʀʏ ᴀғ ɦɛʟʟɮօt ⚡</b>
-</h6>
+<h3 align="center">⚡ 𝗘𝗺𝗯𝗿𝗮𝗰𝗲 𝗧𝗵𝗲 𝗙𝘂𝘁𝘂𝗿𝗲 ⚡</h3>
 
-<h3 align="center">
-  <b>A Smooth & Fast Telegram Userbot Based On Telethon Bot Library.</b>
-</h3>
+---
 
-------
 ![GitHub forks](https://img.shields.io/github/forks/The-HellBot/HellBot?style=social)
 ![GitHub Repo stars](https://img.shields.io/github/stars/The-HellBot/Hellbot?style=social)
-
-![Repo Size](https://img.shields.io/github/repo-size/The-HellBot/HellBot?&style=social&logo=github)
-![Branch](https://img.shields.io/badge/Branch-Master-white?&style=social&logo=github)
 
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-Yes-white?&style=social&logo=hugo)
 ![GitHub license](https://img.shields.io/github/license/The-HellBot/HellBot?&style=social&logo=github)
 
 ![Python](https://img.shields.io/badge/Python-v3.10-white?style=social&logo=python)
-![GitHub language count](https://img.shields.io/github/languages/count/The-HellBot/HellBot?&style=social&logo=hyper)
+[![Documentation](https://img.shields.io/badge/Documentations-docs.hellbot.tech-white?&style=social&logo=gitbook)](https://the-hellbot.gitbook.io/)
 
-[![Telegram Group](https://img.shields.io/badge/Telegram-Group-white?&style=social&logo=telegram)](https://t.me/hellbot_chat)
-[![Telegram Channel](https://img.shields.io/badge/Telegram-Channel-white?&style=social&logo=telegram)](https://t.me/its_hellbot)
+[![Telegram Group](https://img.shields.io/badge/Telegram-Group-white?&style=social&logo=telegram)](https://telegram.dog/hellbot_chat)
+[![Telegram Channel](https://img.shields.io/badge/Telegram-Channel-white?&style=social&logo=telegram)](https://telegram.dog/its_hellbot)
 
-[![Documentation](https://img.shields.io/badge/Documentations-docs.hellbot.tech-white?&style=social&logo=gitbook)](https://hellbot.tech)
+[![Subscribers](https://img.shields.io/youtube/channel/subscribers/UC7Jr0FnRApx5nJASUfOjqJQ?style=social)](https://youtube.com/channel/UC7Jr0FnRApx5nJASUfOjqJQ)
+[![Views](https://img.shields.io/youtube/views/leMyoT-qDH4?label=Tutorial+•+Heroku+•&style=social)](https://youtu.be/leMyoT-qDH4)
 
-------
+---
+
 ## Deploy 🚀
-- [![Heroku](https://img.shields.io/badge/HellBot-Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku)](#Deploy-To-Heroku)
 
-- [![Railway](https://img.shields.io/badge/HellBot-Deploy%20On%20Railway-black?style=for-the-badge&logo=railway)](#Deploy-on-Railway)
+![Heroku](https://img.shields.io/badge/HellBot-Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku)
 
-- [![Locally](https://img.shields.io/badge/HellBot-Deploy%20Locally-black?style=for-the-badge&logo=linux)](#Deploy-Locally)
-
-------
-## YouTube 📺
-- [![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UC7Jr0FnRApx5nJASUfOjqJQ?style=social)](https://youtube.com/channel/UC7Jr0FnRApx5nJASUfOjqJQ)
-- [![YouTube Video Views](https://img.shields.io/youtube/views/leMyoT-qDH4?label=Tutorial+•+Heroku+•&style=social)](https://youtu.be/leMyoT-qDH4)
-
-------
-## Deploy To Heroku
-- Get All The Necessary Variables And Deploy To Heroku.
-- Some Mandatory Variables Are listed [Here](#Variables).
-- Fork & Star this repo.
-- Click on below button to access deploy page.
+- Fork & Star this repo first.
+- You'll need to login to your heroku account before clicking on deploy button.
+- After login, click on deploy to heroku button given below.
+- On the deploy page, you'll have to fill all required variables.
 - NOTE: Click on deploy button from your fork only.
-- [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-------
-## Deploy on Railway
-- Get all the necessary variables and deploy on railway.
-- Every mandatory variables are listed [Here](#Variables).
-- Fork & Star this repo.
-- Some commands might not work properly on railway.
-- Due to railway's privacy policy I removed railway button from repo. But you can get deploy guide in our [@HellBot_Chat](https://t.me/hellbot_chat). Type `#railway` to get deploy guide.
+<h1 align="center">
 
-------
-## Deploy Locally
-- Get detailed guide at [docs.hellbot.tech](https://docs.hellbot.tech/hellbot-userbot/deploy-locally)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-------
-## Variables
+</h1>
 
-- `APP_ID`  =  Get this value from my.telegram.org
-- `API_HASH`  =  Get this value from my.telegram.org
-- `HELLBOT_SESSION`  =  Get this by using [Repl.it](#Repl) or from [terminal](#Terminal)
-- `BOT_TOKEN`  =  Make A Bot From [@BotFather](https://t.me/botfather) and paste it's token.
-- `HANDLER`  =  Your command handler.
-- `DATABASE_URL`  =  A Postgresql database url.
+![Locally](https://img.shields.io/badge/HellBot-Deploy%20Locally-black?style=for-the-badge&logo=linux)
 
-`For all config variables and their detailed explanation go to` [docs.hellbot.tech](https://docs.hellbot.tech/hellbot-userbot/config-variables)
+- Documentations coming soon.
+---
 
-------
-## HellBot Session
+## Config Variables
+- `API_HASH` : Get this value from [my.telegram.org](https://my.telegram.org)
+- `API_ID` : Get this value from [my.telegram.org](https://my.telegram.org)
+- `BOT_TOKEN` : Get this value from [@Botfather](https://telegram.dog/BotFather)
+- `DATABASE_URL` : Get this value from [mongo.db](https://account.mongodb.com/account/login)
+- `LOGGER_ID` : A group/channel id to use as a logger chat.
+- `OWNER_ID` : The owner of bot. Only single userid is supported.
 
-### Repl
-- Open Repl Link.
-- Click on Green Play Button.
-- Wait for requirements to finish.
-- Do human verification.
-- Select the type of session.
-    - HellBot Session
-        - Fill API ID, API HASH, Phone number (with country code).
-        - Paste the OTP received on Telegram.
-        - If You have Enabled 2-Step Verification then fill your password.
-        - Your HellBot Session Will be saved in your Telegram Saved Message.
-    - Telethon
-        - Fill API ID, API HASH, Phone number (with country code).
-        - Paste the OTP received on Telegram.
-        - If You have Enabled 2-Step Verification then fill your password.
-        - Your Telethon Session Will be saved in your Telegram Saved Message.
-    - Pyrogram
-        - Fill API ID, API HASH, Phone number (with country code).
-        - Paste the OTP received on Telegram.
-        - If You have Enabled 2-Step Verification then fill your password.
-        - Your Pyrogram Session will be saved in your Telegram Saved Message.
-    - Instagram
-        - Fill instagram username and password.
-        - If asked for OTP check yout email and fill up the OTP from there.
-        - Your Instagram Session will be displayed on the screen.
-        - Copy it carefully and Do Not Share With Anyone!
-        - Using a fake account is recommended.
+> More config details coming soon with updated documentations
 
-- [![Replit](https://img.shields.io/badge/HellBot-Run%20On%20ReplIT-black?style=for-the-badge&logo=replit)](https://replit.com/@TheHellBot/HellBot?v=1)
+---
 
-### Terminal
-- Open the terminal.
-- Paste this code.
-
-`pkg install python wget -y && pip install telethon && pip install pyrogram && pip install instagrapi && wget https://raw.githubusercontent.com/The-HellBot/HellBot/master/hell_string.py && python3 hell_string.py`
-
-- Select the type of session.
-    - HellBot Session
-        - Fill API ID, API HASH, Phone number (with country code).
-        - Paste the OTP received on Telegram.
-        - If You have Enabled 2-Step Verification then fill your password.
-        - Your Telethon Session Will be saved in your Telegram Saved Message.
-    - Telethon
-        - Fill API ID, API HASH, Phone number (with country code).
-        - Paste the OTP received on Telegram.
-        - If You have Enabled 2-Step Verification then fill your password.
-        - Your Telethon Session Will be saved in your Telegram Saved Message.
-    - Pyrogram
-        - Fill API ID, API HASH, Phone number (with country code).
-        - Paste the OTP received on Telegram.
-        - If You have Enabled 2-Step Verification then fill your password.
-        - Your Pyrogram Session will be saved in your Telegram Saved Message.
-    - Instagram
-        - Fill instagram username and password.
-        - If asked for OTP check yout email and fill up the OTP from there.
-        - Your Instagram Session will be displayed on the screen.
-        - Copy it carefully and Do Not Share With Anyone!
-        - Using a fake account is recommended.
-- Note that Termux Doesn't show passwords when filled. Just paste your password and hit enter.
-
-------
 ## Disclaimer
+
 - We won't be responsible for any kind of ban due to this bot.
-- HellBot was made for fun purpose and to make group management easier.
+- HellBot was made for fun purpose and to make group/profile management easier.
 - It's your concern if you spam and gets your account banned.
 - Also, Forks won't be entertained.
 - If you fork this repo and edit plugins, it's your concern for further updates.
 - Forking Repo is fine. But if you edit something we will not provide any help.
-- In short, Fork At Your Own Risk.
 
-------
+---
+
 # License
 
 <p align="center">
@@ -159,7 +74,7 @@
 </p>
 
 <h4 align="center">
-    Copyright (C) 2023 <a href="https://github.com/The-HellBot">The-HellBot</a>
+    Copyright (C) 2024 <a href="https://github.com/The-HellBot">The-HellBot</a>
 </h4>
 
 Project [HellBot](https://github.com/The-HellBot/HellBot) is free software: you can redistribute it and/or modify
@@ -168,15 +83,15 @@ the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-------
+---
+
 ## Credits
 
-- 💖 All the Dependencies
-- 💖 [Team HellBot](https://github.com/The-HellBot)
+- Made with ❤️ by [Anand](https://github.com/HellBoy-OP)
 
-------
+---
