@@ -11,7 +11,7 @@
     ],
     "repository": "https://github.com/The-HellBot/HellBot/",
     "env": {
-        "APP_HASH": {
+        "API_HASH": {
             "description": "Get this value from my.telegram.org",
             "value": ""
         },
@@ -24,7 +24,7 @@
             "value": ""
         },
         "DATABASE_URL": {
-            "description": "Only use mongodb url here. Get it from https://cloud.mongodb.com/",
+            "description": "Only use mongodb url here. Get it from https://mongodb.com/",
             "value": ""
         },
         "LOGGER_ID": {
@@ -37,13 +37,11 @@
         },
         "HEROKU_APPNAME": {
             "description": "Your heroku app name. Get it from the top of this page.",
-            "value": "",
-            "required": false
+            "value": ""
         },
         "HEROKU_APIKEY": {
             "description": "Heroku api key. Get it from https://dashboard.heroku.com/account",
-            "value": "",
-            "required": false
+            "value": ""
         }
     },
     "buildpacks": [
