@@ -27,6 +27,11 @@
             "description": "Only use mongodb url here. Get it from https://mongodb.com/",
             "value": ""
         },
+        "HANDLERS": {
+            "description": "Lis of handlers seperated with a space to use for userbot command trigger.",
+            "value": ". ! , ?",
+            "required": false
+        },
         "LOGGER_ID": {
             "description": "The chat id of your logging channel/group.",
             "value": ""
@@ -42,6 +47,16 @@
         "HEROKU_APIKEY": {
             "description": "Heroku api key. Get it from https://dashboard.heroku.com/account",
             "value": ""
+        },
+        "PLUGINS_REPO": {
+            "description": "Fillup the username/reponame of the plugins repo.",
+            "value": "The-HellBot/Plugins",
+            "required": false
+        },
+        "DEPLOY_REPO": {
+            "description": "Fillup the username/reponame of the deploy repo. Consider updating the default value with your own forked repo.",
+            "value": "The-HellBot/HellBot",
+            "required": false
         }
     },
     "buildpacks": [
