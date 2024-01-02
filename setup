@@ -4,12 +4,7 @@
 _hellbot_zip () {
     if [[ $PLUGINS_REPO ]]
     then
-        if [[ $PLUGINS_BRANCH ]]
-        then
-            echo "https://github.com/${PLUGINS_REPO}/archive/${PLUGINS_BRANCH}.zip"
-        else
-            echo "https://github.com/${PLUGINS_REPO}/archive/master.zip"
-        fi
+        echo "https://github.com/${PLUGINS_REPO}/archive/master.zip"
     else
         echo "https://github.com/The-HellBot/Plugins/archive/master.zip"
     fi
