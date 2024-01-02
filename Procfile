@@ -1,1 +1,1 @@
-worker: bash HELL
+worker: bash setup

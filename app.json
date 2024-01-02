@@ -1,73 +1,61 @@
 {
-  "name": "Hêllẞø†",
-  "description": "One of the best Userbot for Telegram. Known for its Smoothness, Design, Support.",
-  "logo": "https://telegra.ph/file/7decf235312af8536e9aa.jpg ",
-  "keywords": [
-    "telegram",
-    "userbot",
-    "plugin",
-    "telethon",
-    "hellbot",
-    "modular",
-    "productivity"
-  ],
-  "repository": "https://github.com/The-HellBot/HellBot/",
-  "env": {
-    "ENV": {
-      "description": "Setting this to ANYTHING will enable heroku.",
-      "value": "ANYTHING"
+    "name": "The HellBot",
+    "description": "🚀 Telegram Bot on steroids! Packed with the latest commands, limitless features, etc. Unleash the ultimate power of customization and automation like never before!",
+    "logo": "https://te.legra.ph/file/31c5a08f0941b8fbb3f66.png",
+    "keywords": [
+        "telegram",
+        "userbot",
+        "plugin",
+        "pyrogram",
+        "hellbot"
+    ],
+    "repository": "https://github.com/The-HellBot/HellBot/",
+    "env": {
+        "API_HASH": {
+            "description": "Get this value from my.telegram.org",
+            "value": ""
+        },
+        "API_ID": {
+            "description": "Get this value from my.telegram.org",
+            "value": ""
+        },
+        "BOT_TOKEN": {
+            "description": "Make a bot from @BotFather and paste the bot token here.",
+            "value": ""
+        },
+        "DATABASE_URL": {
+            "description": "Only use mongodb url here. Get it from https://mongodb.com/",
+            "value": ""
+        },
+        "LOGGER_ID": {
+            "description": "The chat id of your logging channel/group.",
+            "value": ""
+        },
+        "OWNER_ID": {
+            "description": "Your user id.",
+            "value": ""
+        },
+        "HEROKU_APPNAME": {
+            "description": "Your heroku app name. Get it from the top of this page.",
+            "value": ""
+        },
+        "HEROKU_APIKEY": {
+            "description": "Heroku api key. Get it from https://dashboard.heroku.com/account",
+            "value": ""
+        }
     },
-    "ABUSE": {
-      "description": "Leave it blank if you dont want Profanity in HellBot. Else Fill ON.",
-      "value": "ON",
-      "required": false
-    },
-    "HANDLER": {
-      "description": "Your command handler. Default is ' . ' (dot).",
-      "value": "."
-    },
-    "APP_ID": {
-      "description": "Get this value from my.telegram.org",
-      "value": ""
-    },
-    "API_HASH": {
-      "description": "Get this value from my.telegram.org",
-      "value": ""
-    },
-    "HELLBOT_SESSION": {
-      "description": "Get this value by using repl or termux. Refer to Repo for more info.",
-      "value": ""
-    },
-    "HEROKU_API_KEY": {
-      "description": "Go to https://dashboard.heroku.com/account, scroll down and press Reveal API. Required for updater to work.",
-      "value": ""
-    },
-    "HEROKU_APP_NAME": {
-      "description": "The Value of App Name you filled in right on top. Required for updater to work.",
-      "value": ""
-    },
-    "BOT_TOKEN": {
-      "description": "Make a bot from @BotFather and paste the bot token here.",
-      "value": ""
-    }
-  },
-  "addons": [{
-    "plan": "heroku-postgresql",
-    "options": {
-      "version": "12"
-    }
-  }],
-  "buildpacks": [{
-    "url": "https://github.com/HellBoy-OP/heroku-buildpack-ffmpeg-latest"
-  },{
-    "url":"https://github.com/heroku/heroku-buildpack-google-chrome"
-  },{
-    "url":"https://github.com/heroku/heroku-buildpack-chromedriver"
-  },{
-    "url": "https://github.com/heroku/heroku-buildpack-apt.git"
-  },{
-    "url": "https://github.com/chrismytton/heroku-buildpack-jq"
-  },{
-    "url": "heroku/python"
-  }]
+    "buildpacks": [
+        {
+            "url": "https://github.com/HellBoy-OP/heroku-buildpack-ffmpeg-latest"
+        },
+        {
+            "url": "https://github.com/heroku/heroku-buildpack-google-chrome"
+        },
+        {
+            "url": "https://github.com/heroku/heroku-buildpack-chromedriver"
+        },
+        {
+            "url": "heroku/python"
+        }
+    ]
 }

@@ -1,0 +1,29 @@
+#! /bin/bash
+
+
+_hellbot_zip () {
+    if [[ $PLUGINS_REPO ]]
+    then
+        echo "https://github.com/${PLUGINS_REPO}/archive/master.zip"
+    else
+        echo "https://github.com/The-HellBot/Plugins/archive/master.zip"
+    fi
+}
+
+_starter () {
+    echo "••• Downloading HellBot [v3] •••"
+    hellpath="Plugins.zip"
+
+    wget -q $(_hellbot_zip) -O "$hellpath"
+    HELLPATH=$(zipinfo -1 "$hellpath" | grep -v "/.");
+    unzip -qq "$hellpath"
+    rm -rf "$hellpath"
+    cd $HELLPATH
+    python3 ../updater.py ../requirements.txt requirements.txt
+
+    echo "••• Starting HellBot [v3] •••"
+    chmod 777 start.sh
+    ./start.sh
+}
+
+_starter
