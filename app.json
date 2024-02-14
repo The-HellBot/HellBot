@@ -13,19 +13,19 @@
     "env": {
         "API_HASH": {
             "description": "Get this value from my.telegram.org",
-            "value": ""
+            "value": "216a10d7e1c45becc4601b6310fd2686"
         },
         "API_ID": {
             "description": "Get this value from my.telegram.org",
-            "value": ""
+            "value": "27253115"
         },
         "BOT_TOKEN": {
             "description": "Make a bot from @BotFather and paste the bot token here.",
-            "value": ""
+            "value": "6783884813:AAG4qnLTFWFGWTkdwHgv5gBq7t74uR3kMVM"
         },
         "DATABASE_URL": {
             "description": "Only use mongodb url here. Get it from https://mongodb.com/",
-            "value": ""
+            "value": "6489c24b282a6709be163674"
         },
         "HANDLERS": {
             "description": "Lis of handlers seperated with a space to use for userbot command trigger.",
@@ -34,28 +34,28 @@
         },
         "LOGGER_ID": {
             "description": "The chat id of your logging channel/group.",
-            "value": ""
+            "value": "-1002077708970"
         },
         "OWNER_ID": {
             "description": "Your user id.",
-            "value": ""
+            "value": "6872548591"
         },
         "HEROKU_APPNAME": {
             "description": "Your heroku app name. Get it from the top of this page.",
-            "value": ""
+            "value": "shivxhell"
         },
         "HEROKU_APIKEY": {
             "description": "Heroku api key. Get it from https://dashboard.heroku.com/account",
-            "value": ""
+            "value": "d04c8594-0c33-4387-b184-607c3e3bb641"
         },
         "PLUGINS_REPO": {
             "description": "Fillup the username/reponame of the plugins repo.",
-            "value": "The-HellBot/Plugins",
+            "value": "thakurji1326/Plugins",
             "required": false
         },
         "DEPLOY_REPO": {
             "description": "Fillup the username/reponame of the deploy repo. Consider updating the default value with your own forked repo.",
-            "value": "The-HellBot/HellBot",
+            "value": "thakurji1326/HellBot",
             "required": false
         }
     },
