@@ -1,4 +1,4 @@
-<h1 align="center"><b>тнє нєℓℓвσт</b></h1>
+<h1 align="center"><b>Altero project</b></h1>
 
 <p align="center"><img src="https://te.legra.ph/file/d64669dd01c40923f1da4.jpg" alt="The HellBot"></p>
 
@@ -11,24 +11,7 @@
 
 ---
 
-![GitHub forks](https://img.shields.io/github/forks/The-HellBot/HellBot?style=social)
-![GitHub Repo stars](https://img.shields.io/github/stars/The-HellBot/Hellbot?style=social)
-
-![Maintenance](https://img.shields.io/badge/Maintained%3F-Yes-white?&style=social&logo=hugo)
-![GitHub license](https://img.shields.io/github/license/The-HellBot/HellBot?&style=social&logo=github)
-
-![Python](https://img.shields.io/badge/Python-v3.10-white?style=social&logo=python)
-[![Documentation](https://img.shields.io/badge/Documentations-docs.hellbot.tech-white?&style=social&logo=gitbook)](https://the-hellbot.gitbook.io/)
-
-[![Telegram Group](https://img.shields.io/badge/Telegram-Group-white?&style=social&logo=telegram)](https://telegram.dog/hellbot_chat)
-[![Telegram Channel](https://img.shields.io/badge/Telegram-Channel-white?&style=social&logo=telegram)](https://telegram.dog/its_hellbot)
-
-[![Subscribers](https://img.shields.io/youtube/channel/subscribers/UC7Jr0FnRApx5nJASUfOjqJQ?style=social)](https://youtube.com/channel/UC7Jr0FnRApx5nJASUfOjqJQ)
-[![Views](https://img.shields.io/youtube/views/leMyoT-qDH4?label=Tutorial+•+Heroku+•&style=social)](https://youtu.be/leMyoT-qDH4)
-
----
-
-## Deploying HellBot on Heroku
+## Deploying Altero on Heroku
 
 Follow these 4 straightforward steps to deploy HellBot on Heroku:
 
@@ -44,7 +27,7 @@ Follow these 4 straightforward steps to deploy HellBot on Heroku:
 4. **Fill Required Variables:**
    > On the deployment page, you'll find necessary variables to be filled out.
 
-That's it! You've successfully deployed HellBot on Heroku. Now scale dynos and start the bot!
+That's it! You've successfully deployed Altero on Heroku. Now scale dynos and start the bot!
 
 <p align="center">
     <a href="https://heroku.com/deploy"><img src="https://img.shields.io/badge/HellBot-Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku"/></a>
@@ -52,9 +35,9 @@ That's it! You've successfully deployed HellBot on Heroku. Now scale dynos and s
 
 ---
 
-## Deploying HellBot on Linux
+## Deploying Altero on Linux
 
-Hellbot can be deployed on any Linux VPS and terminal.
+Altero can be deployed on any Linux VPS and terminal.
 
 1. **Update Packages:**   
     ```bash
@@ -138,8 +121,6 @@ Responsibility for further updates lies with individual forkers.
 Should you require assistance, kindly engage with our support group for community-based guidance.
 
 > Thank you for choosing our bot and for your understanding and adherence.
-
-~ Team HellBot ❤️
 
 ---
 
