@@ -9,6 +9,7 @@ googlesearch-python
 googletrans @ git+https://github.com/HellBoy-OP/py-googletrans
 heroku3
 httpx
+icrawler
 lottie
 lyricsgenius
 motor
